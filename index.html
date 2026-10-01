@@ -197,15 +197,16 @@
 
 <div id="site-footer"></div>
 
+<script src="js/miniatury-data.js"></script>
 <script src="js/produkty-data.js"></script>
 <script src="js/site.js"></script>
 <script>
 (function () {
   var IH = window.IH;
   // pasek szybkich produktów
-  var quick = ["flexistore", "worki-mocne-60", "torba-kopenhaga", "worki-z-tasma-35", "sciereczki", "worki-mocne-240", "tasma", "druciak"];
+  var quick = ["flexistore-mix", "worki-ldpe-mocny-60l", "kopenhaga", "naczyn-lemon-rakun", "budka-dla-jezy", "sciereczki-z-mikrofibry-30x30", "rolka-do-ubran", "torba-prezentowa-wave-kraft-m"];
   var qt = document.getElementById("quicktrack");
-  qt.innerHTML = quick.map(function (id) { return IH.CATALOG.find(function (g) { return g.id === id; }); }).filter(Boolean).map(function (g) {
+  qt.innerHTML = quick.map(IH.find).filter(Boolean).map(function (g) {
     return '<button type="button" class="quick-item" data-id="' + g.id + '" style="background:none;border-top:0;border-bottom:0;border-left:0;text-align:left"><img src="' + g.variants[0].img + '" alt=""><span>' + IH.esc(g.title.split(/ – | \d/)[0]) + '</span><i class="plus" aria-hidden="true">+</i></button>';
   }).join("");
   qt.addEventListener("click", function (e) { var b = e.target.closest(".quick-item"); if (b) IH.openModal(IH.CATALOG.find(function (g) { return g.id === b.dataset.id; })); });
@@ -226,9 +227,9 @@
   IH.carousel(document.getElementById("rooms"), document.getElementById("rprev"), document.getElementById("rnext"));
 
   // bestsellery
-  var best = ["flexistore", "worki-mocne-60", "worki-mocne-120", "torba-kopenhaga", "sciereczki", "worki-z-tasma-60"];
+  var best = ["flexistore-mix", "worki-ldpe-mocny-60l", "worki-ldpe-mocny-120l", "kopenhaga", "sciereczki-do-kuchni", "karmnik-dla-ptakow-maxi"];
   var bestEl = document.getElementById("best");
-  bestEl.innerHTML = best.map(function (id) { return IH.CATALOG.find(function (g) { return g.id === id; }); }).filter(Boolean).map(function (g) { return IH.card(g); }).join("");
+  bestEl.innerHTML = best.map(IH.find).filter(Boolean).map(function (g) { return IH.card(g); }).join("");
   IH.bindCards(bestEl);
 
   // segregacja

@@ -56,20 +56,24 @@
     '<text x="21" y="76" font-family="Manrope, Segoe UI, sans-serif" font-weight="800" font-size="31" letter-spacing="1" fill="currentColor">HOME</text></svg>';
 
   /* ---------- Kategorie i pomieszczenia ---------- */
+  ICON.prezenty = '<svg viewBox="0 0 48 48" ' + P + '><rect x="8" y="18" width="32" height="24" rx="1"/><path d="M6 12h36v6H6zM24 12v30"/><path d="M24 12c-3-6-11-6-10-1 1 3 6 1 10 1zM24 12c3-6 11-6 10-1-1 3-6 1-10 1z"/></svg>';
+  ICON.ogrod = '<svg viewBox="0 0 24 24" ' + P + '><path d="M12 21v-7"/><path d="M12 14c-4 0-6-3-6-6 3 0 6 2 6 6zM12 12c0-4 3-7 7-7 0 4-3 7-7 7z"/><path d="M5 21h14"/></svg>';
+
   var CATS = [
-    { id: "worki", name: "Worki na odpady", short: "Worki\nna odpady", desc: "LDPE, od 35 do 240 l" },
-    { id: "flexistore", name: "Flexistore", short: "Flexistore", desc: "Pojemniki z pokrywą" },
-    { id: "organizery", name: "Organizery", short: "Organizery", desc: "Porządek w szafach" },
-    { id: "torby", name: "Torby i worki", short: "Torby\ni worki", desc: "Bawełna, filc" },
-    { id: "sprzatanie", name: "Kuchnia i sprzątanie", short: "Kuchnia\ni sprzątanie", desc: "Ściereczki, druciaki" },
-    { id: "warsztat", name: "Warsztat i garaż", short: "Warsztat\ni garaż", desc: "Taśmy, oznaczenia" },
-    { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny i koncentraty" },
-    { id: "pianka", name: "Aktywna pianka", short: "Aktywna\npianka", desc: "Czyszczenie bez szorowania" },
-    { id: "mydla", name: "Mydła", short: "Mydła", desc: "W płynie i w kostce" },
-    { id: "techbox", name: "Techbox", short: "Techbox", desc: "Skrzynki i przegródki" },
-    { id: "dom", name: "Dom i biuro", short: "Dom\ni biuro", desc: "Archiwizacja, pudła" },
-    { id: "budki", name: "Budki dla ptaków", short: "Budki\ndla ptaków", desc: "Drewniane, gotowe do montażu" }
+    { id: "worki", name: "Worki na odpady", short: "Worki\nna odpady", desc: "LDPE i HDPE, od 20 do 240 l, w kolorach segregacji" },
+    { id: "flexistore", name: "Flexistore", short: "Flexistore", desc: "Pojemniki z pokrywą i wkłady z przegródkami" },
+    { id: "techbox", name: "Techbox", short: "Techbox", desc: "Wytrzymałe pojemniki HD i wkłady" },
+    { id: "dom", name: "Pudła i przechowywanie", short: "Pudła\ni przechowywanie", desc: "Pudła Loft, kartony do przeprowadzek" },
+    { id: "torby", name: "Torby i plecaki", short: "Torby\ni plecaki", desc: "Bawełna i sztruks, z nadrukiem lub bez" },
+    { id: "prezenty", name: "Opakowania prezentowe", short: "Opakowania\nprezentowe", desc: "Torby i pudełka Wave Kraft" },
+    { id: "sprzatanie", name: "Kuchnia i sprzątanie", short: "Kuchnia\ni sprzątanie", desc: "Ściereczki, zmywaki, druciaki" },
+    { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN w ekonomicznych opakowaniach" },
+    { id: "mydla", name: "Mydła i pielęgnacja", short: "Mydła\ni pielęgnacja", desc: "Mydła w płynie RAKUN, pumeksy" },
+    { id: "warsztat", name: "Taśmy i sznurki", short: "Taśmy\ni sznurki", desc: "Taśmy, sznurki, zestawy renowacyjne" },
+    { id: "budki", name: "Budki i karmniki", short: "Budki\ni karmniki", desc: "Dla ptaków, jeży i nietoperzy" },
+    { id: "pianka", name: "Aktywna pianka", short: "Aktywna\npianka", desc: "Czyszczenie bez szorowania" }
   ];
+  ICON.dom = ICON.organizery;
   CATS.forEach(function (c) { c.icon = ICON[c.id]; });
 
   var ROOMS = [
@@ -79,6 +83,7 @@
     { id: "biuro", name: "Biuro i archiwum", img: "img/foto/baner-pudla-new.jpg" },
     { id: "garaz", name: "Garaż i warsztat", img: "img/produkty/worki-ih-ldpe-mocny-240l-czarny-10szt.jpg", contain: true },
     { id: "lazienka", name: "Łazienka", img: "img/foto/flexistore-1000071613.jpg" },
+    { id: "ogrod", name: "Ogród i taras", img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/634852c1bf402dffb9c0125f_budka-dla-jey-ih-erina.jpg?v=1776082885&width=700", contain: true },
     { id: "wdrodze", name: "Na co dzień", img: "img/foto/torba-valencia-img-0789.jpg" }
   ];
   ROOMS.forEach(function (r) { r.icon = ICON[r.id]; });
@@ -90,83 +95,176 @@
     "ZIELONY": { name: "zielony", hex: "#5E9E48", seg: "Szkło" },
     "ŻÓŁTY": { name: "żółty", hex: "#EDC12E", seg: "Metale i tworzywa sztuczne" },
     "NIEBIESKI": { name: "niebieski", hex: "#2F63AE", seg: "Papier" },
+    "CZERWONY": { name: "czerwony", hex: "#C3362B" },
+    "BIAŁY": { name: "biały", hex: "#F6F5F1" },
+    "SZARY": { name: "szary", hex: "#9A9A96" },
     "DENIM": { name: "denim", hex: "#7F939D" },
     "NEUTRAL": { name: "neutral", hex: "#D8D2C6" },
     "NATURALNY": { name: "naturalny", hex: "#EFE5CF" },
-    "ŻÓŁTO CZARNA": { name: "żółto-czarny", hex: "linear-gradient(135deg,#EDC12E 50%,#232322 50%)" }
+    "LEMON": { name: "lemon", hex: "#F1DE6E" },
+    "BŁĘKITNY": { name: "błękitny", hex: "#8DB4D6" },
+    "BURSZTYNOWY": { name: "bursztynowy", hex: "#C98A3B" },
+    "OLIWKOWY": { name: "oliwkowy", hex: "#7B7F47" },
+    "SREBRNY": { name: "srebrny", hex: "linear-gradient(135deg,#E4E5E7,#9EA1A6)" },
+    "ZŁOTY": { name: "złoty", hex: "linear-gradient(135deg,#F0D78C,#B8902F)" },
+    "MIX": { name: "mix kolorów", hex: "conic-gradient(#C3362B 0 25%,#2F63AE 0 50%,#5E9E48 0 75%,#EDC12E 0)" },
+    "ŻÓŁTO-CZARNY": { name: "żółto-czarny", hex: "linear-gradient(135deg,#EDC12E 50%,#232322 50%)" }
   };
-  var COLOR_KEYS = Object.keys(COLORS).sort(function (a, b) { return b.length - a.length; });
+  // Odmiany słów w nazwach sklepu (CZARNA, CZERWONE, BIAŁYCH...) → klucz koloru
+  var COLOR_WORDS = [
+    [/ŻÓŁTO CZARN\S*/, "ŻÓŁTO-CZARNY"], [/MIX KOLOR\S*/, "MIX"], [/\bCZARN\S*/, "CZARNY"], [/BRĄZOW\S*/, "BRĄZOWY"],
+    [/ZIELON\S*/, "ZIELONY"], [/ŻÓŁT\S*/, "ŻÓŁTY"], [/NIEBIESK\S*/, "NIEBIESKI"], [/CZERWON\S*/, "CZERWONY"],
+    [/BIAŁ\S*/, "BIAŁY"], [/\bSZAR[AYE]\b/, "SZARY"], [/\bDENIM\b/, "DENIM"], [/\bNEUTRAL\b/, "NEUTRAL"],
+    [/NATURALN\S*/, "NATURALNY"], [/\bLEMON\b(?! IH RAKUN)/, "LEMON"], [/BŁĘKITN\S*/, "BŁĘKITNY"], [/BURSZTYN\S*/, "BURSZTYNOWY"],
+    [/OLIWKOW\S*/, "OLIWKOWY"], [/SREBRN\S*/, "SREBRNY"], [/ZŁOT[YAE]CH|\bZŁOT[YAE]\b/, "ZŁOTY"]
+  ];
+  var COLOR_ORDER = ["CZARNY", "BRĄZOWY", "ŻÓŁTY", "NIEBIESKI", "ZIELONY", "CZERWONY", "BIAŁY", "SZARY", "NATURALNY", "NEUTRAL", "DENIM", "LEMON", "BŁĘKITNY", "BURSZTYNOWY", "OLIWKOWY", "SREBRNY", "ZŁOTY", "MIX"];
 
-  /* Ręczne opisy dla rodzin produktów — reszta tworzy się z nazwy pliku. */
-  var FAMILY = {
-    "flexistore": { title: "Pojemniki Flexistore – zestaw 4 rozmiarów", desc: "Cztery pojemniki z pokrywami w jednym komplecie. Uchwyty w ściankach, pokrywa z otworem, pasują do siebie rozmiarami, więc łatwo je piętrzyć na półce i w szafie.", rooms: ["salon", "garderoba", "lazienka", "biuro"], badge: "Nowość" },
-    "torba-kopenhaga": { title: "Torba bawełniana Kopenhaga 38 × 42 cm", desc: "Naturalna bawełna z długimi uszami, bez nadruku. Sprawdza się na zakupach, jako torba na co dzień i jako baza pod własny nadruk – pakowana po 10 sztuk.", rooms: ["wdrodze"] },
-    "sciereczki": { title: "Ściereczki kuchenne w rolce 18 × 35 cm", desc: "Dwie rolki po 100 ściereczek. Odrywasz tyle, ile potrzebujesz – do blatu, naczyń i szybkiego sprzątania.", rooms: ["kuchnia"] },
-    "druciak": { title: "Druciak metalowy", desc: "Metalowe druciaki do przypaleń, garnków i grilla. Opakowanie 12 sztuk.", rooms: ["kuchnia", "garaz"] },
-    "tasma": { title: "Taśma ostrzegawcza odblaskowa 50 mm × 5 m", desc: "Samoprzylepna, żółto-czarna ze strzałką. Oznacza progi, stopnie, słupki i krawędzie w garażu, warsztacie i magazynie.", rooms: ["garaz"] }
-  };
+  /* Nazwy własne, które zostają wielką literą w tytułach */
+  var PROPER = { "flexistore": "Flexistore", "techbox": "Techbox", "hd": "HD", "ldpe": "LDPE", "hdpe": "HDPE", "rakun": "RAKUN", "kopenhaga": "Kopenhaga",
+    "manhattan": "Manhattan", "loft": "Loft", "wave": "Wave", "kraft": "Kraft", "click&go": "Click&Go", "diy": "DIY", "apus": "Apus", "paridae": "Paridae",
+    "erina": "Erina", "chiroptera": "Chiroptera", "maxi": "Maxi", "midi": "Midi", "mini": "Mini", "a4": "A4", "idea": "Idea", "roll": "Roll",
+    "lemon": "Lemon", "mint": "Mint", "flower": "Flower", "bloom": "Bloom", "forest": "Forest", "walk": "Walk", "milk": "Milk", "honey": "Honey",
+    "care": "Care", "ocean": "Ocean", "dive": "Dive", "tropic": "Tropic", "holiday": "Holiday", "12pack": "12 szt.", "6pack": "6 szt." };
+  function prettify(s) {
+    var t = s.toLowerCase().replace(/\s+/g, " ").trim()
+      .replace(/(\d+(?:[.,]\d+)?)l\b/g, "$1 l").replace(/(\d+)mm\b/g, "$1 mm").replace(/(\d+)cm\b/g, "$1 cm").replace(/(\d+)g\b/g, "$1 g")
+      .replace(/(\d+)m\b/g, "$1 m").replace(/(\d)\.(\d)/g, "$1,$2").replace(/ x /g, " × ")
+      .replace(/(\d+)x(\d+)(?:x(\d+))?/g, function (m, a, b, c) { return a + " × " + b + (c ? " × " + c : ""); });
+    t = t.split(" ").map(function (w) { return PROPER[w] || w; }).join(" ").replace(/ Kraft (s|m|l)$/, function (m, a) { return " Kraft " + a.toUpperCase(); });
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
 
-  function titleCase(s) { return s.toLowerCase().replace(/(^|\s)\S/, function (m) { return m.toUpperCase(); }); }
+  function catOf(up) {
+    if (/^WORKI/.test(up)) return "worki";
+    if (/FLEXISTORE/.test(up)) return "flexistore";
+    if (/TECHBOX/.test(up)) return "techbox";
+    if (/^TORBA PREZENTOWA|PUDEŁKO NA WINO/.test(up)) return "prezenty";
+    if (/^TORBA|^PLECAK/.test(up)) return "torby";
+    if (/PUDŁO/.test(up)) return "dom";
+    if (/BUDKA|KARMNIK/.test(up)) return "budki";
+    if (/MYDŁO|PUMEKS/.test(up)) return "mydla";
+    if (/PŁYN/.test(up)) return "chemia";
+    if (/DRUCIAK|ZMYWAK|GĄBKA|ŚCIERECZK|ROLKA DO UBRAŃ/.test(up)) return "sprzatanie";
+    if (/TAŚMA|SZNUREK|RENOWACJI/.test(up)) return "warsztat";
+    return "dom";
+  }
+  var CAT_ROOMS = { flexistore: ["salon", "garderoba", "lazienka", "biuro"], techbox: ["garaz"], dom: ["biuro", "garaz", "garderoba"],
+    torby: ["wdrodze"], prezenty: ["salon"], sprzatanie: ["kuchnia", "lazienka"], chemia: ["kuchnia", "lazienka"], mydla: ["lazienka", "kuchnia"],
+    warsztat: ["garaz"], budki: ["ogrod"] };
+
+  function describe(p, up) {
+    var cap = p.cap ? p.cap + " l" : "";
+    switch (p.cat) {
+      case "worki":
+        if (/HDPE/.test(up)) return "Cienkie, szeleszczące worki HDPE do małych koszy w łazience, biurze i sypialni. Pojemność " + cap + ".";
+        if (/EKSTRA/.test(up)) return "Najgrubsza folia w ofercie: na gruz ogrodowy, liście, gałęzie i ciężkie odpady. Pojemność " + cap + ".";
+        if (/TAŚM/.test(up)) return "Worki z taśmą ściągającą: zawiązujesz je jednym ruchem i wynosisz jak torbę. Folia LDPE, pojemność " + cap + ".";
+        if (/SEGREGACJI/.test(up)) return "Komplet kolorów do segregacji w małym formacie, idealny pod domowe kosze sortujące. Pojemność " + cap + ".";
+        if (/MOCNY/.test(up)) return "Elastyczna, grubsza folia LDPE, która nie pęka przy upychaniu. Kolory zgodne z segregacją odpadów. Pojemność " + cap + ".";
+        return "Klasyczne worki z folii LDPE na codzienne odpady. Kolory zgodne z segregacją. Pojemność " + cap + ".";
+      case "flexistore":
+        if (/INSERT/.test(up)) return "Wkład z przegródkami do pojemnika Flexistore. Dzieli wnętrze na sekcje, więc drobiazgi się nie mieszają.";
+        if (/MIX/.test(up)) return "Cztery pojemniki z pokrywami w jednym komplecie. Uchwyty w ściankach, pokrywa z otworem, pasują do siebie rozmiarami i łatwo je piętrzyć.";
+        return "Zestaw pojemników Flexistore z pokrywami o pojemności " + cap + ". Matowa powierzchnia, uchwyty w ściankach, stabilne piętrowanie.";
+      case "techbox": return /INSERT/.test(up) ? "Wkład z przegródkami do pojemnika Techbox HD. Porządek w narzędziach, kablach i drobnych częściach." : "Wytrzymałe pojemniki Techbox HD do garażu, piwnicy i warsztatu, z wkładem na drobiazgi.";
+      case "dom": return /PRZEPROWADZ/.test(up) ? "Wzmocnione kartony do przeprowadzek, które wytrzymują ciężkie książki i naczynia." : "Tekturowe pudła Loft z polem do opisu. Do archiwizacji dokumentów, zdjęć i rzeczy sezonowych.";
+      case "torby":
+        if (/PLECAK/.test(up)) return "Bawełniany plecak-worek ze sznurkiem. Lekki, pakowny, dobry na siłownię, wycieczkę i pod nadruk.";
+        if (/MANHATTAN/.test(up)) return "Sztruksowa torba Manhattan na co dzień: miękka, pojemna i w modnych kolorach.";
+        return "Bawełniana torba z długimi uszami, bez nadruku. Na zakupy, na co dzień i jako baza pod własne logo.";
+      case "prezenty": return "Opakowania z kolekcji Wave Kraft z naturalnego papieru. Eleganckie, proste i gotowe do zapakowania prezentu.";
+      case "sprzatanie":
+        if (/MIKROFIBR/.test(up)) return "Ściereczki z mikrofibry zbierają kurz i tłuszcz bez detergentu. Różne kolory pomagają oddzielić kuchnię od łazienki.";
+        if (/ROLL/.test(up)) return "Ściereczki w rolce – odrywasz tyle, ile potrzebujesz. Do blatu, naczyń i szybkiego sprzątania.";
+        if (/ROLKA DO UBRAŃ/.test(up)) return "Rolka do ubrań z zapasem wkładów. Zbiera sierść, kurz i włosy z ubrań i tapicerki.";
+        if (/GĄBKA/.test(up)) return "Gąbka melaminowa, która usuwa ślady i zabrudzenia samą wodą.";
+        return "Akcesoria do zmywania i szorowania garnków, patelni i trudnych zabrudzeń.";
+      case "chemia": return /SPRYSKIWACZ/.test(up) ? "Letni płyn do spryskiwaczy RAKUN usuwa owady i smugi z szyby. Kanister 5 l." : /SZYB/.test(up) ? "Płyn RAKUN do mycia szyb i luster bez smug. Kanister 5 l." : "Płyn do mycia naczyń RAKUN, wydajny i przyjemny w zapachu. Ekonomiczny kanister 5 l.";
+      case "mydla": return /PUMEKS/.test(up) ? "Pumeks kosmetyczny do pielęgnacji stóp i dłoni." : "Mydło w płynie RAKUN w kanistrze 5 l do uzupełniania dozowników w domu i w firmie.";
+      case "warsztat":
+        if (/SZNUREK/.test(up)) return "Naturalny sznurek do pakowania, ogrodu, kuchni i rękodzieła.";
+        if (/RENOWACJI/.test(up)) return "Zestaw do odnawiania liter na nagrobkach i tablicach. Przywraca czytelność napisów.";
+        return "Taśmy do pakowania, malowania i prac elektrycznych w praktycznych zestawach.";
+      case "budki": return "Drewniana budka lub karmnik IDEA HOME. Daje schronienie i pożywienie zwierzętom w ogrodzie przez cały rok.";
+    }
+    return "";
+  }
 
   function parse(raw) {
-    var n = raw.name.replace(/\s+IH\s+/, " ").replace(/’/g, "'").trim();
-    var up = n.toUpperCase();
-    var color = null;
-    for (var i = 0; i < COLOR_KEYS.length; i++) { if (up.indexOf(" " + COLOR_KEYS[i]) > -1) { color = COLOR_KEYS[i]; break; } }
-    var pack = (up.match(/(\d+)\s*SZT/) || [])[1];
+    var name = String(raw.name).replace(/’/g, "'").replace(/\s+/g, " ").trim();
+    var up = name.toUpperCase();
+    var color = null, colorRe = null;
+    for (var i = 0; i < COLOR_WORDS.length; i++) { if (COLOR_WORDS[i][0].test(up)) { color = COLOR_WORDS[i][1]; colorRe = COLOR_WORDS[i][0]; break; } }
+    var pack = (up.match(/(\d+)\s*SZT/) || [])[1] || (up.match(/(\d+)PACK/) || [])[1];
     var cap = (up.match(/(\d+)\s*L\b/) || [])[1];
-    var p = { id: raw.id, img: raw.img, raw: raw.name, color: color, pack: pack ? +pack : null, cap: cap ? +cap : null };
+    var length = /SZNUREK/.test(up) ? (up.match(/(\d+)M\b/) || [])[1] : null;
+    var cat = catOf(up);
 
-    if (/^WORKI/.test(up)) {
-      var type = /EKSTRA MOCNY/.test(up) ? "Ekstra mocne" : /Z TAŚMĄ/.test(up) ? "Z taśmą" : "Mocne";
-      p.cat = "worki";
-      p.family = "worki-" + type + "-" + cap;
-      p.title = "Worki na odpady LDPE " + type.toLowerCase() + " " + cap + " l";
-      p.type = type;
-      p.rooms = cap >= 120 ? ["garaz", "biuro"] : ["kuchnia", "lazienka", "biuro"];
-      p.desc = type === "Z taśmą"
-        ? "Worki ze ściągaczem z taśmy – zawiązujesz jednym ruchem, bez wysypywania. Folia LDPE, pojemność " + cap + " l."
-        : type === "Ekstra mocne"
-        ? "Najgrubsza folia w ofercie, na gruz ogrodowy, liście i ciężkie odpady. Pojemność " + cap + " l."
-        : "Elastyczna folia LDPE, która nie pęka przy upychaniu. Pięć kolorów zgodnych z zasadami segregacji. Pojemność " + cap + " l.";
-      p.query = "worki idea home " + cap + "l";
-    } else if (/FLEXISTORE/.test(up)) {
-      p.cat = "flexistore"; p.family = "flexistore";
-    } else if (/^TORBA/.test(up)) {
-      p.cat = "torby"; p.family = /KOPENHAGA/.test(up) ? "torba-kopenhaga" : "torba-" + raw.id;
-    } else if (/ŚCIERECZKI/.test(up)) {
-      p.cat = "sprzatanie"; p.family = "sciereczki";
-    } else if (/DRUCIAK/.test(up)) {
-      p.cat = "sprzatanie"; p.family = "druciak";
-    } else if (/TAŚMA/.test(up)) {
-      p.cat = "warsztat"; p.family = "tasma";
-    } else if (/POJEMNIK|ORGANIZER/.test(up)) {
-      p.cat = "organizery"; p.family = raw.id;
+    // Klucz rodziny = nazwa bez IH, koloru, liczby sztuk (i długości sznurka)
+    var key = up.replace(/\bIH\b/g, " ");
+    if (colorRe) key = key.replace(colorRe, " ");
+    key = key.replace(/\d+\s*SZT\.?/g, " ").replace(/\d+PACK/g, " ").replace(/\bA'\d+/g, " ");
+    if (length) key = key.replace(/\d+M\b/g, " ").replace(/[\d.]+KG\b/g, " ");
+    if (/RENOWACJI/.test(up)) key = "ZESTAW DO RENOWACJI NAPISÓW NA POMNIKACH";
+    key = key.replace(/\s+/g, " ").trim().replace(/\sX$/, "");
+
+    var title;
+    if (cat === "worki") {
+      var type = /EKSTRA MOCNY/.test(up) ? " ekstra mocne" : /MOCNY/.test(up) ? " mocne" : /TAŚM/.test(up) ? " z taśmą" : /SEGREGACJI/.test(up) ? " do segregacji" : "";
+      title = "Worki na odpady " + (/HDPE/.test(up) ? "HDPE" : "LDPE") + type + " " + cap + " l";
+    } else if (/RENOWACJI/.test(up)) {
+      title = "Zestaw do renowacji napisów na pomnikach";
     } else {
-      p.cat = "dom"; p.family = raw.id;
+      title = prettify(key.replace(/\s*\.$/, ""));
     }
-    var f = FAMILY[p.family];
-    if (f) { p.title = f.title; p.desc = f.desc; p.rooms = f.rooms; p.badge = f.badge; }
-    if (!p.title) p.title = titleCase(n.replace(/\s*\d+\s*szt\.?/i, ""));
-    if (!p.rooms) p.rooms = [];
-    if (!p.query) p.query = p.title.replace(/[–—].*$/, "").trim() + " idea home";
+    var p = { id: raw.id, img: raw.img, url: raw.url || null, raw: name, color: color, pack: pack ? +pack : null, cap: cap ? +cap : null,
+      length: length ? +length : null, cat: cat, family: key, title: title, rooms: CAT_ROOMS[cat] || [],
+      badge: /RAKUN/.test(up) ? "RAKUN" : null };
+    if (cat === "worki") p.rooms = p.cap >= 120 ? ["garaz", "ogrod", "biuro"] : p.cap <= 20 ? ["lazienka", "biuro"] : ["kuchnia", "lazienka", "biuro"];
+    p.desc = describe(p, up);
     return p;
   }
 
-  var COLOR_ORDER = ["CZARNY", "BRĄZOWY", "ŻÓŁTY", "NIEBIESKI", "ZIELONY", "NEUTRAL", "DENIM", "NATURALNY"];
+  /* Lokalne miniatury → produkt w sklepie (gdy nazwa pliku różni się od adresu w sklepie) */
+  var LOCAL_ALIAS = {
+    "sciereczki-do-kuchni-ih-roll-18x35cm-a-100-x-2szt": "sciereczki-do-kuchni-ih-roll-18x35cm-a100-x-2szt",
+    "worki-ih-ldpe-ekstra-mocny-120l-czarny-10szt": "worki-ldpe-120l-czarny-10szt-ekstra-mocny",
+    "worki-ih-ldpe-z-tasma-35l-czarny-50szt": "worki-ldpe-z-tasma-sciagajaca-35l-czarny-50szt",
+    "worki-ih-ldpe-z-tasma-60l-czarny-40szt": "worki-ldpe-z-tasma-sciagajaca-60l-czarny-40szt"
+  };
+  function variantLabel(v) {
+    var parts = [];
+    if (v.color && COLORS[v.color]) parts.push(COLORS[v.color].name);
+    if (v.length) parts.push(v.length + " m");
+    if (v.pack) parts.push(v.pack + " szt.");
+    return parts.join(" · ");
+  }
   function buildCatalog() {
-    var raw = window.IH_RAW_PRODUCTS || [];
+    var shop = (window.IH_SHOP_PRODUCTS || []).slice();
+    var byId = {}; shop.forEach(function (s) { byId[s.id] = s; });
+    // własne miniatury: podmieniają zdjęcie produktu ze sklepu albo dochodzą jako osobne pozycje
+    (window.IH_LOCAL_PRODUCTS || []).forEach(function (l) {
+      var s = byId[LOCAL_ALIAS[l.id] || l.id];
+      if (s) s.img = l.img; else shop.push({ id: l.id, name: l.name, img: l.img, url: null });
+    });
     var fams = {}, list = [];
-    raw.map(parse).forEach(function (v) {
+    shop.map(parse).forEach(function (v) {
       var g = fams[v.family];
       if (!g) {
-        g = fams[v.family] = { id: v.family.toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-"), title: v.title, cat: v.cat, desc: v.desc, rooms: v.rooms, badge: v.badge, cap: v.cap, type: v.type, query: v.query, variants: [] };
+        g = fams[v.family] = { id: v.family.toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+          title: v.title, cat: v.cat, desc: v.desc, rooms: v.rooms, badge: v.badge, cap: v.cap, variants: [] };
         list.push(g);
       }
-      g.variants.push(v);
+      // ten sam wariant bywa w sklepie pod dwoma adresami - zostawiamy pierwszy
+      if (!g.variants.some(function (x) { return x.id === v.id || (variantLabel(x) === variantLabel(v) && x.url && v.url); })) g.variants.push(v);
     });
     list.forEach(function (g) {
-      g.variants.sort(function (a, b) { return COLOR_ORDER.indexOf(a.color) - COLOR_ORDER.indexOf(b.color); });
+      g.variants.sort(function (a, b) { return ((a.url ? 0 : 1) - (b.url ? 0 : 1)) || (COLOR_ORDER.indexOf(a.color) - COLOR_ORDER.indexOf(b.color)) || ((a.length || 0) - (b.length || 0)) || ((a.pack || 0) - (b.pack || 0)); });
+      var colors = g.variants.map(function (v) { return v.color; });
+      // kropki kolorów tylko gdy każdy wariant ma inny kolor; w innym wypadku przyciski z opisem
+      g.dots = g.variants.length > 1 && colors.every(function (c, i) { return c && COLORS[c] && colors.indexOf(c) === i; });
+      g.query = g.title + " idea home";
     });
     list.sort(function (a, b) {
       var ca = CATS.findIndex(function (c) { return c.id === a.cat; }), cb = CATS.findIndex(function (c) { return c.id === b.cat; });
@@ -179,6 +277,8 @@
   function roomById(id) { return ROOMS.find(function (r) { return r.id === id; }); }
   function countIn(catId) { return CATALOG.filter(function (g) { return g.cat === catId; }).length; }
   function pl(n, one, few, many) { var d = n % 10, t = n % 100; return n === 1 ? one : (d >= 2 && d <= 4 && (t < 12 || t > 14)) ? few : many; }
+  // wyszukanie rodziny po fragmencie id (do list na stronie głównej)
+  function find(part) { return CATALOG.find(function (g) { return g.id.indexOf(part) > -1; }); }
 
   /* ---------- Ulubione (tylko w tej przeglądarce) ---------- */
   var FAV_KEY = "ih-favs";
@@ -194,19 +294,31 @@
   /* ---------- Karta produktu ---------- */
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function variantSpec(g, v) {
+    var s = variantLabel(v);
+    if (g.cat === "worki" && v.color && COLORS[v.color].seg) s += (s ? " · " : "") + COLORS[v.color].seg;
+    return s;
+  }
+  function buyUrl(g, v) { return v.url || shopSearch(g.query); }
+  // na przycisku tylko to, czym warianty się różnią (np. "5 szt." zamiast "naturalny · 5 szt.")
+  function chipLabel(g, v) {
+    var differs = function (k) { return g.variants.some(function (x) { return x[k] !== g.variants[0][k]; }); };
     var parts = [];
-    if (v.color && COLORS[v.color]) parts.push(COLORS[v.color].name);
-    if (v.pack) parts.push(v.pack + " szt.");
-    if (g.cat === "worki" && v.color && COLORS[v.color].seg) parts.push(COLORS[v.color].seg);
+    if (differs("color") && v.color && COLORS[v.color]) parts.push(COLORS[v.color].name);
+    if (differs("length") && v.length) parts.push(v.length + " m");
+    if (differs("pack") && v.pack) parts.push(v.pack + " szt.");
     return parts.join(" · ");
+  }
+  function variantPicker(g, sel) {
+    if (g.variants.length < 2) return "";
+    return '<div class="' + (g.dots ? "swatches" : "vchips") + '" role="group" aria-label="Warianty">' + g.variants.map(function (x, i) {
+      var label = chipLabel(g, x) || variantLabel(x) || x.raw;
+      if (g.dots) return '<button class="sw" type="button" data-v="' + i + '" aria-pressed="' + (i === sel) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '" style="background:' + COLORS[x.color].hex + '"></button>';
+      return '<button class="vchip" type="button" data-v="' + i + '" aria-pressed="' + (i === sel) + '">' + esc(label) + "</button>";
+    }).join("") + "</div>";
   }
   function card(g, opts) {
     opts = opts || {};
     var v = g.variants[0], cat = catById(g.cat), fav = getFavs().indexOf(g.id) > -1;
-    var sw = g.variants.length > 1 ? '<div class="swatches" role="group" aria-label="Warianty">' + g.variants.map(function (x, i) {
-      var c = COLORS[x.color] || { name: x.raw, hex: "#ccc" };
-      return '<button class="sw" type="button" data-v="' + i + '" aria-pressed="' + (i === 0) + '" title="' + esc(c.name) + '" aria-label="' + esc(c.name) + '" style="background:' + c.hex + '"></button>';
-    }).join("") + "</div>" : "";
     return '<article class="pcard" data-id="' + g.id + '">' +
       (g.badge ? '<span class="badge">' + g.badge + "</span>" : "") +
       '<button class="fav" type="button" aria-pressed="' + fav + '" aria-label="Dodaj do ulubionych">' + ICON.heart + "</button>" +
@@ -215,21 +327,23 @@
       (opts.hideCat ? "" : '<span class="pcat">' + cat.name + "</span>") +
       "<h3>" + esc(g.title) + "</h3>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" +
-      '<div class="foot">' + sw + '<a class="link-arrow buy" href="' + shopSearch(g.query) + '" target="_blank" rel="noopener">Kup online</a></div>' +
+      variantPicker(g, 0) +
+      '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a></div>' +
       "</div></article>";
+  }
+  function selectVariant(root, g, btn) {
+    var v = g.variants[+btn.dataset.v];
+    root.querySelector(".thumb img, .mimg img").src = v.img;
+    root.querySelector(".spec").textContent = variantSpec(g, v);
+    var buy = root.querySelector(".buy"); if (buy) buy.href = buyUrl(g, v);
+    root.querySelectorAll(".sw, .vchip").forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
   }
   function bindCards(root) {
     root.addEventListener("click", function (e) {
       var c = e.target.closest(".pcard"); if (!c) return;
       var g = CATALOG.find(function (x) { return x.id === c.dataset.id; });
-      var sw = e.target.closest(".sw");
-      if (sw) {
-        var v = g.variants[+sw.dataset.v];
-        c.querySelector(".thumb img").src = v.img;
-        c.querySelector(".spec").textContent = variantSpec(g, v);
-        c.querySelectorAll(".sw").forEach(function (b) { b.setAttribute("aria-pressed", b === sw); });
-        return;
-      }
+      var vb = e.target.closest(".sw, .vchip");
+      if (vb) return selectVariant(c, g, vb);
       if (e.target.closest(".fav")) {
         var favs = getFavs(), i = favs.indexOf(g.id), btn = e.target.closest(".fav");
         if (i > -1) { favs.splice(i, 1); toast("Usunięto z ulubionych"); } else { favs.push(g.id); toast("Dodano do ulubionych"); }
@@ -237,7 +351,7 @@
         return;
       }
       if (e.target.closest(".thumb")) {
-        var cur = c.querySelector('.sw[aria-pressed="true"]');
+        var cur = c.querySelector('.sw[aria-pressed="true"], .vchip[aria-pressed="true"]');
         openModal(g, cur ? +cur.dataset.v : 0);
       }
     });
@@ -245,33 +359,37 @@
 
   /* ---------- Podgląd produktu ---------- */
   function openModal(g, vi) {
-    var v = g.variants[vi || 0], cat = catById(g.cat), last = document.activeElement;
+    vi = vi || 0;
+    var v = g.variants[vi], cat = catById(g.cat), last = document.activeElement;
     var m = document.createElement("div");
     m.className = "modal"; m.setAttribute("role", "dialog"); m.setAttribute("aria-modal", "true"); m.setAttribute("aria-label", g.title);
-    var colors = g.variants.filter(function (x) { return x.color; }).map(function (x) { return COLORS[x.color] ? COLORS[x.color].name : ""; });
-    var packs = g.variants.map(function (x) { return x.pack; }).filter(Boolean).filter(function (x, i, a) { return a.indexOf(x) === i; });
+    var uniq = function (a) { return a.filter(function (x, i) { return x && a.indexOf(x) === i; }); };
+    var colors = uniq(g.variants.map(function (x) { return x.color && COLORS[x.color] ? COLORS[x.color].name : null; }));
+    var packs = uniq(g.variants.map(function (x) { return x.pack; }));
     var rooms = g.rooms.map(roomById).filter(Boolean).map(function (r) { return r.name; });
     var specs = [["Kategoria", cat.name]];
+    if (g.badge) specs.push(["Seria", g.badge]);
     if (g.cap) specs.push(["Pojemność", g.cap + " l"]);
-    if (g.cat === "worki") specs.push(["Materiał", "folia LDPE"]);
+    if (g.cat === "worki") specs.push(["Materiał", /HDPE/.test(g.title) ? "folia HDPE" : "folia LDPE"]);
     if (packs.length) specs.push(["Opakowanie", packs.join(" / ") + " szt."]);
     if (colors.length) specs.push([colors.length > 1 ? "Kolory" : "Kolor", colors.join(", ")]);
     if (rooms.length) specs.push(["Gdzie się sprawdzi", rooms.join(", ")]);
+    specs.push(["Warianty w sklepie", String(g.variants.length)]);
     m.innerHTML = '<div class="modal-box">' +
       '<button class="icon-btn modal-close" type="button" aria-label="Zamknij">' + ICON.close + "</button>" +
       '<div class="mimg"><img src="' + v.img + '" alt="' + esc(g.title) + '"></div>' +
       '<div class="mbody"><span class="label">' + cat.name + "</span><h2>" + esc(g.title) + "</h2><p>" + esc(g.desc || "") + "</p>" +
-      (g.variants.length > 1 ? '<div class="swatches">' + g.variants.map(function (x, i) { var c = COLORS[x.color] || { name: "", hex: "#ccc" }; return '<button class="sw" type="button" data-v="' + i + '" aria-pressed="' + (i === (vi || 0)) + '" aria-label="' + c.name + '" title="' + c.name + '" style="background:' + c.hex + '"></button>'; }).join("") + "</div>" : "") +
-      '<p class="spec muted" id="mspec">' + esc(variantSpec(g, v)) + "</p>" +
+      variantPicker(g, vi) +
+      '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
-      '<div class="modal-actions"><a class="btn btn-primary" href="' + shopSearch(g.query) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a><a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
+      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a><a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
       "</div></div>";
     function close() { m.remove(); document.removeEventListener("keydown", onKey); if (last) last.focus(); }
     function onKey(e) { if (e.key === "Escape") close(); }
     m.addEventListener("click", function (e) {
       if (e.target === m || e.target.closest(".modal-close")) return close();
-      var sw = e.target.closest(".sw");
-      if (sw) { var x = g.variants[+sw.dataset.v]; m.querySelector(".mimg img").src = x.img; m.querySelector("#mspec").textContent = variantSpec(g, x); m.querySelectorAll(".sw").forEach(function (b) { b.setAttribute("aria-pressed", b === sw); }); }
+      var vb = e.target.closest(".sw, .vchip");
+      if (vb) selectVariant(m, g, vb);
     });
     document.addEventListener("keydown", onKey);
     document.body.appendChild(m);
@@ -364,5 +482,5 @@
   renderHeader();
   renderFooter();
 
-  window.IH = { ICON: ICON, CATS: CATS, ROOMS: ROOMS, COLORS: COLORS, CATALOG: CATALOG, SHOP: SHOP, shopSearch: shopSearch, card: card, bindCards: bindCards, openModal: openModal, carousel: carousel, countIn: countIn, pl: pl, getFavs: getFavs, catById: catById, roomById: roomById, esc: esc, toast: toast };
+  window.IH = { find: find, variantLabel: variantLabel, ICON: ICON, CATS: CATS, ROOMS: ROOMS, COLORS: COLORS, CATALOG: CATALOG, SHOP: SHOP, shopSearch: shopSearch, card: card, bindCards: bindCards, openModal: openModal, carousel: carousel, countIn: countIn, pl: pl, getFavs: getFavs, catById: catById, roomById: roomById, esc: esc, toast: toast };
 })();

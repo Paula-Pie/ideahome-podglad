@@ -477,3 +477,11 @@ section { padding-block: clamp(56px, 7vw, 96px); }
   .mainnav > a, .mainnav .dd > button { padding: 10px 9px; letter-spacing: .07em; }
 }
 @media (max-width: 1080px) { .mainnav { visibility: hidden; transition: transform .25s, visibility .25s; } .mainnav.open { visibility: visible; } }
+
+/* warianty opisowe (opakowanie, długość) gdy kolory się powtarzają */
+.pcard .swatches, .pcard .vchips { margin-top: 2px; }
+.vchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.vchip { font-size: 11px; line-height: 1.2; padding: 5px 9px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink-2); }
+.vchip:hover { border-color: var(--ink); }
+.vchip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-dark); }
+.pcard .foot { padding-top: 12px; }
