@@ -338,12 +338,12 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .site-footer h4 { color: var(--on-dark); font-size: var(--fs-xs); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .site-footer a:hover { color: var(--on-dark); }
-.site-footer .fbrand svg { height: 50px; width: auto; color: var(--on-dark); }
+.site-footer .fbrand > svg { height: 50px; width: auto; color: var(--on-dark); }
 .site-footer .fbrand p { margin-top: 16px; max-width: 30ch; }
 .socials { display: flex; gap: 10px; margin-top: 20px; }
-.socials a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; display: grid; place-items: center; }
-.socials a:hover { border-color: var(--on-dark); }
-.socials svg { width: 16px; height: 16px; }
+.socials a { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; display: grid; place-items: center; color: var(--on-dark); transition: background .2s, color .2s, border-color .2s; }
+.socials a:hover { background: var(--on-dark); color: var(--dark); border-color: var(--on-dark); }
+.socials svg { width: 17px; height: 17px; display: block; }
 .site-footer .shopbox .btn { margin-top: 14px; border-color: rgba(255,255,255,.5); color: var(--on-dark); }
 .site-footer .shopbox .btn:hover { background: var(--on-dark); color: var(--ink); }
 .site-footer .shopbox b { display: block; margin-top: 14px; color: var(--on-dark); }
