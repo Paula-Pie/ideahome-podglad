@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="icon" href="img/logo-ideahome.png" type="image/png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-page="home">
@@ -60,7 +61,7 @@
       <div class="brands">
         <a class="brand-card" href="serie.html#idea-home">
           <img class="bg" src="img/foto/flexistore-1000071612.jpg" alt="">
-          <div><div class="bname">IDEA<span class="light">HOME</span></div><p class="btag">Funkcjonalny wybór na co dzień</p></div>
+          <div><img class="blogo" src="img/logo-ideahome-white.png" alt="IDEA HOME by Leviatan" width="600" height="532"><p class="btag">Funkcjonalny wybór na co dzień</p></div>
           <span class="btn btn-outline btn-sm">Poznaj</span>
         </a>
         <a class="brand-card" href="rakun/index.html#intro">
@@ -132,6 +133,16 @@
           <a class="btn btn-dark" href="kolekcje.html#flexistore">Odkryj kolekcję</a>
           <a class="link-arrow" href="produkty.html#flexistore">Zobacz produkty</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILM -->
+  <section class="film-sec" aria-label="Film IDEA HOME">
+    <div class="wrap">
+      <div class="film">
+        <video id="film" src="video/new-idea-home.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <button class="film-btn" type="button" id="film-sound" aria-pressed="false" aria-label="Włącz dźwięk"></button>
       </div>
     </div>
   </section>
@@ -238,6 +249,23 @@
     var c = IH.COLORS[s[0]];
     return '<a class="seg-item" href="produkty.html#worki"><span class="bar" style="background:' + c.hex + '"></span><div class="inner"><span class="what">Worek ' + c.name + "</span><h3>" + s[1] + "</h3><p>" + s[2] + "</p></div></a>";
   }).join("");
+
+  // film: dźwięk na kliknięcie, pauza poza ekranem, bez autoodtwarzania przy ograniczonym ruchu
+  var film = document.getElementById("film"), snd = document.getElementById("film-sound");
+  var VOL_OFF = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>';
+  var VOL_ON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 8.5a5 5 0 010 7M19.5 6a8.5 8.5 0 010 12"/></svg>';
+  snd.innerHTML = VOL_OFF;
+  snd.addEventListener("click", function () {
+    film.muted = !film.muted;
+    if (!film.muted) film.play();
+    snd.innerHTML = film.muted ? VOL_OFF : VOL_ON;
+    snd.setAttribute("aria-pressed", !film.muted);
+    snd.setAttribute("aria-label", film.muted ? "Włącz dźwięk" : "Wycisz");
+  });
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) { film.removeAttribute("autoplay"); film.pause(); film.controls = true; }
+  else if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) film.play().catch(function () {}); else film.pause(); }); }, { threshold: 0.25 }).observe(film);
+  }
 
   // newsletter
   document.getElementById("nl").addEventListener("submit", function (e) {

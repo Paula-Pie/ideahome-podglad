@@ -51,9 +51,9 @@
     yt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.4A2.5 2.5 0 002.4 7.2 26 26 0 002 12a26 26 0 00.4 4.8 2.5 2.5 0 001.8 1.8c1.5.4 7.8.4 7.8.4s6.3 0 7.8-.4a2.5 2.5 0 001.8-1.8A26 26 0 0022 12a26 26 0 00-.4-4.8zM10 15V9l5.2 3z"/></svg>'
   };
 
-  var LOGO = '<svg viewBox="0 0 132 92" role="img" aria-label="IDEA HOME"><rect x="2.5" y="2.5" width="127" height="87" fill="none" stroke="currentColor" stroke-width="5"/>' +
-    '<text x="21" y="43" font-family="Manrope, Segoe UI, sans-serif" font-weight="800" font-size="31" letter-spacing="1" fill="currentColor">IDEA</text>' +
-    '<text x="21" y="76" font-family="Manrope, Segoe UI, sans-serif" font-weight="800" font-size="31" letter-spacing="1" fill="currentColor">HOME</text></svg>';
+  // oficjalne logo (IdeaHome_outline_b&w.png) w wersji czarnej i białej z przezroczystym tłem
+  var LOGO = '<img class="logo" src="img/logo-ideahome.png" alt="IDEA HOME by Leviatan" width="600" height="532">';
+  var LOGO_WHITE = '<img class="logo" src="img/logo-ideahome-white.png" alt="IDEA HOME by Leviatan" width="600" height="532">';
 
   /* ---------- Kategorie i pomieszczenia ---------- */
   ICON.prezenty = '<svg viewBox="0 0 48 48" ' + P + '><rect x="8" y="18" width="32" height="24" rx="1"/><path d="M6 12h36v6H6zM24 12v30"/><path d="M24 12c-3-6-11-6-10-1 1 3 6 1 10 1zM24 12c3-6 11-6 10-1-1 3-6 1-10 1z"/></svg>';
@@ -485,7 +485,7 @@
   function renderFooter() {
     var el = document.getElementById("site-footer"); if (!el) return;
     el.outerHTML = '<footer class="site-footer"><div class="wrap"><div class="foot-grid">' +
-      '<div class="fbrand">' + LOGO + "<p>Funkcjonalność, jakość i nowoczesne rozwiązania dla Twojego domu. Marka firmy Leviatan z Bielska-Białej.</p>" +
+      '<div class="fbrand">' + LOGO_WHITE + "<p>Funkcjonalność, jakość i nowoczesne rozwiązania dla Twojego domu. Marka firmy Leviatan z Bielska-Białej.</p>" +
       '<div class="socials"><a href="https://www.facebook.com/LeviatanPoligrafia" target="_blank" rel="noopener" aria-label="Facebook">' + ICON.fb + '</a><a href="https://www.instagram.com/leviatan_poligrafia/" target="_blank" rel="noopener" aria-label="Instagram">' + ICON.ig + '</a><a href="https://www.youtube.com/@LeviatanPoligrafia" target="_blank" rel="noopener" aria-label="YouTube">' + ICON.yt + "</a></div></div>" +
       "<div><h4>Produkty</h4><ul>" + CATS.slice(0, 8).map(function (c) { return '<li><a href="produkty.html#' + c.id + '">' + c.name + "</a></li>"; }).join("") + '<li><a href="produkty.html">Wszystkie →</a></li></ul></div>' +
       '<div><h4>Serie</h4><ul><li><a href="serie.html#idea-home">IDEA HOME</a></li><li><a href="serie.html#rakun">RAKUN</a></li><li><a href="serie.html#ms-everyday">MS. EVERYDAY</a></li></ul><h4 style="margin-top:28px">Kolekcje</h4><ul><li><a href="kolekcje.html#flexistore">Flexistore</a></li><li><a href="kolekcje.html#torby">Torby Valencia i Kopenhaga</a></li></ul></div>' +
