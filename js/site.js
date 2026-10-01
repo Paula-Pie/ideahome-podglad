@@ -222,7 +222,9 @@
       length: length ? +length : null, cat: cat, family: key, title: title, rooms: CAT_ROOMS[cat] || [],
       badge: /RAKUN/.test(up) ? "RAKUN" : null };
     if (cat === "worki") p.rooms = p.cap >= 120 ? ["garaz", "ogrod", "biuro"] : p.cap <= 20 ? ["lazienka", "biuro"] : ["kuchnia", "lazienka", "biuro"];
-    p.desc = describe(p, up);
+    // galeria i krótki opis ze sklepu; gdy sklep nie ma opisu, używamy naszego
+    p.imgs = raw.imgs && raw.imgs.length ? raw.imgs : [raw.img];
+    p.desc = raw.desc || describe(p, up);
     return p;
   }
 
@@ -246,7 +248,8 @@
     // własne miniatury: podmieniają zdjęcie produktu ze sklepu albo dochodzą jako osobne pozycje
     (window.IH_LOCAL_PRODUCTS || []).forEach(function (l) {
       var s = byId[LOCAL_ALIAS[l.id] || l.id];
-      if (s) s.img = l.img; else shop.push({ id: l.id, name: l.name, img: l.img, url: null });
+      if (s) { s.img = l.img; if (s.imgs && s.imgs.length) s.imgs = [l.img].concat(s.imgs.slice(1)); }
+      else shop.push({ id: l.id, name: l.name, img: l.img, url: null });
     });
     var fams = {}, list = [];
     shop.map(parse).forEach(function (v) {
@@ -265,6 +268,7 @@
       // kropki kolorów tylko gdy każdy wariant ma inny kolor; w innym wypadku przyciski z opisem
       g.dots = g.variants.length > 1 && colors.every(function (c, i) { return c && COLORS[c] && colors.indexOf(c) === i; });
       g.query = g.title + " idea home";
+      g.desc = g.variants[0].desc;
     });
     list.sort(function (a, b) {
       var ca = CATS.findIndex(function (c) { return c.id === a.cat; }), cb = CATS.findIndex(function (c) { return c.id === b.cat; });
@@ -322,10 +326,13 @@
     return '<article class="pcard" data-id="' + g.id + '">' +
       (g.badge ? '<span class="badge">' + g.badge + "</span>" : "") +
       '<button class="fav" type="button" aria-pressed="' + fav + '" aria-label="Dodaj do ulubionych">' + ICON.heart + "</button>" +
-      '<button class="thumb" type="button" aria-label="Szczegóły: ' + esc(g.title) + '"><img loading="lazy" src="' + v.img + '" alt="' + esc(g.title) + '"></button>' +
+      '<button class="thumb" type="button" aria-label="Szczegóły: ' + esc(g.title) + '"><img class="main" loading="lazy" src="' + v.img + '" alt="' + esc(g.title) + '">' +
+      '<img class="alt" loading="lazy" src="' + (v.imgs[1] || v.img) + '" alt=""' + (v.imgs[1] ? "" : " hidden") + '>' +
+      (v.imgs.length > 1 ? '<span class="photos">' + v.imgs.length + " " + pl(v.imgs.length, "zdjęcie", "zdjęcia", "zdjęć") + "</span>" : "") + "</button>" +
       '<div class="body">' +
       (opts.hideCat ? "" : '<span class="pcat">' + cat.name + "</span>") +
       "<h3>" + esc(g.title) + "</h3>" +
+      '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" +
       variantPicker(g, 0) +
       '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a></div>' +
@@ -333,7 +340,12 @@
   }
   function selectVariant(root, g, btn) {
     var v = g.variants[+btn.dataset.v];
-    root.querySelector(".thumb img, .mimg img").src = v.img;
+    var main = root.querySelector(".thumb img.main, .mimg img"); if (main) main.src = v.img;
+    var alt = root.querySelector(".thumb img.alt");
+    if (alt) { alt.src = v.imgs[1] || v.img; alt.hidden = !v.imgs[1]; }
+    var photos = root.querySelector(".thumb .photos"); if (photos) photos.textContent = v.imgs.length + " " + pl(v.imgs.length, "zdjęcie", "zdjęcia", "zdjęć");
+    var desc = root.querySelector(".pdesc, .mdesc"); if (desc) desc.textContent = v.desc || "";
+    var strip = root.querySelector(".mthumbs"); if (strip) strip.outerHTML = thumbStrip(v);
     root.querySelector(".spec").textContent = variantSpec(g, v);
     var buy = root.querySelector(".buy"); if (buy) buy.href = buyUrl(g, v);
     root.querySelectorAll(".sw, .vchip").forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
@@ -358,6 +370,12 @@
   }
 
   /* ---------- Podgląd produktu ---------- */
+  function thumbStrip(v) {
+    if (v.imgs.length < 2) return '<div class="mthumbs" hidden></div>';
+    return '<div class="mthumbs" role="group" aria-label="Zdjęcia produktu">' + v.imgs.map(function (src, i) {
+      return '<button type="button" data-img="' + i + '" aria-pressed="' + (i === 0) + '" aria-label="Zdjęcie ' + (i + 1) + '"><img loading="lazy" src="' + src + '" alt=""></button>';
+    }).join("") + "</div>";
+  }
   function openModal(g, vi) {
     vi = vi || 0;
     var v = g.variants[vi], cat = catById(g.cat), last = document.activeElement;
@@ -374,11 +392,11 @@
     if (packs.length) specs.push(["Opakowanie", packs.join(" / ") + " szt."]);
     if (colors.length) specs.push([colors.length > 1 ? "Kolory" : "Kolor", colors.join(", ")]);
     if (rooms.length) specs.push(["Gdzie się sprawdzi", rooms.join(", ")]);
-    specs.push(["Warianty w sklepie", String(g.variants.length)]);
+    specs.push(["Warianty", String(g.variants.length)]);
     m.innerHTML = '<div class="modal-box">' +
       '<button class="icon-btn modal-close" type="button" aria-label="Zamknij">' + ICON.close + "</button>" +
-      '<div class="mimg"><img src="' + v.img + '" alt="' + esc(g.title) + '"></div>' +
-      '<div class="mbody"><span class="label">' + cat.name + "</span><h2>" + esc(g.title) + "</h2><p>" + esc(g.desc || "") + "</p>" +
+      '<div class="mgallery"><div class="mimg"><img src="' + v.img + '" alt="' + esc(g.title) + '"></div>' + thumbStrip(v) + "</div>" +
+      '<div class="mbody"><span class="label">' + cat.name + "</span><h2>" + esc(g.title) + '</h2><p class="mdesc">' + esc(v.desc || "") + "</p>" +
       variantPicker(g, vi) +
       '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
@@ -389,7 +407,12 @@
     m.addEventListener("click", function (e) {
       if (e.target === m || e.target.closest(".modal-close")) return close();
       var vb = e.target.closest(".sw, .vchip");
-      if (vb) selectVariant(m, g, vb);
+      if (vb) { vi = +vb.dataset.v; return selectVariant(m, g, vb); }
+      var tb = e.target.closest(".mthumbs button");
+      if (tb) {
+        m.querySelector(".mimg img").src = g.variants[vi].imgs[+tb.dataset.img];
+        m.querySelectorAll(".mthumbs button").forEach(function (b) { b.setAttribute("aria-pressed", b === tb); });
+      }
     });
     document.addEventListener("keydown", onKey);
     document.body.appendChild(m);

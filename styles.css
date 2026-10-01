@@ -485,3 +485,21 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .vchip:hover { border-color: var(--ink); }
 .vchip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-dark); }
 .pcard .foot { padding-top: 12px; }
+
+/* galeria ze sklepu: drugie zdjęcie na najechanie, licznik zdjęć, krótki opis */
+.pcard .thumb { overflow: hidden; }
+.pcard .thumb img.alt { position: absolute; inset: 14px; width: calc(100% - 28px); height: calc(100% - 28px); object-fit: contain; opacity: 0; transition: opacity .35s; background: var(--surface); }
+.pcard .thumb:hover img.alt, .pcard .thumb:focus-visible img.alt { opacity: 1; }
+.pcard .thumb .photos { position: absolute; left: 12px; bottom: 10px; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: rgba(255,255,255,.9); padding: 3px 7px; border-radius: 2px; }
+.pcard .pdesc { font-size: var(--fs-xs); line-height: 1.5; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pcard .pdesc:empty { display: none; }
+@media (hover: none) { .pcard .thumb img.alt { display: none; } }
+
+.modal-box .mgallery { background: var(--bg); padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.modal-box .mgallery .mimg { padding: 0; background: none; }
+.mthumbs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.mthumbs button { flex: 0 0 64px; height: 64px; padding: 4px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+.mthumbs button img { width: 100%; height: 100%; object-fit: contain; }
+.mthumbs button[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.modal-box .mdesc { color: var(--ink-2); }
+@media (max-width: 720px) { .modal-box .mgallery { padding: 14px; } .mthumbs button { flex-basis: 52px; height: 52px; } }
