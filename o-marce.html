@@ -48,10 +48,6 @@
   </section>
 
   <section style="padding-top:0">
-    <div class="wrap"><div class="stats" id="stats"></div></div>
-  </section>
-
-  <section style="padding-top:0">
     <div class="wrap">
       <div class="cta-band">
         <div><h2>Chcesz sprzedawać IDEA HOME?</h2><p>Współpracujemy ze sklepami, hurtowniami i sieciami. Sprawdź warunki współpracy.</p></div>
@@ -70,10 +66,7 @@
     ["shield", "Jakość", "Kontrolujemy każdą partię. Worek ma wytrzymać upychanie, pojemnik lata użytkowania."],
     ["leaf", "Odpowiedzialność", "Kolory worków zgodne z segregacją, opakowania z recyklingu, torby wielokrotnego użytku."],
     ["tag", "Uczciwa cena", "Duże opakowania i ekonomiczne zestawy. Płacisz za produkt, nie za marketing."]];
-  document.getElementById("values").innerHTML = values.map(function (v) { return '<div class="value">' + IH.ICON[v[0]] + "<h3>" + v[1] + "</h3><p>" + v[2] + "</p></div>"; }).join("");
-  var stats = [["box", "250+", "produktów"], ["award", "20+", "lat doświadczenia"], ["people", "1000+", "partnerów handlowych"], ["shield", "100%", "kontroli jakości"]];
-  document.getElementById("stats").innerHTML = stats.map(function (s) { return '<div class="stat">' + IH.ICON[s[0]] + "<b>" + s[1] + "</b><span>" + s[2] + "</span></div>"; }).join("");
-})();
+  document.getElementById("values").innerHTML = values.map(function (v) { return '<div class="value">' + IH.ICON[v[0]] + "<h3>" + v[1] + "</h3><p>" + v[2] + "</p></div>"; }).join("");})();
 </script>
 </body>
 </html>
