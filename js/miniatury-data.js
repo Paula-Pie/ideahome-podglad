@@ -1,6 +1,11 @@
 // Plik generowany automatycznie przez tools/optimize-images.ps1 - nie edytuj recznie.
 window.IH_LOCAL_PRODUCTS = [
     {
+        "id":  "66ffe752e524fb70b6b7cae0-tama-ostrzegawcza-ih-50mm-x-5m-klejca-odblaskowa-toczarna-strzaka",
+        "name":  "66ffe752e524fb70b6b7cae0_tama-ostrzegawcza-ih-50mm-x-5m-klejca-odblaskowa-toczarna-strzaka",
+        "img":  "img/produkty/66ffe752e524fb70b6b7cae0-tama-ostrzegawcza-ih-50mm-x-5m-klejca-odblaskowa-toczarna-strzaka.jpg"
+    },
+    {
         "id":  "druciak-metalowy-ih-12szt",
         "name":  "DRUCIAK METALOWY IH 12szt",
         "img":  "img/produkty/druciak-metalowy-ih-12szt.jpg"
