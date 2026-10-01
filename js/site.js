@@ -78,11 +78,11 @@
 
   var ROOMS = [
     { id: "salon", name: "Salon", img: "img/foto/flexistore-dsc05557.jpg" },
-    { id: "kuchnia", name: "Kuchnia", img: "img/produkty/sciereczki-do-kuchni-ih-roll-18x35cm-a-100-x-2szt.jpg", contain: true },
+    { id: "kuchnia", name: "Kuchnia", img: "img/foto/baner-kuchnia.jpg" },
     { id: "garderoba", name: "Garderoba", img: "img/foto/baner-111062-7.jpg" },
     { id: "biuro", name: "Biuro i archiwum", img: "img/foto/baner-pudla-new.jpg" },
-    { id: "garaz", name: "Garaż i warsztat", img: "img/produkty/worki-ih-ldpe-mocny-240l-czarny-10szt.jpg", contain: true },
-    { id: "lazienka", name: "Łazienka", img: "img/foto/flexistore-1000071613.jpg" },
+    { id: "garaz", name: "Garaż i warsztat", img: "img/foto/baner-garaz-i-warsztat.jpg" },
+    { id: "lazienka", name: "Łazienka", img: "img/foto/baner-lazienka.jpg" },
     { id: "ogrod", name: "Ogród i taras", img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/634852c1bf402dffb9c0125f_budka-dla-jey-ih-erina.jpg?v=1776082885&width=700", contain: true },
     { id: "wdrodze", name: "Na co dzień", img: "img/foto/torba-valencia-img-0789.jpg" }
   ];
