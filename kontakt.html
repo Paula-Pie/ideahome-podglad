@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kontakt — IDEA HOME</title>
+<meta name="description" content="Kontakt z IDEA HOME by Leviatan: e-mail, telefon, adres i najczęstsze pytania.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="kontakt">
+<div id="site-header"></div>
+<main>
+  <div class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Strona główna</a> / Kontakt</nav>
+      <h1>Porozmawiajmy</h1>
+      <p class="lead">Pytania o produkty, reklamacje albo współpraca handlowa. Odpowiadamy zwykle w ciągu 48 godzin.</p>
+    </div>
+  </div>
+
+  <section id="formularz">
+    <div class="wrap contact-grid">
+      <form class="form" id="cform" novalidate>
+        <div class="row">
+          <div class="field"><label for="c-name">Imię i nazwisko</label><input id="c-name" required autocomplete="name"></div>
+          <div class="field"><label for="c-email">E-mail</label><input id="c-email" type="email" required autocomplete="email"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="c-topic">Temat</label>
+            <select id="c-topic"><option>Pytanie o produkt</option><option>Współpraca handlowa / hurt</option><option>Torby z nadrukiem</option><option>Reklamacja</option><option>Inne</option></select></div>
+          <div class="field"><label for="c-company">Firma (opcjonalnie)</label><input id="c-company" autocomplete="organization"></div>
+        </div>
+        <div class="field"><label for="c-msg">Wiadomość</label><textarea id="c-msg" required></textarea></div>
+        <label class="consent"><input type="checkbox" id="c-consent" required> Zgadzam się na przetwarzanie moich danych w celu odpowiedzi na wiadomość.</label>
+        <div><button class="btn btn-primary" type="submit">Wyślij wiadomość</button></div>
+        <p class="form-msg" id="c-out" hidden></p>
+      </form>
+
+      <div class="cards-stack">
+        <div class="info-card"><span id="i1"></span><div><small>E-mail</small><b>leviatan@leviatan.pl</b></div><button class="copy-btn" type="button" data-copy="leviatan@leviatan.pl">Kopiuj</button></div>
+        <div class="info-card"><span id="i2"></span><div><small>Telefon</small><b>+48 33 443 21 00</b></div><button class="copy-btn" type="button" data-copy="+48 33 443 21 00">Kopiuj</button></div>
+        <div class="info-card"><span id="i3"></span><div><small>Adres</small><b>Rudawka 88, 43-300 Bielsko-Biała</b></div><a class="copy-btn" href="https://www.google.com/maps/search/?api=1&query=Rudawka+88+Bielsko-Bia%C5%82a" target="_blank" rel="noopener">Mapa</a></div>
+        <div class="info-card"><span id="i4"></span><div><small>Sklep internetowy</small><b>dladomu.sklep.pl</b></div><a class="copy-btn" href="https://www.dladomu.sklep.pl" target="_blank" rel="noopener">Otwórz</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap" style="max-width:900px">
+      <div class="sec-head"><div><span class="label">FAQ</span><h2>Najczęstsze pytania</h2></div></div>
+      <div class="faq">
+        <details><summary>Gdzie mogę kupić produkty IDEA HOME?</summary><p>Wszystkie produkty kupisz online w sklepie dladomu.sklep.pl. Znajdziesz je też u naszych partnerów handlowych w całej Polsce.</p></details>
+        <details><summary>Czym różnią się worki mocne od ekstra mocnych?</summary><p>Worki ekstra mocne mają grubszą folię. Sprawdzą się przy gruzie ogrodowym, gałęziach i ciężkich odpadach. Mocne wystarczą do codziennych odpadów domowych.</p></details>
+        <details><summary>Jakie kolory worków odpowiadają frakcjom segregacji?</summary><p>Żółty – metale i tworzywa, niebieski – papier, zielony – szkło, brązowy – bio, czarny – odpady zmieszane.</p></details>
+        <details><summary>Czy pojemniki Flexistore można kupić pojedynczo?</summary><p>Obecnie oferujemy je w zestawach 4 rozmiarów, w kolorach Denim i Neutral. Zapytaj nas, jeśli potrzebujesz większej ilości jednego rozmiaru.</p></details>
+        <details><summary>Czy robicie nadruki na torbach?</summary><p>Tak. Torby bawełniane Kopenhaga możemy zadrukować Twoim logo. Szczegóły znajdziesz na stronie <a href="dla-firm.html#nadruk" style="text-decoration:underline">Dla firm</a>.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="js/produkty-data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function () {
+  var IH = window.IH;
+  document.getElementById("i1").innerHTML = IH.ICON.mail; document.getElementById("i2").innerHTML = IH.ICON.phone;
+  document.getElementById("i3").innerHTML = IH.ICON.pin; document.getElementById("i4").innerHTML = IH.ICON.bag;
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = b.dataset.copy;
+      var done = function () { b.textContent = "Skopiowano"; setTimeout(function () { b.textContent = "Kopiuj"; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function () { selectText(b); });
+      else selectText(b);
+    });
+  });
+  function selectText(b) { var r = document.createRange(); r.selectNodeContents(b.parentElement.querySelector("b")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  document.getElementById("cform").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var out = document.getElementById("c-out"), f = this;
+    var missing = ["c-name", "c-email", "c-msg"].filter(function (id) { return !document.getElementById(id).value.trim(); });
+    out.hidden = false;
+    if (missing.length) { out.textContent = "Uzupełnij imię, e-mail i treść wiadomości."; document.getElementById(missing[0]).focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(document.getElementById("c-email").value)) { out.textContent = "Adres e-mail wygląda na niepełny, np. anna@firma.pl."; document.getElementById("c-email").focus(); return; }
+    if (!document.getElementById("c-consent").checked) { out.textContent = "Zaznacz zgodę na przetwarzanie danych, żebyśmy mogli odpowiedzieć."; return; }
+    out.textContent = "Dziękujemy! Formularz zostanie podłączony do skrzynki przy wdrożeniu strony. Do tego czasu napisz na leviatan@leviatan.pl.";
+  });
+})();
+</script>
+</body>
+</html>

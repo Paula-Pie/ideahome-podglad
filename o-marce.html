@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>O marce — IDEA HOME</title>
+<meta name="description" content="IDEA HOME by Leviatan — kim jesteśmy, jak projektujemy produkty i co jest dla nas ważne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="o-marce">
+<div id="site-header"></div>
+<main>
+  <div class="page-hero with-img">
+    <div class="wrap">
+      <div>
+        <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Strona główna</a> / O marce</nav>
+        <h1>Dom, w którym wszystko ma swoje miejsce</h1>
+        <p class="lead">IDEA HOME to marka firmy Leviatan z Bielska-Białej. Od ponad 20 lat dostarczamy produkty, które porządkują codzienność: od worków na odpady po pojemniki do salonu.</p>
+      </div>
+      <img src="img/foto/flexistore-dsc05557.jpg" alt="Pojemnik Flexistore na stoliku obok sofy">
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div><span class="label">W co wierzymy</span><h2>Cztery zasady, według których projektujemy</h2></div></div>
+      <div class="values" id="values"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap split">
+      <div class="copy">
+        <span class="label">Jak powstają nasze produkty</span>
+        <h2>Od potrzeby do półki</h2>
+        <div class="timeline">
+          <div class="tl"><b>Obserwacja</b><p>Zaczynamy od codziennych problemów: pękający worek, pudło, które nie mieści segregatora, pojemnik bez pokrywy.</p></div>
+          <div class="tl"><b>Projekt i próbki</b><p>Dobieramy grubość folii, wymiary i materiał. Każdą próbkę testujemy w realnym użyciu.</p></div>
+          <div class="tl"><b>Kontrola jakości</b><p>Sprawdzamy każdą partię: wytrzymałość zgrzewów, wymiary, zgodność kolorów.</p></div>
+          <div class="tl" style="padding-bottom:0"><b>Dystrybucja</b><p>Produkty trafiają do ponad 1000 partnerów handlowych i do sklepu dladomu.sklep.pl.</p></div>
+        </div>
+      </div>
+      <div class="media"><img src="img/foto/flexistore-1000071608.jpg" alt="Pojemnik Flexistore z przegródkami"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap"><div class="stats" id="stats"></div></div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band">
+        <div><h2>Chcesz sprzedawać IDEA HOME?</h2><p>Współpracujemy ze sklepami, hurtowniami i sieciami. Sprawdź warunki współpracy.</p></div>
+        <div><a class="btn" href="dla-firm.html">Oferta dla firm</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="js/produkty-data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function () {
+  var IH = window.IH;
+  var values = [["box", "Funkcjonalność", "Produkt ma rozwiązywać konkretny problem. Uchwyty tam, gdzie łapie dłoń, pokrywy, które się piętrzą."],
+    ["shield", "Jakość", "Kontrolujemy każdą partię. Worek ma wytrzymać upychanie, pojemnik lata użytkowania."],
+    ["leaf", "Odpowiedzialność", "Kolory worków zgodne z segregacją, opakowania z recyklingu, torby wielokrotnego użytku."],
+    ["tag", "Uczciwa cena", "Duże opakowania i ekonomiczne zestawy. Płacisz za produkt, nie za marketing."]];
+  document.getElementById("values").innerHTML = values.map(function (v) { return '<div class="value">' + IH.ICON[v[0]] + "<h3>" + v[1] + "</h3><p>" + v[2] + "</p></div>"; }).join("");
+  var stats = [["box", "250+", "produktów"], ["award", "20+", "lat doświadczenia"], ["people", "1000+", "partnerów handlowych"], ["shield", "100%", "kontroli jakości"]];
+  document.getElementById("stats").innerHTML = stats.map(function (s) { return '<div class="stat">' + IH.ICON[s[0]] + "<b>" + s[1] + "</b><span>" + s[2] + "</span></div>"; }).join("");
+})();
+</script>
+</body>
+</html>

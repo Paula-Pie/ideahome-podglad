@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>IDEA HOME</title>
+<meta name="description" content="IDEA HOME by Leviatan — worki na odpady, pojemniki Flexistore, organizery, torby i akcesoria, które ułatwiają utrzymanie porządku w domu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+<div id="site-header"></div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media"><img src="img/foto/baner-111062-7.jpg" alt="Pojemniki Flexistore IDEA HOME na konsoli w jasnym wnętrzu"></div>
+    <div class="wrap hero-inner">
+      <h1 id="hero-title">Nowoczesne rozwiązania dla domu. <span class="light">Funkcjonalność na co dzień.</span></h1>
+      <p class="lead">Produkty, które ułatwiają utrzymanie porządku, organizację i pielęgnację Twojego domu.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="produkty.html">Poznaj produkty</a>
+        <a class="link-arrow" href="https://www.dladomu.sklep.pl" target="_blank" rel="noopener">Kup online</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap quickbar">
+    <div class="quickbar-card">
+      <button class="car-btn prev" type="button" id="qprev" aria-label="Poprzednie"></button>
+      <div class="quick-track" id="quicktrack"></div>
+      <button class="car-btn next" type="button" id="qnext" aria-label="Następne"></button>
+    </div>
+  </div>
+
+  <!-- O MARCE -->
+  <section>
+    <div class="wrap split">
+      <div class="copy">
+        <span class="label">IDEA HOME</span>
+        <h2>Funkcjonalność, jakość i nowoczesne rozwiązania</h2>
+        <p>Tworzymy produkty, które pomagają utrzymać porządek, organizować przestrzeń i ułatwiać codzienne obowiązki. Łączymy wysoką jakość wykonania z nowoczesnym designem, aby zapewnić komfort każdego dnia.</p>
+        <ul class="checklist">
+          <li>Worki na odpady w pięciu kolorach segregacji, od 35 do 240 litrów</li>
+          <li>Pojemniki, które pasują do siebie rozmiarami i kolorami</li>
+          <li>Opakowania z recyklingu i coraz mniej plastiku</li>
+        </ul>
+        <a class="link-arrow" href="o-marce.html" style="margin-top:8px">Dowiedz się więcej o marce</a>
+      </div>
+      <div class="media"><img src="img/foto/baner-pudla-new.jpg" alt="Kartony archiwizacyjne IDEA HOME na regale w loftowym wnętrzu"></div>
+    </div>
+  </section>
+
+  <!-- MARKI -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2 class="sec-title-rule">Nasze marki</h2>
+      <div class="brands">
+        <a class="brand-card" href="marki.html#idea-home">
+          <img class="bg" src="img/foto/flexistore-1000071612.jpg" alt="">
+          <div><div class="bname">IDEA<span class="light">HOME</span></div><p class="btag">Funkcjonalny wybór na co dzień</p></div>
+          <span class="btn btn-outline btn-sm">Poznaj</span>
+        </a>
+        <a class="brand-card rakun" href="marki.html#rakun">
+          <svg class="deco" viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="3"><path d="M20 30l12 14M80 30L68 44"/><ellipse cx="50" cy="58" rx="30" ry="24"/><path d="M26 54c8-8 16-8 24 0 8-8 16-8 24 0"/><circle cx="40" cy="56" r="3" fill="#fff"/><circle cx="60" cy="56" r="3" fill="#fff"/><path d="M47 68h6l-3 4z" fill="#fff"/></svg>
+          <div><div class="bname">RAKUN</div><p class="btag">Skuteczność w każdej sytuacji</p></div>
+          <span class="btn btn-outline btn-sm">Poznaj</span>
+        </a>
+        <a class="brand-card everyday" href="marki.html#ms-everyday">
+          <svg class="deco" viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="3"><path d="M44 12h12M50 12v10M40 22h20v8"/><rect x="30" y="30" width="40" height="56" rx="8"/><circle cx="84" cy="30" r="5"/><circle cx="90" cy="46" r="3"/></svg>
+          <div><div class="bname">MS. EVERYDAY</div><p class="btag">Codzienna higiena i świeżość</p></div>
+          <span class="btn btn-outline btn-sm">Poznaj</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATEGORIE -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2 class="sec-title-rule">Kategorie produktów</h2>
+      <div class="cats" id="cats"></div>
+      <p style="text-align:center; margin-top:26px"><a class="link-arrow" href="produkty.html">Zobacz wszystkie kategorie</a></p>
+    </div>
+  </section>
+
+  <!-- LICZBY -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="stats" id="stats"></div>
+    </div>
+  </section>
+
+  <!-- POMIESZCZENIA -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2 class="sec-title-rule">Rozwiązania do każdego pomieszczenia</h2>
+      <div class="rooms-wrap">
+        <button class="car-btn prev" type="button" id="rprev" aria-label="Poprzednie pomieszczenia"></button>
+        <div class="rooms" id="rooms"></div>
+        <button class="car-btn next" type="button" id="rnext" aria-label="Następne pomieszczenia"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BESTSELLERY -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Najczęściej wybierane</span><h2>Bestsellery</h2></div>
+        <a class="link-arrow" href="produkty.html">Zobacz wszystkie produkty</a>
+      </div>
+      <div class="prodgrid six" id="best"></div>
+    </div>
+  </section>
+
+  <!-- FLEXISTORE -->
+  <section class="feature">
+    <div class="wrap feature-grid">
+      <div class="mosaic">
+        <img src="img/foto/flexistore-1000071604.jpg" alt="Pojemnik Flexistore z przegródkami pełen drobiazgów na sofie">
+        <img src="img/foto/flexistore-1000071614.jpg" alt="Pojemniki Flexistore ustawione jeden na drugim">
+        <img src="img/foto/flexistore-1000071610.jpg" alt="Otwarty pojemnik Flexistore z czasopismami">
+      </div>
+      <div class="copy">
+        <span class="label">Kolekcja</span>
+        <h2><b>FLEXISTORE</b><br>porządek, który dobrze wygląda</h2>
+        <p class="muted">Cztery rozmiary w jednym komplecie. Mniejsze wchodzą do większych, pokrywy pozwalają ustawiać je jeden na drugim, a matowa powierzchnia pasuje do salonu tak samo jak do garderoby.</p>
+        <div class="sizes" aria-label="Rozmiary w zestawie">
+          <div class="size"><i style="width:22px;height:14px"></i><b>S</b>drobiazgi</div>
+          <div class="size"><i style="width:30px;height:18px"></i><b>M</b>kosmetyki</div>
+          <div class="size"><i style="width:38px;height:22px"></i><b>L</b>ubrania</div>
+          <div class="size"><i style="width:46px;height:26px"></i><b>XL</b>pościel</div>
+        </div>
+        <div class="variants"><span><i class="sw" style="background:#7F939D"></i> Denim</span><span><i class="sw" style="background:#D8D2C6"></i> Neutral</span></div>
+        <div style="display:flex; gap:22px; align-items:center; flex-wrap:wrap; margin-top:6px">
+          <a class="btn btn-dark" href="kolekcje.html#flexistore">Odkryj kolekcję</a>
+          <a class="link-arrow" href="produkty.html#flexistore">Zobacz produkty</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TORBY -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Torby Valencia i Kopenhaga</span><h2>Na zakupy, do pracy, na spacer</h2><p>Filcowe torby Valencia i bawełniane Kopenhaga. Pojemne, lekkie i wystarczająco ładne, żeby nosić je codziennie.</p></div>
+        <a class="link-arrow" href="kolekcje.html#torby">Zobacz lookbook</a>
+      </div>
+      <div class="lookbook">
+        <figure class="lb-a"><img loading="lazy" src="img/foto/torba-valencia-img-0710.jpg" alt="Dwie kobiety na leżakach z filcowymi torbami Valencia i pies"><figcaption>Valencia · filc</figcaption></figure>
+        <figure class="lb-b"><img loading="lazy" src="img/foto/torba-valencia-img-0853.jpg" alt="Bawełniany plecak worek na ramieniu"></figure>
+        <figure class="lb-c"><img loading="lazy" src="img/foto/baner-projekt-bez-nazwy-25.jpg" alt="Kobieta w kawiarni z bawełnianą torbą Kopenhaga" style="object-position:50% 70%"><figcaption>Kopenhaga · bawełna</figcaption></figure>
+        <figure class="lb-d"><img loading="lazy" src="img/foto/torba-valencia-img-0584.jpg" alt="Spotkanie na schodach z torbami IDEA HOME" style="object-position:50% 40%"></figure>
+        <figure class="lb-e"><img loading="lazy" src="img/foto/baner-gemini-generated-image-wnagvcwnagvcwnag.jpg" alt="Filcowa torba z kocem, termosem i książkami przy kominku"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEGREGACJA -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Worki na odpady</span><h2>Kolor worka = frakcja odpadów</h2><p>Nasze worki mają kolory zgodne z systemem segregacji. Wystarczy spojrzeć, żeby wiedzieć, co gdzie wrzucić.</p></div>
+        <a class="link-arrow" href="produkty.html#worki">Wszystkie worki</a>
+      </div>
+      <div class="seg" id="seg"></div>
+    </div>
+  </section>
+
+  <!-- INSPIRACJE -->
+  <section style="padding-top:0">
+    <div class="wrap insp">
+      <div class="insp-intro">
+        <div style="display:grid; gap:12px"><span class="label">Blog</span><h2>Inspiracje i porady</h2><p class="muted">Praktyczne sposoby na porządek w domu, garażu i biurze.</p></div>
+        <a class="btn btn-dark" href="inspiracje.html">Zobacz wszystkie</a>
+      </div>
+      <div class="insp-list">
+        <a class="article" href="inspiracje.html#segregacja"><img loading="lazy" src="img/produkty/worki-ih-ldpe-mocny-60l-zielony-50szt.jpg" alt="" style="object-fit:contain; background:#fff; padding:16px"><div class="body"><span class="meta">Poradnik · 4 min</span><h3>Segregacja bez tajemnic: który worek do czego?</h3></div><span class="link-arrow">Czytaj więcej</span></a>
+        <a class="article" href="inspiracje.html#szafa"><img loading="lazy" src="img/foto/flexistore-1000071602.jpg" alt=""><div class="body"><span class="meta">Organizacja · 6 min</span><h3>Jak uporządkować szafę w jedno popołudnie</h3></div><span class="link-arrow">Czytaj więcej</span></a>
+        <a class="article" href="inspiracje.html#archiwum"><img loading="lazy" src="img/foto/baner-pudla-new.jpg" alt=""><div class="body"><span class="meta">Biuro · 5 min</span><h3>Domowe archiwum: dokumenty w pudłach, nie w szufladach</h3></div><span class="link-arrow">Czytaj więcej</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band">
+        <div><h2>Nowości i porady prosto na maila</h2><p>Raz w miesiącu: nowe produkty, sprawdzone patenty na porządek i rabaty w sklepie.</p></div>
+        <form id="nl" novalidate>
+          <label class="visually-hidden" for="nl-email">Adres e-mail</label>
+          <input id="nl-email" type="email" placeholder="Twój adres e-mail" required>
+          <button class="btn" type="submit">Zapisz się</button>
+          <p class="note" id="nl-msg">Możesz wypisać się w każdej chwili.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/produkty-data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function () {
+  var IH = window.IH;
+  // pasek szybkich produktów
+  var quick = ["flexistore", "worki-mocne-60", "torba-kopenhaga", "worki-z-tasma-35", "sciereczki", "worki-mocne-240", "tasma", "druciak"];
+  var qt = document.getElementById("quicktrack");
+  qt.innerHTML = quick.map(function (id) { return IH.CATALOG.find(function (g) { return g.id === id; }); }).filter(Boolean).map(function (g) {
+    return '<button type="button" class="quick-item" data-id="' + g.id + '" style="background:none;border-top:0;border-bottom:0;border-left:0;text-align:left"><img src="' + g.variants[0].img + '" alt=""><span>' + IH.esc(g.title.split(/ – | \d/)[0]) + '</span><i class="plus" aria-hidden="true">+</i></button>';
+  }).join("");
+  qt.addEventListener("click", function (e) { var b = e.target.closest(".quick-item"); if (b) IH.openModal(IH.CATALOG.find(function (g) { return g.id === b.dataset.id; })); });
+  document.getElementById("qprev").innerHTML = IH.ICON.left; document.getElementById("qnext").innerHTML = IH.ICON.right;
+  IH.carousel(qt, document.getElementById("qprev"), document.getElementById("qnext"));
+
+  // kategorie
+  document.getElementById("cats").innerHTML = IH.CATS.map(function (c) {
+    var n = IH.countIn(c.id);
+    return '<a class="cat" href="produkty.html#' + c.id + '">' + c.icon + '<span class="cname">' + c.short.replace("\n", "<br>") + '</span><span class="ccount' + (n ? "" : " soon") + '">' + (n ? n + " " + IH.pl(n, "produkt", "produkty", "produktów") : "wkrótce") + "</span></a>";
+  }).join("");
+
+  // liczby
+  var stats = [["box", "250+", "produktów"], ["award", "20+", "lat doświadczenia"], ["people", "1000+", "partnerów handlowych"], ["shield", "100%", "kontroli jakości"]];
+  document.getElementById("stats").innerHTML = stats.map(function (s) { return '<div class="stat">' + IH.ICON[s[0]] + "<b>" + s[1] + "</b><span>" + s[2] + "</span></div>"; }).join("");
+
+  // pomieszczenia
+  document.getElementById("rooms").innerHTML = IH.ROOMS.map(function (r) {
+    return '<a class="room" href="produkty.html#' + r.id + '"><img loading="lazy" src="' + r.img + '" alt=""' + (r.contain ? ' class="contain"' : "") + '><span class="rlabel">' + r.icon + r.name + "</span></a>";
+  }).join("");
+  document.getElementById("rprev").innerHTML = IH.ICON.left; document.getElementById("rnext").innerHTML = IH.ICON.right;
+  IH.carousel(document.getElementById("rooms"), document.getElementById("rprev"), document.getElementById("rnext"));
+
+  // bestsellery
+  var best = ["flexistore", "worki-mocne-60", "worki-mocne-120", "torba-kopenhaga", "sciereczki", "worki-z-tasma-60"];
+  var bestEl = document.getElementById("best");
+  bestEl.innerHTML = best.map(function (id) { return IH.CATALOG.find(function (g) { return g.id === id; }); }).filter(Boolean).map(function (g) { return IH.card(g); }).join("");
+  IH.bindCards(bestEl);
+
+  // segregacja
+  var segs = [["ŻÓŁTY", "Metale i tworzywa", "Butelki PET, puszki, kartony po mleku, folia."], ["NIEBIESKI", "Papier", "Gazety, kartony, zeszyty, papierowe torby."], ["ZIELONY", "Szkło", "Słoiki i butelki szklane bez nakrętek."], ["BRĄZOWY", "Bio", "Obierki, fusy z kawy, resztki roślin."], ["CZARNY", "Zmieszane", "Wszystko, czego nie da się posegregować."]];
+  document.getElementById("seg").innerHTML = segs.map(function (s) {
+    var c = IH.COLORS[s[0]];
+    return '<a class="seg-item" href="produkty.html#worki"><span class="bar" style="background:' + c.hex + '"></span><div class="inner"><span class="what">Worek ' + c.name + "</span><h3>" + s[1] + "</h3><p>" + s[2] + "</p></div></a>";
+  }).join("");
+
+  // newsletter
+  document.getElementById("nl").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var inp = document.getElementById("nl-email"), msg = document.getElementById("nl-msg");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inp.value)) { msg.textContent = "Wpisz poprawny adres e-mail, np. anna@poczta.pl."; inp.focus(); return; }
+    msg.textContent = "Dziękujemy! Zapis zostanie aktywowany po podłączeniu systemu mailingowego.";
+    inp.value = "";
+  });
+})();
+</script>
+</body>
+</html>

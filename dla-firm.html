@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Dla firm — IDEA HOME</title>
+<meta name="description" content="IDEA HOME dla firm: sprzedaż hurtowa, torby z nadrukiem, private label i zaopatrzenie biur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="dla-firm">
+<div id="site-header"></div>
+<main>
+  <div class="page-hero with-img">
+    <div class="wrap">
+      <div>
+        <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Strona główna</a> / Dla firm</nav>
+        <h1>IDEA HOME dla firm i handlu</h1>
+        <p class="lead">Zaopatrujemy sklepy, hurtownie, biura i firmy sprzątające. Stałe dostawy, pełne palety i produkty z Twoim logo.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:28px"><a class="btn btn-primary" href="kontakt.html#formularz">Poproś o ofertę</a><a class="btn btn-outline" href="produkty.html">Katalog produktów</a></div>
+      </div>
+      <img src="img/foto/baner-pudla-new.jpg" alt="Kartony IDEA HOME na regale magazynowym">
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div><span class="label">Co oferujemy</span><h2>Współpraca dopasowana do skali</h2></div></div>
+      <div class="b2b-grid" id="b2b"></div>
+    </div>
+  </section>
+
+  <section id="nadruk" class="feature">
+    <div class="wrap split">
+      <div class="copy">
+        <span class="label">Torby z nadrukiem</span>
+        <h2>Twoje logo na torbie Kopenhaga</h2>
+        <p>Bawełniana torba 38 × 42 cm bez nadruku to gotowa baza pod gadżet firmowy, torbę eventową albo opakowanie do sklepu. Jako grupa Leviatan mamy własną poligrafię, więc nadruk przygotujemy na miejscu.</p>
+        <ul class="checklist"><li>Nadruk jedno- i wielokolorowy</li><li>Pakowanie po 10 szt. lub zbiorczo</li><li>Próbka przed produkcją całej serii</li></ul>
+        <a class="btn btn-dark" href="kontakt.html#formularz" style="justify-self:start">Wyceń nadruk</a>
+      </div>
+      <div class="media"><img src="img/foto/torba-valencia-nowy-projekt-6.jpg" alt="Bawełniana torba Kopenhaga na ramieniu"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div><span class="label">Jak zacząć</span><h2>Od zapytania do dostawy</h2></div></div>
+      <div class="steps">
+        <div class="step"><h3>Zapytanie</h3><p>Napisz, jakich produktów i ilości potrzebujesz. Odpowiadamy w ciągu 48 godzin.</p></div>
+        <div class="step"><h3>Oferta i próbki</h3><p>Przygotowujemy wycenę i na życzenie wysyłamy próbki.</p></div>
+        <div class="step"><h3>Zamówienie</h3><p>Ustalamy terminy, logistykę i sposób pakowania.</p></div>
+        <div class="step"><h3>Stałe dostawy</h3><p>Opiekun handlowy pilnuje stanów i kolejnych zamówień.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band">
+        <div><h2>Porozmawiajmy o współpracy</h2><p>leviatan@leviatan.pl · +48 33 443 21 00</p></div>
+        <div><a class="btn" href="kontakt.html#formularz">Formularz kontaktowy</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="js/produkty-data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function () {
+  var IH = window.IH;
+  var items = [["truck", "Sprzedaż hurtowa", "Pełne palety i kartony zbiorcze dla sklepów, hurtowni i sieci handlowych."],
+    ["tag", "Private label", "Worki, pojemniki i torby pod Twoją marką, z Twoją etykietą i opakowaniem."],
+    ["print", "Torby z nadrukiem", "Bawełniane torby Kopenhaga z logo firmy. Na eventy, do sklepu, jako upominek."],
+    ["box", "Zaopatrzenie biur", "Worki na odpady, kartony archiwizacyjne i środki czystości w stałych dostawach."],
+    ["people", "Firmy sprzątające", "Worki 120 i 240 l, chemia RAKUN i ściereczki w ekonomicznych opakowaniach."],
+    ["shield", "Kontrola jakości", "Każda partia sprawdzona przed wysyłką. Dokumentacja i karty produktów na życzenie."]];
+  document.getElementById("b2b").innerHTML = items.map(function (i) { return '<div class="b2b">' + IH.ICON[i[0]] + "<h3>" + i[1] + "</h3><p>" + i[2] + "</p></div>"; }).join("");
+})();
+</script>
+</body>
+</html>

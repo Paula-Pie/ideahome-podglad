@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Inspiracje — IDEA HOME</title>
+<meta name="description" content="Poradniki IDEA HOME: segregacja odpadów, organizacja szafy, domowe archiwum i porządek w garażu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .post { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(24px, 4vw, 56px); padding-block: 48px; border-bottom: 1px solid var(--line); scroll-margin-top: 110px; }
+  .post:last-child { border-bottom: 0; }
+  .post img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); }
+  .post .copy { display: grid; gap: 14px; align-content: start; }
+  .post h2 { font-size: var(--fs-xl); }
+  .post p, .post li { color: var(--ink-2); max-width: 64ch; }
+  .post ol { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+  .post .related { display: flex; gap: 10px; flex-wrap: wrap; }
+  @media (max-width: 860px) { .post { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="inspiracje">
+<div id="site-header"></div>
+<main>
+  <div class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Strona główna</a> / Inspiracje</nav>
+      <h1>Inspiracje i porady</h1>
+      <p class="lead">Sprawdzone sposoby na porządek. Krótko, konkretnie i z listą rzeczy, które się przydadzą.</p>
+      <div class="tabs" style="margin:24px 0 0" id="tabs">
+        <button class="tab" type="button" data-t="all" aria-pressed="true">Wszystkie</button>
+        <button class="tab" type="button" data-t="porzadek" aria-pressed="false">Organizacja</button>
+        <button class="tab" type="button" data-t="eko" aria-pressed="false">Ekologia</button>
+        <button class="tab" type="button" data-t="garaz" aria-pressed="false">Garaż i biuro</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" id="posts">
+    <article class="post" id="segregacja" data-t="eko">
+      <img src="img/produkty/worki-ih-ldpe-mocny-35l-zolty-20szt.jpg" alt="Żółte worki na odpady IDEA HOME" style="object-fit:contain; background:#fff; padding:24px">
+      <div class="copy">
+        <span class="label">Ekologia · 4 min</span>
+        <h2>Segregacja bez tajemnic: który worek do czego?</h2>
+        <p>W Polsce obowiązuje pięć frakcji odpadów. Każda ma swój kolor, a nasze worki są dopasowane do tego systemu.</p>
+        <ol>
+          <li><b>Żółty</b> – metale i tworzywa sztuczne: butelki PET, puszki, kartony po napojach.</li>
+          <li><b>Niebieski</b> – papier: gazety, kartony, papierowe torby.</li>
+          <li><b>Zielony</b> – szkło: butelki i słoiki bez nakrętek.</li>
+          <li><b>Brązowy</b> – bio: resztki warzyw i owoców, fusy, skoszona trawa.</li>
+          <li><b>Czarny</b> – odpady zmieszane.</li>
+        </ol>
+        <div class="related"><a class="btn btn-dark btn-sm" href="produkty.html#worki">Worki na odpady</a></div>
+      </div>
+    </article>
+
+    <article class="post" id="szafa" data-t="porzadek">
+      <img src="img/foto/flexistore-1000071602.jpg" alt="Pojemniki Flexistore na sofie">
+      <div class="copy">
+        <span class="label">Organizacja · 6 min</span>
+        <h2>Jak uporządkować szafę w jedno popołudnie</h2>
+        <ol>
+          <li>Wyjmij wszystko i podziel na trzy stosy: zostaje, oddaję, wyrzucam.</li>
+          <li>Rzeczy sezonowe zapakuj do dużych pojemników z pokrywą i przenieś na górną półkę.</li>
+          <li>Drobiazgi (paski, szaliki, skarpety) włóż do małych pojemników. Nie będą się mieszać.</li>
+          <li>Ustaw pojemniki jeden na drugim, od największego do najmniejszego.</li>
+          <li>Podpisz każdy pojemnik od frontu. Po miesiącu nie będziesz musiała(-y) zaglądać do środka.</li>
+        </ol>
+        <div class="related"><a class="btn btn-dark btn-sm" href="produkty.html#flexistore">Pojemniki Flexistore</a><a class="btn btn-outline btn-sm" href="produkty.html#garderoba">Do garderoby</a></div>
+      </div>
+    </article>
+
+    <article class="post" id="archiwum" data-t="garaz">
+      <img src="img/foto/baner-pudla-new.jpg" alt="Kartony archiwizacyjne na regale">
+      <div class="copy">
+        <span class="label">Biuro · 5 min</span>
+        <h2>Domowe archiwum: dokumenty w pudłach, nie w szufladach</h2>
+        <p>Umowy, rachunki i gwarancje trzeba trzymać latami. Zamiast upychać je w szufladach, podziel je według roku i kategorii, a potem zapakuj do kartonów archiwizacyjnych z polem opisowym na froncie.</p>
+        <p>Na bieżący rok wystarczy jeden segregator. Starsze lata trafiają do pudeł na górną półkę regału.</p>
+        <div class="related"><a class="btn btn-dark btn-sm" href="produkty.html#biuro">Do biura</a></div>
+      </div>
+    </article>
+
+    <article class="post" id="garaz" data-t="garaz">
+      <img src="img/produkty/tasma-ostrzegawcza-ih-50mm-x-5m-klejaca-odblaskowa-zolto-czarna-strzalka.jpg" alt="Taśma ostrzegawcza żółto-czarna" style="object-fit:contain; background:#fff; padding:24px">
+      <div class="copy">
+        <span class="label">Garaż · 3 min</span>
+        <h2>Bezpieczny garaż: trzy rzeczy do zrobienia w weekend</h2>
+        <ol>
+          <li>Oznacz taśmą odblaskową próg, stopnie i krawędzie regałów. W półmroku widać je od razu.</li>
+          <li>Liście i gruz zbieraj do worków 120 l lub 240 l. Wersja ekstra mocna nie przebije się na gałęziach.</li>
+          <li>Drobne narzędzia trzymaj w pojemnikach na wysokości oczu, a ciężkie na dole.</li>
+        </ol>
+        <div class="related"><a class="btn btn-dark btn-sm" href="produkty.html#garaz">Do garażu</a></div>
+      </div>
+    </article>
+
+    <article class="post" id="torby-zamiast" data-t="eko">
+      <img src="img/foto/torba-valencia-img-e7721.jpg" alt="Torby wielokrotnego użytku na spacerze">
+      <div class="copy">
+        <span class="label">Ekologia · 3 min</span>
+        <h2>Jedna torba zamiast setek foliówek</h2>
+        <p>Bawełnianą lub filcową torbę możesz używać przez lata. Trzymaj jedną w samochodzie, jedną przy drzwiach i jedną w plecaku, wtedy zawsze masz ją pod ręką.</p>
+        <div class="related"><a class="btn btn-dark btn-sm" href="produkty.html#torby">Torby</a><a class="btn btn-outline btn-sm" href="kolekcje.html#torby">Lookbook</a></div>
+      </div>
+    </article>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="js/produkty-data.js"></script>
+<script src="js/site.js"></script>
+<script>
+document.getElementById("tabs").addEventListener("click", function (e) {
+  var b = e.target.closest(".tab"); if (!b) return;
+  this.querySelectorAll(".tab").forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+  document.querySelectorAll(".post").forEach(function (p) { p.hidden = b.dataset.t !== "all" && p.dataset.t !== b.dataset.t; });
+});
+</script>
+</body>
+</html>

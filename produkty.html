@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Produkty — IDEA HOME</title>
+<meta name="description" content="Katalog produktów IDEA HOME: worki na odpady, pojemniki Flexistore, torby, akcesoria do kuchni i warsztatu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="produkty">
+<div id="site-header"></div>
+
+<main>
+  <div class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Strona główna</a> / <span id="crumb">Produkty</span></nav>
+      <h1 id="ptitle">Wszystkie produkty</h1>
+      <p class="lead" id="plead">Wybierz kategorię, pomieszczenie albo kolor. Każdy produkt kupisz online w sklepie dladomu.sklep.pl.</p>
+    </div>
+  </div>
+
+  <section style="padding-top:36px">
+    <div class="wrap catalog">
+      <aside class="filters" id="filters" aria-label="Filtry">
+        <div class="fgroup"><h3>Kategorie</h3><ul id="f-cat"></ul></div>
+        <div class="fgroup"><h3>Pomieszczenie</h3><ul id="f-room"></ul></div>
+        <div class="fgroup"><h3>Kolor</h3><div class="swatches" id="f-color"></div></div>
+        <div class="fgroup"><ul><li><button class="fbtn" type="button" id="f-fav" aria-pressed="false"><span>Moje ulubione</span><span class="n" id="f-fav-n"></span></button></li></ul></div>
+      </aside>
+
+      <div style="min-width:0">
+        <div class="toolbar">
+          <div class="search">
+            <span id="s-ico"></span>
+            <label class="visually-hidden" for="q">Szukaj w katalogu</label>
+            <input id="q" type="search" placeholder="Szukaj, np. 120 l, żółty, bawełna">
+          </div>
+          <button class="btn btn-outline btn-sm filters-toggle" type="button" id="ftoggle" aria-expanded="false">Filtry</button>
+          <label class="visually-hidden" for="sort">Sortowanie</label>
+          <select id="sort">
+            <option value="cat">Sortuj: kategoriami</option>
+            <option value="az">Nazwa A–Z</option>
+            <option value="cap">Pojemność rosnąco</option>
+            <option value="var">Najwięcej wariantów</option>
+          </select>
+        </div>
+        <div class="chips" id="chips"></div>
+        <p class="result" id="result" style="margin-bottom:14px; font-size:.875rem; color:var(--muted)"></p>
+        <div class="prodgrid" id="grid"></div>
+        <div id="empty" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band" style="background:var(--dark)">
+        <div><h2>Kupujesz dla firmy lub sklepu?</h2><p>Hurtowe ilości, własna etykieta i torby z nadrukiem. Przygotujemy ofertę dopasowaną do Twojej skali.</p></div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap"><a class="btn" href="dla-firm.html">Oferta dla firm</a><a class="btn btn-outline" style="color:#fff" href="kontakt.html">Napisz do nas</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/produkty-data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function () {
+  var IH = window.IH;
+  var state = { cat: null, room: null, color: null, fav: false, q: "", sort: "cat" };
+  var grid = document.getElementById("grid");
+  document.getElementById("s-ico").innerHTML = IH.ICON.search;
+  IH.bindCards(grid);
+
+  function readHash() {
+    var h = decodeURIComponent(location.hash.slice(1));
+    state.cat = null; state.room = null; state.fav = false;
+    if (IH.catById(h)) state.cat = h;
+    else if (IH.roomById(h)) state.room = h;
+    else if (h === "ulubione") state.fav = true;
+    else if (h === "szukaj") { try { state.q = sessionStorage.getItem("ih-q") || ""; } catch (e) {} document.getElementById("q").value = state.q; }
+  }
+
+  function matches(g) {
+    if (state.cat && g.cat !== state.cat) return false;
+    if (state.room && g.rooms.indexOf(state.room) === -1) return false;
+    if (state.color && !g.variants.some(function (v) { return v.color === state.color; })) return false;
+    if (state.fav && IH.getFavs().indexOf(g.id) === -1) return false;
+    if (state.q) {
+      var hay = (g.title + " " + IH.catById(g.cat).name + " " + g.variants.map(function (v) { return v.raw + " " + (IH.COLORS[v.color] ? IH.COLORS[v.color].name + " " + (IH.COLORS[v.color].seg || "") : ""); }).join(" ")).toLowerCase();
+      var ok = state.q.toLowerCase().split(/\s+/).every(function (w) { return hay.indexOf(w.replace(/\s*l$/, "")) > -1 || hay.indexOf(w) > -1; });
+      if (!ok) return false;
+    }
+    return true;
+  }
+
+  function renderFilters() {
+    document.getElementById("f-cat").innerHTML = '<li><button class="fbtn" type="button" data-cat="" aria-pressed="' + (!state.cat) + '"><span>Wszystkie</span><span class="n">' + IH.CATALOG.length + "</span></button></li>" +
+      IH.CATS.map(function (c) { var n = IH.countIn(c.id); return '<li><button class="fbtn' + (n ? "" : " empty") + '" type="button" data-cat="' + c.id + '" aria-pressed="' + (state.cat === c.id) + '"><span>' + c.name + '</span><span class="n">' + (n || "wkrótce") + "</span></button></li>"; }).join("");
+    document.getElementById("f-room").innerHTML = IH.ROOMS.map(function (r) { var n = IH.CATALOG.filter(function (g) { return g.rooms.indexOf(r.id) > -1; }).length; return '<li><button class="fbtn" type="button" data-room="' + r.id + '" aria-pressed="' + (state.room === r.id) + '"><span>' + r.name + '</span><span class="n">' + n + "</span></button></li>"; }).join("");
+    var used = {}; IH.CATALOG.forEach(function (g) { g.variants.forEach(function (v) { if (v.color) used[v.color] = 1; }); });
+    document.getElementById("f-color").innerHTML = Object.keys(used).map(function (k) { var c = IH.COLORS[k]; return '<button class="sw" type="button" data-color="' + k + '" aria-pressed="' + (state.color === k) + '" title="' + c.name + '" aria-label="Kolor ' + c.name + '" style="background:' + c.hex + '"></button>'; }).join("");
+    var fb = document.getElementById("f-fav"); fb.setAttribute("aria-pressed", state.fav); document.getElementById("f-fav-n").textContent = IH.getFavs().length;
+  }
+
+  function render() {
+    renderFilters();
+    var list = IH.CATALOG.filter(matches).slice();
+    if (state.sort === "az") list.sort(function (a, b) { return a.title.localeCompare(b.title, "pl"); });
+    if (state.sort === "cap") list.sort(function (a, b) { return (a.cap || 9999) - (b.cap || 9999); });
+    if (state.sort === "var") list.sort(function (a, b) { return b.variants.length - a.variants.length; });
+    grid.innerHTML = list.map(function (g) { return IH.card(g, { hideCat: !!state.cat }); }).join("");
+
+    var cat = state.cat && IH.catById(state.cat), room = state.room && IH.roomById(state.room);
+    var t = cat ? cat.name : room ? "Produkty: " + room.name.toLowerCase() : state.fav ? "Moje ulubione" : "Wszystkie produkty";
+    document.getElementById("ptitle").textContent = t;
+    document.getElementById("crumb").textContent = t;
+    document.getElementById("plead").textContent = cat ? cat.desc + ". " + (IH.countIn(cat.id) ? "Wybierz wariant koloru na karcie produktu." : "")
+      : room ? "Produkty, które sprawdzają się w tym miejscu domu." : state.fav ? "Produkty zapisane w tej przeglądarce." : "Wybierz kategorię, pomieszczenie albo kolor. Każdy produkt kupisz online w sklepie dladomu.sklep.pl.";
+
+    var variants = list.reduce(function (s, g) { return s + g.variants.length; }, 0);
+    document.getElementById("result").textContent = list.length ? list.length + " " + IH.pl(list.length, "produkt", "produkty", "produktów") + " · " + variants + " " + IH.pl(variants, "wariant", "warianty", "wariantów") : "";
+
+    var chips = [];
+    if (cat) chips.push(["cat", cat.name]);
+    if (room) chips.push(["room", room.name]);
+    if (state.color) chips.push(["color", "Kolor: " + IH.COLORS[state.color].name]);
+    if (state.fav) chips.push(["fav", "Ulubione"]);
+    if (state.q) chips.push(["q", "„" + state.q + "”"]);
+    document.getElementById("chips").innerHTML = chips.map(function (c) { return '<span class="chip">' + IH.esc(c[1]) + '<button type="button" data-clear="' + c[0] + '" aria-label="Usuń filtr ' + IH.esc(c[1]) + '">×</button></span>'; }).join("") +
+      (chips.length > 1 ? '<button class="chip" type="button" data-clear="all">Wyczyść wszystko</button>' : "");
+
+    var empty = document.getElementById("empty");
+    empty.hidden = !!list.length;
+    if (!list.length) {
+      var soon = cat && !IH.countIn(cat.id);
+      empty.innerHTML = '<div class="empty-state">' + (cat ? cat.icon : IH.ICON.search) +
+        (soon ? "<h3>" + cat.name + " – już wkrótce</h3><p>Pracujemy nad tą kategorią. Do tego czasu zajrzyj do sklepu albo zapytaj nas o dostępność.</p><div style=\"display:flex;gap:10px;flex-wrap:wrap;justify-content:center\"><a class=\"btn btn-primary\" href=\"" + IH.shopSearch(cat.name + " idea home") + "\" target=\"_blank\" rel=\"noopener\">Szukaj w sklepie</a><a class=\"btn btn-outline\" href=\"kontakt.html\">Zapytaj o dostępność</a></div>"
+          : state.fav ? "<h3>Nie masz jeszcze ulubionych</h3><p>Kliknij serce na karcie produktu, żeby zapisać go tutaj.</p><button class=\"btn btn-dark\" type=\"button\" data-clear=\"all\">Pokaż wszystkie produkty</button>"
+          : "<h3>Brak produktów dla tych filtrów</h3><p>Usuń jeden z filtrów albo wpisz inną frazę.</p><button class=\"btn btn-dark\" type=\"button\" data-clear=\"all\">Wyczyść filtry</button>") + "</div>";
+    }
+  }
+
+  function setHash(h) { history.replaceState(null, "", h ? "#" + h : location.pathname); }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-cat],[data-room],[data-color],[data-clear],#f-fav");
+    if (!b || b.closest(".pcard")) return;
+    if (b.dataset.cat !== undefined) { state.cat = b.dataset.cat || null; state.room = null; state.fav = false; setHash(state.cat); }
+    else if (b.dataset.room) { state.room = state.room === b.dataset.room ? null : b.dataset.room; state.cat = null; state.fav = false; setHash(state.room); }
+    else if (b.dataset.color) { state.color = state.color === b.dataset.color ? null : b.dataset.color; }
+    else if (b.id === "f-fav") { state.fav = !state.fav; if (state.fav) { state.cat = null; state.room = null; } setHash(state.fav ? "ulubione" : ""); }
+    else {
+      var k = b.dataset.clear;
+      if (k === "all") { state = { cat: null, room: null, color: null, fav: false, q: "", sort: state.sort }; document.getElementById("q").value = ""; setHash(""); }
+      else { if (k === "q") document.getElementById("q").value = ""; state[k] = k === "fav" ? false : k === "q" ? "" : null; if (k !== "color" && k !== "q") setHash(""); }
+    }
+    render();
+    if (window.innerWidth < 900 && (b.dataset.cat !== undefined || b.dataset.room)) document.getElementById("grid").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  document.getElementById("q").addEventListener("input", function (e) { state.q = e.target.value.trim(); render(); });
+  document.getElementById("sort").addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+  document.getElementById("ftoggle").addEventListener("click", function () { var f = document.getElementById("filters"), o = f.classList.toggle("open"); this.setAttribute("aria-expanded", o); });
+  window.addEventListener("hashchange", function () { readHash(); render(); });
+  // odświeżaj licznik ulubionych na liście po kliknięciu serca
+  grid.addEventListener("click", function (e) { if (e.target.closest(".fav")) setTimeout(function () { document.getElementById("f-fav-n").textContent = IH.getFavs().length; if (state.fav) render(); }, 0); });
+
+  readHash();
+  render();
+})();
+</script>
+</body>
+</html>
