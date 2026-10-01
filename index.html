@@ -86,13 +86,6 @@
     </div>
   </section>
 
-  <!-- LICZBY -->
-  <section style="padding-top:0">
-    <div class="wrap">
-      <div class="stats" id="stats"></div>
-    </div>
-  </section>
-
   <!-- POMIESZCZENIA -->
   <section style="padding-top:0">
     <div class="wrap">
@@ -224,10 +217,6 @@
     var n = IH.countIn(c.id);
     return '<a class="cat" href="produkty.html#' + c.id + '">' + c.icon + '<span class="cname">' + c.short.replace("\n", "<br>") + '</span><span class="ccount' + (n ? "" : " soon") + '">' + (n ? n + " " + IH.pl(n, "produkt", "produkty", "produktów") : "wkrótce") + "</span></a>";
   }).join("");
-
-  // liczby
-  var stats = [["box", "250+", "produktów"], ["award", "20+", "lat doświadczenia"], ["people", "1000+", "partnerów handlowych"], ["shield", "100%", "kontroli jakości"]];
-  document.getElementById("stats").innerHTML = stats.map(function (s) { return '<div class="stat">' + IH.ICON[s[0]] + "<b>" + s[1] + "</b><span>" + s[2] + "</span></div>"; }).join("");
 
   // pomieszczenia
   document.getElementById("rooms").innerHTML = IH.ROOMS.map(function (r) {
