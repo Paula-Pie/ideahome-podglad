@@ -225,7 +225,7 @@
   IH.carousel(qt, document.getElementById("qprev"), document.getElementById("qnext"));
 
   // kategorie
-  document.getElementById("cats").innerHTML = IH.CATS.map(function (c) {
+  document.getElementById("cats").innerHTML = IH.CATS.filter(function (c) { return IH.countIn(c.id); }).map(function (c) {
     var n = IH.countIn(c.id);
     return '<a class="cat" href="produkty.html#' + c.id + '">' + c.icon + '<span class="cname">' + c.short.replace("\n", "<br>") + '</span><span class="ccount' + (n ? "" : " soon") + '">' + (n ? n + " " + IH.pl(n, "produkt", "produkty", "produktów") : "wkrótce") + "</span></a>";
   }).join("");

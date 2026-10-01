@@ -69,11 +69,13 @@
     { id: "sprzatanie", name: "Kuchnia i sprzątanie", short: "Kuchnia\ni sprzątanie", desc: "Ściereczki, zmywaki, druciaki" },
     { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN w ekonomicznych opakowaniach" },
     { id: "mydla", name: "Mydła i pielęgnacja", short: "Mydła\ni pielęgnacja", desc: "Mydła w płynie RAKUN, pumeksy" },
-    { id: "warsztat", name: "Taśmy i sznurki", short: "Taśmy\ni sznurki", desc: "Taśmy, sznurki, zestawy renowacyjne" },
+    { id: "warsztat", name: "Taśmy i sznurki", short: "Taśmy\ni sznurki", desc: "Taśmy izolacyjne i maskujące, sznurki" },
     { id: "budki", name: "Budki i karmniki", short: "Budki\ni karmniki", desc: "Dla ptaków, jeży i nietoperzy" },
+    { id: "nagrobki", name: "Profesjonalne czyszczenie i renowacja nagrobków", short: "Czyszczenie\ni renowacja nagrobków", desc: "Zestawy do odnawiania napisów na pomnikach" },
     { id: "pianka", name: "Aktywna pianka", short: "Aktywna\npianka", desc: "Czyszczenie bez szorowania" }
   ];
   ICON.dom = ICON.organizery;
+  ICON.nagrobki = '<svg viewBox="0 0 48 48" ' + P + '><path d="M14 40V18a10 10 0 0120 0v22"/><path d="M8 40h32v4H8z"/><path d="M24 17v12M19 22h10"/></svg>';
   CATS.forEach(function (c) { c.icon = ICON[c.id]; });
 
   var ROOMS = [
@@ -146,7 +148,8 @@
     if (/MYDŁO|PUMEKS/.test(up)) return "mydla";
     if (/PŁYN/.test(up)) return "chemia";
     if (/DRUCIAK|ZMYWAK|GĄBKA|ŚCIERECZK|ROLKA DO UBRAŃ/.test(up)) return "sprzatanie";
-    if (/TAŚMA|SZNUREK|RENOWACJI/.test(up)) return "warsztat";
+    if (/RENOWACJI/.test(up)) return "nagrobki";
+    if (/TAŚMA|SZNUREK/.test(up)) return "warsztat";
     return "dom";
   }
   var CAT_ROOMS = { flexistore: ["salon", "garderoba", "lazienka", "biuro"], techbox: ["garaz"], dom: ["biuro", "garaz", "garderoba"],
@@ -184,9 +187,9 @@
       case "mydla": return /PUMEKS/.test(up) ? "Pumeks kosmetyczny do pielęgnacji stóp i dłoni." : "Mydło w płynie RAKUN w kanistrze 5 l do uzupełniania dozowników w domu i w firmie.";
       case "warsztat":
         if (/SZNUREK/.test(up)) return "Naturalny sznurek do pakowania, ogrodu, kuchni i rękodzieła.";
-        if (/RENOWACJI/.test(up)) return "Zestaw do odnawiania liter na nagrobkach i tablicach. Przywraca czytelność napisów.";
         return "Taśmy do pakowania, malowania i prac elektrycznych w praktycznych zestawach.";
       case "budki": return "Drewniana budka lub karmnik IDEA HOME. Daje schronienie i pożywienie zwierzętom w ogrodzie przez cały rok.";
+      case "nagrobki": return "Zestaw do odnawiania liter na nagrobkach i tablicach. Przywraca czytelność i kolor napisów.";
     }
     return "";
   }
