@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAKUN — Naturalnie w Twoim domu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f6efe2;
+    --cream-2:#efe4d0;
+    --ink:#3d332a;
+    --ink-soft:#6b5d4f;
+    --accent:#c17f4f;
+    --accent-dark:#a86438;
+    --sage:#8a9a6e;
+    --line:#e2d5bd;
+    --white:#fffdf8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:auto; font-size:clamp(12px, 12px + 0.17vw, 15.5px);}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Nunito Sans', Arial, sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+  h1,h2,h3,h4{
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0 0 .4em 0;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:990px; margin:0 auto; padding:0 30px;}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:.76rem;
+    font-weight:700;
+    color:var(--accent-dark);
+    margin-bottom:.6em;
+  }
+  .btn{
+    display:inline-block;
+    background:var(--ink);
+    color:var(--white);
+    padding:13px 30px;
+    border-radius:40px;
+    font-weight:700;
+    font-family:'Quicksand',sans-serif;
+    font-size:.95rem;
+    letter-spacing:.02em;
+    transition:transform .25s ease, background .25s ease;
+    border:2px solid var(--ink);
+  }
+  .btn:hover{background:var(--accent-dark); border-color:var(--accent-dark); transform:translateY(-2px);}
+  .btn.outline{background:transparent; color:var(--ink);}
+  .btn.outline:hover{background:var(--ink); color:var(--white);}
+
+  /* ===== Header — transparent overlay, solidifies after 80px scroll ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(247,245,240,0);
+    backdrop-filter:blur(0px);
+    border-bottom:1px solid rgba(0,0,0,0);
+    transition:background .35s ease, backdrop-filter .35s ease, border-color .35s ease;
+  }
+  header.scrolled{
+    background:rgba(247,245,240,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(0,0,0,.05);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:17px 30px; max-width:1260px; margin:0 auto;
+    transition:padding .35s ease;
+  }
+  header.scrolled .nav-inner{padding:11px 30px;}
+  .logo{
+    font-family:'Quicksand', sans-serif;
+    font-size:2.3rem; font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#fff;
+    display:flex; align-items:center; gap:8px;
+    text-shadow:0 2px 10px rgba(0,0,0,.25);
+    transition:color .35s ease, text-shadow .35s ease;
+  }
+  header.scrolled .logo{color:var(--ink); text-shadow:none;}
+  .logo span{color:var(--accent);}
+  nav.main-nav{display:flex; gap:38px;}
+  nav.main-nav a{
+    font-weight:600; font-size:.86rem; color:#fff;
+    text-transform:uppercase; letter-spacing:.08em;
+    position:relative; padding:4px 0;
+    text-shadow:0 2px 10px rgba(0,0,0,.25);
+    transition:color .35s ease, text-shadow .35s ease;
+  }
+  header.scrolled nav.main-nav a{color:var(--ink-soft); text-shadow:none;}
+  nav.main-nav a:hover{color:var(--accent-dark);}
+  nav.main-nav a::after{
+    content:''; position:absolute; left:0; bottom:-3px; width:0; height:2px;
+    background:var(--accent); transition:width .25s ease;
+  }
+  nav.main-nav a:hover::after{width:100%;}
+  .icons{display:flex; align-items:center; gap:22px;}
+  .icons a{color:#fff; display:flex;}
+  .icons svg{width:21px; height:21px; stroke:#fff; filter:drop-shadow(0 2px 8px rgba(0,0,0,.25)); transition:stroke .35s ease, filter .35s ease, transform .2s ease;}
+  header.scrolled .icons svg{stroke:var(--ink); filter:none;}
+  .icons a:hover svg{stroke:var(--accent-dark); transform:translateY(-2px);}
+
+  /* ===== Hero video — full first viewport, overlay nav only ===== */
+  .hero-video{position:relative; width:100%; height:100vh; min-height:390px; line-height:0; overflow:hidden;}
+  .hero-video video{width:100%; height:100%; object-fit:cover; display:block;}
+  .scroll-btn{
+    position:absolute; right:5%; bottom:2%; z-index:5;
+    width:84px; height:84px; border-radius:50%;
+    border:2px solid var(--ink); background:var(--cream);
+    color:var(--ink); text-decoration:none;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Quicksand',sans-serif; font-weight:700;
+    font-size:.95rem; letter-spacing:.14em; text-transform:uppercase;
+    box-shadow:0 6px 16px rgba(61,51,42,.25);
+    transition:transform .25s ease, background .25s ease;
+    animation:scrollBob 2.2s ease-in-out infinite;
+  }
+  .scroll-btn:hover{background:var(--ink); color:var(--white); transform:scale(1.06);}
+  .sound-btn{
+    position:absolute; left:5%; bottom:5%; z-index:5;
+    width:42px; height:42px; border-radius:50%;
+    border:2px solid #fff; background:rgba(61,51,42,.28);
+    backdrop-filter:blur(2px);
+    color:#fff; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .25s ease, background .25s ease;
+  }
+  .sound-btn:hover{background:rgba(61,51,42,.5); transform:scale(1.08);}
+  .sound-btn svg{width:17px; height:17px;}
+  .sound-btn .mute-x{display:block;}
+  .sound-btn .sound-waves{display:none;}
+  .sound-btn.is-unmuted .mute-x{display:none;}
+  .sound-btn.is-unmuted .sound-waves{display:block;}
+  @keyframes scrollBob{
+    0%, 100%{transform:translateY(0);}
+    50%{transform:translateY(8px);}
+  }
+
+  /* ===== Intro strip (between hero video and banner 1) ===== */
+  .intro-strip{
+    background:var(--cream);
+    text-align:center;
+    padding:30px 18px;
+    width:100%;
+  }
+  .intro-strip span{
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:1.9rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+
+  /* ===== Banner 1 with arrows — full, uncropped ===== */
+  .banner1{position:relative; width:100%; line-height:0;}
+  .banner1 img{width:100%; height:auto;}
+  .banner1-arrows{
+    position:absolute; left:0; right:0; bottom:6%;
+    display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
+    padding:0 18px;
+  }
+  .arrow-pill{
+    background:rgba(255,253,248,.92);
+    border:2px solid var(--ink);
+    color:var(--ink);
+    padding:18px 33px;
+    border-radius:45px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    font-size:1.4rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    display:flex; align-items:center; gap:9px;
+    box-shadow:0 6px 16px rgba(61,51,42,.18);
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+  }
+  .arrow-pill svg{width:17px; height:17px; stroke:var(--ink); transition:transform .25s ease;}
+  .arrow-pill:hover{background:var(--ink); color:var(--white); transform:translateY(-4px);}
+  .arrow-pill:hover svg{stroke:var(--white); transform:translateX(3px);}
+
+  /* ===== Editorial product sections — no ecommerce cards ===== */
+  .prod-section{
+    position:relative;
+    padding:53px 0;
+    overflow:hidden;
+    scroll-margin-top:90px;
+  }
+  .prod-section.alt{background:var(--cream-2);}
+  .prod-flex{
+    display:flex; align-items:flex-end; gap:60px;
+    position:relative; width:100%;
+  }
+  .prod-flex.reverse{flex-direction:row-reverse;}
+  .prod-character{
+    flex:0 1 480px; min-width:0; text-align:center; position:relative; z-index:2;
+  }
+  .prod-character img{width:100%; max-width:480px; margin:0 auto;}
+  .prod-character--xl{flex-basis:675px;}
+  .prod-character--xl img{max-width:675px;}
+  .prod-heading{margin-top:15px; margin-bottom:21px; max-width:480px;}
+  .prod-heading h2{font-size:2.4rem; letter-spacing:.03em;}
+  .prod-heading p{color:var(--ink-soft); max-width:390px; font-size:1.05rem; line-height:1.7;}
+  .prod-grid-wrap{flex:1 1 225px; min-width:0; position:relative; z-index:2;}
+
+  .editorial-grid{
+    display:flex; flex-wrap:wrap; gap:48px 42px; align-items:flex-start;
+  }
+  .editorial-grid.cols-2{max-width:480px;}
+  .editorial-grid.cols-1{max-width:255px;}
+  .editorial-grid.cols-3{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    gap:30px 24px;
+    max-width:675px; margin:0 auto;
+  }
+  .editorial-grid.cols-3 .editorial-item{margin:0 auto; max-width:240px;}
+  .prod-flex.stack{flex-direction:column; align-items:center; gap:45px;}
+  .prod-flex.stack .prod-grid-wrap{flex:none; width:100%;}
+  .prod-flex.stack .prod-character{flex:none;}
+  #mydla{overflow:visible;}
+  #mydla .wrap{max-width:1260px;}
+  #mydla .prod-character{flex-basis:700px; z-index:4;}
+  #mydla .prod-character img{max-width:700px;}
+  #mydla .editorial-grid.cols-3{max-width:850px;}
+  #mydla .editorial-grid.cols-3 .editorial-item{max-width:290px;}
+
+  #chemia{overflow:visible;}
+  #chemia .wrap{max-width:1260px;}
+  #chemia .prod-character{flex-basis:700px; z-index:4;}
+  #chemia .prod-character img{max-width:700px;}
+  #chemia .editorial-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr);
+    gap:24px 21px; max-width:450px;
+  }
+  #chemia .editorial-item{margin:0 auto; max-width:195px;}
+
+  #spryskiwacz{overflow:visible; padding-bottom:15px;}
+  #spryskiwacz .wrap{max-width:1260px;}
+  #spryskiwacz .prod-character{flex-basis:880px; z-index:4;}
+  #spryskiwacz .prod-character img{max-width:880px;}
+  #spryskiwacz .editorial-grid.cols-1{max-width:585px;}
+  #spryskiwacz .editorial-item{max-width:570px;}
+  #spryskiwacz .prod-grid-wrap{align-self:flex-start; margin-top:45px; display:flex; justify-content:flex-end; padding-right:75px;}
+
+  #akcesoria{overflow:visible;}
+  #akcesoria .wrap{max-width:1260px;}
+  #akcesoria .prod-character--xl{flex-basis:800px; z-index:4;}
+  #akcesoria .prod-character--xl img{max-width:800px;}
+  #akcesoria .prod-heading{margin-top:8px;}
+  #akcesoria .editorial-grid.cols-2{flex-direction:column; max-width:195px; gap:23px;}
+  #akcesoria .editorial-item{max-width:195px;}
+  .editorial-item{
+    flex:1 1 158px; max-width:210px;
+    text-align:center;
+  }
+  .editorial-item .thumb{
+    position:relative; aspect-ratio:1/1;
+  }
+  .editorial-item .thumb img{
+    width:100%; height:100%; object-fit:contain;
+    position:absolute; inset:0;
+    transition:opacity .35s ease, transform .35s ease;
+    mix-blend-mode:multiply;
+  }
+  .editorial-item .thumb img.img-2{opacity:0;}
+  .editorial-item:hover .thumb img.img-1{opacity:0;}
+  .editorial-item:hover .thumb img.img-2{opacity:1;}
+  .editorial-item:hover .thumb img{transform:scale(1.03);}
+  .editorial-item .cat{
+    text-transform:uppercase; font-size:.68rem; letter-spacing:.14em;
+    color:var(--accent-dark); font-weight:700; margin:22px 0 6px;
+  }
+  .editorial-item h4{font-size:1.05rem; margin-bottom:8px; letter-spacing:.04em;}
+  .editorial-item p{font-size:.88rem; color:var(--ink-soft); line-height:1.6; margin:0;}
+
+  /* ===== Side-peek decorative raccoon (BOK STRONY) ===== */
+  .side-peek{
+    position:absolute; left:-46px; top:50%; transform:translateY(-50%);
+    width:220px; z-index:3; pointer-events:none;
+    filter:drop-shadow(0 12px 20px rgba(61,51,42,.18));
+  }
+  .side-peek img{width:100%;}
+
+  /* ===== Blog / Poznaj Rakuna ===== */
+  .split-section{
+    display:flex; align-items:center; gap:53px; padding:98px 0;
+    position:relative; overflow:hidden;
+    scroll-margin-top:90px;
+  }
+  .split-section.reverse{flex-direction:row-reverse;}
+  .split-img{flex:0 0 400px;}
+  .split-img img{width:100%;}
+  .split-text{flex:1;}
+  .split-text h2{font-size:2.3rem;}
+  #blog .eyebrow, #poznaj-rakuna .eyebrow, #o-marce .eyebrow, #social .eyebrow{font-size:1.1rem; letter-spacing:.14em;}
+  .split-text p{color:var(--ink-soft); font-size:1.05rem; line-height:1.75; max-width:390px; margin-bottom:1.7em;}
+
+  .trio-row{display:flex; align-items:stretch;}
+  .trio-row .split-section{
+    flex:1 1 0; padding:60px 21px !important; overflow:visible;
+  }
+  .trio-row .wrap{
+    flex-direction:column !important; align-items:center !important;
+    gap:15px !important; text-align:center; max-width:100% !important;
+    padding:0 6px !important;
+  }
+  .trio-row .split-img{flex:0 0 auto !important; max-width:min(240px, 60vw) !important;}
+  .trio-row .split-text{flex:none !important; width:100%;}
+  .trio-row .split-text p{max-width:100% !important;}
+  .trio-row .split-text h2{font-size:1.5rem;}
+  .trio-row .blog-cards, .trio-row .btn{display:none;}
+  @media (max-width:1000px){
+    .trio-row{flex-direction:column;}
+  }
+
+  .blog-cards{display:flex; gap:24px; margin-top:36px; flex-wrap:wrap;}
+  .blog-card{
+    flex:1; min-width:190px;
+    border-top:2px solid var(--ink);
+    padding-top:16px;
+  }
+  .blog-card .eyebrow{margin-bottom:.4em;}
+  .blog-card h4{font-size:.98rem; margin-bottom:8px;}
+  .blog-card p{font-size:.85rem; color:var(--ink-soft); margin:0; line-height:1.55;}
+
+  /* ===== Social media (peek raccoon on the right) ===== */
+  .social-section{
+    position:relative; padding:83px 0; overflow:visible; text-align:center;
+  }
+  .social-peek{
+    position:absolute; right:clamp(-69px,-4.5vw,-30px); top:50%; transform:translateY(-50%);
+    width:clamp(165px, 22.5vw, 375px); z-index:3; pointer-events:none;
+    filter:drop-shadow(0 12px 20px rgba(61,51,42,.18));
+  }
+  .social-peek img{width:100%;}
+  .social-peek--left{right:auto; left:clamp(-69px,-4.5vw,-30px);}
+  .social-links{
+    display:flex; justify-content:center; gap:14px; margin-top:26px; flex-wrap:wrap;
+  }
+  .social-links a{
+    display:inline-block;
+    color:var(--ink);
+    padding:10px 23px;
+    border-radius:30px;
+    font-weight:700;
+    font-family:'Quicksand',sans-serif;
+    font-size:.9rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    border:2px solid var(--ink);
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+  }
+  .social-links a:hover{background:var(--ink); color:var(--white); transform:translateY(-2px);}
+
+  /* ===== Banner 4 + Footer ===== */
+  .banner4{width:100%; line-height:0;}
+  .banner4 img{width:100%; height:auto;}
+
+  footer{
+    background:var(--cream-2);
+    color:var(--ink);
+    padding:48px 0 18px;
+    position:relative;
+    overflow:visible;
+    scroll-margin-top:0;
+    border-top:1px solid var(--line);
+  }
+  footer .wrap{max-width:1260px;}
+  .footer-inner{
+    display:grid;
+    grid-template-columns:1.5fr .8fr .8fr .8fr 1fr;
+    gap:27px;
+    align-items:start;
+    position:relative; z-index:2;
+  }
+  footer h4{font-size:1.15rem;}
+  footer p{font-size:1.05rem;}
+  footer ul a{font-size:1.05rem;}
+  .newsletter-form{max-width:315px;}
+  .newsletter-form input{font-size:1rem; padding:11px 14px;}
+  .newsletter-form button{font-size:.92rem; padding:0 20px;}
+  .allegro-badge{font-size:1.3rem; padding:10px 21px;}
+  .footer-bottom{font-size:.95rem;}
+  .idea-home-logo{
+    position:absolute; left:50%; bottom:30px; transform:translateX(-50%);
+    z-index:2;
+  }
+  .idea-home-logo img{width:clamp(120px, 13vw, 260px);}
+  footer h4{color:var(--ink); font-family:'Quicksand',sans-serif; font-size:.92rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:18px;}
+  footer p{color:var(--ink-soft); font-size:.9rem; line-height:1.6;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  footer ul a{color:var(--ink-soft); font-size:.92rem; transition:color .2s ease;}
+  footer ul a:hover{color:var(--accent-dark);}
+  .newsletter-form{display:flex; margin-top:16px; max-width:340px;}
+  .newsletter-form input{
+    flex:1; border:none; border-radius:30px 0 0 30px; padding:12px 16px;
+    font-family:inherit; font-size:.88rem; outline:none;
+  }
+  .newsletter-form button{
+    border:none; background:var(--accent); color:#fff; font-weight:700;
+    padding:0 20px; border-radius:0 30px 30px 0; cursor:pointer;
+    font-family:'Quicksand',sans-serif; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase;
+  }
+  .footer-inner{padding-bottom:clamp(140px, 17vw, 290px);}
+  .raccoon-tea-wrap{position:absolute; bottom:0; z-index:1;}
+  .footer-graphic--left{left:0; width:clamp(150px, 23vw, 430px);}
+  .footer-graphic--right{right:0; width:clamp(130px, 17vw, 320px);}
+  .raccoon-tea-wrap img{width:100%; display:block; transform-origin:68% 92%; animation:sip 4s ease-in-out infinite;}
+  .raccoon-tea-wrap:hover img{animation-duration:1.3s;}
+  @keyframes sip{
+    0%, 100%{transform:rotate(0deg);}
+    50%{transform:rotate(-3deg);}
+  }
+  .steam{
+    position:absolute; width:5px; height:20px; border-radius:50%;
+    background:rgba(255,255,255,.65); filter:blur(2px);
+    opacity:0; pointer-events:none;
+  }
+  .steam.s1{left:42%; top:33%; animation:steamRise 3s ease-in infinite;}
+  .steam.s2{left:48%; top:31%; animation:steamRise 3s ease-in infinite 1s;}
+  .steam.s3{left:54%; top:34%; animation:steamRise 3s ease-in infinite 2s;}
+  @keyframes steamRise{
+    0%{opacity:0; transform:translateY(0) scaleX(1);}
+    25%{opacity:.65;}
+    100%{opacity:0; transform:translateY(-24px) scaleX(1.5);}
+  }
+  .petal{
+    position:absolute; width:8px; height:8px; border-radius:50% 50% 50% 0;
+    background:rgba(193,127,79,.55); pointer-events:none;
+  }
+  .petal.p1{top:8%; left:52%; animation:petalFloat 4.5s ease-in-out infinite;}
+  .petal.p2{top:14%; left:62%; background:rgba(138,154,110,.5); animation:petalFloat 5.5s ease-in-out infinite 1.2s;}
+  .petal.p3{top:6%; left:70%; background:rgba(168,100,56,.5); animation:petalFloat 4s ease-in-out infinite 2.4s;}
+  @keyframes petalFloat{
+    0%{opacity:0; transform:translate(0,0) rotate(0deg);}
+    20%{opacity:.85;}
+    100%{opacity:0; transform:translate(14px,-30px) rotate(140deg);}
+  }
+  .allegro-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    background:#fff; color:#f15f22; font-weight:800; font-style:italic;
+    padding:10px 22px; border-radius:8px; margin-top:10px; font-size:1.05rem;
+  }
+  .footer-bottom{
+    border-top:1px solid var(--line);
+    margin-top:48px; padding-top:20px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-size:.82rem; color:var(--ink-soft);
+    position:relative; z-index:2;
+  }
+  .footer-bottom a{color:var(--ink-soft);}
+  .footer-bottom a:hover{color:var(--ink);}
+  .footer-bottom-links{display:flex; gap:22px;}
+
+  @media (max-width:1000px){
+    nav.main-nav{display:none;}
+    .prod-flex, .prod-flex.reverse{flex-direction:column; align-items:center; gap:36px;}
+    .prod-character,
+    #mydla .prod-character, #chemia .prod-character,
+    #spryskiwacz .prod-character, #akcesoria .prod-character,
+    .prod-character--xl, #akcesoria .prod-character--xl{
+      flex-basis:auto; width:100%; max-width:195px; margin:0 auto;
+    }
+    .prod-character img, #mydla .prod-character img, #chemia .prod-character img,
+    #spryskiwacz .prod-character img, #akcesoria .prod-character img,
+    .prod-character--xl img, #akcesoria .prod-character--xl img{
+      max-width:100%;
+    }
+    #spryskiwacz .prod-grid-wrap{padding-right:0; justify-content:center; margin-top:18px;}
+    #mydla .editorial-grid.cols-3, #chemia .editorial-grid{max-width:100%;}
+    .split-section, .split-section.reverse{flex-direction:column;}
+    .split-img{flex:0 0 auto; max-width:210px;}
+    .footer-inner{grid-template-columns:1fr 1fr; padding-bottom:165px;}
+    .footer-graphic--left{width:113px;}
+    .footer-graphic--right{width:98px;}
+    .idea-home-logo img{width:98px;}
+    .social-peek{display:none;}
+  }
+  @media (max-width:480px){
+    .prod-character, #mydla .prod-character, #chemia .prod-character,
+    #spryskiwacz .prod-character, #akcesoria .prod-character,
+    .prod-character--xl, #akcesoria .prod-character--xl{max-width:150px;}
+    .arrow-pill{padding:11px 17px; font-size:1rem;}
+    .intro-strip span{font-size:1.2rem; letter-spacing:.14em;}
+    .scroll-btn{width:60px; height:60px; font-size:.7rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER (transparent overlay) ============ -->
+<header id="site-header">
+  <div class="nav-inner">
+    <a href="#top" class="logo">RAKUN</a>
+    <nav class="main-nav">
+      <a href="#produkty">Produkty</a>
+      <a href="#o-marce">O marce</a>
+      <a href="#blog">Dziennik Rakuna</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO VIDEO (full first viewport, no extra graphics) ============ -->
+<section class="hero-video" id="top">
+  <video autoplay muted loop playsinline id="hero-video-el"></video>
+  <a href="#intro" class="scroll-btn">Scroll</a>
+  <button type="button" id="sound-toggle" class="sound-btn" aria-label="Włącz dźwięk">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="4 8 8 8 13 4 13 20 8 16 4 16 4 8"></polygon>
+      <line class="mute-x" x1="17" y1="9" x2="22" y2="14"></line>
+      <line class="mute-x" x1="22" y1="9" x2="17" y2="14"></line>
+      <path class="sound-waves" d="M17 8.5a5 5 0 0 1 0 7"></path>
+      <path class="sound-waves" d="M19.5 6a8.5 8.5 0 0 1 0 12"></path>
+    </svg>
+  </button>
+</section>
+
+<!-- ============ PASEK WPROWADZAJĄCY ============ -->
+<div class="intro-strip" id="intro">
+  <span>Odkryj świat Rakuna</span>
+</div>
+
+<!-- ============ BANNER 1 + STRZAŁKI ============ -->
+<section class="banner1">
+  <img src="BANERY GŁÓWNE/BANER NR 1.png" alt="Rakun na ganku swojego domku">
+  <div class="banner1-arrows">
+    <a class="arrow-pill" href="#mydla">Łazienka
+    </a>
+    <a class="arrow-pill" href="#chemia">Kuchnia
+    </a>
+    <a class="arrow-pill" href="#akcesoria">Salon
+    </a>
+    <a class="arrow-pill" href="#spryskiwacz">Garaż
+    </a>
+  </div>
+</section>
+
+<main id="produkty">
+
+<!-- ============ SEKCJA MYDŁA ============ -->
+<section class="prod-section" id="mydla">
+  <div class="wrap">
+    <div class="prod-heading">
+      <div class="eyebrow">Dział mydeł</div>
+      <h2>Mydła w płynie RAKUN</h2>
+      <p>Pięć zapachowych podróży w jednej butelce — od kwiatowej łąki po tropikalną wyspę. Delikatna formuła dla całej rodziny.</p>
+    </div>
+    <div class="prod-flex reverse">
+      <div class="prod-character">
+        <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/_TRANSPARENT/RAKUN DO DZIAŁU MYDEŁ.png" alt="Rakun z bukietem kwiatów – dział mydeł">
+      </div>
+      <div class="prod-grid-wrap">
+        <div class="editorial-grid cols-3">
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/MYDŁA/RAKUN FLOWER BLOM.png" alt="Mydło Flower Bloom">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/MYDŁA/FLOWER BLOOM.jpg" alt="Flower Bloom – ilustracja">
+            </div>
+            <div class="cat">Mydło w płynie</div>
+            <h4>Flower Bloom</h4>
+            <p>Kwiatowo-różana kompozycja rozświetlająca poranną rutynę.</p>
+          </div>
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/MYDŁA/RAKUN FOREST WALK.png" alt="Mydło Forest Walk">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/MYDŁA/FOREST WALK.jpg" alt="Forest Walk – ilustracja">
+            </div>
+            <div class="cat">Mydło w płynie</div>
+            <h4>Forest Walk</h4>
+            <p>Leśna świeżość mchu i ziół na spacer bez wychodzenia z domu.</p>
+          </div>
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/MYDŁA/RAKUN MILK&HONEY CARE.png" alt="Mydło Milk & Honey">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/MYDŁA/MILK&HONEY.jpg" alt="Milk & Honey – ilustracja">
+            </div>
+            <div class="cat">Mydło w płynie</div>
+            <h4>Milk &amp; Honey Care</h4>
+            <p>Odżywcze mleko i miód dla skóry spragnionej ukojenia.</p>
+          </div>
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/MYDŁA/RAKUN OCEAN DIVE.png" alt="Mydło Ocean Dive">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/MYDŁA/OCEAN DIVE.jpg" alt="Ocean Dive – ilustracja">
+            </div>
+            <div class="cat">Mydło w płynie</div>
+            <h4>Ocean Dive</h4>
+            <p>Orzeźwiająca, morska nuta na energetyczny start dnia.</p>
+          </div>
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/MYDŁA/RAKUN TROPIC HOLIDAY.png" alt="Mydło Tropic Holiday">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/MYDŁA/TROPIC HOLIDAY.jpg" alt="Tropic Holiday – ilustracja">
+            </div>
+            <div class="cat">Mydło w płynie</div>
+            <h4>Tropic Holiday</h4>
+            <p>Owocowe wakacje w każdej kropli — ananas, mango i marakuja.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEKCJA CHEMIA ============ -->
+<section class="prod-section alt" id="chemia">
+  <div class="wrap">
+    <div class="prod-heading">
+      <div class="eyebrow">Dział chemii</div>
+      <h2>Płyny do naczyń i szyb</h2>
+      <p>Skuteczne odtłuszczanie i bezsmugowy blask — bez rezygnacji z przyjemnego zapachu i ładnej butelki na blacie.</p>
+    </div>
+    <div class="prod-flex">
+      <div class="prod-character">
+        <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/_TRANSPARENT/RAKUN DO DZIAŁU CHEMIA.png" alt="Rakun ze spryskiwaczem – dział chemii">
+      </div>
+      <div class="prod-grid-wrap">
+        <div class="editorial-grid">
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/PŁYNY DO MYCIA NACZYŃ/RAKUN PŁYN DO MYCIA NACZYŃ CYTRYNOWY.png" alt="Płyn do naczyń cytrynowy">
+              <img class="img-2" src="MINIATURY PRODUKTOWE/PŁYNY DO MYCIA NACZYŃ/RAKUN PŁYN DO MYCIA NACZYŃ CYTRYNOWY.png" alt="Płyn do naczyń cytrynowy">
+            </div>
+            <div class="cat">Płyn do naczyń</div>
+            <h4>Cytrynowy</h4>
+            <p>Intensywnie usuwa tłuszcz, zostawiając cytrusową świeżość.</p>
+          </div>
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/PŁYNY DO MYCIA NACZYŃ/RAKUN PŁYNY DO MYCIA NACZYŃ MIĘTOWY.png" alt="Płyn do naczyń miętowy">
+              <img class="img-2" src="MINIATURY PRODUKTOWE/PŁYNY DO MYCIA NACZYŃ/RAKUN PŁYNY DO MYCIA NACZYŃ MIĘTOWY.png" alt="Płyn do naczyń miętowy">
+            </div>
+            <div class="cat">Płyn do naczyń</div>
+            <h4>Miętowy</h4>
+            <p>Chłodząca mięta i skuteczność na tłuste garnki i patelnie.</p>
+          </div>
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/PŁYN DO MYCIA SZYB/RAKUN PŁYN DO SZYB.png" alt="Płyn do mycia szyb">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/PŁYN DO SZYB/Gemini_Generated_Image_9b91om9b91om9b91.jpg" alt="Płyn do szyb – ilustracja">
+            </div>
+            <div class="cat">Płyn do szyb</div>
+            <h4>Płyn do mycia szyb</h4>
+            <p>Bezsmugowy połysk na lustrach, oknach i szklanych blatach.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEKCJA PŁYN DO SPRYSKIWACZY ============ -->
+<section class="prod-section" id="spryskiwacz">
+  <div class="wrap">
+    <div class="prod-heading">
+      <div class="eyebrow">Dział auto</div>
+      <h2>Letni płyn do spryskiwaczy</h2>
+      <p>Krystalicznie czysta szyba na każdą trasę — formuła szybko usuwająca owady i drogowy brud.</p>
+    </div>
+    <div class="prod-flex reverse">
+      <div class="prod-character">
+        <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/SEKCJA AUTO.png" alt="Rakun podróżnik z autem – płyn do spryskiwaczy">
+      </div>
+      <div class="prod-grid-wrap">
+        <div class="editorial-grid cols-1">
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/PŁYN DO SPRYSKIWACZY/RAKUN PŁYN DO SPRYSKIWACZY.png" alt="Płyn do spryskiwaczy letni">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/PŁYN DO SPRYSKIWACZY/PŁYN DO SPRYSKIWACZY.png" alt="Płyn do spryskiwaczy – ilustracja">
+            </div>
+            <div class="cat">Letni płyn do spryskiwaczy</div>
+            <h4>RAKUN Summer</h4>
+            <p>Orzeźwiający zapach i skuteczne czyszczenie szyby w podróży.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEKCJA AKCESORIA ============ -->
+<section class="prod-section alt" id="akcesoria">
+  <div class="wrap">
+    <div class="prod-heading">
+      <div class="eyebrow">Dział akcesoriów</div>
+      <h2>Ścierki RAKUN</h2>
+      <p>Chłonne, bezsmugowe mikrofibry do każdej powierzchni — kuchnia, łazienka, samochód.</p>
+    </div>
+    <div class="prod-flex">
+      <div class="prod-character prod-character--xl">
+        <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/RAKUN AKCESORIA.png" alt="Rakun z akcesoriami do sprzątania">
+      </div>
+      <div class="prod-grid-wrap">
+        <div class="editorial-grid cols-2">
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/ŚCIERKI/Magiczne ściereczki bezsmugowe NA ROLCE RAKUN ROLL 30x30cm.png" alt="Ściereczki na rolce RAKUN ROLL">
+              <img class="img-2" src="RAKUN GRAFIKI DO WYKORZYSTANIA JAKO DRUGI OBRAZEK PRODUKTOWY/ŚCIERKI ROLL/RAKUN ROLL MINT 3.jpg" alt="RAKUN ROLL – ilustracja">
+            </div>
+            <div class="cat">Ściereczki</div>
+            <h4>RAKUN ROLL 30×30cm</h4>
+            <p>Magiczne, bezsmugowe ściereczki na wygodnej rolce.</p>
+          </div>
+          <div class="editorial-item">
+            <div class="thumb">
+              <img class="img-1" src="MINIATURY PRODUKTOWE/ŚCIERKI/ŚCIERECZKI Z MIKROFIBRY.png" alt="Ściereczki z mikrofibry">
+              <img class="img-2" src="MINIATURY PRODUKTOWE/ŚCIERKI/ŚCIERECZKI Z MIKROFIBRY.png" alt="Ściereczki z mikrofibry">
+            </div>
+            <div class="cat">Ściereczki</div>
+            <h4>Zestaw z mikrofibry</h4>
+            <p>Komplet kolorowych ściereczek — superchłonne i szybkoschnące.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG O MARCE ============ -->
+<div class="intro-strip">
+  <span>Poznaj Rakuna</span>
+</div>
+
+<div class="trio-row">
+<section class="split-section trio" id="blog">
+  <div class="wrap" style="display:flex; align-items:center; gap:70px; width:100%;">
+    <div class="split-img">
+      <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/_TRANSPARENT/SEKCJA BLOG.png" alt="Rakun poleca – dziennik marki">
+    </div>
+    <div class="split-text">
+      <div class="eyebrow">Dziennik Rakuna</div>
+      <h2>Poradnik czystego, naturalnego domu</h2>
+      <p>Sprawdzone triki na sprzątanie, pielęgnację i ekologiczne nawyki — prosto od Rakuna i jego przyjaciół.</p>
+      <div class="blog-cards">
+        <div class="blog-card">
+          <div class="eyebrow">Porady</div>
+          <h4>Jak myć szyby bez smug?</h4>
+          <p>3 kroki do krystalicznie czystego okna.</p>
+        </div>
+        <div class="blog-card">
+          <div class="eyebrow">Eko</div>
+          <h4>Zrównoważona pielęgnacja</h4>
+          <p>Dlaczego stawiamy na naturalne składniki.</p>
+        </div>
+        <div class="blog-card">
+          <div class="eyebrow">Dom</div>
+          <h4>Rytuał wieczornego sprzątania</h4>
+          <p>Krótka rutyna, która zmienia wszystko.</p>
+        </div>
+      </div>
+      <a href="#" class="btn outline" style="margin-top:30px;">Czytaj dziennik</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POZNAJ RAKUNA ============ -->
+<section class="split-section reverse alt trio" id="poznaj-rakuna" style="background:var(--cream-2);">
+  <div class="wrap" style="display:flex; align-items:center; gap:70px; width:100%;">
+    <div class="split-img">
+      <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/_TRANSPARENT/SEKCJA POZNAJ RAKUNA.png" alt="Poznaj Rakuna">
+    </div>
+    <div class="split-text">
+      <div class="eyebrow">Kim jest Rakun?</div>
+      <h2>Wesoły przewodnik po świecie czystości</h2>
+      <p>Rakun to nie tylko maskotka na etykiecie — to symbol radości z prostych, domowych rytuałów. Ciekawski, pomocny i zawsze gotowy na nową przygodę w każdym kącie Twojego domu.</p>
+      <a href="#o-marce" class="btn">Poznaj naszą markę</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O MARCE ============ -->
+<section class="split-section trio" id="o-marce">
+  <div class="wrap" style="display:flex; align-items:center; gap:70px; width:100%;">
+    <div class="split-img">
+      <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/SEKCJA O MARCE.png" alt="O marce RAKUN">
+    </div>
+    <div class="split-text">
+      <div class="eyebrow">O marce</div>
+      <h2>Naturalnie, od podszewki</h2>
+      <p>RAKUN powstał z miłości do prostych, domowych rytuałów i szacunku dla natury. Tworzymy produkty z biodegradowalnych składników, w przyjaznych zapachach, które zamieniają sprzątanie w chwilę przyjemności — dla Ciebie i dla planety.</p>
+      <a href="#produkty" class="btn outline">Zobacz produkty</a>
+    </div>
+  </div>
+</section>
+</div>
+
+</main>
+
+<!-- ============ SOCIAL MEDIA ============ -->
+<section class="social-section" id="social">
+  <div class="social-peek" aria-hidden="true">
+    <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/RAKUN BOK STRONY OD PRAWEJ.png" alt="">
+  </div>
+  <div class="social-peek social-peek--left" aria-hidden="true">
+    <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/RAKUN BOK STRONY OD LEWEJ.png" alt="">
+  </div>
+  <div class="wrap">
+    <div class="eyebrow">Bądź na bieżąco</div>
+    <h2>Znajdź Rakuna w social mediach</h2>
+    <div class="social-links">
+      <a href="https://www.instagram.com/leviatan_poligrafia/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/LeviatanPoligrafia" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://pl.pinterest.com/leviatanpoligrafia/" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.tiktok.com/@leviatanpoligrafia" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANNER 4 ============ -->
+<section class="banner4">
+  <img src="BANERY GŁÓWNE/BANER NR 4.png" alt="Rakun w podróży swoim samochodem">
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="kontakt">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div></div>
+      <div>
+        <h4>Produkty</h4>
+        <ul>
+          <li><a href="#mydla">Łazienka</a></li>
+          <li><a href="#chemia">Kuchnia</a></li>
+          <li><a href="#akcesoria">Salon</a></li>
+          <li><a href="#spryskiwacz">Garaż</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>O marce</h4>
+        <ul>
+          <li><a href="#o-marce">Nasza historia</a></li>
+          <li><a href="#o-marce">Jakość</a></li>
+          <li><a href="#o-marce">Zrównoważony rozwój</a></li>
+          <li><a href="#o-marce">Produkcja</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Pomoc</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Dostawa</a></li>
+          <li><a href="#">Zwroty</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="text-align:right;">Kup teraz</h4>
+        <p style="text-align:right;">Znajdź nasze produkty na Allegro.</p>
+        <div style="text-align:right;">
+          <a class="allegro-badge" href="https://allegro.pl/uzytkownik/Leviatan_SHOP?string=RAKUN" target="_blank" rel="noopener">allegro</a>
+        </div>
+      </div>
+
+      <div class="raccoon-tea-wrap footer-graphic footer-graphic--left">
+        <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/RAKUN NA KOŃCU.png" alt="Rakun wśród kwiatów">
+        <span class="petal p1" aria-hidden="true"></span>
+        <span class="petal p2" aria-hidden="true"></span>
+        <span class="petal p3" aria-hidden="true"></span>
+      </div>
+      <div class="raccoon-tea-wrap footer-graphic footer-graphic--right">
+        <img src="POSTACIE RAKUNA DO OSADZENIA W SEKCJACH/RAKUN NA KOŃCU STRONY DO STOPKI.png" alt="Rakun przy filiżance herbaty">
+        <span class="steam s1" aria-hidden="true"></span>
+        <span class="steam s2" aria-hidden="true"></span>
+        <span class="steam s3" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RAKUN. Wszelkie prawa zastrzeżone.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Polityka prywatności</a>
+        <a href="#">Regulamin</a>
+        <a href="#">Mapa strony</a>
+      </div>
+    </div>
+    <div class="idea-home-logo">
+      <img src="DODATKI/IdeaHome_fill_color.png" alt="Idea Home by Leviatan">
+    </div>
+  </div>
+</footer>
+
+<script>
+  var heroVideo = document.getElementById('hero-video-el');
+  heroVideo.src = "LETNI PŁYN DO SPRYSKIWACZY RAKUN krótka wersja pod stronę (1).mp4";
+  var soundBtn = document.getElementById('sound-toggle');
+  soundBtn.addEventListener('click', function(){
+    heroVideo.muted = !heroVideo.muted;
+    if(!heroVideo.muted){ heroVideo.play(); }
+    soundBtn.classList.toggle('is-unmuted', !heroVideo.muted);
+    soundBtn.setAttribute('aria-label', heroVideo.muted ? 'Włącz dźwięk' : 'Wyłącz dźwięk');
+  });
+
+  var header = document.getElementById('site-header');
+  function onScroll(){
+    if(window.scrollY > 80){ header.classList.add('scrolled'); }
+    else{ header.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('load', onScroll);
+  window.addEventListener('hashchange', onScroll);
+  onScroll();
+
+  // Re-apply the hash scroll after full load: images/video can change the
+  // document height after the browser's initial (pre-layout) hash jump,
+  // leaving a stale scroll position. Scroll instantly (not smooth) so it
+  // lands immediately rather than mid-animation.
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      if(location.hash){
+        var el = document.querySelector(location.hash);
+        if(el){
+          var prev = document.documentElement.style.scrollBehavior;
+          document.documentElement.style.scrollBehavior = 'auto';
+          el.scrollIntoView({ block:'start' });
+          document.documentElement.style.scrollBehavior = prev;
+        }
+      }
+      onScroll();
+      document.documentElement.style.scrollBehavior = 'smooth';
+    }, 150);
+  });
+</script>
+
+</body>
+</html>
