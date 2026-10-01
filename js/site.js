@@ -83,7 +83,7 @@
     { id: "biuro", name: "Biuro i archiwum", img: "img/foto/baner-pudla-new.jpg" },
     { id: "garaz", name: "Garaż i warsztat", img: "img/foto/baner-garaz-i-warsztat.jpg" },
     { id: "lazienka", name: "Łazienka", img: "img/foto/baner-lazienka.jpg" },
-    { id: "ogrod", name: "Ogród i taras", img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/634852c1bf402dffb9c0125f_budka-dla-jey-ih-erina.jpg?v=1776082885&width=700", contain: true },
+    { id: "ogrod", name: "Ogród i taras", img: "img/foto/baner-ogrod-i-taras.jpg" },
     { id: "wdrodze", name: "Na co dzień", img: "img/foto/torba-valencia-img-0789.jpg" }
   ];
   ROOMS.forEach(function (r) { r.icon = ICON[r.id]; });
