@@ -19,11 +19,20 @@
       <div>
         <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Strona główna</a> / O marce</nav>
         <h1>Dom, w którym wszystko ma swoje miejsce</h1>
-        <p class="lead">IDEA HOME to marka firmy Leviatan z Bielska-Białej. Od ponad 20 lat dostarczamy produkty, które porządkują codzienność: od worków na odpady po pojemniki do salonu.</p>
+        <p class="lead">IDEA HOME to marka tworzona z myślą o codziennym komforcie, funkcjonalności i odpowiedzialnym podejściu do organizacji przestrzeni. Łączymy praktyczne rozwiązania z wysoką jakością wykonania i nowoczesnym wzornictwem, żeby łatwiej było utrzymać porządek, zorganizować przestrzeń i zadbać o dom.</p>
+        <p class="lead" style="margin-top:12px">W odpowiedzi na potrzeby klientów rozwijamy własne serie: <a href="serie.html#rakun" style="text-decoration:underline">RAKUN</a> i <a href="serie.html#ms-everyday" style="text-decoration:underline">MS. EVERYDAY</a>. To nowoczesna chemia gospodarcza, mydła i aktywna pianka czyszcząca, która usuwa nawet trudne zabrudzenia z wielu rodzajów powierzchni.</p>
       </div>
       <img src="img/foto/flexistore-dsc05557.jpg" alt="Pojemnik Flexistore na stoliku obok sofy">
     </div>
   </div>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div><span class="label">Oferta</span><h2>Co znajdziesz w IDEA HOME</h2></div><a class="link-arrow" href="produkty.html">Wszystkie produkty</a></div>
+      <div class="values offer" id="offer"></div>
+      <p class="muted" style="margin-top:32px; max-width:70ch">IDEA HOME stale się rozwija. Tworzymy produkty, które ułatwiają codzienne obowiązki, pomagają w organizacji przestrzeni i sprawdzają się każdego dnia.</p>
+    </div>
+  </section>
 
   <section>
     <div class="wrap">
@@ -68,6 +77,19 @@
     ["shield", "Jakość", "Kontrolujemy każdą partię. Worek ma wytrzymać upychanie, pojemnik lata użytkowania."],
     ["leaf", "Odpowiedzialność", "Kolory worków zgodne z segregacją, opakowania z recyklingu, torby wielokrotnego użytku."],
     ["tag", "Uczciwa cena", "Duże opakowania i ekonomiczne zestawy. Płacisz za produkt, nie za marketing."]];
+  var offer = [
+    ["warsztat", "Do domu i biura", "Ścierki, taśmy specjalistyczne, naturalne sznurki, worki jutowe i zestawy do renowacji napisów.", "warsztat"],
+    ["chemia", "Chemia gospodarcza", "Skuteczne środki do codziennego sprzątania i pielęgnacji różnych powierzchni.", "chemia"],
+    ["mydla", "Mydła", "Produkty do codziennej higieny w kilku wariantach zapachowych.", "mydla"],
+    ["sprzatanie", "Akcesoria do sprzątania", "Worki na śmieci, szczotki, ścierki i inne drobiazgi, które ułatwiają porządki.", "sprzatanie"],
+    ["flexistore", "Pojemniki Flexistore i Techbox", "Wytrzymałe systemy przechowywania do domu, warsztatu, magazynu i pomieszczeń gospodarczych.", "flexistore"],
+    ["dom", "Pudła specjalistyczne", "Ekologiczne kartony do archiwizacji, przechowywania i bezpiecznego transportu.", "dom"],
+    ["torby", "Torby i worki", "Trwałe i estetyczne torby wielokrotnego użytku na co dzień.", "torby"],
+    ["budki", "Budki dla ptaków", "Trwałe schronienia, które wspierają ochronę ptaków w ogrodzie.", "budki"]];
+  document.getElementById("offer").innerHTML = offer.map(function (o) {
+    var c = IH.catById(o[0]);
+    return '<a class="value" href="produkty.html#' + o[3] + '">' + c.icon + "<h3>" + o[1] + "</h3><p>" + o[2] + '</p><span class="link-arrow" style="margin-top:4px">Zobacz</span></a>';
+  }).join("");
   document.getElementById("values").innerHTML = values.map(function (v) { return '<div class="value">' + IH.ICON[v[0]] + "<h3>" + v[1] + "</h3><p>" + v[2] + "</p></div>"; }).join("");})();
 </script>
 </body>

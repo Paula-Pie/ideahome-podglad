@@ -511,3 +511,6 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .film-btn { position: absolute; right: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); background: rgba(28,28,26,.45); color: #fff; display: grid; place-items: center; backdrop-filter: blur(6px); transition: background .2s; }
 .film-btn:hover { background: rgba(28,28,26,.75); }
 .brand-card .blogo { height: 92px; width: auto; display: block; }
+.values.offer .value svg { width: 36px; height: 36px; }
+.values.offer .value:hover h3 { color: var(--olive); }
+.values.offer .value { grid-template-rows: auto auto 1fr auto; align-content: stretch; }
