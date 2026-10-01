@@ -64,7 +64,7 @@
     { id: "flexistore", name: "Flexistore", short: "Flexistore", desc: "Pojemniki z pokrywą i wkłady z przegródkami" },
     { id: "techbox", name: "Techbox", short: "Techbox", desc: "Wytrzymałe pojemniki HD i wkłady" },
     { id: "dom", name: "Pudła i przechowywanie", short: "Pudła\ni przechowywanie", desc: "Pudła Loft, kartony do przeprowadzek" },
-    { id: "torby", name: "Torby i plecaki", short: "Torby\ni plecaki", desc: "Bawełna i sztruks, z nadrukiem lub bez" },
+    { id: "torby", name: "Torby i plecaki", short: "Torby\ni plecaki", desc: "Torby i plecaki z bawełny i sztruksu" },
     { id: "prezenty", name: "Opakowania prezentowe", short: "Opakowania\nprezentowe", desc: "Torby i pudełka Wave Kraft" },
     { id: "sprzatanie", name: "Kuchnia i sprzątanie", short: "Kuchnia\ni sprzątanie", desc: "Ściereczki, zmywaki, druciaki" },
     { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN w ekonomicznych opakowaniach" },
@@ -173,9 +173,9 @@
       case "techbox": return /INSERT/.test(up) ? "Wkład z przegródkami do pojemnika Techbox HD. Porządek w narzędziach, kablach i drobnych częściach." : "Wytrzymałe pojemniki Techbox HD do garażu, piwnicy i warsztatu, z wkładem na drobiazgi.";
       case "dom": return /PRZEPROWADZ/.test(up) ? "Wzmocnione kartony do przeprowadzek, które wytrzymują ciężkie książki i naczynia." : "Tekturowe pudła Loft z polem do opisu. Do archiwizacji dokumentów, zdjęć i rzeczy sezonowych.";
       case "torby":
-        if (/PLECAK/.test(up)) return "Bawełniany plecak-worek ze sznurkiem. Lekki, pakowny, dobry na siłownię, wycieczkę i pod nadruk.";
+        if (/PLECAK/.test(up)) return "Bawełniany plecak-worek ze sznurkiem. Lekki i pakowny, dobry na siłownię i wycieczkę.";
         if (/MANHATTAN/.test(up)) return "Sztruksowa torba Manhattan na co dzień: miękka, pojemna i w modnych kolorach.";
-        return "Bawełniana torba z długimi uszami, bez nadruku. Na zakupy, na co dzień i jako baza pod własne logo.";
+        return "Bawełniana torba z długimi uszami, bez nadruku. Na zakupy, na co dzień i w podróż.";
       case "prezenty": return "Opakowania z kolekcji Wave Kraft z naturalnego papieru. Eleganckie, proste i gotowe do zapakowania prezentu.";
       case "sprzatanie":
         if (/MIKROFIBR/.test(up)) return "Ściereczki z mikrofibry zbierają kurz i tłuszcz bez detergentu. Różne kolory pomagają oddzielić kuchnię od łazienki.";
