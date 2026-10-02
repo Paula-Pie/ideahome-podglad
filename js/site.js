@@ -194,8 +194,8 @@
     return "";
   }
 
-  /* Produkty sprzedawane na Amazon.pl jako seria MS. EVERYDAY (w dladomu.sklep.pl mają w nazwie RAKUN) */
-  var AMAZON_MS = "https://www.amazon.pl/stores/page/916542A8-6F93-43D6-B5FC-639158F0193C/search?terms=MS.EVERYDAY";
+  /* Produkty sprzedawane na Amazon.de jako seria MS. EVERYDAY (w dladomu.sklep.pl mają w nazwie RAKUN) */
+  var AMAZON_MS = "https://www.amazon.de/stores/page/916542A8-6F93-43D6-B5FC-639158F0193C/search?terms=MS.EVERYDAY";
   var SERIES_OVERRIDE = {
     "plyn-do-szyb-ih-rakun-5l": { series: "MS. EVERYDAY", amazon: AMAZON_MS, title: "Płyn do szyb MS. EVERYDAY 5 l",
       desc: "Płyn do mycia szyb, luster i przeszklonych powierzchni. Zostawia je czyste i bez smug. Ekonomiczny kanister 5 l." },
@@ -360,7 +360,7 @@
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" +
       variantPicker(g, 0) +
       '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
-      (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.pl</a>' : "") + "</div>" +
+      (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.de</a>' : "") + "</div>" +
       "</div></article>";
   }
   function selectVariant(root, g, btn) {
@@ -425,7 +425,7 @@
       variantPicker(g, vi) +
       '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
-      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.pl</a>' : "") + '<a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
+      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + '<a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
       "</div></div>";
     function close() { m.remove(); document.removeEventListener("keydown", onKey); if (last) last.focus(); }
     function onKey(e) { if (e.key === "Escape") close(); }
