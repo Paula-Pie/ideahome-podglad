@@ -248,7 +248,7 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .pcard .thumb { position: relative; aspect-ratio: 1; padding: 14px; cursor: zoom-in; background: none; border: 0; width: 100%; }
 .pcard .thumb img { width: 100%; height: 100%; object-fit: contain; transition: transform .35s; }
 .pcard:hover .thumb img { transform: scale(1.04); }
-.pcard .badge { position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--olive-soft); color: var(--olive-ink); padding: 4px 8px; border-radius: 2px; }
+.pcard .badge { position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--olive-soft); color: var(--olive-ink); padding: 4px 8px; border-radius: 2px; z-index: 2; }
 .pcard .fav { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--surface); display: grid; place-items: center; z-index: 1; }
 .pcard .fav svg { width: 17px; height: 17px; }
 .pcard .fav[aria-pressed="true"] svg { fill: var(--olive); stroke: var(--olive); }

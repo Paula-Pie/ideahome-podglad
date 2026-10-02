@@ -67,7 +67,7 @@
     { id: "torby", name: "Torby i plecaki", short: "Torby\ni plecaki", desc: "Torby i plecaki z bawełny i sztruksu" },
     { id: "prezenty", name: "Opakowania prezentowe", short: "Opakowania\nprezentowe", desc: "Torby i pudełka Wave Kraft" },
     { id: "sprzatanie", name: "Kuchnia i sprzątanie", short: "Kuchnia\ni sprzątanie", desc: "Ściereczki, zmywaki, druciaki" },
-    { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN w ekonomicznych opakowaniach" },
+    { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN i MS. EVERYDAY w ekonomicznych opakowaniach" },
     { id: "mydla", name: "Mydła i pielęgnacja", short: "Mydła\ni pielęgnacja", desc: "Mydła w płynie RAKUN, pumeksy" },
     { id: "warsztat", name: "Taśmy i sznurki", short: "Taśmy\ni sznurki", desc: "Taśmy izolacyjne i maskujące, sznurki" },
     { id: "budki", name: "Budki i karmniki", short: "Budki\ni karmniki", desc: "Dla ptaków, jeży i nietoperzy" },
@@ -194,6 +194,15 @@
     return "";
   }
 
+  /* Produkty sprzedawane na Amazon.de jako seria MS. EVERYDAY (w dladomu.sklep.pl mają w nazwie RAKUN) */
+  var AMAZON_MS = "https://www.amazon.de/stores/page/916542A8-6F93-43D6-B5FC-639158F0193C/search?terms=MS.EVERYDAY";
+  var SERIES_OVERRIDE = {
+    "plyn-do-szyb-ih-rakun-5l": { series: "MS. EVERYDAY", amazon: AMAZON_MS, title: "Płyn do szyb MS. EVERYDAY 5 l",
+      desc: "Płyn do mycia szyb, luster i przeszklonych powierzchni. Zostawia je czyste i bez smug. Ekonomiczny kanister 5 l." },
+    "plyn-do-spryskiwaczy-letni-ih-rakun-5l": { series: "MS. EVERYDAY", amazon: AMAZON_MS, title: "Letni płyn do spryskiwaczy MS. EVERYDAY 5 l",
+      desc: "Gotowy do użycia letni płyn do spryskiwaczy. Usuwa owady, kurz i smugi z szyby samochodu. Kanister 5 l." }
+  };
+
   function parse(raw) {
     var name = String(raw.name).replace(/’/g, "'").replace(/\s+/g, " ").trim();
     var up = name.toUpperCase();
@@ -223,11 +232,13 @@
     }
     var p = { id: raw.id, img: raw.img, url: raw.url || null, raw: name, color: color, pack: pack ? +pack : null, cap: cap ? +cap : null,
       length: length ? +length : null, cat: cat, family: key, title: title, rooms: CAT_ROOMS[cat] || [],
-      badge: /RAKUN/.test(up) ? "RAKUN" : null };
+      badge: SERIES_OVERRIDE[raw.id] ? SERIES_OVERRIDE[raw.id].series : /RAKUN/.test(up) ? "RAKUN" : null };
+    var so = SERIES_OVERRIDE[raw.id];
+    if (so) { p.title = so.title; p.amazon = so.amazon; }
     if (cat === "worki") p.rooms = p.cap >= 120 ? ["garaz", "ogrod", "biuro"] : p.cap <= 20 ? ["lazienka", "biuro"] : ["kuchnia", "lazienka", "biuro"];
     // galeria i krótki opis ze sklepu; gdy sklep nie ma opisu, używamy naszego
     p.imgs = raw.imgs && raw.imgs.length ? raw.imgs : [raw.img];
-    p.desc = raw.desc || describe(p, up);
+    p.desc = (so && so.desc) || raw.desc || describe(p, up);
     return p;
   }
 
@@ -237,6 +248,10 @@
     "worki-ih-ldpe-ekstra-mocny-120l-czarny-10szt": "worki-ldpe-120l-czarny-10szt-ekstra-mocny",
     "worki-ih-ldpe-z-tasma-35l-czarny-50szt": "worki-ldpe-z-tasma-sciagajaca-35l-czarny-50szt",
     "worki-ih-ldpe-z-tasma-60l-czarny-40szt": "worki-ldpe-z-tasma-sciagajaca-60l-czarny-40szt"
+  };
+  /* Dodatkowe zdjęcia z MINIATUR dołączane do galerii innego produktu (zamiast osobnej karty) */
+  var LOCAL_EXTRA = {
+    "66ffe752e524fb70b6b7cae0-tama-ostrzegawcza-ih-50mm-x-5m-klejca-odblaskowa-toczarna-strzaka": "tasma-ostrzegawcza-ih-50mm-x-5m-klejaca-odblaskowa-zolto-czarna-strzalka"
   };
   function variantLabel(v) {
     var parts = [];
@@ -249,10 +264,16 @@
     var shop = (window.IH_SHOP_PRODUCTS || []).slice();
     var byId = {}; shop.forEach(function (s) { byId[s.id] = s; });
     // własne miniatury: podmieniają zdjęcie produktu ze sklepu albo dochodzą jako osobne pozycje
-    (window.IH_LOCAL_PRODUCTS || []).forEach(function (l) {
+    var locals = window.IH_LOCAL_PRODUCTS || [];
+    locals.forEach(function (l) {
+      if (LOCAL_EXTRA[l.id]) return;
       var s = byId[LOCAL_ALIAS[l.id] || l.id];
       if (s) { s.img = l.img; if (s.imgs && s.imgs.length) s.imgs = [l.img].concat(s.imgs.slice(1)); }
-      else shop.push({ id: l.id, name: l.name, img: l.img, url: null });
+      else { s = { id: l.id, name: l.name, img: l.img, imgs: [l.img], url: null }; shop.push(s); byId[l.id] = s; }
+    });
+    locals.forEach(function (l) {
+      var t = byId[LOCAL_EXTRA[l.id]];
+      if (t) t.imgs = (t.imgs && t.imgs.length ? t.imgs : [t.img]).concat(l.img);
     });
     var fams = {}, list = [];
     shop.map(parse).forEach(function (v) {
@@ -338,7 +359,8 @@
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" +
       variantPicker(g, 0) +
-      '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a></div>' +
+      '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
+      (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.de</a>' : "") + "</div>" +
       "</div></article>";
   }
   function selectVariant(root, g, btn) {
@@ -403,7 +425,7 @@
       variantPicker(g, vi) +
       '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
-      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a><a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
+      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + '<a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
       "</div></div>";
     function close() { m.remove(); document.removeEventListener("keydown", onKey); if (last) last.focus(); }
     function onKey(e) { if (e.key === "Escape") close(); }
