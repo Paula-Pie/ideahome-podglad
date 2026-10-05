@@ -67,7 +67,7 @@
     { id: "torby", name: "Torby i plecaki", short: "Torby\ni plecaki", desc: "Torby i plecaki z bawełny i sztruksu" },
     { id: "prezenty", name: "Opakowania prezentowe", short: "Opakowania\nprezentowe", desc: "Torby i pudełka Wave Kraft" },
     { id: "sprzatanie", name: "Kuchnia i sprzątanie", short: "Kuchnia\ni sprzątanie", desc: "Ściereczki, zmywaki, druciaki" },
-    { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN i MS. EVERYDAY w ekonomicznych opakowaniach" },
+    { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN w ekonomicznych opakowaniach" },
     { id: "mydla", name: "Mydła i pielęgnacja", short: "Mydła\ni pielęgnacja", desc: "Mydła w płynie RAKUN, pumeksy" },
     { id: "warsztat", name: "Taśmy i sznurki", short: "Taśmy\ni sznurki", desc: "Taśmy izolacyjne i maskujące, sznurki" },
     { id: "budki", name: "Budki i karmniki", short: "Budki\ni karmniki", desc: "Dla ptaków, jeży i nietoperzy" },
@@ -194,14 +194,8 @@
     return "";
   }
 
-  /* Produkty sprzedawane na Amazon.de jako seria MS. EVERYDAY (w dladomu.sklep.pl mają w nazwie RAKUN) */
-  var AMAZON_MS = "https://www.amazon.de/stores/page/916542A8-6F93-43D6-B5FC-639158F0193C/search?terms=MS.EVERYDAY";
-  var SERIES_OVERRIDE = {
-    "plyn-do-szyb-ih-rakun-5l": { series: "MS. EVERYDAY", amazon: AMAZON_MS, title: "Płyn do szyb MS. EVERYDAY 5 l",
-      desc: "Płyn do mycia szyb, luster i przeszklonych powierzchni. Zostawia je czyste i bez smug. Ekonomiczny kanister 5 l." },
-    "plyn-do-spryskiwaczy-letni-ih-rakun-5l": { series: "MS. EVERYDAY", amazon: AMAZON_MS, title: "Letni płyn do spryskiwaczy MS. EVERYDAY 5 l",
-      desc: "Gotowy do użycia letni płyn do spryskiwaczy. Usuwa owady, kurz i smugi z szyby samochodu. Kanister 5 l." }
-  };
+  /* Ręczne nadpisanie serii/nazwy/opisu dla pojedynczych produktów (id ze sklepu → { series, title, desc, amazon }) */
+  var SERIES_OVERRIDE = {};
 
   function parse(raw) {
     var name = String(raw.name).replace(/’/g, "'").replace(/\s+/g, " ").trim();
