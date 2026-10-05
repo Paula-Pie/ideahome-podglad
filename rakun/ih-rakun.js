@@ -1,20 +1,29 @@
 /* Dopasowanie podstrony RAKUN do strony IDEA HOME (wstawiane przez tools/import-rakun.ps1):
-   pasek powrotu do IDEA HOME, ceny i przyciski "Kup online" przy produktach, poprawione linki w stopce. */
+   wspólny nagłówek z powrotem do IDEA HOME, ceny i przyciski "Kup online" przy produktach, poprawione linki w stopce. */
 (function () {
   var SHOP = "https://www.dladomu.sklep.pl";
   var data = {};
   (window.IH_SHOP_PRODUCTS || []).forEach(function (p) { data[p.id] = p; });
 
-  /* 1. Pasek IDEA HOME nad nagłówkiem RAKUN */
-  var bar = document.createElement("div");
-  bar.className = "ih-bar";
-  bar.innerHTML = '<div class="ih-bar-in">' +
-    '<a class="ih-back" href="../index.html" aria-label="Wróć na stronę IDEA HOME"><span aria-hidden="true">←</span> <img src="../img/logo-ideahome-white.png" alt="IDEA HOME" width="600" height="532"></a>' +
-    '<span class="ih-tag">RAKUN to seria marki IDEA HOME</span>' +
-    '<nav class="ih-links" aria-label="IDEA HOME"><a href="../produkty.html">Produkty</a><a href="../serie.html">Serie</a><a href="../kontakt.html">Kontakt</a>' +
-    '<a class="ih-buy" href="' + SHOP + '/search?q=rakun" target="_blank" rel="noopener">Kup online</a></nav></div>';
-  document.body.insertBefore(bar, document.body.firstChild);
-  document.documentElement.classList.add("has-ih-bar");
+  /* 1. Jeden nagłówek: logo IDEA HOME (powrót) + logo RAKUN, menu RAKUNA, "Kup online", menu na telefonie */
+  var inner = document.querySelector("header .nav-inner"), logo = inner && inner.querySelector(".logo"), nav = inner && inner.querySelector("nav.main-nav");
+  if (inner && logo && nav) {
+    var brand = document.createElement("div"); brand.className = "ih-brand";
+    var home = document.createElement("a"); home.className = "ih-home"; home.href = "../index.html";
+    home.setAttribute("aria-label", "IDEA HOME – strona główna"); home.title = "Wróć na stronę IDEA HOME";
+    home.innerHTML = '<img class="on-dark" src="../img/logo-ideahome-white.png" alt="" width="600" height="532"><img class="on-light" src="../img/logo-ideahome.png" alt="" width="600" height="532">';
+    logo.parentNode.insertBefore(brand, logo); brand.appendChild(home); brand.appendChild(logo);
+    var buy = document.createElement("a"); buy.className = "ih-buy"; buy.href = SHOP + "/search?q=rakun"; buy.target = "_blank"; buy.rel = "noopener"; buy.textContent = "Kup online";
+    var allLink = document.createElement("a"); allLink.href = "../produkty.html"; allLink.textContent = "Wszystkie produkty"; allLink.className = "ih-all";
+    nav.appendChild(allLink);
+    var buyM = buy.cloneNode(true); buyM.className = "ih-buy ih-buy-m"; nav.appendChild(buyM);
+    var tog = document.createElement("button"); tog.type = "button"; tog.className = "ih-burger"; tog.setAttribute("aria-label", "Otwórz menu"); tog.setAttribute("aria-expanded", "false");
+    tog.innerHTML = "<span></span><span></span><span></span>";
+    var right = document.createElement("div"); right.className = "ih-right"; right.appendChild(buy); right.appendChild(tog);
+    inner.appendChild(right);
+    tog.addEventListener("click", function () { var o = nav.classList.toggle("ih-open"); tog.setAttribute("aria-expanded", o); document.querySelector("header").classList.toggle("ih-menu-open", o); });
+    nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { nav.classList.remove("ih-open"); tog.setAttribute("aria-expanded", "false"); document.querySelector("header").classList.remove("ih-menu-open"); }); });
+  }
 
   /* 2. Ceny i przyciski przy produktach (dopasowanie po nazwie z karty) */
   var MAP = [

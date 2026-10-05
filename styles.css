@@ -565,3 +565,11 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .cookie-note p { color: var(--ink-2); flex: 1; min-width: 0; }
 .cookie-note a { text-decoration: underline; }
 .foot-bottom a { text-decoration: underline; }
+
+/* telefon: wybór wariantów zwarty, przycisk Kup zawsze na dole karty */
+@media (max-width: 620px) {
+  .pcard .vpick .vlab { flex-basis: 100%; }
+  .pcard .vchip { padding: 4px 7px; font-size: 10px; }
+  .pcard .sw { width: 18px; height: 18px; }
+  .cookie-note { flex-direction: column; align-items: stretch; text-align: left; }
+}

@@ -521,7 +521,7 @@
 
 <!-- ============ HERO VIDEO (full first viewport, no extra graphics) ============ -->
 <section class="hero-video" id="top">
-  <video autoplay muted loop playsinline id="hero-video-el"></video>
+  <video autoplay muted loop playsinline poster="rakun-film-poster.jpg" id="hero-video-el"></video>
   <a href="#intro" class="scroll-btn">Scroll</a>
   <button type="button" id="sound-toggle" class="sound-btn" aria-label="Włącz dźwięk">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -899,7 +899,9 @@
 
 <script>
   var heroVideo = document.getElementById('hero-video-el');
-  heroVideo.src = "rakun-film-1080.mp4";
+  // na telefonach i przy oszczędzaniu danych zostaje sam kadr (poster), bez pobierania filmu
+  var ihLite = window.matchMedia("(max-width: 760px)").matches || (navigator.connection && navigator.connection.saveData);
+  if (!ihLite) heroVideo.src = "rakun-film-1080.mp4"; else document.documentElement.classList.add("ih-lite");
   var soundBtn = document.getElementById('sound-toggle');
   soundBtn.addEventListener('click', function(){
     heroVideo.muted = !heroVideo.muted;
