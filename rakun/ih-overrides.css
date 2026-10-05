@@ -4,3 +4,47 @@
 /* czcionka IDEA HOME (Manrope) wszędzie poza logo RAKUN */
 body, body *:not(.logo) { font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif !important; }
 .logo, .logo * { font-family: "Quicksand", "Manrope", sans-serif !important; }
+
+/* kolory IDEA HOME */
+:root { --ih-olive: #5E6A3A; --ih-olive-ink: #47512B; --ih-dark: #242422; --ih-on-dark: #F4F2EC; }
+
+/* pasek powrotu do IDEA HOME */
+.ih-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 300; background: var(--ih-dark); color: var(--ih-on-dark); font-size: 12px; padding-top: env(safe-area-inset-top, 0px); }
+.ih-bar-in { max-width: 1260px; margin: 0 auto; padding: 6px 30px; display: flex; align-items: center; gap: 18px; min-height: 40px; }
+.ih-back { display: inline-flex; align-items: center; gap: 8px; color: var(--ih-on-dark); text-decoration: none; font-weight: 700; }
+.ih-back img { height: 28px; width: auto; display: block; }
+.ih-back:hover span { transform: translateX(-3px); }
+.ih-back span { transition: transform .2s; }
+.ih-tag { color: #B9B6AC; letter-spacing: .04em; }
+.ih-links { margin-left: auto; display: flex; align-items: center; gap: 18px; }
+.ih-links a { color: var(--ih-on-dark); text-decoration: none; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 11px; }
+.ih-links a:hover { color: #C9D3A8; }
+.ih-links .ih-buy { background: var(--ih-olive); padding: 7px 12px; border-radius: 3px; }
+.ih-links .ih-buy:hover { background: var(--ih-olive-ink); color: #fff; }
+.has-ih-bar header { top: 40px; }
+@media (max-width: 760px) { .ih-tag { display: none; } .ih-links a:not(.ih-buy) { display: none; } .ih-bar-in { padding: 6px 16px; } }
+
+/* przyciski w stylu IDEA HOME */
+.btn, .ih-btn { display: inline-flex; align-items: center; gap: .6em; padding: .95em 1.6em !important; border-radius: 3px !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: .12em !important; text-transform: uppercase; border: 1px solid var(--ih-olive) !important; background: var(--ih-olive) !important; color: #fff !important; text-decoration: none; transition: background .2s, color .2s, border-color .2s; transform: none !important; }
+.btn:hover, .ih-btn:hover { background: var(--ih-olive-ink) !important; border-color: var(--ih-olive-ink) !important; }
+.btn.outline, .ih-btn-outline { background: transparent !important; color: var(--ink) !important; border-color: var(--ink) !important; }
+.btn.outline:hover, .ih-btn-outline:hover { background: var(--ink) !important; color: var(--white) !important; }
+
+/* cena i przycisk przy produkcie */
+.ih-buyrow { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 12px; }
+.ih-price { font-weight: 700; font-size: 1rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.ih-price small { display: block; font-size: 10px; font-weight: 600; color: var(--ink-soft); }
+.ih-buyrow .ih-btn { padding: .7em 1.1em !important; font-size: 11px !important; }
+
+/* stopka: sklep obok Allegro */
+footer .ih-btn { margin: 0 10px 10px 0; padding: .7em 1.1em !important; font-size: 11px !important; }
+.idea-home-logo a { display: inline-block; }
+
+/* większe miniatury produktów (postacie Rakuna bez zmian) */
+.editorial-item .thumb { overflow: visible; margin: 26px 0 24px; }
+.editorial-item .thumb img { transform: scale(1.4); transform-origin: 50% 55%; }
+.editorial-item:hover .thumb img { transform: scale(1.46); }
+#chemia .editorial-item, #akcesoria .editorial-item { max-width: 230px; }
+#chemia .editorial-grid { max-width: 520px; }
+#akcesoria .editorial-grid.cols-2 { max-width: 230px; }
+@media (max-width: 760px) { .editorial-item .thumb img { transform: scale(1.25); } .editorial-item:hover .thumb img { transform: scale(1.3); } }
