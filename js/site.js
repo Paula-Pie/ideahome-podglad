@@ -213,12 +213,15 @@
     key = key.replace(/\d+\s*SZT\.?/g, " ").replace(/\d+PACK/g, " ").replace(/\bA'\d+/g, " ");
     if (length) key = key.replace(/\d+M\b/g, " ").replace(/[\d.]+KG\b/g, " ");
     if (/RENOWACJI/.test(up)) key = "ZESTAW DO RENOWACJI NAPISÓW NA POMNIKACH";
+    var bagType = /EKSTRA MOCNY/.test(up) ? " ekstra mocne" : /MOCNY/.test(up) ? " mocne" : /TAŚM/.test(up) ? " z taśmą" : /SEGREGACJI/.test(up) ? " do segregacji" : "";
+    var bagMat = /HDPE/.test(up) ? "HDPE" : "LDPE";
+    // worki: jedna rodzina na rodzaj worka, pojemność i kolor to warianty
+    if (cat === "worki") key = ("WORKI " + bagMat + bagType).toUpperCase();
     key = key.replace(/\s+/g, " ").trim().replace(/\sX$/, "");
 
     var title;
     if (cat === "worki") {
-      var type = /EKSTRA MOCNY/.test(up) ? " ekstra mocne" : /MOCNY/.test(up) ? " mocne" : /TAŚM/.test(up) ? " z taśmą" : /SEGREGACJI/.test(up) ? " do segregacji" : "";
-      title = "Worki na odpady " + (/HDPE/.test(up) ? "HDPE" : "LDPE") + type + " " + cap + " l";
+      title = "Worki na odpady " + bagMat + bagType;
     } else if (/RENOWACJI/.test(up)) {
       title = "Zestaw do renowacji napisów na pomnikach";
     } else {
@@ -278,10 +281,17 @@
         list.push(g);
       }
       // ten sam wariant bywa w sklepie pod dwoma adresami - zostawiamy pierwszy
-      if (!g.variants.some(function (x) { return x.id === v.id || (variantLabel(x) === variantLabel(v) && x.url && v.url); })) g.variants.push(v);
+      var same = function (x) { return x.color === v.color && x.cap === v.cap && x.pack === v.pack && x.length === v.length; };
+      if (!g.variants.some(function (x) { return x.id === v.id || (same(x) && x.url && v.url); })) g.variants.push(v);
+      v.rooms.forEach(function (r) { if (g.rooms.indexOf(r) === -1) g.rooms = g.rooms.concat(r); });
     });
     list.forEach(function (g) {
-      g.variants.sort(function (a, b) { return ((a.url ? 0 : 1) - (b.url ? 0 : 1)) || (COLOR_ORDER.indexOf(a.color) - COLOR_ORDER.indexOf(b.color)) || ((a.length || 0) - (b.length || 0)) || ((a.pack || 0) - (b.pack || 0)); });
+      // pojemności rodziny; przy kilku litrażach karta pokazuje wybór litrów i kolorów
+      g.caps = g.variants.map(function (v) { return v.cap; }).filter(function (c, i, a) { return c && a.indexOf(c) === i; }).sort(function (a, b) { return a - b; });
+      g.multi = g.caps.length > 1;
+      g.cap = g.caps.length === 1 ? g.caps[0] : null;
+      g.capMin = g.caps[0] || null;
+      g.variants.sort(function (a, b) { return ((a.url ? 0 : 1) - (b.url ? 0 : 1)) || ((a.cap || 0) - (b.cap || 0)) || (COLOR_ORDER.indexOf(a.color) - COLOR_ORDER.indexOf(b.color)) || ((a.length || 0) - (b.length || 0)) || ((a.pack || 0) - (b.pack || 0)); });
       var colors = g.variants.map(function (v) { return v.color; });
       // kropki kolorów tylko gdy każdy wariant ma inny kolor; w innym wypadku przyciski z opisem
       g.dots = g.variants.length > 1 && colors.every(function (c, i) { return c && COLORS[c] && colors.indexOf(c) === i; });
@@ -290,7 +300,7 @@
     });
     list.sort(function (a, b) {
       var ca = CATS.findIndex(function (c) { return c.id === a.cat; }), cb = CATS.findIndex(function (c) { return c.id === b.cat; });
-      return ca - cb || (a.cap || 0) - (b.cap || 0) || a.title.localeCompare(b.title, "pl");
+      return ca - cb || (a.capMin || 0) - (b.capMin || 0) || a.title.localeCompare(b.title, "pl");
     });
     return list;
   }
@@ -317,6 +327,7 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function variantSpec(g, v) {
     var s = variantLabel(v);
+    if (g.multi && v.cap) s = v.cap + " l" + (s ? " · " + s : "");
     if (g.cat === "worki" && v.color && COLORS[v.color].seg) s += (s ? " · " : "") + COLORS[v.color].seg;
     return s;
   }
@@ -330,8 +341,41 @@
     if (differs("pack") && v.pack) parts.push(v.pack + " szt.");
     return parts.join(" · ");
   }
+  // dwuwymiarowy wybór (litry + kolor) dla rodzin z kilkoma pojemnościami
+  function multiPicker(g, sel) {
+    var v = g.variants[sel];
+    var colors = [];
+    g.variants.forEach(function (x) { if (x.color && colors.indexOf(x.color) === -1) colors.push(x.color); });
+    colors.sort(function (a, b) { return COLOR_ORDER.indexOf(a) - COLOR_ORDER.indexOf(b); });
+    var has = function (cap, col) { return g.variants.some(function (x) { return x.cap === cap && x.color === col; }); };
+    return '<div class="vpick">' +
+      '<div class="vrow" role="group" aria-label="Pojemność"><span class="vlab">Pojemność</span>' + g.caps.map(function (c) {
+        return '<button class="vchip vcap" type="button" data-cap="' + c + '" aria-pressed="' + (c === v.cap) + '">' + c + " l</button>";
+      }).join("") + "</div>" +
+      '<div class="vrow swatches" role="group" aria-label="Kolor"><span class="vlab">Kolor</span>' + colors.map(function (c) {
+        var ok = has(v.cap, c), name = COLORS[c] ? COLORS[c].name : c;
+        return '<button class="sw vcol' + (ok ? "" : " na") + '" type="button" data-color="' + c + '" aria-pressed="' + (c === v.color) + '" title="' + esc(name + (ok ? "" : " – w innej pojemności")) + '" aria-label="' + esc(name) + '" style="background:' + (COLORS[c] ? COLORS[c].hex : "#ccc") + '"></button>';
+      }).join("") + "</div></div>";
+  }
+  // który wariant wybrać po kliknięciu litrażu albo koloru
+  function pickIndex(g, cur, btn) {
+    var v = g.variants[cur], i;
+    if (btn.dataset.v !== undefined) return +btn.dataset.v;
+    if (btn.dataset.cap) {
+      var cap = +btn.dataset.cap;
+      i = g.variants.findIndex(function (x) { return x.cap === cap && x.color === v.color; });
+      return i > -1 ? i : g.variants.findIndex(function (x) { return x.cap === cap; });
+    }
+    var col = btn.dataset.color;
+    i = g.variants.findIndex(function (x) { return x.color === col && x.cap === v.cap; });
+    if (i > -1) return i;
+    var best = -1;
+    g.variants.forEach(function (x, k) { if (x.color === col && (best < 0 || Math.abs(x.cap - v.cap) < Math.abs(g.variants[best].cap - v.cap))) best = k; });
+    return best > -1 ? best : cur;
+  }
   function variantPicker(g, sel) {
     if (g.variants.length < 2) return "";
+    if (g.multi) return multiPicker(g, sel);
     return '<div class="' + (g.dots ? "swatches" : "vchips") + '" role="group" aria-label="Warianty">' + g.variants.map(function (x, i) {
       var label = chipLabel(g, x) || variantLabel(x) || x.raw;
       if (g.dots) return '<button class="sw" type="button" data-v="' + i + '" aria-pressed="' + (i === sel) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '" style="background:' + COLORS[x.color].hex + '"></button>';
@@ -343,7 +387,7 @@
     // opts.color: od razu pokaż wariant w tym kolorze (np. po kliknięciu koloru w sekcji segregacji)
     var si = opts.color ? Math.max(0, g.variants.findIndex(function (x) { return x.color === opts.color; })) : 0;
     var v = g.variants[si], cat = catById(g.cat), fav = getFavs().indexOf(g.id) > -1;
-    return '<article class="pcard" data-id="' + g.id + '">' +
+    return '<article class="pcard" data-id="' + g.id + '" data-vi="' + si + '">' +
       (g.badge ? '<span class="badge">' + g.badge + "</span>" : "") +
       '<button class="fav" type="button" aria-pressed="' + fav + '" aria-label="Dodaj do ulubionych">' + ICON.heart + "</button>" +
       '<button class="thumb" type="button" aria-label="Szczegóły: ' + esc(g.title) + '"><img class="main" loading="lazy" src="' + v.img + '" alt="' + esc(g.title) + '">' +
@@ -354,13 +398,14 @@
       "<h3>" + esc(g.title) + "</h3>" +
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" +
-      variantPicker(g, si) +
+      '<div class="vwrap">' + variantPicker(g, si) + "</div>" +
       '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
       (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.de</a>' : "") + "</div>" +
       "</div></article>";
   }
-  function selectVariant(root, g, btn) {
-    var v = g.variants[+btn.dataset.v];
+  function selectVariant(root, g, idx) {
+    var v = g.variants[idx];
+    root.dataset.vi = idx;
     var main = root.querySelector(".thumb img.main, .mimg img"); if (main) main.src = v.img;
     var alt = root.querySelector(".thumb img.alt");
     if (alt) { alt.src = v.imgs[1] || v.img; alt.hidden = !v.imgs[1]; }
@@ -369,14 +414,15 @@
     var strip = root.querySelector(".mthumbs"); if (strip) strip.outerHTML = thumbStrip(v);
     root.querySelector(".spec").textContent = variantSpec(g, v);
     var buy = root.querySelector(".buy"); if (buy) buy.href = buyUrl(g, v);
-    root.querySelectorAll(".sw, .vchip").forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
+    var w = root.querySelector(".vwrap"); if (w) w.innerHTML = variantPicker(g, idx);
+    var amz = root.querySelector(".amz"); if (amz) amz.hidden = !v.amazon;
   }
   function bindCards(root) {
     root.addEventListener("click", function (e) {
       var c = e.target.closest(".pcard"); if (!c) return;
       var g = CATALOG.find(function (x) { return x.id === c.dataset.id; });
       var vb = e.target.closest(".sw, .vchip");
-      if (vb) return selectVariant(c, g, vb);
+      if (vb) return selectVariant(c, g, pickIndex(g, +c.dataset.vi || 0, vb));
       if (e.target.closest(".fav")) {
         var favs = getFavs(), i = favs.indexOf(g.id), btn = e.target.closest(".fav");
         if (i > -1) { favs.splice(i, 1); toast("Usunięto z ulubionych"); } else { favs.push(g.id); toast("Dodano do ulubionych"); }
@@ -384,8 +430,7 @@
         return;
       }
       if (e.target.closest(".thumb")) {
-        var cur = c.querySelector('.sw[aria-pressed="true"], .vchip[aria-pressed="true"]');
-        openModal(g, cur ? +cur.dataset.v : 0);
+        openModal(g, +c.dataset.vi || 0);
       }
     });
   }
@@ -408,7 +453,7 @@
     var rooms = g.rooms.map(roomById).filter(Boolean).map(function (r) { return r.name; });
     var specs = [["Kategoria", cat.name]];
     if (g.badge) specs.push(["Seria", g.badge]);
-    if (g.cap) specs.push(["Pojemność", g.cap + " l"]);
+    if (g.caps.length) specs.push([g.multi ? "Pojemności" : "Pojemność", g.caps.join(" / ") + " l"]);
     if (g.cat === "worki") specs.push(["Materiał", /HDPE/.test(g.title) ? "folia HDPE" : "folia LDPE"]);
     if (packs.length) specs.push(["Opakowanie", packs.join(" / ") + " szt."]);
     if (colors.length) specs.push([colors.length > 1 ? "Kolory" : "Kolor", colors.join(", ")]);
@@ -418,7 +463,7 @@
       '<button class="icon-btn modal-close" type="button" aria-label="Zamknij">' + ICON.close + "</button>" +
       '<div class="mgallery"><div class="mimg"><img src="' + v.img + '" alt="' + esc(g.title) + '"></div>' + thumbStrip(v) + "</div>" +
       '<div class="mbody"><span class="label">' + cat.name + "</span><h2>" + esc(g.title) + '</h2><p class="mdesc">' + esc(v.desc || "") + "</p>" +
-      variantPicker(g, vi) +
+      '<div class="vwrap">' + variantPicker(g, vi) + "</div>" +
       '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
       '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + '<a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
@@ -428,7 +473,7 @@
     m.addEventListener("click", function (e) {
       if (e.target === m || e.target.closest(".modal-close")) return close();
       var vb = e.target.closest(".sw, .vchip");
-      if (vb) { vi = +vb.dataset.v; return selectVariant(m, g, vb); }
+      if (vb) { vi = pickIndex(g, vi, vb); return selectVariant(m, g, vi); }
       var tb = e.target.closest(".mthumbs button");
       if (tb) {
         m.querySelector(".mimg img").src = g.variants[vi].imgs[+tb.dataset.img];

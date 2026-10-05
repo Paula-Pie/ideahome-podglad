@@ -536,3 +536,12 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .hero-slide-nagrobki .lead { max-width: 36ch; }
 @media (max-width: 1500px) { .hero-slide-nagrobki .hero-media img { object-position: 8% 50%; } }
 @media (max-width: 1500px) and (min-width: 701px) { .hero-slide-nagrobki .hero-media::after { background: linear-gradient(90deg, rgba(250,249,246,.96) 0%, rgba(250,249,246,.9) 30%, rgba(250,249,246,.3) 42%, rgba(250,249,246,0) 52%); } }
+
+/* wybór litrażu i koloru (worki) */
+.vpick { display: grid; gap: 8px; margin-top: 2px; }
+.vpick .vrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.vpick .vlab { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); min-width: 68px; }
+.sw.na { opacity: .3; }
+.sw.na:hover { opacity: .6; }
+.modal-box .vpick .vlab { min-width: 80px; }
+.pcard .vpick .vlab { min-width: 0; flex-basis: 100%; }
