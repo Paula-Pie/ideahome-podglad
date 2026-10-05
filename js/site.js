@@ -217,11 +217,30 @@
     var bagMat = /HDPE/.test(up) ? "HDPE" : "LDPE";
     // worki: jedna rodzina na rodzaj worka, pojemność i kolor to warianty
     if (cat === "worki") key = ("WORKI " + bagMat + bagType).toUpperCase();
+    // Flexistore / Techbox: jedna karta na pojemniki i jedna na inserty, rozmiar jako opcja do wyboru
+    var opt = null, optSort = null, optLabel = "Pojemność";
+    if (cat === "flexistore" || cat === "techbox") {
+      var isInsert = /INSERT/.test(up) && !/SET/.test(up);
+      var sizes = (up.match(/(\d+)\/(\d+)\s*L/) || []);
+      if (cat === "flexistore") key = isInsert ? "INSERTY FLEXISTORE" : "POJEMNIKI FLEXISTORE";
+      else key = "TECHBOX HD";
+      if (/MIX ROZMIAR/.test(up)) { opt = "Mix 4 rozmiary"; optSort = 0; }
+      else if (/SET 2X(\d+)L/.test(up)) { var n = up.match(/SET 2X(\d+)L/)[1]; opt = "Zestaw 2 × " + n + " l + insert"; optSort = 1; }
+      else if (sizes[1]) { opt = (isInsert && cat === "techbox" ? "Insert " : "") + sizes[1] + "/" + sizes[2] + " l"; optSort = +sizes[1] + (cat === "techbox" ? 1000 : 0); }
+      else if (cap) { opt = cap + " l"; optSort = +cap; }
+      optLabel = cat === "techbox" ? "Wariant" : "Rozmiar";
+    }
     key = key.replace(/\s+/g, " ").trim().replace(/\sX$/, "");
 
     var title;
     if (cat === "worki") {
       title = "Worki na odpady " + bagMat + bagType;
+    } else if (key === "POJEMNIKI FLEXISTORE") {
+      title = "Pojemniki Flexistore z pokrywą";
+    } else if (key === "INSERTY FLEXISTORE") {
+      title = "Insert z przegródkami do pojemnika Flexistore";
+    } else if (key === "TECHBOX HD") {
+      title = "Pojemniki Techbox HD i inserty";
     } else if (/RENOWACJI/.test(up)) {
       title = "Zestaw do renowacji napisów na pomnikach";
     } else {
@@ -234,6 +253,8 @@
     if (so) { p.title = so.title; p.amazon = so.amazon; }
     if (cat === "worki") p.rooms = p.cap >= 120 ? ["garaz", "ogrod", "biuro"] : p.cap <= 20 ? ["lazienka", "biuro"] : ["kuchnia", "lazienka", "biuro"];
     // galeria i krótki opis ze sklepu; gdy sklep nie ma opisu, używamy naszego
+    // opcja do wyboru na karcie (domyślnie pojemność w litrach)
+    p.opt = opt || (p.cap ? p.cap + " l" : null); p.optSort = optSort != null ? optSort : p.cap; p.optLabel = optLabel;
     p.imgs = raw.imgs && raw.imgs.length ? raw.imgs : [raw.img];
     p.desc = (so && so.desc) || raw.desc || describe(p, up);
     return p;
@@ -281,17 +302,21 @@
         list.push(g);
       }
       // ten sam wariant bywa w sklepie pod dwoma adresami - zostawiamy pierwszy
-      var same = function (x) { return x.color === v.color && x.cap === v.cap && x.pack === v.pack && x.length === v.length; };
+      var same = function (x) { return x.color === v.color && x.opt === v.opt && x.cap === v.cap && x.pack === v.pack && x.length === v.length; };
       if (!g.variants.some(function (x) { return x.id === v.id || (same(x) && x.url && v.url); })) g.variants.push(v);
       v.rooms.forEach(function (r) { if (g.rooms.indexOf(r) === -1) g.rooms = g.rooms.concat(r); });
     });
     list.forEach(function (g) {
       // pojemności rodziny; przy kilku litrażach karta pokazuje wybór litrów i kolorów
       g.caps = g.variants.map(function (v) { return v.cap; }).filter(function (c, i, a) { return c && a.indexOf(c) === i; }).sort(function (a, b) { return a - b; });
-      g.multi = g.caps.length > 1;
+      // opcje (litraż albo rozmiar/wariant) w kolejności optSort
+      var os = {}; g.variants.forEach(function (v) { if (v.opt && !(v.opt in os)) os[v.opt] = v.optSort; });
+      g.opts = Object.keys(os).sort(function (a, b) { return (os[a] || 0) - (os[b] || 0); });
+      g.optLabel = g.variants[0].optLabel;
+      g.multi = g.opts.length > 1;
       g.cap = g.caps.length === 1 ? g.caps[0] : null;
       g.capMin = g.caps[0] || null;
-      g.variants.sort(function (a, b) { return ((a.url ? 0 : 1) - (b.url ? 0 : 1)) || ((a.cap || 0) - (b.cap || 0)) || (COLOR_ORDER.indexOf(a.color) - COLOR_ORDER.indexOf(b.color)) || ((a.length || 0) - (b.length || 0)) || ((a.pack || 0) - (b.pack || 0)); });
+      g.variants.sort(function (a, b) { return ((a.url ? 0 : 1) - (b.url ? 0 : 1)) || ((a.optSort || 0) - (b.optSort || 0)) || (COLOR_ORDER.indexOf(a.color) - COLOR_ORDER.indexOf(b.color)) || ((a.length || 0) - (b.length || 0)) || ((a.pack || 0) - (b.pack || 0)); });
       var colors = g.variants.map(function (v) { return v.color; });
       // kropki kolorów tylko gdy każdy wariant ma inny kolor; w innym wypadku przyciski z opisem
       g.dots = g.variants.length > 1 && colors.every(function (c, i) { return c && COLORS[c] && colors.indexOf(c) === i; });
@@ -327,7 +352,7 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function variantSpec(g, v) {
     var s = variantLabel(v);
-    if (g.multi && v.cap) s = v.cap + " l" + (s ? " · " + s : "");
+    if (g.multi && v.opt) s = v.opt + (s ? " · " + s : "");
     if (g.cat === "worki" && v.color && COLORS[v.color].seg) s += (s ? " · " : "") + COLORS[v.color].seg;
     return s;
   }
@@ -347,30 +372,31 @@
     var colors = [];
     g.variants.forEach(function (x) { if (x.color && colors.indexOf(x.color) === -1) colors.push(x.color); });
     colors.sort(function (a, b) { return COLOR_ORDER.indexOf(a) - COLOR_ORDER.indexOf(b); });
-    var has = function (cap, col) { return g.variants.some(function (x) { return x.cap === cap && x.color === col; }); };
+    var has = function (opt, col) { return g.variants.some(function (x) { return x.opt === opt && x.color === col; }); };
+    var lab = g.optLabel || "Pojemność";
     return '<div class="vpick">' +
-      '<div class="vrow" role="group" aria-label="Pojemność"><span class="vlab">Pojemność</span>' + g.caps.map(function (c) {
-        return '<button class="vchip vcap" type="button" data-cap="' + c + '" aria-pressed="' + (c === v.cap) + '">' + c + " l</button>";
+      '<div class="vrow" role="group" aria-label="' + lab + '"><span class="vlab">' + lab + "</span>" + g.opts.map(function (o) {
+        return '<button class="vchip vcap" type="button" data-opt="' + esc(o) + '" aria-pressed="' + (o === v.opt) + '">' + esc(o) + "</button>";
       }).join("") + "</div>" +
-      '<div class="vrow swatches" role="group" aria-label="Kolor"><span class="vlab">Kolor</span>' + colors.map(function (c) {
-        var ok = has(v.cap, c), name = COLORS[c] ? COLORS[c].name : c;
-        return '<button class="sw vcol' + (ok ? "" : " na") + '" type="button" data-color="' + c + '" aria-pressed="' + (c === v.color) + '" title="' + esc(name + (ok ? "" : " – w innej pojemności")) + '" aria-label="' + esc(name) + '" style="background:' + (COLORS[c] ? COLORS[c].hex : "#ccc") + '"></button>';
-      }).join("") + "</div></div>";
+      (colors.length > 1 ? '<div class="vrow swatches" role="group" aria-label="Kolor"><span class="vlab">Kolor</span>' + colors.map(function (c) {
+        var ok = has(v.opt, c), name = COLORS[c] ? COLORS[c].name : c;
+        return '<button class="sw vcol' + (ok ? "" : " na") + '" type="button" data-color="' + c + '" aria-pressed="' + (c === v.color) + '" title="' + esc(name + (ok ? "" : " – w innym wariancie")) + '" aria-label="' + esc(name) + '" style="background:' + (COLORS[c] ? COLORS[c].hex : "#ccc") + '"></button>';
+      }).join("") + "</div>" : "") + "</div>";
   }
-  // który wariant wybrać po kliknięciu litrażu albo koloru
+  // który wariant wybrać po kliknięciu opcji (litraż/rozmiar) albo koloru
   function pickIndex(g, cur, btn) {
     var v = g.variants[cur], i;
     if (btn.dataset.v !== undefined) return +btn.dataset.v;
-    if (btn.dataset.cap) {
-      var cap = +btn.dataset.cap;
-      i = g.variants.findIndex(function (x) { return x.cap === cap && x.color === v.color; });
-      return i > -1 ? i : g.variants.findIndex(function (x) { return x.cap === cap; });
+    if (btn.dataset.opt) {
+      var opt = btn.dataset.opt;
+      i = g.variants.findIndex(function (x) { return x.opt === opt && x.color === v.color; });
+      return i > -1 ? i : g.variants.findIndex(function (x) { return x.opt === opt; });
     }
     var col = btn.dataset.color;
-    i = g.variants.findIndex(function (x) { return x.color === col && x.cap === v.cap; });
+    i = g.variants.findIndex(function (x) { return x.color === col && x.opt === v.opt; });
     if (i > -1) return i;
     var best = -1;
-    g.variants.forEach(function (x, k) { if (x.color === col && (best < 0 || Math.abs(x.cap - v.cap) < Math.abs(g.variants[best].cap - v.cap))) best = k; });
+    g.variants.forEach(function (x, k) { if (x.color === col && (best < 0 || Math.abs((x.optSort || 0) - (v.optSort || 0)) < Math.abs((g.variants[best].optSort || 0) - (v.optSort || 0)))) best = k; });
     return best > -1 ? best : cur;
   }
   function variantPicker(g, sel) {
@@ -453,7 +479,8 @@
     var rooms = g.rooms.map(roomById).filter(Boolean).map(function (r) { return r.name; });
     var specs = [["Kategoria", cat.name]];
     if (g.badge) specs.push(["Seria", g.badge]);
-    if (g.caps.length) specs.push([g.multi ? "Pojemności" : "Pojemność", g.caps.join(" / ") + " l"]);
+    if (g.caps.length && (g.cat === "worki" || !g.multi)) specs.push([g.caps.length > 1 ? "Pojemności" : "Pojemność", g.caps.join(" / ") + " l"]);
+    if (g.multi && g.cat !== "worki") specs.push([g.optLabel === "Wariant" ? "Warianty" : "Rozmiary", g.opts.join(", ")]);
     if (g.cat === "worki") specs.push(["Materiał", /HDPE/.test(g.title) ? "folia HDPE" : "folia LDPE"]);
     if (packs.length) specs.push(["Opakowanie", packs.join(" / ") + " szt."]);
     if (colors.length) specs.push([colors.length > 1 ? "Kolory" : "Kolor", colors.join(", ")]);
