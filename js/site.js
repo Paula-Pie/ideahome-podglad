@@ -503,7 +503,7 @@
       (v.imgs.length > 1 ? '<span class="photos">' + v.imgs.length + " " + pl(v.imgs.length, "zdjęcie", "zdjęcia", "zdjęć") + "</span>" : "") + "</button>" +
       '<div class="body">' +
       (opts.hideCat ? "" : '<span class="pcat">' + cat.name + "</span>") +
-      "<h3>" + esc(g.title) + "</h3>" +
+      '<h3><a class="plink" href="p/' + g.id + '.html">' + esc(g.title) + "</a></h3>" +
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<div class="vwrap">' + variantPicker(g, si) + "</div>" +
@@ -576,7 +576,7 @@
       '<div class="vwrap">' + variantPicker(g, vi) + "</div>" +
       '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
-      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + '<a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
+      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + '<a class="btn btn-outline" href="p/' + g.id + '.html">Strona produktu</a></div>' +
       "</div></div>";
     function close() { m.remove(); document.removeEventListener("keydown", onKey); if (last) last.focus(); }
     function onKey(e) { if (e.key === "Escape") close(); }
