@@ -403,7 +403,7 @@
   var CATALOG = buildCatalog();
   function catById(id) { return CATS.find(function (c) { return c.id === id; }); }
   function roomById(id) { return ROOMS.find(function (r) { return r.id === id; }); }
-  function countIn(catId) { return CATALOG.filter(function (g) { return g.cat === catId; }).length; }
+  function countIn(catId) { return CATALOG.filter(function (g) { return g.cat === catId; }).reduce(function (s, g) { return s + g.variants.length; }, 0); }
   function pl(n, one, few, many) { var d = n % 10, t = n % 100; return n === 1 ? one : (d >= 2 && d <= 4 && (t < 12 || t > 14)) ? few : many; }
   // wyszukanie rodziny po fragmencie id (do list na stronie głównej)
   function find(part) { return CATALOG.find(function (g) { return g.id === part; }) || CATALOG.find(function (g) { return g.id.indexOf(part) > -1; }); }
@@ -484,7 +484,7 @@
   function card(g, opts) {
     opts = opts || {};
     // opts.color: od razu pokaż wariant w tym kolorze (np. po kliknięciu koloru w sekcji segregacji)
-    var si = opts.color ? Math.max(0, g.variants.findIndex(function (x) { return x.color === opts.color; })) : 0;
+    var si = opts.vi != null ? opts.vi : opts.color ? Math.max(0, g.variants.findIndex(function (x) { return x.color === opts.color; })) : 0;
     var v = g.variants[si], cat = catById(g.cat), fav = getFavs().indexOf(g.id) > -1;
     return '<article class="pcard" data-id="' + g.id + '" data-vi="' + si + '">' +
       (g.badge ? '<span class="badge">' + g.badge + "</span>" : "") +

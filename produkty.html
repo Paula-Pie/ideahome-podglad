@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610051327">
+<link rel="stylesheet" href="styles.css?v=202610051330">
 </head>
 <body data-page="produkty">
 <div id="site-header"></div>
@@ -68,9 +68,9 @@
 
 <div id="site-footer"></div>
 
-<script src="js/miniatury-data.js?v=202610051327"></script>
-<script src="js/produkty-data.js?v=202610051327"></script>
-<script src="js/site.js?v=202610051327"></script>
+<script src="js/miniatury-data.js?v=202610051330"></script>
+<script src="js/produkty-data.js?v=202610051330"></script>
+<script src="js/site.js?v=202610051330"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -92,23 +92,32 @@
     else if (h === "szukaj") { try { state.q = sessionStorage.getItem("ih-q") || ""; } catch (e) {} document.getElementById("q").value = state.q; }
   }
 
-  function matches(g) {
-    if (state.cat && g.cat !== state.cat) return false;
-    if (state.room && g.rooms.indexOf(state.room) === -1) return false;
-    if (state.color && !g.variants.some(function (v) { return v.color === state.color; })) return false;
-    if (state.fav && IH.getFavs().indexOf(g.id) === -1) return false;
+  // każdy wariant to osobna karta (z wyborem powiązanych wariantów na karcie)
+  function variantMatches(g, v) {
+    if (state.room && (v.rooms || g.rooms).indexOf(state.room) === -1) return false;
+    if (state.color && v.color !== state.color) return false;
     if (state.q) {
-      var hay = (g.title + " " + IH.catById(g.cat).name + " " + g.variants.map(function (v) { return v.raw + " " + (IH.COLORS[v.color] ? IH.COLORS[v.color].name + " " + (IH.COLORS[v.color].seg || "") : ""); }).join(" ")).toLowerCase();
+      var hay = (g.title + " " + IH.catById(g.cat).name + " " + v.raw + " " + (v.opt || "") + " " + (IH.COLORS[v.color] ? IH.COLORS[v.color].name + " " + (IH.COLORS[v.color].seg || "") : "")).toLowerCase();
       var ok = state.q.toLowerCase().split(/\s+/).every(function (w) { return hay.indexOf(w.replace(/\s*l$/, "")) > -1 || hay.indexOf(w) > -1; });
       if (!ok) return false;
     }
     return true;
   }
+  function items() {
+    var out = [];
+    IH.CATALOG.forEach(function (g) {
+      if (state.cat && g.cat !== state.cat) return;
+      if (state.fav && IH.getFavs().indexOf(g.id) === -1) return;
+      g.variants.forEach(function (v, k) { if (variantMatches(g, v)) out.push({ g: g, v: v, k: k }); });
+    });
+    return out;
+  }
+  function countVariants(fn) { return IH.CATALOG.reduce(function (s, g) { return s + g.variants.filter(function (v) { return fn(g, v); }).length; }, 0); }
 
   function renderFilters() {
-    document.getElementById("f-cat").innerHTML = '<li><button class="fbtn" type="button" data-cat="" aria-pressed="' + (!state.cat) + '"><span>Wszystkie</span><span class="n">' + IH.CATALOG.length + "</span></button></li>" +
+    document.getElementById("f-cat").innerHTML = '<li><button class="fbtn" type="button" data-cat="" aria-pressed="' + (!state.cat) + '"><span>Wszystkie</span><span class="n">' + countVariants(function () { return true; }) + "</span></button></li>" +
       IH.CATS.map(function (c) { var n = IH.countIn(c.id); return '<li><button class="fbtn' + (n ? "" : " empty") + '" type="button" data-cat="' + c.id + '" aria-pressed="' + (state.cat === c.id) + '"><span>' + c.name + '</span><span class="n">' + (n || "wkrótce") + "</span></button></li>"; }).join("");
-    document.getElementById("f-room").innerHTML = IH.ROOMS.map(function (r) { var n = IH.CATALOG.filter(function (g) { return g.rooms.indexOf(r.id) > -1; }).length; return '<li><button class="fbtn" type="button" data-room="' + r.id + '" aria-pressed="' + (state.room === r.id) + '"><span>' + r.name + '</span><span class="n">' + n + "</span></button></li>"; }).join("");
+    document.getElementById("f-room").innerHTML = IH.ROOMS.map(function (r) { var n = countVariants(function (g, v) { return (v.rooms || g.rooms).indexOf(r.id) > -1; }); return '<li><button class="fbtn" type="button" data-room="' + r.id + '" aria-pressed="' + (state.room === r.id) + '"><span>' + r.name + '</span><span class="n">' + n + "</span></button></li>"; }).join("");
     var used = {}; IH.CATALOG.forEach(function (g) { g.variants.forEach(function (v) { if (v.color) used[v.color] = 1; }); });
     document.getElementById("f-color").innerHTML = Object.keys(used).map(function (k) { var c = IH.COLORS[k]; return '<button class="sw" type="button" data-color="' + k + '" aria-pressed="' + (state.color === k) + '" title="' + c.name + '" aria-label="Kolor ' + c.name + '" style="background:' + c.hex + '"></button>'; }).join("");
     var fb = document.getElementById("f-fav"); fb.setAttribute("aria-pressed", state.fav); document.getElementById("f-fav-n").textContent = IH.getFavs().length;
@@ -116,21 +125,20 @@
 
   function render() {
     renderFilters();
-    var list = IH.CATALOG.filter(matches).slice();
-    if (state.sort === "az") list.sort(function (a, b) { return a.title.localeCompare(b.title, "pl"); });
-    if (state.sort === "cap") list.sort(function (a, b) { return (a.cap || 9999) - (b.cap || 9999); });
-    if (state.sort === "var") list.sort(function (a, b) { return b.variants.length - a.variants.length; });
-    grid.innerHTML = list.map(function (g) { return IH.card(g, { hideCat: !!state.cat, color: state.color }); }).join("");
+    var list = items();
+    if (state.sort === "az") list.sort(function (a, b) { return a.g.title.localeCompare(b.g.title, "pl") || a.k - b.k; });
+    if (state.sort === "cap") list.sort(function (a, b) { return (a.v.cap || 9999) - (b.v.cap || 9999); });
+    if (state.sort === "var") list.sort(function (a, b) { return b.g.variants.length - a.g.variants.length || a.k - b.k; });
+    grid.innerHTML = list.map(function (it) { return IH.card(it.g, { hideCat: !!state.cat, vi: it.k }); }).join("");
 
     var cat = state.cat && IH.catById(state.cat), room = state.room && IH.roomById(state.room);
     var t = cat ? cat.name : room ? "Produkty: " + room.name.toLowerCase() : state.fav ? "Moje ulubione" : "Wszystkie produkty";
     document.getElementById("ptitle").textContent = t;
     document.getElementById("crumb").textContent = t;
-    document.getElementById("plead").textContent = cat ? cat.desc + ". " + (IH.countIn(cat.id) ? "Wybierz wariant koloru na karcie produktu." : "")
+    document.getElementById("plead").textContent = cat ? cat.desc + ". " + (IH.countIn(cat.id) ? "Na karcie produktu przełączysz się między powiązanymi wariantami." : "")
       : room ? "Produkty, które sprawdzają się w tym miejscu domu." : state.fav ? "Produkty zapisane w tej przeglądarce." : "Wybierz kategorię, pomieszczenie albo kolor. Każdy produkt kupisz online w sklepie dladomu.sklep.pl.";
 
-    var variants = list.reduce(function (s, g) { return s + g.variants.length; }, 0);
-    document.getElementById("result").textContent = list.length ? list.length + " " + IH.pl(list.length, "produkt", "produkty", "produktów") + " · " + variants + " " + IH.pl(variants, "wariant", "warianty", "wariantów") : "";
+    document.getElementById("result").textContent = list.length ? list.length + " " + IH.pl(list.length, "produkt", "produkty", "produktów") : "";
 
     var chips = [];
     if (cat) chips.push(["cat", cat.name]);
