@@ -106,6 +106,9 @@
     "NEUTRAL": { name: "neutral", hex: "#D8D2C6" },
     "NATURALNY": { name: "naturalny", hex: "#EFE5CF" },
     "LEMON": { name: "lemon", hex: "#F1DE6E" },
+    "RÓŻOWY": { name: "różowy", hex: "#E58BB0" },
+    "TURKUSOWY": { name: "turkusowy", hex: "#2FB5B0" },
+    "POMARAŃCZOWY": { name: "pomarańczowy", hex: "#EE8A2E" },
     "BŁĘKITNY": { name: "błękitny", hex: "#8DB4D6" },
     "BURSZTYNOWY": { name: "bursztynowy", hex: "#C98A3B" },
     "OLIWKOWY": { name: "oliwkowy", hex: "#7B7F47" },
@@ -120,13 +123,13 @@
     [/ZIELON\S*/, "ZIELONY"], [/ŻÓŁT\S*/, "ŻÓŁTY"], [/NIEBIESK\S*/, "NIEBIESKI"], [/CZERWON\S*/, "CZERWONY"],
     [/BIAŁ\S*/, "BIAŁY"], [/\bSZAR[AYE]\b/, "SZARY"], [/\bDENIM\b/, "DENIM"], [/\bNEUTRAL\b/, "NEUTRAL"],
     [/NATURALN\S*/, "NATURALNY"], [/\bLEMON\b(?! IH RAKUN)/, "LEMON"], [/BŁĘKITN\S*/, "BŁĘKITNY"], [/BURSZTYN\S*/, "BURSZTYNOWY"],
-    [/OLIWKOW\S*/, "OLIWKOWY"], [/SREBRN\S*/, "SREBRNY"], [/ZŁOT[YAE]CH|\bZŁOT[YAE]\b/, "ZŁOTY"]
+    [/OLIWKOW\S*/, "OLIWKOWY"], [/RÓŻOW\S*/, "RÓŻOWY"], [/TURKUSOW\S*/, "TURKUSOWY"], [/POMARAŃCZOW\S*/, "POMARAŃCZOWY"], [/SREBRN\S*/, "SREBRNY"], [/ZŁOT[YAE]CH|\bZŁOT[YAE]\b/, "ZŁOTY"]
   ];
-  var COLOR_ORDER = ["CZARNY", "BRĄZOWY", "ŻÓŁTY", "NIEBIESKI", "ZIELONY", "CZERWONY", "BIAŁY", "SZARY", "NATURALNY", "NEUTRAL", "DENIM", "LEMON", "BŁĘKITNY", "BURSZTYNOWY", "OLIWKOWY", "SREBRNY", "ZŁOTY", "MIX"];
+  var COLOR_ORDER = ["CZARNY", "BRĄZOWY", "ŻÓŁTY", "NIEBIESKI", "ZIELONY", "CZERWONY", "BIAŁY", "SZARY", "NATURALNY", "NEUTRAL", "DENIM", "LEMON", "BŁĘKITNY", "BURSZTYNOWY", "OLIWKOWY", "RÓŻOWY", "TURKUSOWY", "POMARAŃCZOWY", "SREBRNY", "ZŁOTY", "MIX"];
 
   /* Nazwy własne, które zostają wielką literą w tytułach */
   var PROPER = { "flexistore": "Flexistore", "techbox": "Techbox", "hd": "HD", "ldpe": "LDPE", "hdpe": "HDPE", "rakun": "RAKUN", "kopenhaga": "Kopenhaga",
-    "manhattan": "Manhattan", "loft": "Loft", "wave": "Wave", "kraft": "Kraft", "click&go": "Click&Go", "diy": "DIY", "apus": "Apus", "paridae": "Paridae",
+    "manhattan": "Manhattan", "loft": "Loft", "wave": "Wave", "kraft": "Kraft", "click&go": "Click&Go", "diy": "DIY", "xxl": "XXL", "kangoo": "Kangoo", "apus": "Apus", "paridae": "Paridae",
     "erina": "Erina", "chiroptera": "Chiroptera", "maxi": "Maxi", "midi": "Midi", "mini": "Mini", "a4": "A4", "idea": "Idea", "roll": "Roll",
     "lemon": "Lemon", "mint": "Mint", "flower": "Flower", "bloom": "Bloom", "forest": "Forest", "walk": "Walk", "milk": "Milk", "honey": "Honey",
     "care": "Care", "ocean": "Ocean", "dive": "Dive", "tropic": "Tropic", "holiday": "Holiday", "12pack": "12 szt.", "6pack": "6 szt." };
@@ -144,7 +147,7 @@
     if (/FLEXISTORE/.test(up)) return "flexistore";
     if (/TECHBOX/.test(up)) return "techbox";
     if (/^TORBA PREZENTOWA|PUDEŁKO NA WINO/.test(up)) return "prezenty";
-    if (/^TORBA|^PLECAK/.test(up)) return "torby";
+    if (/TORBA|PLECAK/.test(up)) return "torby";
     if (/PUDŁO/.test(up)) return "dom";
     if (/BUDKA|KARMNIK/.test(up)) return "budki";
     if (/MYDŁO|PUMEKS/.test(up)) return "mydla";
@@ -226,6 +229,8 @@
       opt: function (up, len) { return [len + " m", len]; } },
     { re: /^TAŚMA MASKUJĄCA/, key: "TAŚMA MASKUJĄCA", title: "Taśma maskująca 50 m", label: "Szerokość",
       opt: function (up) { var w = +(up.match(/(\d+)MM/) || [])[1]; return [w + " mm", w]; } },
+    { re: /^TORBA FILCOWA .*1102/, key: "TORBA FILCOWA 1102", title: "Torba filcowa 1102", label: "Model",
+      opt: function () { return [null, 0]; } },
     { re: /^KARMNIK DLA PTAKÓW/, key: "KARMNIK DLA PTAKÓW", title: "Karmnik dla ptaków", label: "Model",
       opt: pick([[/MAXI/, "Maxi"], [/MIDI/, "Midi DIY"], [/MINI(?! DIY)/, "Mini"], [/MINI DIY/, "Mini DIY"]]) },
     { re: /^BUDKA DLA PTAKÓW/, key: "BUDKA DLA PTAKÓW", title: "Budka dla ptaków", label: "Model",
@@ -246,7 +251,7 @@
     [/PUDŁO DO PRZECHOWYWANIA/, ["biuro", "garderoba"]],
     [/PUDŁO DO PRZEPROWADZEK/, ["garaz", "biuro"]],
     [/^TORBA PREZENTOWA|PUDEŁKO NA WINO/, ["salon"]],
-    [/^TORBA|^PLECAK/, ["wdrodze"]],
+    [/TORBA|PLECAK/, ["wdrodze"]],
     [/SIZALOWY/, ["ogrod", "garaz"]],
     [/TAŚMA|SZNUREK/, ["garaz"]],
     [/BUDKA|KARMNIK/, ["ogrod"]],
