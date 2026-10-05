@@ -346,7 +346,9 @@
   }
   function card(g, opts) {
     opts = opts || {};
-    var v = g.variants[0], cat = catById(g.cat), fav = getFavs().indexOf(g.id) > -1;
+    // opts.color: od razu pokaż wariant w tym kolorze (np. po kliknięciu koloru w sekcji segregacji)
+    var si = opts.color ? Math.max(0, g.variants.findIndex(function (x) { return x.color === opts.color; })) : 0;
+    var v = g.variants[si], cat = catById(g.cat), fav = getFavs().indexOf(g.id) > -1;
     return '<article class="pcard" data-id="' + g.id + '">' +
       (g.badge ? '<span class="badge">' + g.badge + "</span>" : "") +
       '<button class="fav" type="button" aria-pressed="' + fav + '" aria-label="Dodaj do ulubionych">' + ICON.heart + "</button>" +
@@ -358,7 +360,7 @@
       "<h3>" + esc(g.title) + "</h3>" +
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" +
-      variantPicker(g, 0) +
+      variantPicker(g, si) +
       '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
       (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.de</a>' : "") + "</div>" +
       "</div></article>";

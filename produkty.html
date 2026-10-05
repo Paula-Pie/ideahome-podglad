@@ -81,8 +81,12 @@
 
   function readHash() {
     var h = decodeURIComponent(location.hash.slice(1));
-    state.cat = null; state.room = null; state.fav = false;
-    if (IH.catById(h)) state.cat = h;
+    state.cat = null; state.room = null; state.fav = false; state.color = null;
+    // #worki-zolty itd. = kategoria + kolor (z sekcji „Kolor worka = frakcja odpadów”)
+    var SEG = { zolty: "ŻÓŁTY", niebieski: "NIEBIESKI", zielony: "ZIELONY", brazowy: "BRĄZOWY", czarny: "CZARNY" };
+    var mc = h.match(/^([a-z]+)-([a-z]+)$/);
+    if (mc && IH.catById(mc[1]) && SEG[mc[2]]) { state.cat = mc[1]; state.color = SEG[mc[2]]; }
+    else if (IH.catById(h)) state.cat = h;
     else if (IH.roomById(h)) state.room = h;
     else if (h === "ulubione") state.fav = true;
     else if (h === "szukaj") { try { state.q = sessionStorage.getItem("ih-q") || ""; } catch (e) {} document.getElementById("q").value = state.q; }
@@ -116,7 +120,7 @@
     if (state.sort === "az") list.sort(function (a, b) { return a.title.localeCompare(b.title, "pl"); });
     if (state.sort === "cap") list.sort(function (a, b) { return (a.cap || 9999) - (b.cap || 9999); });
     if (state.sort === "var") list.sort(function (a, b) { return b.variants.length - a.variants.length; });
-    grid.innerHTML = list.map(function (g) { return IH.card(g, { hideCat: !!state.cat }); }).join("");
+    grid.innerHTML = list.map(function (g) { return IH.card(g, { hideCat: !!state.cat, color: state.color }); }).join("");
 
     var cat = state.cat && IH.catById(state.cat), room = state.room && IH.roomById(state.room);
     var t = cat ? cat.name : room ? "Produkty: " + room.name.toLowerCase() : state.fav ? "Moje ulubione" : "Wszystkie produkty";

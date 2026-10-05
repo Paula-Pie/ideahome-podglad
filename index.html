@@ -247,7 +247,8 @@
   var segs = [["ŻÓŁTY", "Metale i tworzywa", "Butelki PET, puszki, kartony po mleku, folia."], ["NIEBIESKI", "Papier", "Gazety, kartony, zeszyty, papierowe torby."], ["ZIELONY", "Szkło", "Słoiki i butelki szklane bez nakrętek."], ["BRĄZOWY", "Bio", "Obierki, fusy z kawy, resztki roślin."], ["CZARNY", "Zmieszane", "Wszystko, czego nie da się posegregować."]];
   document.getElementById("seg").innerHTML = segs.map(function (s) {
     var c = IH.COLORS[s[0]];
-    return '<a class="seg-item" href="produkty.html#worki"><span class="bar" style="background:' + c.hex + '"></span><div class="inner"><span class="what">Worek ' + c.name + "</span><h3>" + s[1] + "</h3><p>" + s[2] + "</p></div></a>";
+    var slug = { "ŻÓŁTY": "zolty", "NIEBIESKI": "niebieski", "ZIELONY": "zielony", "BRĄZOWY": "brazowy", "CZARNY": "czarny" }[s[0]];
+    return '<a class="seg-item" href="produkty.html#worki-' + slug + '"><span class="bar" style="background:' + c.hex + '"></span><div class="inner"><span class="what">Worek ' + c.name + "</span><h3>" + s[1] + "</h3><p>" + s[2] + "</p></div></a>";
   }).join("");
 
   // film: dźwięk na kliknięcie, pauza poza ekranem, bez autoodtwarzania przy ograniczonym ruchu
