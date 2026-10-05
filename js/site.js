@@ -197,12 +197,45 @@
   /* Ręczne nadpisanie serii/nazwy/opisu dla pojedynczych produktów (id ze sklepu → { series, title, desc, amazon }) */
   var SERIES_OVERRIDE = {};
 
+  /* Grupowanie podobnych produktów w jedną kartę: re → klucz rodziny, tytuł, nazwa opcji i jej wartość [etykieta, kolejność] */
+  function pick(list) { return function (up) { for (var i = 0; i < list.length; i++) if (list[i][0].test(up)) return [list[i][1], i]; return [null, 99]; }; }
+  var GROUP_RULES = [
+    { re: /PUDŁO DO PRZECHOWYWANIA ZESTAW LOFT/, key: "PUDŁA LOFT", title: "Pudła do przechowywania Loft", label: "Model",
+      opt: pick([[/^(?!.*IDEA A4)/, "Loft"], [/IDEA A4/, "Loft Idea A4"]]) },
+    { re: /^PLECAK BAWEŁNIANY/, key: "PLECAK BAWEŁNIANY", title: "Plecak bawełniany 360 × 440 mm", label: "Gramatura",
+      opt: function (up) { var g = +(up.match(/(\d+)G\b/) || [])[1]; return [g + " g", g]; } },
+    { re: /^TORBA BAWEŁNIANA \d+G/, key: "TORBA BAWEŁNIANA", title: "Torba bawełniana 380 × 420 mm z uszami, bez nadruku", label: "Wersja",
+      opt: function (up) { var g = +(up.match(/(\d+)G\b/) || [])[1], w = /POSZERZANA/.test(up); return [g + " g" + (w ? " poszerzana" : ""), g * 10 + (w ? 1 : 0)]; } },
+    { re: /^TORBA PREZENTOWA .*WAVE KRAFT/, key: "TORBA PREZENTOWA WAVE KRAFT", title: "Torba prezentowa Wave Kraft", label: "Rozmiar",
+      opt: pick([[/KRAFT S\b/, "S"], [/KRAFT M\b/, "M"], [/KRAFT L\b/, "L"]]) },
+    { re: /^PUDEŁKO NA WINO .*WAVE KRAFT/, key: "PUDEŁKO NA WINO WAVE KRAFT", title: "Pudełko na wino Wave Kraft", label: "Model",
+      opt: pick([[/^(?!.*CLICK)/, "Klasyczne"], [/CLICK/, "Click&Go"]]) },
+    { re: /^DRUCIAK/, key: "DRUCIAKI", title: "Druciaki do garnków i patelni", label: "Rodzaj",
+      opt: pick([[/METALOWY/, "metalowy"], [/PLASTIKOWY/, "plastikowy"], [/SPIRALNY/, "spiralny"]]) },
+    { re: /^ZMYWAK|^GĄBKA MAGICZNA/, key: "ZMYWAKI I GĄBKI", title: "Zmywaki i gąbki kuchenne", label: "Rodzaj", clearColor: true,
+      opt: pick([[/CELULOZOWY/, "celulozowy"], [/DELIKATNYCH/, "do delikatnych powierzchni"], [/TEFLONU/, "do teflonu"], [/GĄBKA/, "gąbka magiczna"]]) },
+    { re: /ŚCIERECZK\S* Z MIKROFIBRY(?!.*RAKUN)/, key: "ŚCIERECZKI Z MIKROFIBRY", title: "Ściereczki z mikrofibry", label: "Rozmiar",
+      opt: function (up) { var s = up.match(/(\d+)X(\d+)CM/) || []; return [s[1] + " × " + s[2] + " cm", +s[1]]; } },
+    { re: /^PŁYN DO MYCIA NACZYŃ .*RAKUN/, key: "PŁYN DO MYCIA NACZYŃ RAKUN", title: "Płyn do mycia naczyń RAKUN 5 l", label: "Zapach",
+      opt: pick([[/LEMON/, "Lemon"], [/MINT/, "Mint"]]) },
+    { re: /^MYDŁO W PŁYNIE .*RAKUN/, key: "MYDŁO W PŁYNIE RAKUN", title: "Mydło w płynie RAKUN 5 l", label: "Zapach",
+      opt: pick([[/FLOWER/, "Flower Bloom"], [/FOREST/, "Forest Walk"], [/MILK/, "Milk & Honey Care"], [/OCEAN/, "Ocean Dive"], [/TROPIC/, "Tropic Holiday"]]) },
+    { re: /^SZNUREK/, label: "Długość", clearLength: true,
+      opt: function (up, len) { return [len + " m", len]; } },
+    { re: /^TAŚMA MASKUJĄCA/, key: "TAŚMA MASKUJĄCA", title: "Taśma maskująca 50 m", label: "Szerokość",
+      opt: function (up) { var w = +(up.match(/(\d+)MM/) || [])[1]; return [w + " mm", w]; } },
+    { re: /^KARMNIK DLA PTAKÓW/, key: "KARMNIK DLA PTAKÓW", title: "Karmnik dla ptaków", label: "Model",
+      opt: pick([[/MAXI/, "Maxi"], [/MIDI/, "Midi DIY"], [/MINI(?! DIY)/, "Mini"], [/MINI DIY/, "Mini DIY"]]) },
+    { re: /^BUDKA DLA PTAKÓW/, key: "BUDKA DLA PTAKÓW", title: "Budka dla ptaków", label: "Model",
+      opt: pick([[/APUS/, "Apus"], [/PARIDAE/, "Paridae"]]) }
+  ];
+
   function parse(raw) {
     var name = String(raw.name).replace(/’/g, "'").replace(/\s+/g, " ").trim();
     var up = name.toUpperCase();
     var color = null, colorRe = null;
     for (var i = 0; i < COLOR_WORDS.length; i++) { if (COLOR_WORDS[i][0].test(up)) { color = COLOR_WORDS[i][1]; colorRe = COLOR_WORDS[i][0]; break; } }
-    var pack = (up.match(/(\d+)\s*SZT/) || [])[1] || (up.match(/(\d+)PACK/) || [])[1];
+    var pack = (up.match(/(\d+)\s*SZT/) || [])[1] || (up.match(/(\d+)PACK/) || [])[1] || (up.match(/A'(\d+)/) || [])[1];
     var cap = (up.match(/(\d+)\s*L\b/) || [])[1];
     var length = /SZNUREK/.test(up) ? (up.match(/(\d+)M\b/) || [])[1] : null;
     var cat = catOf(up);
@@ -230,6 +263,10 @@
       else if (cap) { opt = cap + " l"; optSort = +cap; }
       optLabel = cat === "techbox" ? "Wariant" : "Rozmiar";
     }
+    // pozostałe podobne produkty: jedna karta, różnica jako opcja do wyboru
+    var rr = null;
+    for (var ri = 0; ri < GROUP_RULES.length; ri++) { if (GROUP_RULES[ri].re.test(up)) { rr = GROUP_RULES[ri]; break; } }
+    if (rr) { if (rr.key) key = rr.key; var ro = rr.opt(up, length); opt = ro[0]; optSort = ro[1]; optLabel = rr.label; }
     key = key.replace(/\s+/g, " ").trim().replace(/\sX$/, "");
 
     var title;
@@ -246,6 +283,7 @@
     } else {
       title = prettify(key.replace(/\s*\.$/, ""));
     }
+    if (rr && rr.title) title = rr.title;
     var p = { id: raw.id, img: raw.img, url: raw.url || null, raw: name, color: color, pack: pack ? +pack : null, cap: cap ? +cap : null,
       length: length ? +length : null, cat: cat, family: key, title: title, rooms: CAT_ROOMS[cat] || [],
       badge: SERIES_OVERRIDE[raw.id] ? SERIES_OVERRIDE[raw.id].series : /RAKUN/.test(up) ? "RAKUN" : null };
@@ -253,6 +291,8 @@
     if (so) { p.title = so.title; p.amazon = so.amazon; }
     if (cat === "worki") p.rooms = p.cap >= 120 ? ["garaz", "ogrod", "biuro"] : p.cap <= 20 ? ["lazienka", "biuro"] : ["kuchnia", "lazienka", "biuro"];
     // galeria i krótki opis ze sklepu; gdy sklep nie ma opisu, używamy naszego
+    if (rr && rr.clearColor) p.color = null;
+    if (rr && rr.clearLength) p.length = null;
     // opcja do wyboru na karcie (domyślnie pojemność w litrach)
     p.opt = opt || (p.cap ? p.cap + " l" : null); p.optSort = optSort != null ? optSort : p.cap; p.optLabel = optLabel;
     p.imgs = raw.imgs && raw.imgs.length ? raw.imgs : [raw.img];
@@ -335,7 +375,7 @@
   function countIn(catId) { return CATALOG.filter(function (g) { return g.cat === catId; }).length; }
   function pl(n, one, few, many) { var d = n % 10, t = n % 100; return n === 1 ? one : (d >= 2 && d <= 4 && (t < 12 || t > 14)) ? few : many; }
   // wyszukanie rodziny po fragmencie id (do list na stronie głównej)
-  function find(part) { return CATALOG.find(function (g) { return g.id.indexOf(part) > -1; }); }
+  function find(part) { return CATALOG.find(function (g) { return g.id === part; }) || CATALOG.find(function (g) { return g.id.indexOf(part) > -1; }); }
 
   /* ---------- Ulubione (tylko w tej przeglądarce) ---------- */
   var FAV_KEY = "ih-favs";
@@ -366,47 +406,49 @@
     if (differs("pack") && v.pack) parts.push(v.pack + " szt.");
     return parts.join(" · ");
   }
-  // dwuwymiarowy wybór (litry + kolor) dla rodzin z kilkoma pojemnościami
+  // wybór wariantu w maks. trzech rzędach: opcja (litraż/rozmiar/model…), kolor, opakowanie
   function multiPicker(g, sel) {
     var v = g.variants[sel];
-    var colors = [];
-    g.variants.forEach(function (x) { if (x.color && colors.indexOf(x.color) === -1) colors.push(x.color); });
-    colors.sort(function (a, b) { return COLOR_ORDER.indexOf(a) - COLOR_ORDER.indexOf(b); });
-    var has = function (opt, col) { return g.variants.some(function (x) { return x.opt === opt && x.color === col; }); };
+    var uniq = function (a) { return a.filter(function (x, i) { return x != null && a.indexOf(x) === i; }); };
+    var colors = uniq(g.variants.map(function (x) { return x.color; })).sort(function (a, b) { return COLOR_ORDER.indexOf(a) - COLOR_ORDER.indexOf(b); });
+    var sameOpt = g.variants.filter(function (x) { return x.opt === v.opt; });
+    var packPool = sameOpt.filter(function (x) { return x.color === v.color; });
+    if (uniq(packPool.map(function (x) { return x.pack; })).length < 2) packPool = sameOpt;
+    var packs = uniq(packPool.map(function (x) { return x.pack; })).sort(function (a, b) { return a - b; });
     var lab = g.optLabel || "Pojemność";
-    return '<div class="vpick">' +
-      '<div class="vrow" role="group" aria-label="' + lab + '"><span class="vlab">' + lab + "</span>" + g.opts.map(function (o) {
-        return '<button class="vchip vcap" type="button" data-opt="' + esc(o) + '" aria-pressed="' + (o === v.opt) + '">' + esc(o) + "</button>";
-      }).join("") + "</div>" +
-      (colors.length > 1 ? '<div class="vrow swatches" role="group" aria-label="Kolor"><span class="vlab">Kolor</span>' + colors.map(function (c) {
-        var ok = has(v.opt, c), name = COLORS[c] ? COLORS[c].name : c;
-        return '<button class="sw vcol' + (ok ? "" : " na") + '" type="button" data-color="' + c + '" aria-pressed="' + (c === v.color) + '" title="' + esc(name + (ok ? "" : " – w innym wariancie")) + '" aria-label="' + esc(name) + '" style="background:' + (COLORS[c] ? COLORS[c].hex : "#ccc") + '"></button>';
-      }).join("") + "</div>" : "") + "</div>";
+    var html = '<div class="vpick">';
+    if (g.opts.length > 1) html += '<div class="vrow" role="group" aria-label="' + lab + '"><span class="vlab">' + lab + "</span>" + g.opts.map(function (o) {
+      return '<button class="vchip" type="button" data-opt="' + esc(o) + '" aria-pressed="' + (o === v.opt) + '">' + esc(o) + "</button>";
+    }).join("") + "</div>";
+    if (colors.length > 1) html += '<div class="vrow swatches" role="group" aria-label="Kolor"><span class="vlab">Kolor</span>' + colors.map(function (c) {
+      var ok = sameOpt.some(function (x) { return x.color === c; }), name = COLORS[c] ? COLORS[c].name : c;
+      return '<button class="sw' + (ok ? "" : " na") + '" type="button" data-color="' + c + '" aria-pressed="' + (c === v.color) + '" title="' + esc(name + (ok ? "" : " – w innym wariancie")) + '" aria-label="' + esc(name) + '" style="background:' + (COLORS[c] ? COLORS[c].hex : "#ccc") + '"></button>';
+    }).join("") + "</div>";
+    if (packs.length > 1) html += '<div class="vrow" role="group" aria-label="Opakowanie"><span class="vlab">Opakowanie</span>' + packs.map(function (p) {
+      return '<button class="vchip" type="button" data-pack="' + p + '" aria-pressed="' + (p === v.pack) + '">' + p + " szt.</button>";
+    }).join("") + "</div>";
+    return html + "</div>";
   }
-  // który wariant wybrać po kliknięciu opcji (litraż/rozmiar) albo koloru
+  // po kliknięciu: wariant z klikniętą wartością, możliwie zgodny z resztą obecnego wyboru
   function pickIndex(g, cur, btn) {
-    var v = g.variants[cur], i;
-    if (btn.dataset.v !== undefined) return +btn.dataset.v;
-    if (btn.dataset.opt) {
-      var opt = btn.dataset.opt;
-      i = g.variants.findIndex(function (x) { return x.opt === opt && x.color === v.color; });
-      return i > -1 ? i : g.variants.findIndex(function (x) { return x.opt === opt; });
-    }
-    var col = btn.dataset.color;
-    i = g.variants.findIndex(function (x) { return x.color === col && x.opt === v.opt; });
-    if (i > -1) return i;
-    var best = -1;
-    g.variants.forEach(function (x, k) { if (x.color === col && (best < 0 || Math.abs((x.optSort || 0) - (v.optSort || 0)) < Math.abs((g.variants[best].optSort || 0) - (v.optSort || 0)))) best = k; });
+    var v = g.variants[cur], d, val;
+    if (btn.dataset.opt !== undefined) { d = "opt"; val = btn.dataset.opt; }
+    else if (btn.dataset.color !== undefined) { d = "color"; val = btn.dataset.color; }
+    else if (btn.dataset.pack !== undefined) { d = "pack"; val = +btn.dataset.pack; }
+    else return cur;
+    var W = { opt: 4, color: 2, pack: 1 }, best = -1, bestScore = -1;
+    g.variants.forEach(function (x, k) {
+      if (x[d] !== val) return;
+      var s = 0;
+      Object.keys(W).forEach(function (o) { if (o !== d && x[o] === v[o]) s += W[o]; });
+      if (d === "color" && x.opt !== v.opt) s -= Math.abs((x.optSort || 0) - (v.optSort || 0)) / 1000;
+      if (s > bestScore) { bestScore = s; best = k; }
+    });
     return best > -1 ? best : cur;
   }
   function variantPicker(g, sel) {
     if (g.variants.length < 2) return "";
-    if (g.multi) return multiPicker(g, sel);
-    return '<div class="' + (g.dots ? "swatches" : "vchips") + '" role="group" aria-label="Warianty">' + g.variants.map(function (x, i) {
-      var label = chipLabel(g, x) || variantLabel(x) || x.raw;
-      if (g.dots) return '<button class="sw" type="button" data-v="' + i + '" aria-pressed="' + (i === sel) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '" style="background:' + COLORS[x.color].hex + '"></button>';
-      return '<button class="vchip" type="button" data-v="' + i + '" aria-pressed="' + (i === sel) + '">' + esc(label) + "</button>";
-    }).join("") + "</div>";
+    return multiPicker(g, sel);
   }
   function card(g, opts) {
     opts = opts || {};

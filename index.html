@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610051231">
+<link rel="stylesheet" href="styles.css?v=202610051259">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -225,9 +225,9 @@
 
 <div id="site-footer"></div>
 
-<script src="js/miniatury-data.js?v=202610051231"></script>
-<script src="js/produkty-data.js?v=202610051231"></script>
-<script src="js/site.js?v=202610051231"></script>
+<script src="js/miniatury-data.js?v=202610051259"></script>
+<script src="js/produkty-data.js?v=202610051259"></script>
+<script src="js/site.js?v=202610051259"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -258,7 +258,7 @@
   })();
 
   // pasek szybkich produktów
-  var quick = ["pojemniki-flexistore", "worki-ldpe-mocne", "kopenhaga", "naczyn-lemon-rakun", "budka-dla-jezy", "sciereczki-z-mikrofibry-30x30", "rolka-do-ubran", "torba-prezentowa-wave-kraft-m"];
+  var quick = ["pojemniki-flexistore", "worki-ldpe-mocne", "kopenhaga", "plyn-do-mycia-naczyn-rakun", "budka-dla-jezy", "sciereczki-z-mikrofibry", "rolka-do-ubran", "torba-prezentowa-wave-kraft"];
   var qt = document.getElementById("quicktrack");
   qt.innerHTML = quick.map(IH.find).filter(Boolean).map(function (g) {
     return '<button type="button" class="quick-item" data-id="' + g.id + '" style="background:none;border-top:0;border-bottom:0;border-left:0;text-align:left"><img src="' + g.variants[0].img + '" alt=""><span>' + IH.esc(g.title.split(/ – | \d/)[0]) + '</span><i class="plus" aria-hidden="true">+</i></button>';
@@ -281,7 +281,7 @@
   IH.carousel(document.getElementById("rooms"), document.getElementById("rprev"), document.getElementById("rnext"));
 
   // bestsellery
-  var best = ["pojemniki-flexistore", "worki-ldpe-mocne", "worki-ldpe-ekstra-mocne", "kopenhaga", "sciereczki-do-kuchni", "karmnik-dla-ptakow-maxi"];
+  var best = ["pojemniki-flexistore", "worki-ldpe-mocne", "worki-ldpe-ekstra-mocne", "kopenhaga", "sciereczki-do-kuchni", "karmnik-dla-ptakow"];
   var bestEl = document.getElementById("best");
   bestEl.innerHTML = best.map(IH.find).filter(Boolean).map(function (g) { return IH.card(g); }).join("");
   IH.bindCards(bestEl);
