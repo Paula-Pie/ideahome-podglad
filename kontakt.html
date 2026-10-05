@@ -5,11 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Kontakt — IDEA HOME</title>
 <meta name="description" content="Kontakt z IDEA HOME by Leviatan: e-mail, telefon, adres i najczęstsze pytania.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="fonts/manrope.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="IDEA HOME">
+<meta property="og:title" content="Kontakt — IDEA HOME">
+<meta property="og:description" content="Kontakt z IDEA HOME by Leviatan: e-mail, telefon, adres i najczęstsze pytania.">
+<meta property="og:url" content="https://strona-ideahome-chi.vercel.app/kontakt.html">
+<meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610051330">
+<link rel="stylesheet" href="styles.css?v=202610051358">
 </head>
 <body data-page="kontakt">
 <div id="site-header"></div>
@@ -35,7 +41,7 @@
           <div class="field"><label for="c-company">Firma (opcjonalnie)</label><input id="c-company" autocomplete="organization"></div>
         </div>
         <div class="field"><label for="c-msg">Wiadomość</label><textarea id="c-msg" required></textarea></div>
-        <label class="consent"><input type="checkbox" id="c-consent" required> Zgadzam się na przetwarzanie moich danych w celu odpowiedzi na wiadomość.</label>
+        <label class="consent"><input type="checkbox" id="c-consent" required> Zgadzam się na przetwarzanie moich danych w celu odpowiedzi na wiadomość. Szczegóły w <a href="polityka-prywatnosci.html" style="text-decoration:underline">polityce prywatności</a>.</label>
         <div><button class="btn btn-primary" type="submit">Wyślij wiadomość</button></div>
         <p class="form-msg" id="c-out" hidden></p>
       </form>
@@ -62,9 +68,10 @@
   </section>
 </main>
 <div id="site-footer"></div>
-<script src="js/miniatury-data.js?v=202610051330"></script>
-<script src="js/produkty-data.js?v=202610051330"></script>
-<script src="js/site.js?v=202610051330"></script>
+<script src="js/miniatury-data.js?v=202610051358"></script>
+<script src="js/produkty-data.js?v=202610051358"></script>
+<script src="js/site.js?v=202610051358"></script>
+<script src="js/formularze.js?v=202610051358"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -88,7 +95,19 @@
     if (missing.length) { out.textContent = "Uzupełnij imię, e-mail i treść wiadomości."; document.getElementById(missing[0]).focus(); return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(document.getElementById("c-email").value)) { out.textContent = "Adres e-mail wygląda na niepełny, np. anna@firma.pl."; document.getElementById("c-email").focus(); return; }
     if (!document.getElementById("c-consent").checked) { out.textContent = "Zaznacz zgodę na przetwarzanie danych, żebyśmy mogli odpowiedzieć."; return; }
-    out.textContent = "Dziękujemy! Formularz zostanie podłączony do skrzynki przy wdrożeniu strony. Do tego czasu napisz na leviatan@leviatan.pl.";
+    var btn = f.querySelector("button[type=submit]"); btn.disabled = true; out.textContent = "Wysyłamy wiadomość…";
+    IH_FORM.send("Strona IDEA HOME: " + document.getElementById("c-topic").value, {
+      "Imię i nazwisko": document.getElementById("c-name").value.trim(),
+      "E-mail": document.getElementById("c-email").value.trim(),
+      "Firma": document.getElementById("c-company").value.trim(),
+      "Temat": document.getElementById("c-topic").value,
+      "Wiadomość": document.getElementById("c-msg").value.trim(),
+      _replyto: document.getElementById("c-email").value.trim()
+    }, function (ok) {
+      btn.disabled = false;
+      if (ok) { out.textContent = "Dziękujemy! Wiadomość została wysłana. Odpowiadamy zwykle w ciągu 48 godzin."; f.reset(); }
+      else out.textContent = "Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę albo napisz bezpośrednio na leviatan@leviatan.pl.";
+    });
   });
 })();
 </script>

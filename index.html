@@ -5,11 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>IDEA HOME</title>
 <meta name="description" content="IDEA HOME by Leviatan — worki na odpady, pojemniki Flexistore, organizery, torby i akcesoria, które ułatwiają utrzymanie porządku w domu.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="fonts/manrope.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="IDEA HOME">
+<meta property="og:title" content="IDEA HOME">
+<meta property="og:description" content="IDEA HOME by Leviatan — worki na odpady, pojemniki Flexistore, organizery, torby i akcesoria, które ułatwiają utrzymanie porządku w domu.">
+<meta property="og:url" content="https://strona-ideahome-chi.vercel.app/index.html">
+<meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610051330">
+<link rel="stylesheet" href="styles.css?v=202610051358">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -158,7 +164,7 @@
   <section class="film-sec" aria-label="Film IDEA HOME">
     <div class="wrap">
       <div class="film">
-        <video id="film" src="video/new-idea-home.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <video id="film" src="video/new-idea-home-1080.mp4" poster="video/new-idea-home-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
         <button class="film-btn" type="button" id="film-sound" aria-pressed="false" aria-label="Włącz dźwięk"></button>
       </div>
     </div>
@@ -216,7 +222,8 @@
           <label class="visually-hidden" for="nl-email">Adres e-mail</label>
           <input id="nl-email" type="email" placeholder="Twój adres e-mail" required>
           <button class="btn" type="submit">Zapisz się</button>
-          <p class="note" id="nl-msg">Możesz wypisać się w każdej chwili.</p>
+          <label class="note consent-nl"><input type="checkbox" id="nl-consent"> Zgadzam się na otrzymywanie newslettera IDEA HOME. Szczegóły w <a href="polityka-prywatnosci.html" style="text-decoration:underline">polityce prywatności</a>.</label>
+          <p class="note" id="nl-msg" role="status">Możesz wypisać się w każdej chwili.</p>
         </form>
       </div>
     </div>
@@ -225,9 +232,10 @@
 
 <div id="site-footer"></div>
 
-<script src="js/miniatury-data.js?v=202610051330"></script>
-<script src="js/produkty-data.js?v=202610051330"></script>
-<script src="js/site.js?v=202610051330"></script>
+<script src="js/miniatury-data.js?v=202610051358"></script>
+<script src="js/produkty-data.js?v=202610051358"></script>
+<script src="js/site.js?v=202610051358"></script>
+<script src="js/formularze.js?v=202610051358"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -316,8 +324,14 @@
     e.preventDefault();
     var inp = document.getElementById("nl-email"), msg = document.getElementById("nl-msg");
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inp.value)) { msg.textContent = "Wpisz poprawny adres e-mail, np. anna@poczta.pl."; inp.focus(); return; }
-    msg.textContent = "Dziękujemy! Zapis zostanie aktywowany po podłączeniu systemu mailingowego.";
-    inp.value = "";
+    var email = inp.value.trim(), btn = this.querySelector("button[type=submit]");
+    if (!document.getElementById("nl-consent").checked) { msg.textContent = "Zaznacz zgodę, żebyśmy mogli wysyłać Ci newsletter."; return; }
+    btn.disabled = true; msg.textContent = "Zapisujemy…";
+    IH_FORM.send("Strona IDEA HOME: zapis do newslettera", { "E-mail": email, "Zgoda": "tak – newsletter IDEA HOME" }, function (ok) {
+      btn.disabled = false;
+      if (ok) { msg.textContent = "Dziękujemy! Zapisaliśmy Twój adres."; inp.value = ""; }
+      else msg.textContent = "Nie udało się zapisać. Spróbuj ponownie za chwilę.";
+    });
   });
 })();
 </script>

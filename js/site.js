@@ -326,6 +326,7 @@
     if (rr && rr.clearLength) p.length = null;
     // opcja do wyboru na karcie (domyślnie pojemność w litrach)
     p.opt = opt || (p.cap ? p.cap + " l" : null); p.optSort = optSort != null ? optSort : p.cap; p.optLabel = optLabel;
+    p.price = raw.price != null ? raw.price : null; p.avail = raw.avail;
     p.imgs = raw.imgs && raw.imgs.length ? raw.imgs : [raw.img];
     p.desc = (so && so.desc) || raw.desc || describe(p, up);
     return p;
@@ -427,6 +428,12 @@
     if (g.cat === "worki" && v.color && COLORS[v.color].seg) s += (s ? " · " : "") + COLORS[v.color].seg;
     return s;
   }
+  // cena brutto ze sklepu dladomu.sklep.pl
+  function priceHtml(v) {
+    if (v.price == null) return '<p class="price" hidden></p>';
+    var p = v.price.toFixed(2).replace(".", ",") + " zł";
+    return '<p class="price">' + p + (v.avail === false ? ' <span class="soldout">chwilowo niedostępny</span>' : "") + "</p>";
+  }
   function buyUrl(g, v) { return v.url || shopSearch(g.query); }
   // na przycisku tylko to, czym warianty się różnią (np. "5 szt." zamiast "naturalny · 5 szt.")
   function chipLabel(g, v) {
@@ -496,7 +503,7 @@
       (opts.hideCat ? "" : '<span class="pcat">' + cat.name + "</span>") +
       "<h3>" + esc(g.title) + "</h3>" +
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
-      '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" +
+      '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<div class="vwrap">' + variantPicker(g, si) + "</div>" +
       '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
       (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.de</a>' : "") + "</div>" +
@@ -512,6 +519,7 @@
     var desc = root.querySelector(".pdesc, .mdesc"); if (desc) desc.textContent = v.desc || "";
     var strip = root.querySelector(".mthumbs"); if (strip) strip.outerHTML = thumbStrip(v);
     root.querySelector(".spec").textContent = variantSpec(g, v);
+    var pr = root.querySelector(".price"); if (pr) pr.outerHTML = priceHtml(v);
     var buy = root.querySelector(".buy"); if (buy) buy.href = buyUrl(g, v);
     var w = root.querySelector(".vwrap"); if (w) w.innerHTML = variantPicker(g, idx);
     var amz = root.querySelector(".amz"); if (amz) amz.hidden = !v.amazon;
@@ -564,7 +572,7 @@
       '<div class="mgallery"><div class="mimg"><img src="' + v.img + '" alt="' + esc(g.title) + '"></div>' + thumbStrip(v) + "</div>" +
       '<div class="mbody"><span class="label">' + cat.name + "</span><h2>" + esc(g.title) + '</h2><p class="mdesc">' + esc(v.desc || "") + "</p>" +
       '<div class="vwrap">' + variantPicker(g, vi) + "</div>" +
-      '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" +
+      '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
       '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + '<a class="btn btn-outline" href="kontakt.html">Zapytaj o hurt</a></div>' +
       "</div></div>";
@@ -658,7 +666,7 @@
       '<div><h4>Serie</h4><ul><li><a href="serie.html#idea-home">IDEA HOME</a></li><li><a href="serie.html#rakun">RAKUN</a></li><li><a href="serie.html#ms-everyday">MS. EVERYDAY</a></li></ul><h4 style="margin-top:28px">Kolekcje</h4><ul><li><a href="kolekcje.html#flexistore">Flexistore</a></li><li><a href="kolekcje.html#torby">Torby Valencia i Kopenhaga</a></li></ul></div>' +
       '<div><h4>Informacje</h4><ul><li><a href="o-marce.html">O marce</a></li><li><a href="inspiracje.html">Inspiracje i porady</a></li><li><a href="dla-firm.html">Dla firm i hurtowni</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#faq">Najczęstsze pytania</a></li></ul></div>' +
       '<div class="shopbox"><h4>Kup online</h4><p>Wszystkie produkty IDEA HOME znajdziesz w sklepie naszego partnera.</p><b>dladomu.sklep.pl</b><a class="btn btn-outline btn-sm" href="' + SHOP + '" target="_blank" rel="noopener">Przejdź do sklepu</a></div>' +
-      '</div><div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Wszelkie prawa zastrzeżone.</span><span>Rudawka 88, 43-300 Bielsko-Biała</span></div></div></footer>';
+      '</div><div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Wszelkie prawa zastrzeżone.</span><span><a href="polityka-prywatnosci.html">Polityka prywatności i cookies</a> · Rudawka 88, 43-300 Bielsko-Biała</span></div></div></footer>';
   }
 
   /* ---------- Karuzele ---------- */
@@ -669,8 +677,17 @@
     if (next) next.addEventListener("click", function () { track.scrollBy({ left: step(), behavior: "smooth" }); });
   }
 
+  // informacja o cookies (strona nie śledzi – wystarczy informacja, bez zgody)
+  function cookieNote() {
+    try { if (localStorage.getItem("ih-cookies")) return; } catch (e) {}
+    var n = document.createElement("div"); n.className = "cookie-note"; n.setAttribute("role", "region"); n.setAttribute("aria-label", "Informacja o cookies");
+    n.innerHTML = "<p>Strona nie używa cookies analitycznych ani reklamowych. Pamięć przeglądarki służy tylko do zapisania Twoich ulubionych produktów. <a href=\"polityka-prywatnosci.html\">Polityka prywatności</a></p><button class=\"btn btn-dark btn-sm\" type=\"button\">OK</button>";
+    n.querySelector("button").addEventListener("click", function () { try { localStorage.setItem("ih-cookies", "1"); } catch (e) {} n.remove(); });
+    document.body.appendChild(n);
+  }
   renderHeader();
   renderFooter();
+  cookieNote();
 
   window.IH = { find: find, variantLabel: variantLabel, ICON: ICON, CATS: CATS, ROOMS: ROOMS, COLORS: COLORS, CATALOG: CATALOG, SHOP: SHOP, shopSearch: shopSearch, card: card, bindCards: bindCards, openModal: openModal, carousel: carousel, countIn: countIn, pl: pl, getFavs: getFavs, catById: catById, roomById: roomById, esc: esc, toast: toast };
 })();
