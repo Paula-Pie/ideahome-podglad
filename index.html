@@ -16,33 +16,15 @@
 
 <main>
   <!-- HERO -->
-  <section class="hero hero-slider" aria-roledescription="karuzela" aria-label="Najważniejsze">
-    <div class="hero-slide is-active" role="group" aria-roledescription="slajd" aria-label="1 z 2">
-      <div class="hero-media"><img src="img/foto/baner-111062-7.jpg" alt="Pojemniki Flexistore IDEA HOME na konsoli w jasnym wnętrzu"></div>
-      <div class="wrap hero-inner">
-        <h1>Nowoczesne rozwiązania dla domu. <span class="light">Funkcjonalność na co dzień.</span></h1>
-        <p class="lead">Produkty, które ułatwiają utrzymanie porządku, organizację i pielęgnację Twojego domu.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="produkty.html">Poznaj produkty</a>
-          <a class="link-arrow" href="https://www.dladomu.sklep.pl" target="_blank" rel="noopener">Kup online</a>
-        </div>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media"><img src="img/foto/baner-111062-7.jpg" alt="Pojemniki Flexistore IDEA HOME na konsoli w jasnym wnętrzu"></div>
+    <div class="wrap hero-inner">
+      <h1 id="hero-title">Nowoczesne rozwiązania dla domu. <span class="light">Funkcjonalność na co dzień.</span></h1>
+      <p class="lead">Produkty, które ułatwiają utrzymanie porządku, organizację i pielęgnację Twojego domu.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="produkty.html">Poznaj produkty</a>
+        <a class="link-arrow" href="https://www.dladomu.sklep.pl" target="_blank" rel="noopener">Kup online</a>
       </div>
-    </div>
-    <div class="hero-slide hero-slide-nagrobki" role="group" aria-roledescription="slajd" aria-label="2 z 2" aria-hidden="true">
-      <div class="hero-media"><img src="img/foto/baner-baner-komplet.jpg" alt="Aktywna pianka do kamienia i zestaw do renowacji napisów IDEA HOME na granitowym nagrobku" loading="lazy"></div>
-      <div class="wrap hero-inner">
-        <h2 class="hero-title">Profesjonalne czyszczenie i renowacja nagrobków. <span class="light">Pomnik jak nowy, napisy znów czytelne.</span></h2>
-        <p class="lead">Aktywna pianka usuwa z kamienia brud, osady i ślady pogody. Zestaw do renowacji przywraca kolor wyblakłym literom.</p>
-        <div class="hero-colors" id="hero-colors" aria-label="Zestawy do renowacji napisów"></div>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="produkty.html#nagrobki">Zestawy do renowacji</a>
-          <a class="link-arrow" id="hero-nagrobki-buy" href="https://www.dladomu.sklep.pl" target="_blank" rel="noopener">Kup online</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-dots wrap" role="group" aria-label="Wybierz slajd">
-      <button type="button" class="hero-dot" data-slide="0" aria-label="Slajd 1: Nowoczesne rozwiązania dla domu" aria-pressed="true"></button>
-      <button type="button" class="hero-dot" data-slide="1" aria-label="Slajd 2: Czyszczenie i renowacja nagrobków" aria-pressed="false"></button>
     </div>
   </section>
 
@@ -232,36 +214,6 @@
 <script>
 (function () {
   var IH = window.IH;
-  // karuzela banera głównego
-  (function () {
-    var hero = document.querySelector(".hero-slider");
-    var slides = hero.querySelectorAll(".hero-slide"), dots = hero.querySelectorAll(".hero-dot"), cur = 0, timer = null;
-    function show(i) {
-      cur = (i + slides.length) % slides.length;
-      slides.forEach(function (s, k) { s.classList.toggle("is-active", k === cur); s.setAttribute("aria-hidden", k !== cur); });
-      dots.forEach(function (d, k) { d.setAttribute("aria-pressed", k === cur); });
-    }
-    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    function start() { if (!still) { stop(); timer = setInterval(function () { show(cur + 1); }, 7000); } }
-    function stop() { if (timer) clearInterval(timer); timer = null; }
-    dots.forEach(function (d) { d.addEventListener("click", function () { show(+d.dataset.slide); start(); }); });
-    hero.addEventListener("mouseenter", stop); hero.addEventListener("mouseleave", start);
-    hero.addEventListener("focusin", stop); hero.addEventListener("focusout", start);
-    start();
-
-    // slajd 2: kolory napisów prowadzą prosto do produktów w sklepie
-    var g = IH.find("zestaw-do-renowacji");
-    if (g) {
-      var order = ["ZŁOTY", "SREBRNY", "BIAŁY", "CZARNY"];
-      var vs = g.variants.slice().sort(function (a, b) { return order.indexOf(a.color) - order.indexOf(b.color); });
-      document.getElementById("hero-colors").innerHTML = '<span class="hc-label">Kolor napisów:</span>' + vs.map(function (v) {
-        var c = IH.COLORS[v.color];
-        return '<a href="' + (v.url || IH.shopSearch(g.query)) + '" target="_blank" rel="noopener"><i style="background:' + c.hex + '"></i>' + c.name + "</a>";
-      }).join("");
-      document.getElementById("hero-nagrobki-buy").href = vs[0].url || IH.shopSearch(g.query);
-    }
-  })();
-
   // pasek szybkich produktów
   var quick = ["flexistore-mix", "worki-ldpe-mocny-60l", "kopenhaga", "naczyn-lemon-rakun", "budka-dla-jezy", "sciereczki-z-mikrofibry-30x30", "rolka-do-ubran", "torba-prezentowa-wave-kraft-m"];
   var qt = document.getElementById("quicktrack");
