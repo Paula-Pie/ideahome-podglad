@@ -230,6 +230,37 @@
       opt: pick([[/APUS/, "Apus"], [/PARIDAE/, "Paridae"]]) }
   ];
 
+  /* Pomieszczenia przypisane do konkretnego rodzaju produktu (pierwsza pasująca reguła) */
+  var ROOM_RULES = [
+    [/PŁYN DO MYCIA NACZYŃ|DRUCIAK|ZMYWAK|GĄBKA|ŚCIERECZKI DO KUCHNI|WĘDLINIARSKI/, ["kuchnia"]],
+    [/SPRYSKIWACZ/, ["garaz"]],
+    [/PŁYN DO SZYB/, ["salon", "lazienka"]],
+    [/MYDŁO|PUMEKS/, ["lazienka"]],
+    [/MIKROFIBR/, ["kuchnia", "lazienka"]],
+    [/ROLKA DO UBRAŃ/, ["garderoba"]],
+    [/INSERT DO POJEMNIKA FLEXISTORE/, ["garderoba", "biuro", "lazienka"]],
+    [/FLEXISTORE/, ["salon", "garderoba", "lazienka", "biuro"]],
+    [/TECHBOX/, ["garaz"]],
+    [/PUDŁO DO PRZECHOWYWANIA/, ["biuro", "garderoba"]],
+    [/PUDŁO DO PRZEPROWADZEK/, ["garaz", "biuro"]],
+    [/^TORBA PREZENTOWA|PUDEŁKO NA WINO/, ["salon"]],
+    [/^TORBA|^PLECAK/, ["wdrodze"]],
+    [/SIZALOWY/, ["ogrod", "garaz"]],
+    [/TAŚMA|SZNUREK/, ["garaz"]],
+    [/BUDKA|KARMNIK/, ["ogrod"]],
+    [/RENOWACJI/, []]
+  ];
+  function roomsFor(p, up) {
+    if (p.cat === "worki") {
+      if (/HDPE/.test(up)) return ["lazienka", "biuro"];
+      if (p.cap >= 120) return ["garaz", "ogrod"];
+      if (p.cap >= 60) return ["kuchnia", "garaz"];
+      return ["kuchnia", "biuro"];
+    }
+    for (var i = 0; i < ROOM_RULES.length; i++) if (ROOM_RULES[i][0].test(up)) return ROOM_RULES[i][1];
+    return CAT_ROOMS[p.cat] || [];
+  }
+
   function parse(raw) {
     var name = String(raw.name).replace(/’/g, "'").replace(/\s+/g, " ").trim();
     var up = name.toUpperCase();
@@ -289,7 +320,7 @@
       badge: SERIES_OVERRIDE[raw.id] ? SERIES_OVERRIDE[raw.id].series : /RAKUN/.test(up) ? "RAKUN" : null };
     var so = SERIES_OVERRIDE[raw.id];
     if (so) { p.title = so.title; p.amazon = so.amazon; }
-    if (cat === "worki") p.rooms = p.cap >= 120 ? ["garaz", "ogrod", "biuro"] : p.cap <= 20 ? ["lazienka", "biuro"] : ["kuchnia", "lazienka", "biuro"];
+    p.rooms = roomsFor(p, up);
     // galeria i krótki opis ze sklepu; gdy sklep nie ma opisu, używamy naszego
     if (rr && rr.clearColor) p.color = null;
     if (rr && rr.clearLength) p.length = null;
