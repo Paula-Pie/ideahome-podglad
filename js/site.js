@@ -503,7 +503,8 @@
       '<div class="dd' + (page === "serie" ? " current" : "") + '"><button type="button" aria-expanded="false">Serie ' + ICON.chev + '</button><div class="mega narrow">' +
       '<a href="serie.html#idea-home"><span>IDEA HOME<small>Funkcjonalność na co dzień</small></span></a>' +
       '<a href="serie.html#rakun"><span>RAKUN<small>Skuteczność w każdej sytuacji</small></span></a>' +
-      '<a href="serie.html#ms-everyday"><span>MS. EVERYDAY<small>Codzienna higiena i świeżość</small></span></a></div></div>' +
+      '<a href="serie.html#ms-everyday"><span>MS. EVERYDAY<small>Codzienna higiena i świeżość</small></span></a>' +
+      '<a class="mega-all" href="serie.html">Zobacz wszystkie serie <span>→</span></a></div></div>' +
       navLink("kolekcje.html", "Kolekcje", "kolekcje") +
       navLink("o-marce.html", "O marce", "o-marce") +
       navLink("inspiracje.html", "Inspiracje", "inspiracje") +
