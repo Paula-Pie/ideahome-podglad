@@ -545,3 +545,10 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .sw.na:hover { opacity: .6; }
 .modal-box .vpick .vlab { min-width: 80px; }
 .pcard .vpick .vlab { min-width: 0; flex-basis: 100%; }
+
+/* klikalne zdjęcie (np. pudła na stronie głównej) */
+.media-link { display: block; position: relative; overflow: hidden; border-radius: var(--radius); }
+.media-link img { transition: transform .6s; }
+.media-link:hover img { transform: scale(1.03); }
+.media-link .media-tag { position: absolute; left: 16px; bottom: 16px; background: rgba(250,249,246,.95); color: var(--ink); padding: 9px 14px; border-radius: 3px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; transition: background .2s, color .2s; }
+.media-link:hover .media-tag { background: var(--olive); color: #fff; }
