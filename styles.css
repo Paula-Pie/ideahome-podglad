@@ -521,7 +521,7 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .hero-slide.is-active { opacity: 1; visibility: visible; }
 .hero .hero-title { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem); max-width: 13ch; letter-spacing: -.03em; }
 .hero .hero-title .light { display: block; font-size: .72em; letter-spacing: -.02em; margin-top: .15em; }
-.hero-slide-nagrobki .hero-media img { object-position: 78% 50%; }
+.hero-slide-nagrobki .hero-media img { object-position: 100% 50%; }
 .hero-colors { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
 .hero-colors .hc-label { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-right: 4px; }
 .hero-colors a { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; border-radius: 20px; background: rgba(255,255,255,.9); border: 1px solid var(--line); font-size: var(--fs-xs); font-weight: 600; transition: border-color .2s; }
@@ -531,4 +531,8 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .hero-dot { pointer-events: auto; width: 26px; height: 4px; padding: 0; border: 0; border-radius: 2px; background: rgba(28,28,26,.22); transition: width .3s, background .3s; }
 .hero-dot[aria-pressed="true"] { width: 46px; background: var(--ink); }
 @media (max-width: 700px) { .hero-dots { bottom: 112px; } .hero .hero-title { max-width: none; } }
-@media (max-width: 1500px) { .hero-slide-nagrobki .hero-media img { object-position: 100% 50%; } }
+/* slajd nagrobków: mgiełka tylko pod tekstem, żeby pianka była dobrze widoczna */
+.hero-slide-nagrobki .hero-media::after { background: linear-gradient(90deg, rgba(250,249,246,.96) 0%, rgba(250,249,246,.9) 30%, rgba(250,249,246,.4) 38.5%, rgba(250,249,246,0) 43%); }
+.hero-slide-nagrobki .lead { max-width: 36ch; }
+@media (max-width: 1500px) { .hero-slide-nagrobki .hero-media img { object-position: 8% 50%; } }
+@media (max-width: 1500px) and (min-width: 701px) { .hero-slide-nagrobki .hero-media::after { background: linear-gradient(90deg, rgba(250,249,246,.96) 0%, rgba(250,249,246,.9) 30%, rgba(250,249,246,.3) 42%, rgba(250,249,246,0) 52%); } }
