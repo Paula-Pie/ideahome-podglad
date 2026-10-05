@@ -1,0 +1,6 @@
+/* Dopasowanie podstrony RAKUN do strony IDEA HOME.
+   Ładowany po stylach strony RAKUN (wstawia go tools/import-rakun.ps1). */
+
+/* czcionka IDEA HOME (Manrope) wszędzie poza logo RAKUN */
+body, body *:not(.logo) { font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif !important; }
+.logo, .logo * { font-family: "Quicksand", "Manrope", sans-serif !important; }
