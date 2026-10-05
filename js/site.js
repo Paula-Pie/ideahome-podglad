@@ -612,8 +612,8 @@
       '<div class="dd' + (page === "produkty" ? " current" : "") + '"><button type="button" aria-expanded="false">Produkty ' + ICON.chev + '</button><div class="mega">' + megaCats + '<a class="mega-all" href="produkty.html">Zobacz wszystkie produkty <span>→</span></a></div></div>' +
       '<div class="dd' + (page === "serie" ? " current" : "") + '"><button type="button" aria-expanded="false">Serie ' + ICON.chev + '</button><div class="mega narrow">' +
       '<a href="serie.html#idea-home"><span>IDEA HOME<small>Funkcjonalność na co dzień</small></span></a>' +
-      '<a href="serie.html#rakun"><span>RAKUN<small>Skuteczność w każdej sytuacji</small></span></a>' +
-      '<a href="serie.html#ms-everyday"><span>MS. EVERYDAY<small>Codzienna higiena i świeżość</small></span></a>' +
+      '<a href="rakun/index.html"><span>RAKUN<small>Skuteczność w każdej sytuacji</small></span></a>' +
+      '<a href="ms-everyday.html"><span>MS. EVERYDAY<small>Czystość na co dzień</small></span></a>' +
       '<a class="mega-all" href="serie.html">Zobacz wszystkie serie <span>→</span></a></div></div>' +
       navLink("kolekcje.html", "Kolekcje", "kolekcje") +
       navLink("o-marce.html", "O marce", "o-marce") +
@@ -665,7 +665,7 @@
       '<div class="fbrand">' + LOGO_WHITE + "<p>Funkcjonalność, jakość i nowoczesne rozwiązania dla Twojego domu. Marka firmy Leviatan z Bielska-Białej.</p>" +
       '<div class="socials"><a href="https://www.facebook.com/LeviatanPoligrafia" target="_blank" rel="noopener" aria-label="Facebook">' + ICON.fb + '</a><a href="https://www.instagram.com/leviatan_poligrafia/" target="_blank" rel="noopener" aria-label="Instagram">' + ICON.ig + '</a><a href="https://www.youtube.com/@LeviatanPoligrafia" target="_blank" rel="noopener" aria-label="YouTube">' + ICON.yt + '</a><a href="https://pl.pinterest.com/leviatanpoligrafia/" target="_blank" rel="noopener" aria-label="Pinterest">' + ICON.pin2 + '</a><a href="https://www.tiktok.com/@leviatanpoligrafia" target="_blank" rel="noopener" aria-label="TikTok">' + ICON.tt + "</a></div></div>" +
       "<div><h4>Produkty</h4><ul>" + CATS.slice(0, 8).map(function (c) { return '<li><a href="produkty.html#' + c.id + '">' + c.name + "</a></li>"; }).join("") + '<li><a href="produkty.html">Wszystkie →</a></li></ul></div>' +
-      '<div><h4>Serie</h4><ul><li><a href="serie.html#idea-home">IDEA HOME</a></li><li><a href="serie.html#rakun">RAKUN</a></li><li><a href="serie.html#ms-everyday">MS. EVERYDAY</a></li></ul><h4 style="margin-top:28px">Kolekcje</h4><ul><li><a href="kolekcje.html#flexistore">Flexistore</a></li><li><a href="kolekcje.html#torby">Torby Valencia i Kopenhaga</a></li></ul></div>' +
+      '<div><h4>Serie</h4><ul><li><a href="serie.html#idea-home">IDEA HOME</a></li><li><a href="rakun/index.html">RAKUN</a></li><li><a href="ms-everyday.html">MS. EVERYDAY</a></li></ul><h4 style="margin-top:28px">Kolekcje</h4><ul><li><a href="kolekcje.html#flexistore">Flexistore</a></li><li><a href="kolekcje.html#torby">Torby Valencia i Kopenhaga</a></li></ul></div>' +
       '<div><h4>Informacje</h4><ul><li><a href="o-marce.html">O marce</a></li><li><a href="inspiracje.html">Inspiracje i porady</a></li><li><a href="dla-firm.html">Dla firm i hurtowni</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#faq">Najczęstsze pytania</a></li></ul></div>' +
       '<div class="shopbox"><h4>Kup online</h4><p>Wszystkie produkty IDEA HOME znajdziesz w sklepie naszego partnera.</p><b>dladomu.sklep.pl</b><a class="btn btn-outline btn-sm" href="' + SHOP + '" target="_blank" rel="noopener">Przejdź do sklepu</a></div>' +
       '</div><div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Wszelkie prawa zastrzeżone.</span><span><a href="polityka-prywatnosci.html">Polityka prywatności i cookies</a> · <a href="regulamin.html">Regulamin</a> · Rudawka 88, 43-300 Bielsko-Biała</span></div></div></footer>';
