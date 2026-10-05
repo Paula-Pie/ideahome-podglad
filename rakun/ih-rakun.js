@@ -59,6 +59,10 @@
   }
   document.querySelectorAll('a[href="#blog"]').forEach(function (a) { if (/dziennik/i.test(a.textContent)) a.textContent = "Świat Rakuna"; });
 
+  // "O marce": bez niepotwierdzonych deklaracji ekologicznych (biodegradowalność, "dla planety")
+  var about = document.querySelector("#o-marce .split-text > p");
+  if (about && /biodegrad/i.test(about.textContent)) about.textContent = "RAKUN powstał z miłości do prostych, domowych rytuałów. Tworzymy skuteczne środki czystości w przyjemnych zapachach, które zamieniają sprzątanie w chwilę przyjemności.";
+
   /* 4. Linki bez celu (#) i stopka */
   var fix = {
     "Czytaj dziennik": "../inspiracje.html",
