@@ -519,8 +519,8 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .hero-slider { display: grid; }
 .hero-slide { grid-area: 1 / 1; position: relative; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility .8s; }
 .hero-slide.is-active { opacity: 1; visibility: visible; }
-.hero .hero-title { font-size: clamp(2rem, 1.25rem + 2.7vw, 3.4rem); max-width: 17ch; letter-spacing: -.03em; }
-.hero .hero-title .light { display: block; font-size: .7em; letter-spacing: -.02em; margin-top: .2em; }
+.hero .hero-title { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem); max-width: 13ch; letter-spacing: -.03em; }
+.hero .hero-title .light { display: block; font-size: .72em; letter-spacing: -.02em; margin-top: .15em; }
 .hero-slide-nagrobki .hero-media img { object-position: 62% 50%; }
 .hero-colors { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
 .hero-colors .hc-label { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-right: 4px; }
