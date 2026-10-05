@@ -666,7 +666,7 @@
       '<div><h4>Serie</h4><ul><li><a href="serie.html#idea-home">IDEA HOME</a></li><li><a href="serie.html#rakun">RAKUN</a></li><li><a href="serie.html#ms-everyday">MS. EVERYDAY</a></li></ul><h4 style="margin-top:28px">Kolekcje</h4><ul><li><a href="kolekcje.html#flexistore">Flexistore</a></li><li><a href="kolekcje.html#torby">Torby Valencia i Kopenhaga</a></li></ul></div>' +
       '<div><h4>Informacje</h4><ul><li><a href="o-marce.html">O marce</a></li><li><a href="inspiracje.html">Inspiracje i porady</a></li><li><a href="dla-firm.html">Dla firm i hurtowni</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#faq">Najczęstsze pytania</a></li></ul></div>' +
       '<div class="shopbox"><h4>Kup online</h4><p>Wszystkie produkty IDEA HOME znajdziesz w sklepie naszego partnera.</p><b>dladomu.sklep.pl</b><a class="btn btn-outline btn-sm" href="' + SHOP + '" target="_blank" rel="noopener">Przejdź do sklepu</a></div>' +
-      '</div><div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Wszelkie prawa zastrzeżone.</span><span><a href="polityka-prywatnosci.html">Polityka prywatności i cookies</a> · Rudawka 88, 43-300 Bielsko-Biała</span></div></div></footer>';
+      '</div><div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Wszelkie prawa zastrzeżone.</span><span><a href="polityka-prywatnosci.html">Polityka prywatności i cookies</a> · <a href="regulamin.html">Regulamin</a> · Rudawka 88, 43-300 Bielsko-Biała</span></div></div></footer>';
   }
 
   /* ---------- Karuzele ---------- */

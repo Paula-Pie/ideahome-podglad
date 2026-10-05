@@ -66,7 +66,7 @@
     "Dostawa": SHOP,
     "Zwroty": SHOP,
     "Polityka prywatności": "../polityka-prywatnosci.html",
-    "Regulamin": SHOP,
+    "Regulamin": "../regulamin.html",
     "Mapa strony": "../index.html"
   };
   document.querySelectorAll('a[href="#"]').forEach(function (a) {
