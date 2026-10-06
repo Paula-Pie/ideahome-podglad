@@ -73,3 +73,4 @@ footer .ih-btn { margin: 0 10px 10px 0; padding: .7em 1.1em !important; font-siz
 @media (max-width: 760px) { nav.main-nav.ih-open .ih-buy-m { display: block !important; margin-top: 12px; text-align: center; border-bottom: 0; color: #fff !important; } }
 .ih-buyrow .ih-btn { white-space: nowrap; }
 @media (max-width: 760px) { .ih-buyrow .ih-btn { padding: .65em .8em !important; font-size: 10px !important; letter-spacing: .06em !important; } }
+.ih-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

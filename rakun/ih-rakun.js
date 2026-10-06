@@ -25,6 +25,13 @@
     nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { nav.classList.remove("ih-open"); tog.setAttribute("aria-expanded", "false"); document.querySelector("header").classList.remove("ih-menu-open"); }); });
   }
 
+  // główny nagłówek strony (dla Google i czytników ekranu): pasek "Odkryj świat Rakuna" albo ukryty h1
+  if (!document.querySelector("h1")) {
+    var h1 = document.createElement("h1"); h1.className = "ih-sr";
+    h1.textContent = "RAKUN – seria środków czystości IDEA HOME";
+    document.body.insertBefore(h1, document.body.firstChild);
+  }
+
   /* 2. Ceny i przyciski przy produktach (dopasowanie po nazwie z karty) */
   var MAP = [
     [/flower bloom/i, "mydlo-w-plynie-ih-rakun-flower-bloom-5l"],
