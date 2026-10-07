@@ -574,3 +574,24 @@ section { padding-block: clamp(56px, 7vw, 96px); }
   .cookie-note { flex-direction: column; align-items: stretch; text-align: left; }
 }
 .pcard h3 .plink:hover { color: var(--olive); text-decoration: underline; }
+
+/* stopka: inne marki Leviatan */
+.foot-brands { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.1); }
+.foot-brands .fb-label { font-size: var(--fs-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark); font-weight: 700; margin-right: 8px; }
+.foot-brands a { display: inline-flex; align-items: center; gap: 12px; background: #fff; border-radius: var(--radius); padding: 8px 16px; transition: transform .2s, box-shadow .2s; }
+.foot-brands a:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+.foot-brands img { height: 40px; width: auto; }
+.foot-brands small { font-size: 11px; color: var(--muted); }
+.foot-bottom { margin-top: 22px; }
+
+/* O marce: rodzina marek Leviatan */
+.lev-brands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.lev-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: grid; gap: 18px; align-content: start; transition: border-color .2s, box-shadow .2s; }
+a.lev-card:hover { border-color: var(--ink); box-shadow: var(--shadow); }
+.lev-card img { height: 72px; width: auto; justify-self: start; }
+.lev-card div { display: grid; gap: 8px; }
+.lev-card h3 { font-size: var(--fs-lg); }
+.lev-card p { font-size: var(--fs-sm); color: var(--muted); }
+.lev-card .lev-here { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--olive); }
+.lev-card.current { background: var(--sand); }
+@media (max-width: 860px) { .lev-brands { grid-template-columns: 1fr; } }
