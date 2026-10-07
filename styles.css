@@ -444,7 +444,8 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 .field input, .field select, .field textarea { font: inherit; font-size: var(--fs-sm); padding: 12px 14px; border: 1px solid var(--line); border-radius: 3px; background: var(--surface); color: var(--ink); }
 .field textarea { min-height: 140px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--olive); box-shadow: 0 0 0 3px var(--olive-soft); }
-.consent { display: flex; gap: 10px; font-size: var(--fs-xs); color: var(--muted); align-items: flex-start; }
+.consent { display: block; font-size: var(--fs-xs); color: var(--muted); line-height: 1.6; padding-left: 26px; position: relative; }
+.consent input { position: absolute; left: 0; top: 2px; width: 16px; height: 16px; margin: 0; }
 .form-msg { font-size: var(--fs-sm); padding: 12px 14px; border-radius: 3px; background: var(--olive-soft); color: var(--olive-ink); }
 @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .form .row { grid-template-columns: 1fr; } }
@@ -595,3 +596,19 @@ a.lev-card:hover { border-color: var(--ink); box-shadow: var(--shadow); }
 .lev-card .lev-here { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--olive); }
 .lev-card.current { background: var(--sand); }
 @media (max-width: 860px) { .lev-brands { grid-template-columns: 1fr; } }
+
+/* telefon: wygodniejsze dotykanie i krótsze karty */
+@media (max-width: 620px) {
+  .pcard .sw, .modal-box .sw { width: 26px; height: 26px; }
+  .pcard .swatches, .vpick .vrow { gap: 8px; }
+  .pcard .vchip, .modal-box .vchip { min-height: 30px; padding: 6px 10px; font-size: 11px; }
+  .pcard .pdesc { display: none; }
+  .pcard h3 { font-size: .85rem; }
+  .pcard .price { font-size: .95rem; }
+  .pcard .foot { padding-top: 8px; }
+  .icon-btn { width: 44px; height: 44px; }
+  .faq summary { padding: 18px 0; }
+  .btn { padding: 1em 1.4em; }
+  .modal { padding: 0; align-items: end; }
+  .modal-box { max-height: 92vh; border-radius: 12px 12px 0 0; }
+}
