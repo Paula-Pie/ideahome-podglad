@@ -32,8 +32,25 @@
     document.body.insertBefore(h1, document.body.firstChild);
   }
 
+  // sekcja chemii: nowy nagłówek + Aktywna piana do nagrobków jako pierwszy produkt
+  var chem = document.getElementById("chemia");
+  if (chem) {
+    var ch2 = chem.querySelector(".prod-heading h2"), cp = chem.querySelector(".prod-heading p"), ce = chem.querySelector(".prod-heading .eyebrow");
+    if (ch2) ch2.textContent = "Chemia RAKUN";
+    if (ce) ce.textContent = "Dział chemii";
+    if (cp) cp.textContent = "Płyny do naczyń i szyb oraz aktywna piana do mycia nagrobków – skuteczne czyszczenie bez szorowania.";
+    var grid = chem.querySelector(".editorial-grid");
+    if (grid && !grid.querySelector(".ih-piana")) {
+      var it = document.createElement("div"); it.className = "editorial-item ih-piana";
+      it.innerHTML = '<div class="thumb"><img class="img-1" src="ih/aktywna-piana.png" alt="Aktywna piana do mycia nagrobków RAKUN 400 ml"><img class="img-2" src="../img/foto/baner-aktywna-pianka.jpg" alt="Aktywna piana na nagrobku"></div>' +
+        '<div class="cat">Aktywna piana</div><h4>Do nagrobków</h4><p>Usuwa z kamienia brud, osady i zacieki – bez szorowania.</p>';
+      grid.insertBefore(it, grid.firstChild);
+    }
+  }
+
   /* 2. Ceny i przyciski przy produktach (dopasowanie po nazwie z karty) */
   var MAP = [
+    [/aktywna piana|nagrobk/i, "spray-do-nagrobkow-aktywna-piana-plyn-do-mycia-nagrobkow-pomnikow-400ml"],
     [/flower bloom/i, "mydlo-w-plynie-ih-rakun-flower-bloom-5l"],
     [/forest walk/i, "mydlo-w-plynie-ih-rakun-forest-walk-5l"],
     [/milk/i, "mydlo-w-plynie-ih-rakun-milk-honey-care-5l"],
