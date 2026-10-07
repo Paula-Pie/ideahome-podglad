@@ -124,6 +124,9 @@
     shop.className = "ih-btn"; shop.href = SHOP + "/search?q=rakun"; shop.target = "_blank"; shop.rel = "noopener";
     shop.textContent = "dladomu.sklep.pl";
     p.insertBefore(shop, allegro);
+    allegro.href = "https://allegro.pl/uzytkownik/Leviatan_SHOP?string=RAKUN";
+    allegro.target = "_blank"; allegro.rel = "noopener";
+    allegro.className = "ih-btn ih-allegro"; allegro.textContent = "allegro.pl";
   }
   // logo IDEA HOME w stopce prowadzi na stronę główną
   var ihLogo = document.querySelector(".idea-home-logo img");
