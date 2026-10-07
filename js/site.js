@@ -726,8 +726,8 @@
   }
 
   /* ---------- Nagłówek i stopka ---------- */
-  var page = document.body.dataset.page || "";
-  function navLink(href, label, key) { return '<a href="' + href + '"' + (page === key ? ' aria-current="page"' : "") + ">" + label + "</a>"; }
+  var curPage = document.body.dataset.page || "";
+  function navLink(href, label, key) { return '<a href="' + href + '"' + (curPage === key ? ' aria-current="page"' : "") + ">" + label + "</a>"; }
   function renderHeader() {
     var el = document.getElementById("site-header"); if (!el) return;
     var megaCats = CATS.map(function (c) {
@@ -739,8 +739,8 @@
       '<header class="site-header"><div class="wrap headbar">' +
       '<a class="brand" href="index.html" aria-label="IDEA HOME – strona główna">' + LOGO + '<span class="brand-tag">Funkcjonalność<br>na co dzień</span></a>' +
       '<nav class="mainnav" id="mainnav" aria-label="Menu główne">' +
-      '<div class="dd' + (page === "produkty" ? " current" : "") + '"><button type="button" aria-expanded="false">Produkty ' + ICON.chev + '</button><div class="mega">' + megaCats + '<a class="mega-all" href="produkty.html">Zobacz wszystkie produkty <span>→</span></a></div></div>' +
-      '<div class="dd' + (page === "serie" ? " current" : "") + '"><button type="button" aria-expanded="false">Serie ' + ICON.chev + '</button><div class="mega narrow">' +
+      '<div class="dd' + (curPage === "produkty" ? " current" : "") + '"><button type="button" aria-expanded="false">Produkty ' + ICON.chev + '</button><div class="mega">' + megaCats + '<a class="mega-all" href="produkty.html">Zobacz wszystkie produkty <span>→</span></a></div></div>' +
+      '<div class="dd' + (curPage === "serie" ? " current" : "") + '"><button type="button" aria-expanded="false">Serie ' + ICON.chev + '</button><div class="mega narrow">' +
       '<a href="serie.html#idea-home"><span>IDEA HOME<small>Funkcjonalność na co dzień</small></span></a>' +
       '<a href="rakun/index.html"><span>RAKUN<small>Skuteczność w każdej sytuacji</small></span></a>' +
       '<a href="ms-everyday.html"><span>MS. EVERYDAY<small>Czystość na co dzień</small></span></a>' +
@@ -802,7 +802,14 @@
       e.preventDefault();
       var q = document.getElementById("q-global").value.trim();
       try { sessionStorage.setItem("ih-q", q); } catch (err) {}
-      location.href = page("produkty.html#szukaj");
+      // fraza w adresie (#szukaj-puudla): działa też, gdy katalog jest już otwarty z tym samym adresem
+      var target = new URL(page("produkty.html") + "#szukaj" + (q ? "-" + encodeURIComponent(q.replace(/\s+/g, "-")) : ""), location.href).href;
+      sug.hidden = true; sp.hidden = true; sb.setAttribute("aria-expanded", "false");
+      if (target === location.href) window.dispatchEvent(new HashChangeEvent("hashchange"));
+      else location.href = target;
+    });
+    sug.addEventListener("click", function (e) {
+      if (e.target.closest(".sg-all")) { e.preventDefault(); document.getElementById("searchform").dispatchEvent(new Event("submit", { cancelable: true })); }
     });
     updateFavCount();
   }
