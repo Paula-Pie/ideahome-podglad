@@ -73,8 +73,7 @@
     { id: "mydla", name: "Mydła i pielęgnacja", short: "Mydła\ni pielęgnacja", desc: "Mydła w płynie RAKUN, pumeksy" },
     { id: "warsztat", name: "Taśmy i sznurki", short: "Taśmy\ni sznurki", desc: "Taśmy izolacyjne i maskujące, sznurki" },
     { id: "budki", name: "Budki i karmniki", short: "Budki\ni karmniki", desc: "Dla ptaków, jeży i nietoperzy" },
-    { id: "nagrobki", name: "Profesjonalne czyszczenie i renowacja nagrobków", short: "Czyszczenie\ni renowacja nagrobków", desc: "Zestawy do odnawiania napisów na pomnikach" },
-    { id: "pianka", name: "Aktywna pianka", short: "Aktywna\npianka", desc: "Czyszczenie bez szorowania" }
+    { id: "nagrobki", name: "Profesjonalne czyszczenie i renowacja nagrobków", short: "Czyszczenie\ni renowacja nagrobków", desc: "Aktywna piana do mycia pomników i zestawy do renowacji napisów" },
   ];
   ICON.dom = ICON.organizery;
   ICON.nagrobki = '<svg viewBox="0 0 48 48" ' + P + '><path d="M14 40V18a10 10 0 0120 0v22"/><path d="M8 40h32v4H8z"/><path d="M24 17v12M19 22h10"/></svg>';
@@ -143,6 +142,7 @@
   }
 
   function catOf(up) {
+    if (/RENOWACJI|NAGROBK|POMNIK/.test(up)) return "nagrobki";
     if (/^WORKI/.test(up)) return "worki";
     if (/FLEXISTORE/.test(up)) return "flexistore";
     if (/TECHBOX/.test(up)) return "techbox";
@@ -153,7 +153,7 @@
     if (/MYDŁO|PUMEKS/.test(up)) return "mydla";
     if (/PŁYN/.test(up)) return "chemia";
     if (/DRUCIAK|ZMYWAK|GĄBKA|ŚCIERECZK|ROLKA DO UBRAŃ/.test(up)) return "sprzatanie";
-    if (/RENOWACJI/.test(up)) return "nagrobki";
+
     if (/TAŚMA|SZNUREK/.test(up)) return "warsztat";
     return "dom";
   }
@@ -231,6 +231,8 @@
       opt: function (up) { var w = +(up.match(/(\d+)MM/) || [])[1]; return [w + " mm", w]; } },
     { re: /TORBA FILCOWA|TORBA KANGOO/, key: "TORBY FILCOWE", title: "Torba filcowa", label: "Model",
       opt: pick([[/XXL/, "XXL na zakupy"], [/1102/, "1102"], [/KANGOO/, "Kangoo z przegródkami"]]) },
+    { re: /AKTYWNA PIANA/, key: "AKTYWNA PIANA DO NAGROBKÓW", title: "Aktywna piana do mycia nagrobków 400 ml", label: "Wariant",
+      opt: function () { return [null, 0]; } },
     { re: /^KARMNIK DLA PTAKÓW/, key: "KARMNIK DLA PTAKÓW", title: "Karmnik dla ptaków", label: "Model",
       opt: pick([[/MAXI/, "Maxi"], [/MIDI/, "Midi DIY"], [/MINI(?! DIY)/, "Mini"], [/MINI DIY/, "Mini DIY"]]) },
     { re: /^BUDKA DLA PTAKÓW/, key: "BUDKA DLA PTAKÓW", title: "Budka dla ptaków", label: "Model",
@@ -255,7 +257,7 @@
     [/SIZALOWY/, ["ogrod", "garaz"]],
     [/TAŚMA|SZNUREK/, ["garaz"]],
     [/BUDKA|KARMNIK/, ["ogrod"]],
-    [/RENOWACJI/, []]
+    [/RENOWACJI|NAGROBK|POMNIK/, []]
   ];
   function roomsFor(p, up) {
     if (p.cat === "worki") {

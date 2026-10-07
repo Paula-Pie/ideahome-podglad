@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610071131">
+<link rel="stylesheet" href="styles.css?v=202610071142">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -40,8 +40,8 @@
         <h2 class="hero-title">Profesjonalne czyszczenie i renowacja nagrobków. <span class="light">Pomnik jak nowy, napisy czytelne.</span></h2>
         <p class="lead">Aktywna pianka usuwa z kamienia brud, osady i zacieki. Zestaw do renowacji przywraca kolor wyblakłym literom.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="produkty.html#nagrobki">Zestawy do renowacji</a>
-          <a class="link-arrow" id="hero-nagrobki-buy" href="https://www.dladomu.sklep.pl" target="_blank" rel="noopener">Kup online</a>
+          <a class="btn btn-primary" href="produkty.html#nagrobki">Pianka i zestawy do renowacji</a>
+          <a class="link-arrow" href="https://www.dladomu.sklep.pl/product/spray-do-nagrobkow-aktywna-piana-plyn-do-mycia-nagrobkow-pomnikow-400ml" target="_blank" rel="noopener">Kup aktywną pianę</a>
         </div>
       </div>
     </div>
@@ -232,10 +232,10 @@
 
 <div id="site-footer"></div>
 
-<script src="js/miniatury-data.js?v=202610071131"></script>
-<script src="js/produkty-data.js?v=202610071131"></script>
-<script src="js/site.js?v=202610071131"></script>
-<script src="js/formularze.js?v=202610071131"></script>
+<script src="js/miniatury-data.js?v=202610071142"></script>
+<script src="js/produkty-data.js?v=202610071142"></script>
+<script src="js/site.js?v=202610071142"></script>
+<script src="js/formularze.js?v=202610071142"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -249,7 +249,7 @@
       dots.forEach(function (d, k) { d.setAttribute("aria-pressed", k === cur); });
     }
     var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    function start() { if (!still) { stop(); timer = setInterval(function () { show(cur + 1); }, 7000); } }
+    function start() { if (!still) { stop(); timer = setInterval(function () { show(cur + 1); }, 4500); } }
     function stop() { if (timer) clearInterval(timer); timer = null; }
     dots.forEach(function (d) { d.addEventListener("click", function () { show(+d.dataset.slide); start(); }); });
     hero.addEventListener("mouseenter", stop); hero.addEventListener("mouseleave", start);
@@ -261,7 +261,6 @@
     if (g) {
       var order = ["ZŁOTY", "SREBRNY", "BIAŁY", "CZARNY"];
       var vs = g.variants.slice().sort(function (a, b) { return order.indexOf(a.color) - order.indexOf(b.color); });
-      document.getElementById("hero-nagrobki-buy").href = vs[0].url || IH.shopSearch(g.query);
     }
   })();
 
