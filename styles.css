@@ -612,3 +612,8 @@ a.lev-card:hover { border-color: var(--ink); box-shadow: var(--shadow); }
   .modal { padding: 0; align-items: end; }
   .modal-box { max-height: 92vh; border-radius: 12px 12px 0 0; }
 }
+
+/* przyciski Kup online: zielone, dobrze widoczne */
+.hero .hero-actions .btn + .btn { margin-left: -12px; }
+.pcard .foot .btn { padding: .75em 1.1em; font-size: 11px; }
+@media (max-width: 620px) { .pcard .foot .btn { width: 100%; justify-content: center; } }

@@ -514,7 +514,7 @@
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<div class="vwrap">' + variantPicker(g, si) + "</div>" +
-      '<div class="foot"><a class="link-arrow buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
+      '<div class="foot"><a class="btn btn-primary btn-sm buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
       (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.de</a>' : "") + "</div>" +
       "</div></article>";
   }
