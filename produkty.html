@@ -100,6 +100,41 @@
     else if (h === "szukaj") { try { state.q = sessionStorage.getItem("ih-q") || ""; } catch (e) {} document.getElementById("q").value = state.q; }
   }
 
+  /* Wyszukiwanie odporne na literówki:
+     - bez polskich znaków (zolty = żółty), wielkość liter bez znaczenia
+     - słowo może być początkiem wyrazu (work → worki)
+     - dopuszczalne literówki: 1 przy słowach 4–6 liter, 2 przy dłuższych (wrki, flexstore, pojmnik) */
+  function fold(s) { return s.toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function dist(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev = [], cur, i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur = [i]; var best = i;
+      for (j = 1; j <= b.length; j++) {
+        var c = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) c = Math.min(c, prev[j - 2] + 1); // zamienione litery
+        cur[j] = c; if (c < best) best = c;
+      }
+      if (best > max) return max + 1;
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  function fuzzyMatch(q, hay) {
+    var h = fold(hay), words = h.split(/[^a-z0-9]+/).filter(Boolean);
+    return fold(q).split(/\s+/).filter(Boolean).every(function (w) {
+      w = w.replace(/^(\d+)l$/, "$1");
+      if (h.indexOf(w) > -1) return true;
+      if (/^\d+$/.test(w) || w.length < 4) return false;
+      var max = w.length <= 6 ? 1 : 2;
+      return words.some(function (x) {
+        if (x.length < 3) return false;
+        return dist(w, x, max) <= max || (x.length > w.length && dist(w, x.slice(0, w.length), max) <= max);
+      });
+    });
+  }
+
   // każdy wariant to osobna karta (z wyborem powiązanych wariantów na karcie)
   function variantMatches(g, v) {
     if (state.room && (v.rooms || g.rooms).indexOf(state.room) === -1) return false;
@@ -108,8 +143,7 @@
       var hay = (g.title + " " + IH.catById(g.cat).name + " " + v.raw + " " + (v.opt || "") + " " + (IH.COLORS[v.color] ? IH.COLORS[v.color].name + " " + (IH.COLORS[v.color].seg || "") : "")).toLowerCase();
       // synonimy: pianka/piana (i odmiany) znajdują ten sam produkt
       if (/\bpian/.test(hay)) hay += " pianka pianki piankę pianke piana piany pianę piane";
-      var ok = state.q.toLowerCase().split(/\s+/).every(function (w) { return hay.indexOf(w.replace(/\s*l$/, "")) > -1 || hay.indexOf(w) > -1; });
-      if (!ok) return false;
+      if (!fuzzyMatch(state.q, hay)) return false;
     }
     return true;
   }
