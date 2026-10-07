@@ -617,3 +617,16 @@ a.lev-card:hover { border-color: var(--ink); box-shadow: var(--shadow); }
 .hero .hero-actions .btn + .btn { margin-left: -12px; }
 .pcard .foot .btn { padding: .75em 1.1em; font-size: 11px; }
 @media (max-width: 620px) { .pcard .foot .btn { width: 100%; justify-content: center; } }
+
+/* podpowiedzi w wyszukiwarce */
+.suggest { margin-top: 12px; display: grid; gap: 4px; max-height: 60vh; overflow-y: auto; }
+.sg-item { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; text-align: left; background: none; border: 1px solid transparent; border-radius: 4px; padding: 6px 8px; }
+.sg-item:hover, .sg-item:focus-visible { background: var(--sand); border-color: var(--line); }
+.sg-item img { width: 52px; height: 52px; object-fit: contain; background: #fff; border-radius: 3px; }
+.sg-item b { display: block; font-size: var(--fs-sm); font-weight: 600; }
+.sg-item small { display: block; font-size: var(--fs-xs); color: var(--muted); }
+.sg-all { justify-self: start; margin-top: 6px; background: none; border: 0; padding: 6px 8px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--olive); }
+.sg-none { font-size: var(--fs-sm); color: var(--muted); padding: 6px 8px; }
+
+/* elementy ukryte atrybutem hidden zawsze niewidoczne (np. wpisy w Inspiracjach po wyborze zakładki) */
+[hidden] { display: none !important; }

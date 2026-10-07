@@ -602,6 +602,65 @@
     m.querySelector(".modal-close").focus();
   }
 
+  /* ---------- Wyszukiwanie odporne na literówki ----------
+     - bez polskich znaków (zolty = żółty), wielkość liter bez znaczenia
+     - słowo może być początkiem wyrazu (work → worki)
+     - literówki: 1 przy słowach 4–5 liter, 2 przy dłuższych; zamienione sąsiednie litery liczą się jako 1 (tobra → torba) */
+  function fold(s) { return String(s).toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function dist(a, b) {
+    var d = [], i, j;
+    for (i = 0; i <= a.length; i++) { d[i] = [i]; }
+    for (j = 0; j <= b.length; j++) d[0][j] = j;
+    for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++) {
+      var c = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) c = Math.min(c, d[i - 2][j - 2] + 1);
+      d[i][j] = c;
+    }
+    return d[a.length][b.length];
+  }
+  // synonimy i odmiany, żeby różne słowa trafiały w ten sam produkt
+  var SYN = [
+    [/\bpian/, "pianka pianki pianke piana piany piane spray"],
+    [/worki|worek/, "worek worki worka workow smieci odpady kosz kosza smietnik"],
+    [/torb/, "torba torby torebka siatka"],
+    [/sciereczk|scierk/, "scierka scierki sciereczka sciereczki"],
+    [/pojemnik|flexistore|techbox/, "pojemnik pojemniki skrzynka pudelko organizer"],
+    [/mydlo/, "mydlo mydla"],
+    [/nagrob|pomnik|renowacj/, "nagrobek nagrobki pomnik pomniki cmentarz znicz"]
+  ];
+  function searchText(g, v) {
+    var t = fold([g.title, catById(g.cat).name, v.raw, v.opt || "",
+      v.color && COLORS[v.color] ? COLORS[v.color].name + " " + (COLORS[v.color].seg || "") : ""].join(" "));
+    SYN.forEach(function (s) { if (s[0].test(t)) t += " " + s[1]; });
+    return t;
+  }
+  function fuzzyMatch(q, hay) {
+    var h = fold(hay), words = h.split(/[^a-z0-9]+/).filter(Boolean);
+    return fold(q).split(/\s+/).filter(Boolean).every(function (w) {
+      w = w.replace(/^(\d+)l$/, "$1");
+      if (h.indexOf(w) > -1) return true;
+      if (w.length < 3) return true; // krótkie słowa (na, do, z) pomijamy
+      if (/^\d+$/.test(w) || w.length < 4) return false;
+      var max = w.length <= 6 ? 1 : 2;
+      return words.some(function (x) {
+        if (x.length < 3) return false;
+        return dist(w, x) <= max || (x.length > w.length && dist(w, x.slice(0, w.length)) <= max);
+      });
+    });
+  }
+  // wyniki dla podpowiedzi w wyszukiwarce w nagłówku: najpierw trafienia dokładne
+  function searchProducts(q, limit) {
+    var exact = [], fuzzy = [], fq = fold(q);
+    CATALOG.forEach(function (g) {
+      for (var k = 0; k < g.variants.length; k++) {
+        var t = searchText(g, g.variants[k]);
+        if (fq.split(/\s+/).every(function (w) { return t.indexOf(w) > -1; })) { exact.push({ g: g, k: k }); return; }
+        if (fuzzyMatch(q, t)) { fuzzy.push({ g: g, k: k }); return; }
+      }
+    });
+    return exact.concat(fuzzy).slice(0, limit || 6);
+  }
+
   /* ---------- Nagłówek i stopka ---------- */
   var page = document.body.dataset.page || "";
   function navLink(href, label, key) { return '<a href="' + href + '"' + (page === key ? ' aria-current="page"' : "") + ">" + label + "</a>"; }
@@ -636,6 +695,7 @@
       '<button class="icon-btn navtoggle" type="button" id="navtoggle" aria-label="Otwórz menu" aria-expanded="false">' + ICON.menu + "</button>" +
       "</div></div>" +
       '<div class="search-panel" id="searchpanel" hidden><div class="wrap"><form action="produkty.html" id="searchform" role="search"><label class="visually-hidden" for="q-global">Szukaj produktów</label><input id="q-global" name="q" type="search" placeholder="Czego szukasz? np. worki 60 l, pojemnik, torba"><button class="btn btn-dark" type="submit">Szukaj</button></form>' +
+      '<div class="suggest" id="suggest" hidden></div>' +
       '<div class="hints">Popularne: <a class="chip" href="produkty.html#worki">Worki na odpady</a><a class="chip" href="produkty.html#flexistore">Flexistore</a><a class="chip" href="produkty.html#torby">Torby bawełniane</a></div></div></div>' +
       "</header>";
 
@@ -657,6 +717,23 @@
 
     var sb = document.getElementById("searchbtn"), sp = document.getElementById("searchpanel");
     sb.addEventListener("click", function () { sp.hidden = !sp.hidden; sb.setAttribute("aria-expanded", !sp.hidden); if (!sp.hidden) document.getElementById("q-global").focus(); });
+    // podpowiedzi w trakcie pisania (odporne na literówki)
+    var qg = document.getElementById("q-global"), sug = document.getElementById("suggest"), sugTimer;
+    function showSuggest() {
+      var q = qg.value.trim();
+      if (q.length < 2) { sug.hidden = true; sug.innerHTML = ""; return; }
+      var res = searchProducts(q, 6);
+      sug.hidden = false;
+      sug.innerHTML = res.length ? res.map(function (r, i) {
+        var v = r.g.variants[r.k];
+        return '<button type="button" class="sg-item" data-i="' + i + '"><img src="' + esc(v.img) + '" alt="" loading="lazy"><span><b>' + esc(r.g.title) + "</b><small>" + esc(catById(r.g.cat).name + (variantLabel(v) ? " · " + variantLabel(v) : "")) + "</small></span></button>";
+      }).join("") + '<button type="submit" form="searchform" class="sg-all">Zobacz wszystkie wyniki →</button>'
+        : '<p class="sg-none">Nie znaleźliśmy produktów dla „' + esc(q) + '”. Spróbuj innego słowa, np. worki, torba, pojemnik.</p>';
+      sug.querySelectorAll(".sg-item").forEach(function (b) {
+        b.addEventListener("click", function () { var r = res[+b.dataset.i]; openModal(r.g, r.k); });
+      });
+    }
+    qg.addEventListener("input", function () { clearTimeout(sugTimer); sugTimer = setTimeout(showSuggest, 120); });
     document.getElementById("searchform").addEventListener("submit", function (e) {
       e.preventDefault();
       var q = document.getElementById("q-global").value.trim();
@@ -701,5 +778,5 @@
   renderFooter();
   cookieNote();
 
-  window.IH = { find: find, variantLabel: variantLabel, ICON: ICON, CATS: CATS, ROOMS: ROOMS, COLORS: COLORS, CATALOG: CATALOG, SHOP: SHOP, shopSearch: shopSearch, card: card, bindCards: bindCards, openModal: openModal, carousel: carousel, countIn: countIn, pl: pl, getFavs: getFavs, catById: catById, roomById: roomById, esc: esc, toast: toast };
+  window.IH = { find: find, variantLabel: variantLabel, fuzzyMatch: fuzzyMatch, searchText: searchText, searchProducts: searchProducts, fold: fold, ICON: ICON, CATS: CATS, ROOMS: ROOMS, COLORS: COLORS, CATALOG: CATALOG, SHOP: SHOP, shopSearch: shopSearch, card: card, bindCards: bindCards, openModal: openModal, carousel: carousel, countIn: countIn, pl: pl, getFavs: getFavs, catById: catById, roomById: roomById, esc: esc, toast: toast };
 })();

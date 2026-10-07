@@ -84,3 +84,7 @@ footer .ih-btn { margin: 0 10px 10px 0; padding: .7em 1.1em !important; font-siz
 }
 .ih-allegro { background: #FF5A00 !important; border-color: #FF5A00 !important; }
 .ih-allegro:hover { background: #E04E00 !important; border-color: #E04E00 !important; }
+
+/* grafiki w stopce nie mogą zasłaniać przycisków (Allegro, dladomu.sklep.pl) */
+.footer-graphic, .raccoon-tea-wrap { pointer-events: none; }
+footer .ih-btn, footer a { position: relative; z-index: 3; }
