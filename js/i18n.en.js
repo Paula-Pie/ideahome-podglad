@@ -1,0 +1,25 @@
+/* Plik generowany przez tools/i18n-generuj.pl – nie edytuj recznie. */
+window.IH_TITLES = {
+  "budka-dla-jezy-erina": "Erina hedgehog house",
+  "budka-dla-nietoperzy-chiroptera": "Chiroptera bat box",
+  "plyn-do-spryskiwaczy-letni-rakun-5l": "RAKUN summer screenwash 5 l",
+  "plyn-do-szyb-rakun-5l": "RAKUN glass cleaner 5 l",
+  "pudlo-do-przeprowadzek-wzmocnione": "Reinforced moving box",
+  "pumeks-kosmetyczny": "Cosmetic pumice stone",
+  "rolka-do-ubran-12-wkladow-zestaw": "Lint roller + 12 refills set",
+  "sciereczki-do-kuchni-roll-18x35cm": "Kitchen cloths Roll 18 × 35 cm",
+  "sciereczki-z-mikrofibry": "Microfibre cloths",
+  "sciereczki-z-mikrofibry-rakun-30x30cm-pizza-box-all": "RAKUN microfibre cloths 30 × 30 cm, pizza box",
+  "sznurek-sizalowy-2mm": "Sisal twine 2 mm",
+  "sznurek-wedliniarski-1-8mm-na-szpuli": "Butcher's twine 1.8 mm on a spool",
+  "tasma-izolacyjna-18mm-x-20m": "Insulating tape 18 mm × 20 m",
+  "tasma-ostrzegawcza-50mm-x-5m-klejaca-odblaskowa-strzalka": "Reflective adhesive warning tape 50 mm × 5 m, arrows",
+  "torba-bawelniana-kopenhaga-380x420-z-uszami-bez-nadruku": "Kopenhaga plain cotton bag 380 × 420 with handles",
+  "torba-manhattan-sztruksowa": "Manhattan corduroy bag",
+  "worki-hdpe": "HDPE bin bags",
+  "worki-ldpe": "LDPE bin bags",
+  "worki-ldpe-do-segregacji": "LDPE bin bags for recycling",
+  "worki-ldpe-ekstra-mocne": "Extra-strong LDPE bin bags",
+  "worki-ldpe-mocne": "Strong LDPE bin bags",
+  "worki-ldpe-z-tasma": "LDPE drawstring bin bags"
+};

@@ -1,0 +1,25 @@
+/* Plik generowany przez tools/i18n-generuj.pl – nie edytuj recznie. */
+window.IH_TITLES = {
+  "budka-dla-jezy-erina": "Igelhaus Erina",
+  "budka-dla-nietoperzy-chiroptera": "Fledermauskasten Chiroptera",
+  "plyn-do-spryskiwaczy-letni-rakun-5l": "RAKUN Sommer-Scheibenwaschflüssigkeit 5 l",
+  "plyn-do-szyb-rakun-5l": "RAKUN Glasreiniger 5 l",
+  "pudlo-do-przeprowadzek-wzmocnione": "Verstärkter Umzugskarton",
+  "pumeks-kosmetyczny": "Kosmetischer Bimsstein",
+  "rolka-do-ubran-12-wkladow-zestaw": "Fusselrolle + 12 Ersatzrollen, Set",
+  "sciereczki-do-kuchni-roll-18x35cm": "Küchentücher Roll 18 × 35 cm",
+  "sciereczki-z-mikrofibry": "Mikrofasertücher",
+  "sciereczki-z-mikrofibry-rakun-30x30cm-pizza-box-all": "RAKUN Mikrofasertücher 30 × 30 cm, Pizza-Box",
+  "sznurek-sizalowy-2mm": "Sisalschnur 2 mm",
+  "sznurek-wedliniarski-1-8mm-na-szpuli": "Metzgergarn 1,8 mm auf Spule",
+  "tasma-izolacyjna-18mm-x-20m": "Isolierband 18 mm × 20 m",
+  "tasma-ostrzegawcza-50mm-x-5m-klejaca-odblaskowa-strzalka": "Reflektierendes Warnklebeband 50 mm × 5 m, Pfeile",
+  "torba-bawelniana-kopenhaga-380x420-z-uszami-bez-nadruku": "Baumwolltasche Kopenhaga 380 × 420 mit Henkeln, unbedruckt",
+  "torba-manhattan-sztruksowa": "Cordtasche Manhattan",
+  "worki-hdpe": "HDPE-Müllbeutel",
+  "worki-ldpe": "LDPE-Müllbeutel",
+  "worki-ldpe-do-segregacji": "LDPE-Müllbeutel zur Mülltrennung",
+  "worki-ldpe-ekstra-mocne": "Extrastarke LDPE-Müllbeutel",
+  "worki-ldpe-mocne": "Starke LDPE-Müllbeutel",
+  "worki-ldpe-z-tasma": "LDPE-Müllbeutel mit Zugband"
+};

@@ -1,5 +1,6 @@
+/* Plik generowany przez tools/i18n-generuj.pl z rakun/ih-rakun.js – nie edytuj recznie. */
 /* Dopasowanie podstrony RAKUN do strony IDEA HOME (wstawiane przez tools/import-rakun.ps1):
-   wspólny nagłówek z powrotem do IDEA HOME, ceny i przyciski "Kup online" przy produktach, poprawione linki w stopce. */
+   wspólny nagłówek z powrotem do IDEA HOME, ceny i przyciski "Buy online" przy produktach, poprawione linki w stopce. */
 (function () {
   var SHOP = "https://www.dladomu.sklep.pl";
   // wersje językowe: EN/DE kupują na Amazon.de, CS na Allegro.cz; ceny tylko po polsku (złotówki)
@@ -11,19 +12,19 @@
   var data = {};
   (window.IH_SHOP_PRODUCTS || []).forEach(function (p) { data[p.id] = p; });
 
-  /* 1. Jeden nagłówek: logo IDEA HOME (powrót) + logo RAKUN, menu RAKUNA, "Kup online", menu na telefonie */
+  /* 1. Jeden nagłówek: logo IDEA HOME (powrót) + logo RAKUN, menu RAKUNA, "Buy online", menu na telefonie */
   var inner = document.querySelector("header .nav-inner"), logo = inner && inner.querySelector(".logo"), nav = inner && inner.querySelector("nav.main-nav");
   if (inner && logo && nav) {
     var brand = document.createElement("div"); brand.className = "ih-brand";
     var home = document.createElement("a"); home.className = "ih-home"; home.href = "../index.html";
-    home.setAttribute("aria-label", "IDEA HOME – strona główna"); home.title = "Wróć na stronę IDEA HOME";
+    home.setAttribute("aria-label", "IDEA HOME – home page"); home.title = "Back to the IDEA HOME website";
     home.innerHTML = '<img class="on-dark" src="../img/logo-ideahome-white.png" alt="" width="600" height="532"><img class="on-light" src="../img/logo-ideahome.png" alt="" width="600" height="532">';
     logo.parentNode.insertBefore(brand, logo); brand.appendChild(home); brand.appendChild(logo);
-    var buy = document.createElement("a"); buy.className = "ih-buy"; buy.href = MARKET.url; buy.target = "_blank"; buy.rel = "noopener"; buy.textContent = "Kup online";
-    var allLink = document.createElement("a"); allLink.href = "../produkty.html"; allLink.textContent = "Wszystkie produkty"; allLink.className = "ih-all";
+    var buy = document.createElement("a"); buy.className = "ih-buy"; buy.href = MARKET.url; buy.target = "_blank"; buy.rel = "noopener"; buy.textContent = "Buy online";
+    var allLink = document.createElement("a"); allLink.href = "../produkty.html"; allLink.textContent = "All products"; allLink.className = "ih-all";
     nav.appendChild(allLink);
     var buyM = buy.cloneNode(true); buyM.className = "ih-buy ih-buy-m"; nav.appendChild(buyM);
-    var tog = document.createElement("button"); tog.type = "button"; tog.className = "ih-burger"; tog.setAttribute("aria-label", "Otwórz menu"); tog.setAttribute("aria-expanded", "false");
+    var tog = document.createElement("button"); tog.type = "button"; tog.className = "ih-burger"; tog.setAttribute("aria-label", "Open menu"); tog.setAttribute("aria-expanded", "false");
     tog.innerHTML = "<span></span><span></span><span></span>";
     var right = document.createElement("div"); right.className = "ih-right"; right.appendChild(buy); right.appendChild(tog);
     inner.appendChild(right);
@@ -38,10 +39,10 @@
     nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { nav.classList.remove("ih-open"); tog.setAttribute("aria-expanded", "false"); document.querySelector("header").classList.remove("ih-menu-open"); }); });
   }
 
-  // główny nagłówek strony (dla Google i czytników ekranu): pasek "Odkryj świat Rakuna" albo ukryty h1
+  // główny nagłówek strony (dla Google i czytników ekranu): pasek "Discover the Raccoon's world" albo ukryty h1
   if (!document.querySelector("h1")) {
     var h1 = document.createElement("h1"); h1.className = "ih-sr";
-    h1.textContent = "RAKUN – seria środków czystości IDEA HOME";
+    h1.textContent = "RAKUN – an IDEA HOME range of cleaning products";
     document.body.insertBefore(h1, document.body.firstChild);
   }
 
@@ -49,14 +50,14 @@
   var chem = document.getElementById("chemia");
   if (chem) {
     var ch2 = chem.querySelector(".prod-heading h2"), cp = chem.querySelector(".prod-heading p"), ce = chem.querySelector(".prod-heading .eyebrow");
-    if (ch2) ch2.textContent = "Chemia RAKUN";
-    if (ce) ce.textContent = "Dział chemii";
-    if (cp) cp.textContent = "Płyny do naczyń i szyb oraz aktywna piana do mycia nagrobków – skuteczne czyszczenie bez szorowania.";
+    if (ch2) ch2.textContent = "RAKUN cleaning products";
+    if (ce) ce.textContent = "Cleaning products";
+    if (cp) cp.textContent = "Washing-up liquids, glass cleaner and active headstone cleaning foam – effective cleaning without scrubbing.";
     var grid = chem.querySelector(".editorial-grid");
     if (grid && !grid.querySelector(".ih-piana")) {
       var it = document.createElement("div"); it.className = "editorial-item ih-piana";
-      it.innerHTML = '<div class="thumb"><img class="img-1" src="ih/aktywna-piana.png" alt="Aktywna piana do mycia nagrobków RAKUN 400 ml"><img class="img-2" src="../img/foto/baner-aktywna-pianka.jpg" alt="Aktywna piana na nagrobku"></div>' +
-        '<div class="cat">Aktywna piana</div><h4>Do nagrobków</h4><p>Usuwa z kamienia brud, osady i zacieki – bez szorowania.</p>';
+      it.innerHTML = '<div class="thumb"><img class="img-1" src="ih/aktywna-piana.png" alt="RAKUN active headstone cleaning foam 400 ml"><img class="img-2" src="../img/foto/baner-aktywna-pianka.jpg" alt="Active foam on a headstone"></div>' +
+        '<div class="cat">Active foam</div><h4>For headstones</h4><p>Removes dirt, deposits and streaks from stone – without scrubbing.</p>';
       grid.insertBefore(it, grid.firstChild);
     }
   }
@@ -84,62 +85,62 @@
     var buy = document.createElement("div");
     buy.className = "ih-buyrow";
     if (LANG !== "pl") {
-      buy.innerHTML = '<a class="ih-btn" href="' + MARKET.url + '" target="_blank" rel="noopener">Kup online</a>';
+      buy.innerHTML = '<a class="ih-btn" href="' + MARKET.url + '" target="_blank" rel="noopener">Buy online</a>';
     } else if (p) {
       var price = p.price != null ? p.price.toFixed(2).replace(".", ",") + " zł" : "";
-      buy.innerHTML = (price ? '<span class="ih-price">' + price + (p.avail === false ? ' <small>chwilowo niedostępny</small>' : "") + "</span>" : "") +
-        '<a class="ih-btn" href="' + p.url + '" target="_blank" rel="noopener">Kup online</a>';
+      buy.innerHTML = (price ? '<span class="ih-price">' + price + (p.avail === false ? ' <small>temporarily unavailable</small>' : "") + "</span>" : "") +
+        '<a class="ih-btn" href="' + p.url + '" target="_blank" rel="noopener">Buy online</a>';
     } else {
-      buy.innerHTML = '<a class="ih-btn ih-btn-outline" href="' + SHOP + '/search?q=' + encodeURIComponent("rakun roll") + '" target="_blank" rel="noopener">Sprawdź w sklepie</a>';
+      buy.innerHTML = '<a class="ih-btn ih-btn-outline" href="' + SHOP + '/search?q=' + encodeURIComponent("rakun roll") + '" target="_blank" rel="noopener">Check in shop</a>';
     }
     item.appendChild(buy);
   });
 
-  /* 3. Sekcja "Dziennik Rakuna" → stała treść o Rakunie (bez bloga do prowadzenia) */
+  /* 3. Sekcja "Raccoon's world" → stała treść o Rakunie (bez bloga do prowadzenia) */
   var blog = document.getElementById("blog");
   if (blog) {
     var eb = blog.querySelector(".eyebrow"), h2 = blog.querySelector("h2"), p = blog.querySelector(".split-text > p");
-    if (eb) eb.textContent = "Świat Rakuna";
-    if (h2) h2.textContent = "Rakun – Twój pomocnik w domowych porządkach";
-    if (p) p.textContent = "Rakun to bohater serii środków czystości IDEA HOME. Na każdej etykiecie znajdziesz go w innej codziennej sytuacji – przy zlewie, przy umywalce, przy oknie i w podróży swoim różowym kabrioletem. Łączymy skuteczne formuły z przyjemnymi zapachami i ekonomicznymi kanistrami 5 l, żeby sprzątanie było prostsze i odrobinę przyjemniejsze.";
+    if (eb) eb.textContent = "Raccoon's world";
+    if (h2) h2.textContent = "The Raccoon – your helper with housework";
+    if (p) p.textContent = "The Raccoon is the hero of the IDEA HOME cleaning range. On every label you'll find him in a different everyday situation – at the sink, at the washbasin, at the window and on the road in his pink convertible. We combine effective formulas with pleasant scents and economical 5 l canisters to make cleaning simpler and a little more enjoyable.";
     var cards = blog.querySelector(".blog-cards"); if (cards) cards.remove();
     var more = blog.querySelector(".btn"); if (more) more.remove();
   }
-  document.querySelectorAll('a[href="#blog"]').forEach(function (a) { if (/dziennik/i.test(a.textContent)) a.textContent = "Świat Rakuna"; });
+  document.querySelectorAll('a[href="#blog"]').forEach(function (a) { if (/dziennik/i.test(a.textContent)) a.textContent = "Raccoon's world"; });
 
-  // "O marce": bez niepotwierdzonych deklaracji ekologicznych (biodegradowalność, "dla planety")
+  // "About us": bez niepotwierdzonych deklaracji ekologicznych (biodegradowalność, "dla planety")
   var about = document.querySelector("#o-marce .split-text > p");
-  if (about && /biodegrad/i.test(about.textContent)) about.textContent = "RAKUN powstał z miłości do prostych, domowych rytuałów. Tworzymy skuteczne środki czystości w przyjemnych zapachach, które zamieniają sprzątanie w chwilę przyjemności.";
+  if (about && /biodegrad/i.test(about.textContent)) about.textContent = "RAKUN was born from a love of simple home rituals. We create effective cleaning products in pleasant scents that turn cleaning into a moment of pleasure.";
 
   /* 4. Linki bez celu (#) i stopka */
   var fix = {
-    "Czytaj dziennik": "../inspiracje.html",
+    "Read more": "../inspiracje.html",
     "FAQ": "../kontakt.html#faq",
-    "Dostawa": LANG === "pl" ? SHOP : MARKET.url,
-    "Zwroty": LANG === "pl" ? SHOP : MARKET.url,
-    "Polityka prywatności": "../polityka-prywatnosci.html",
-    "Regulamin": "../regulamin.html",
-    "Mapa strony": "../index.html"
+    "Delivery": LANG === "pl" ? SHOP : MARKET.url,
+    "Returns": LANG === "pl" ? SHOP : MARKET.url,
+    "Privacy policy": "../polityka-prywatnosci.html",
+    "Terms of use": "../regulamin.html",
+    "Sitemap": "../index.html"
   };
   document.querySelectorAll('a[href="#"]').forEach(function (a) {
     var t = a.textContent.trim();
     if (fix[t]) { a.href = fix[t]; if (/^https?:/.test(fix[t])) { a.target = "_blank"; a.rel = "noopener"; } }
   });
-  var mapLink = Array.prototype.find.call(document.querySelectorAll(".footer-bottom-links a"), function (a) { return a.textContent.trim() === "Mapa strony"; });
+  var mapLink = Array.prototype.find.call(document.querySelectorAll(".footer-bottom-links a"), function (a) { return a.textContent.trim() === "Sitemap"; });
   if (mapLink) mapLink.textContent = "IDEA HOME";
-  var kontakt = Array.prototype.find.call(document.querySelectorAll("footer a"), function (a) { return a.textContent.trim() === "Kontakt"; });
+  var kontakt = Array.prototype.find.call(document.querySelectorAll("footer a"), function (a) { return a.textContent.trim() === "Contact"; });
   if (kontakt) kontakt.href = "../kontakt.html";
 
-  // "Kup teraz": sklep dladomu.sklep.pl obok Allegro
+  // "Buy now": sklep dladomu.sklep.pl obok Allegro
   var allegro = document.querySelector(".allegro-badge");
   if (allegro && LANG !== "pl") {
     var ip = allegro.parentElement.previousElementSibling;
-    if (ip && ip.tagName === "P") ip.textContent = LANG === "cs" ? "Produkty RAKUN kupisz na Allegro.cz." : "Produkty RAKUN kupisz na Amazon.de.";
+    if (ip && ip.tagName === "P") ip.textContent = LANG === "cs" ? "RAKUN products are available on Allegro.cz." : "RAKUN products are available on Amazon.de.";
     allegro.href = MARKET.url; allegro.target = "_blank"; allegro.rel = "noopener";
     allegro.className = LANG === "cs" ? "ih-btn ih-allegro" : "ih-btn"; allegro.textContent = MARKET.name;
   } else if (allegro) {
     var p = allegro.parentElement, intro = p.previousElementSibling;
-    if (intro && intro.tagName === "P") intro.textContent = "Produkty RAKUN kupisz w sklepie dladomu.sklep.pl i na Allegro.";
+    if (intro && intro.tagName === "P") intro.textContent = "RAKUN products are available on Amazon.de.";
     var shop = document.createElement("a");
     shop.className = "ih-btn"; shop.href = SHOP + "/search?q=rakun"; shop.target = "_blank"; shop.rel = "noopener";
     shop.textContent = "dladomu.sklep.pl";
@@ -151,10 +152,10 @@
   // logo IDEA HOME w stopce prowadzi na stronę główną
   var ihLogo = document.querySelector(".idea-home-logo img");
   if (ihLogo && !ihLogo.closest("a")) {
-    var a = document.createElement("a"); a.href = "../index.html"; a.setAttribute("aria-label", "IDEA HOME – strona główna");
+    var a = document.createElement("a"); a.href = "../index.html"; a.setAttribute("aria-label", "IDEA HOME – home page");
     ihLogo.parentNode.insertBefore(a, ihLogo); a.appendChild(ihLogo);
   }
   // rok w stopce
   var copy = document.querySelector(".footer-bottom > span");
-  if (copy) copy.textContent = "© " + new Date().getFullYear() + " RAKUN – seria marki IDEA HOME by Leviatan.";
+  if (copy) copy.textContent = "© " + new Date().getFullYear() + " RAKUN – a range by IDEA HOME by Leviatan.";
 })();

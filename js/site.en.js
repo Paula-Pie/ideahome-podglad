@@ -1,3 +1,4 @@
+/* Plik generowany przez tools/i18n-generuj.pl z js/site.js – nie edytuj recznie. */
 /* IDEA HOME — wspólne elementy strony: nagłówek, stopka, katalog produktów, karty, podgląd. */
 (function () {
   var SHOP = "https://www.dladomu.sklep.pl";
@@ -33,7 +34,7 @@
     return root + (l === "pl" ? "" : l + "/") + rel + location.hash;
   }
   function langSwitch() {
-    return '<div class="langs" role="navigation" aria-label="Język / Language">' + LANGS.map(function (l) {
+    return '<div class="langs" role="navigation" aria-label="Language">' + LANGS.map(function (l) {
       return '<a href="' + langHref(l) + '" hreflang="' + l + '" lang="' + l + '"' + (l === LANG ? ' aria-current="true"' : "") + ">" + l.toUpperCase() + "</a>";
     }).join("") + "</div>";
   }
@@ -97,59 +98,59 @@
   ICON.ogrod = '<svg viewBox="0 0 24 24" ' + P + '><path d="M12 21v-7"/><path d="M12 14c-4 0-6-3-6-6 3 0 6 2 6 6zM12 12c0-4 3-7 7-7 0 4-3 7-7 7z"/><path d="M5 21h14"/></svg>';
 
   var CATS = [
-    { id: "worki", name: "Worki na odpady", short: "Worki\nna odpady", desc: "LDPE i HDPE, od 20 do 240 l, w kolorach segregacji" },
-    { id: "flexistore", name: "Flexistore", short: "Flexistore", desc: "Pojemniki z pokrywą i wkłady z przegródkami" },
-    { id: "techbox", name: "Techbox", short: "Techbox", desc: "Wytrzymałe pojemniki HD i wkłady" },
-    { id: "dom", name: "Pudła i przechowywanie", short: "Pudła\ni przechowywanie", desc: "Pudła Loft, kartony do przeprowadzek" },
-    { id: "torby", name: "Torby i plecaki", short: "Torby\ni plecaki", desc: "Torby i plecaki z bawełny i sztruksu" },
-    { id: "prezenty", name: "Opakowania prezentowe", short: "Opakowania\nprezentowe", desc: "Torby i pudełka Wave Kraft" },
-    { id: "sprzatanie", name: "Kuchnia i sprzątanie", short: "Kuchnia\ni sprzątanie", desc: "Ściereczki, zmywaki, druciaki" },
-    { id: "chemia", name: "Chemia gospodarcza", short: "Chemia\ngospodarcza", desc: "Płyny RAKUN w ekonomicznych opakowaniach" },
-    { id: "mydla", name: "Mydła i pielęgnacja", short: "Mydła\ni pielęgnacja", desc: "Mydła w płynie RAKUN, pumeksy" },
-    { id: "warsztat", name: "Taśmy i sznurki", short: "Taśmy\ni sznurki", desc: "Taśmy izolacyjne i maskujące, sznurki" },
-    { id: "budki", name: "Budki i karmniki", short: "Budki\ni karmniki", desc: "Dla ptaków, jeży i nietoperzy" },
-    { id: "nagrobki", name: "Profesjonalne czyszczenie i renowacja nagrobków", short: "Czyszczenie\ni renowacja nagrobków", desc: "Aktywna piana do mycia pomników i zestawy do renowacji napisów" },
+    { id: "worki", name: "Bin bags", short: "Bin\nbags", desc: "LDPE and HDPE, 20 to 240 l, in recycling colours" },
+    { id: "flexistore", name: "Flexistore", short: "Flexistore", desc: "Lidded boxes and compartment inserts" },
+    { id: "techbox", name: "Techbox", short: "Techbox", desc: "Heavy-duty HD boxes and inserts" },
+    { id: "dom", name: "Boxes and storage", short: "Boxes\nand storage", desc: "Loft boxes, moving boxes" },
+    { id: "torby", name: "Bags and backpacks", short: "Bags and\nbackpacks", desc: "Cotton and corduroy bags and backpacks" },
+    { id: "prezenty", name: "Gift packaging", short: "Gift\npackaging", desc: "Wave Kraft bags and boxes" },
+    { id: "sprzatanie", name: "Kitchen and cleaning", short: "Kitchen\nand cleaning", desc: "Cloths, sponges, scourers" },
+    { id: "chemia", name: "Household cleaning products", short: "Household\ncleaners", desc: "RAKUN liquids in economical packs" },
+    { id: "mydla", name: "Soaps and care", short: "Soaps\nand care", desc: "RAKUN liquid soaps, pumice stones" },
+    { id: "warsztat", name: "Tapes and twine", short: "Tapes\nand twine", desc: "Insulating and masking tapes, twine" },
+    { id: "budki", name: "Birdhouses and feeders", short: "Birdhouses\nand feeders", desc: "For birds, hedgehogs and bats" },
+    { id: "nagrobki", name: "Professional headstone cleaning and renovation", short: "Headstone cleaning\nand renovation", desc: "Active headstone cleaning foam and inscription renovation kits" },
   ];
   ICON.dom = ICON.organizery;
   ICON.nagrobki = '<svg viewBox="0 0 48 48" ' + P + '><path d="M14 40V18a10 10 0 0120 0v22"/><path d="M8 40h32v4H8z"/><path d="M24 17v12M19 22h10"/></svg>';
   CATS.forEach(function (c) { c.icon = ICON[c.id]; });
 
   var ROOMS = [
-    { id: "salon", name: "Salon", img: "img/foto/flexistore-dsc05557.jpg" },
-    { id: "kuchnia", name: "Kuchnia", img: "img/foto/baner-kuchnia.jpg" },
-    { id: "garderoba", name: "Garderoba", img: "img/foto/baner-111062-7.jpg" },
-    { id: "biuro", name: "Biuro i archiwum", img: "img/foto/baner-pudla-new.jpg" },
-    { id: "garaz", name: "Garaż i warsztat", img: "img/foto/baner-garaz-i-warsztat.jpg" },
-    { id: "lazienka", name: "Łazienka", img: "img/foto/baner-lazienka.jpg" },
-    { id: "ogrod", name: "Ogród i taras", img: "img/foto/baner-ogrod-i-taras.jpg" },
-    { id: "wdrodze", name: "Na co dzień", img: "img/foto/torba-valencia-img-0789.jpg" }
+    { id: "salon", name: "Living room", img: "img/foto/flexistore-dsc05557.jpg" },
+    { id: "kuchnia", name: "Kitchen", img: "img/foto/baner-kuchnia.jpg" },
+    { id: "garderoba", name: "Wardrobe", img: "img/foto/baner-111062-7.jpg" },
+    { id: "biuro", name: "Office and archive", img: "img/foto/baner-pudla-new.jpg" },
+    { id: "garaz", name: "Garage and workshop", img: "img/foto/baner-garaz-i-warsztat.jpg" },
+    { id: "lazienka", name: "Bathroom", img: "img/foto/baner-lazienka.jpg" },
+    { id: "ogrod", name: "Garden and patio", img: "img/foto/baner-ogrod-i-taras.jpg" },
+    { id: "wdrodze", name: "Everyday", img: "img/foto/torba-valencia-img-0789.jpg" }
   ];
   ROOMS.forEach(function (r) { r.icon = ICON[r.id]; });
 
   /* ---------- Kolory wariantów + segregacja ---------- */
   var COLORS = {
-    "CZARNY": { name: "czarny", hex: "#232322", seg: "Zmieszane" },
-    "BRĄZOWY": { name: "brązowy", hex: "#7A5433", seg: "Bio" },
-    "ZIELONY": { name: "zielony", hex: "#5E9E48", seg: "Szkło" },
-    "ŻÓŁTY": { name: "żółty", hex: "#EDC12E", seg: "Metale i tworzywa sztuczne" },
-    "NIEBIESKI": { name: "niebieski", hex: "#2F63AE", seg: "Papier" },
-    "CZERWONY": { name: "czerwony", hex: "#C3362B" },
-    "BIAŁY": { name: "biały", hex: "#F6F5F1" },
-    "SZARY": { name: "szary", hex: "#9A9A96" },
+    "CZARNY": { name: "black", hex: "#232322", seg: "Mixed waste" },
+    "BRĄZOWY": { name: "brown", hex: "#7A5433", seg: "Organic" },
+    "ZIELONY": { name: "green", hex: "#5E9E48", seg: "Glass" },
+    "ŻÓŁTY": { name: "yellow", hex: "#EDC12E", seg: "Metals and plastics" },
+    "NIEBIESKI": { name: "blue", hex: "#2F63AE", seg: "Paper" },
+    "CZERWONY": { name: "red", hex: "#C3362B" },
+    "BIAŁY": { name: "white", hex: "#F6F5F1" },
+    "SZARY": { name: "grey", hex: "#9A9A96" },
     "DENIM": { name: "denim", hex: "#7F939D" },
     "NEUTRAL": { name: "neutral", hex: "#D8D2C6" },
-    "NATURALNY": { name: "naturalny", hex: "#EFE5CF" },
+    "NATURALNY": { name: "natural", hex: "#EFE5CF" },
     "LEMON": { name: "lemon", hex: "#F1DE6E" },
-    "RÓŻOWY": { name: "różowy", hex: "#E58BB0" },
-    "TURKUSOWY": { name: "turkusowy", hex: "#2FB5B0" },
-    "POMARAŃCZOWY": { name: "pomarańczowy", hex: "#EE8A2E" },
-    "BŁĘKITNY": { name: "błękitny", hex: "#8DB4D6" },
-    "BURSZTYNOWY": { name: "bursztynowy", hex: "#C98A3B" },
-    "OLIWKOWY": { name: "oliwkowy", hex: "#7B7F47" },
-    "SREBRNY": { name: "srebrny", hex: "linear-gradient(135deg,#E4E5E7,#9EA1A6)" },
-    "ZŁOTY": { name: "złoty", hex: "linear-gradient(135deg,#F0D78C,#B8902F)" },
-    "MIX": { name: "mix kolorów", hex: "conic-gradient(#C3362B 0 25%,#2F63AE 0 50%,#5E9E48 0 75%,#EDC12E 0)" },
-    "ŻÓŁTO-CZARNY": { name: "żółto-czarny", hex: "linear-gradient(135deg,#EDC12E 50%,#232322 50%)" }
+    "RÓŻOWY": { name: "pink", hex: "#E58BB0" },
+    "TURKUSOWY": { name: "turquoise", hex: "#2FB5B0" },
+    "POMARAŃCZOWY": { name: "orange", hex: "#EE8A2E" },
+    "BŁĘKITNY": { name: "light blue", hex: "#8DB4D6" },
+    "BURSZTYNOWY": { name: "amber", hex: "#C98A3B" },
+    "OLIWKOWY": { name: "olive", hex: "#7B7F47" },
+    "SREBRNY": { name: "silver", hex: "linear-gradient(135deg,#E4E5E7,#9EA1A6)" },
+    "ZŁOTY": { name: "gold", hex: "linear-gradient(135deg,#F0D78C,#B8902F)" },
+    "MIX": { name: "mixed colours", hex: "conic-gradient(#C3362B 0 25%,#2F63AE 0 50%,#5E9E48 0 75%,#EDC12E 0)" },
+    "ŻÓŁTO-CZARNY": { name: "yellow-black", hex: "linear-gradient(135deg,#EDC12E 50%,#232322 50%)" }
   };
   // Odmiany słów w nazwach sklepu (CZARNA, CZERWONE, BIAŁYCH...) → klucz koloru
   var COLOR_WORDS = [
@@ -166,7 +167,7 @@
     "manhattan": "Manhattan", "loft": "Loft", "wave": "Wave", "kraft": "Kraft", "click&go": "Click&Go", "diy": "DIY", "xxl": "XXL", "kangoo": "Kangoo", "apus": "Apus", "paridae": "Paridae",
     "erina": "Erina", "chiroptera": "Chiroptera", "maxi": "Maxi", "midi": "Midi", "mini": "Mini", "a4": "A4", "idea": "Idea", "roll": "Roll",
     "lemon": "Lemon", "mint": "Mint", "flower": "Flower", "bloom": "Bloom", "forest": "Forest", "walk": "Walk", "milk": "Milk", "honey": "Honey",
-    "care": "Care", "ocean": "Ocean", "dive": "Dive", "tropic": "Tropic", "holiday": "Holiday", "12pack": "12 szt.", "6pack": "6 szt." };
+    "care": "Care", "ocean": "Ocean", "dive": "Dive", "tropic": "Tropic", "holiday": "Holiday", "12pack": "12 pcs", "6pack": "6 pcs" };
   function prettify(s) {
     var t = s.toLowerCase().replace(/\s+/g, " ").trim()
       .replace(/(\d+(?:[.,]\d+)?)l\b/g, "$1 l").replace(/(\d+)mm\b/g, "$1 mm").replace(/(\d+)cm\b/g, "$1 cm").replace(/(\d+)g\b/g, "$1 g")
@@ -200,36 +201,36 @@
     var cap = p.cap ? p.cap + " l" : "";
     switch (p.cat) {
       case "worki":
-        if (/HDPE/.test(up)) return "Cienkie, szeleszczące worki HDPE do małych koszy w łazience, biurze i sypialni. Pojemność " + cap + ".";
-        if (/EKSTRA/.test(up)) return "Najgrubsza folia w ofercie: na gruz ogrodowy, liście, gałęzie i ciężkie odpady. Pojemność " + cap + ".";
-        if (/TAŚM/.test(up)) return "Worki z taśmą ściągającą: zawiązujesz je jednym ruchem i wynosisz jak torbę. Folia LDPE, pojemność " + cap + ".";
-        if (/SEGREGACJI/.test(up)) return "Komplet kolorów do segregacji w małym formacie, idealny pod domowe kosze sortujące. Pojemność " + cap + ".";
-        if (/MOCNY/.test(up)) return "Elastyczna, grubsza folia LDPE, która nie pęka przy upychaniu. Kolory zgodne z segregacją odpadów. Pojemność " + cap + ".";
-        return "Klasyczne worki z folii LDPE na codzienne odpady. Kolory zgodne z segregacją. Pojemność " + cap + ".";
+        if (/HDPE/.test(up)) return "Thin, rustling HDPE bags for small bins in the bathroom, office and bedroom. Capacity " + cap + ".";
+        if (/EKSTRA/.test(up)) return "The thickest film in our range: for garden debris, leaves, branches and heavy waste. Capacity " + cap + ".";
+        if (/TAŚM/.test(up)) return "Drawstring bags: tie them in one move and carry them out like a bag. LDPE film, capacity " + cap + ".";
+        if (/SEGREGACJI/.test(up)) return "A full set of recycling colours in a small size, ideal for home sorting bins. Capacity " + cap + ".";
+        if (/MOCNY/.test(up)) return "Flexible, thicker LDPE film that doesn't split when you stuff it. Colours that follow waste sorting. Capacity " + cap + ".";
+        return "Classic LDPE bin bags for everyday waste. Recycling colours. Capacity " + cap + ".";
       case "flexistore":
-        if (/INSERT/.test(up)) return "Wkład z przegródkami do pojemnika Flexistore. Dzieli wnętrze na sekcje, więc drobiazgi się nie mieszają.";
-        if (/MIX/.test(up)) return "Cztery pojemniki z pokrywami w jednym komplecie. Uchwyty w ściankach, pokrywa z otworem, pasują do siebie rozmiarami i łatwo je piętrzyć.";
-        return "Zestaw pojemników Flexistore z pokrywami o pojemności " + cap + ". Matowa powierzchnia, uchwyty w ściankach, stabilne piętrowanie.";
-      case "techbox": return /INSERT/.test(up) ? "Wkład z przegródkami do pojemnika Techbox HD. Porządek w narzędziach, kablach i drobnych częściach." : "Wytrzymałe pojemniki Techbox HD do garażu, piwnicy i warsztatu, z wkładem na drobiazgi.";
-      case "dom": return /PRZEPROWADZ/.test(up) ? "Wzmocnione kartony do przeprowadzek, które wytrzymują ciężkie książki i naczynia." : "Tekturowe pudła Loft z polem do opisu. Do archiwizacji dokumentów, zdjęć i rzeczy sezonowych.";
+        if (/INSERT/.test(up)) return "Compartment insert for the Flexistore box. It divides the inside into sections so small items don't get mixed up.";
+        if (/MIX/.test(up)) return "Four lidded boxes in one set. Handles in the sides, a lid with an opening; they fit together in size and stack easily.";
+        return "Set of lidded Flexistore boxes with a capacity of " + cap + ". Matt finish, handles in the sides, stable stacking.";
+      case "techbox": return /INSERT/.test(up) ? "Compartment insert for the Techbox HD box. Keeps tools, cables and small parts in order." : "Heavy-duty Techbox HD boxes for the garage, cellar and workshop, with an insert for small items.";
+      case "dom": return /PRZEPROWADZ/.test(up) ? "Reinforced moving boxes that can take heavy books and dishes." : "Loft cardboard boxes with a label field. For archiving documents, photos and seasonal items.";
       case "torby":
-        if (/PLECAK/.test(up)) return "Bawełniany plecak-worek ze sznurkiem. Lekki i pakowny, dobry na siłownię i wycieczkę.";
-        if (/MANHATTAN/.test(up)) return "Sztruksowa torba Manhattan na co dzień: miękka, pojemna i w modnych kolorach.";
-        return "Bawełniana torba z długimi uszami, bez nadruku. Na zakupy, na co dzień i w podróż.";
-      case "prezenty": return "Opakowania z kolekcji Wave Kraft z naturalnego papieru. Eleganckie, proste i gotowe do zapakowania prezentu.";
+        if (/PLECAK/.test(up)) return "Cotton drawstring backpack. Light and roomy, good for the gym and day trips.";
+        if (/MANHATTAN/.test(up)) return "Manhattan corduroy bag for every day: soft, roomy and in trendy colours.";
+        return "Plain cotton bag with long handles. For shopping, every day and travel.";
+      case "prezenty": return "Wave Kraft packaging made of natural paper. Elegant, simple and ready for your gift.";
       case "sprzatanie":
-        if (/MIKROFIBR/.test(up)) return "Ściereczki z mikrofibry zbierają kurz i tłuszcz bez detergentu. Różne kolory pomagają oddzielić kuchnię od łazienki.";
-        if (/ROLL/.test(up)) return "Ściereczki w rolce – odrywasz tyle, ile potrzebujesz. Do blatu, naczyń i szybkiego sprzątania.";
-        if (/ROLKA DO UBRAŃ/.test(up)) return "Rolka do ubrań z zapasem wkładów. Zbiera sierść, kurz i włosy z ubrań i tapicerki.";
-        if (/GĄBKA/.test(up)) return "Gąbka melaminowa, która usuwa ślady i zabrudzenia samą wodą.";
-        return "Akcesoria do zmywania i szorowania garnków, patelni i trudnych zabrudzeń.";
-      case "chemia": return /SPRYSKIWACZ/.test(up) ? "Letni płyn do spryskiwaczy RAKUN usuwa owady i smugi z szyby. Kanister 5 l." : /SZYB/.test(up) ? "Płyn RAKUN do mycia szyb i luster bez smug. Kanister 5 l." : "Płyn do mycia naczyń RAKUN, wydajny i przyjemny w zapachu. Ekonomiczny kanister 5 l.";
-      case "mydla": return /PUMEKS/.test(up) ? "Pumeks kosmetyczny do pielęgnacji stóp i dłoni." : "Mydło w płynie RAKUN w kanistrze 5 l do uzupełniania dozowników w domu i w firmie.";
+        if (/MIKROFIBR/.test(up)) return "Microfibre cloths pick up dust and grease without detergent. Different colours help keep kitchen and bathroom cloths apart.";
+        if (/ROLL/.test(up)) return "Cloths on a roll – tear off as many as you need. For worktops, dishes and quick clean-ups.";
+        if (/ROLKA DO UBRAŃ/.test(up)) return "Lint roller with refills. Picks up pet hair, dust and hair from clothes and upholstery.";
+        if (/GĄBKA/.test(up)) return "Melamine sponge that removes marks and dirt with just water.";
+        return "Accessories for washing and scrubbing pots, pans and tough dirt.";
+      case "chemia": return /SPRYSKIWACZ/.test(up) ? "RAKUN summer screenwash removes insects and streaks from the windscreen. 5 l canister." : /SZYB/.test(up) ? "RAKUN streak-free glass and mirror cleaner. 5 l canister." : "RAKUN washing-up liquid, efficient and pleasantly scented. Economical 5 l canister.";
+      case "mydla": return /PUMEKS/.test(up) ? "Cosmetic pumice stone for foot and hand care." : "RAKUN liquid soap in a 5 l canister for refilling dispensers at home and at work.";
       case "warsztat":
-        if (/SZNUREK/.test(up)) return "Naturalny sznurek do pakowania, ogrodu, kuchni i rękodzieła.";
-        return "Taśmy do pakowania, malowania i prac elektrycznych w praktycznych zestawach.";
-      case "budki": return "Drewniana budka lub karmnik IDEA HOME. Daje schronienie i pożywienie zwierzętom w ogrodzie przez cały rok.";
-      case "nagrobki": return "Zestaw do odnawiania liter na nagrobkach i tablicach. Przywraca czytelność i kolor napisów.";
+        if (/SZNUREK/.test(up)) return "Natural twine for packing, the garden, the kitchen and crafts.";
+        return "Tapes for packing, painting and electrical work in practical sets.";
+      case "budki": return "IDEA HOME wooden house or feeder. Gives garden wildlife shelter and food all year round.";
+      case "nagrobki": return "Kit for renovating letters on headstones and plaques. Restores the readability and colour of inscriptions.";
     }
     return "";
   }
@@ -240,37 +241,37 @@
   /* Grupowanie podobnych produktów w jedną kartę: re → klucz rodziny, tytuł, nazwa opcji i jej wartość [etykieta, kolejność] */
   function pick(list) { return function (up) { for (var i = 0; i < list.length; i++) if (list[i][0].test(up)) return [list[i][1], i]; return [null, 99]; }; }
   var GROUP_RULES = [
-    { re: /PUDŁO DO PRZECHOWYWANIA ZESTAW LOFT/, key: "PUDŁA LOFT", title: "Pudła do przechowywania Loft", label: "Model",
+    { re: /PUDŁO DO PRZECHOWYWANIA ZESTAW LOFT/, key: "PUDŁA LOFT", title: "Loft storage boxes", label: "Model",
       opt: pick([[/^(?!.*IDEA A4)/, "Loft"], [/IDEA A4/, "Loft Idea A4"]]) },
-    { re: /^PLECAK BAWEŁNIANY/, key: "PLECAK BAWEŁNIANY", title: "Plecak bawełniany 360 × 440 mm", label: "Gramatura",
+    { re: /^PLECAK BAWEŁNIANY/, key: "PLECAK BAWEŁNIANY", title: "Cotton backpack 360 × 440 mm", label: "Weight",
       opt: function (up) { var g = +(up.match(/(\d+)G\b/) || [])[1]; return [g + " g", g]; } },
-    { re: /^TORBA BAWEŁNIANA \d+G/, key: "TORBA BAWEŁNIANA", title: "Torba bawełniana 380 × 420 mm z uszami, bez nadruku", label: "Wersja",
+    { re: /^TORBA BAWEŁNIANA \d+G/, key: "TORBA BAWEŁNIANA", title: "Plain cotton bag 380 × 420 mm with handles", label: "Version",
       opt: function (up) { var g = +(up.match(/(\d+)G\b/) || [])[1], w = /POSZERZANA/.test(up); return [g + " g" + (w ? " poszerzana" : ""), g * 10 + (w ? 1 : 0)]; } },
-    { re: /^TORBA PREZENTOWA .*WAVE KRAFT/, key: "TORBA PREZENTOWA WAVE KRAFT", title: "Torba prezentowa Wave Kraft", label: "Rozmiar",
+    { re: /^TORBA PREZENTOWA .*WAVE KRAFT/, key: "TORBA PREZENTOWA WAVE KRAFT", title: "Wave Kraft gift bag", label: "Size",
       opt: pick([[/KRAFT S\b/, "S"], [/KRAFT M\b/, "M"], [/KRAFT L\b/, "L"]]) },
-    { re: /^PUDEŁKO NA WINO .*WAVE KRAFT/, key: "PUDEŁKO NA WINO WAVE KRAFT", title: "Pudełko na wino Wave Kraft", label: "Model",
-      opt: pick([[/^(?!.*CLICK)/, "Klasyczne"], [/CLICK/, "Click&Go"]]) },
-    { re: /^DRUCIAK/, key: "DRUCIAKI", title: "Druciaki do garnków i patelni", label: "Rodzaj",
+    { re: /^PUDEŁKO NA WINO .*WAVE KRAFT/, key: "PUDEŁKO NA WINO WAVE KRAFT", title: "Wave Kraft wine box", label: "Model",
+      opt: pick([[/^(?!.*CLICK)/, "Classic"], [/CLICK/, "Click&Go"]]) },
+    { re: /^DRUCIAK/, key: "DRUCIAKI", title: "Scourers for pots and pans", label: "Type",
       opt: pick([[/METALOWY/, "metalowy"], [/PLASTIKOWY/, "plastikowy"], [/SPIRALNY/, "spiralny"]]) },
-    { re: /^ZMYWAK|^GĄBKA MAGICZNA/, key: "ZMYWAKI I GĄBKI", title: "Zmywaki i gąbki kuchenne", label: "Rodzaj", clearColor: true,
-      opt: pick([[/CELULOZOWY/, "celulozowy"], [/DELIKATNYCH/, "do delikatnych powierzchni"], [/TEFLONU/, "do teflonu"], [/GĄBKA/, "gąbka magiczna"]]) },
-    { re: /ŚCIERECZK\S* Z MIKROFIBRY(?!.*RAKUN)/, key: "ŚCIERECZKI Z MIKROFIBRY", title: "Ściereczki z mikrofibry", label: "Rozmiar",
+    { re: /^ZMYWAK|^GĄBKA MAGICZNA/, key: "ZMYWAKI I GĄBKI", title: "Kitchen scrubbers and sponges", label: "Type", clearColor: true,
+      opt: pick([[/CELULOZOWY/, "cellulose"], [/DELIKATNYCH/, "for delicate surfaces"], [/TEFLONU/, "for non-stick"], [/GĄBKA/, "magic sponge"]]) },
+    { re: /ŚCIERECZK\S* Z MIKROFIBRY(?!.*RAKUN)/, key: "ŚCIERECZKI Z MIKROFIBRY", title: "Microfibre cloths", label: "Size",
       opt: function (up) { var s = up.match(/(\d+)X(\d+)CM/) || []; return [s[1] + " × " + s[2] + " cm", +s[1]]; } },
-    { re: /^PŁYN DO MYCIA NACZYŃ .*RAKUN/, key: "PŁYN DO MYCIA NACZYŃ RAKUN", title: "Płyn do mycia naczyń RAKUN 5 l", label: "Zapach",
+    { re: /^PŁYN DO MYCIA NACZYŃ .*RAKUN/, key: "PŁYN DO MYCIA NACZYŃ RAKUN", title: "RAKUN washing-up liquid 5 l", label: "Scent",
       opt: pick([[/LEMON/, "Lemon"], [/MINT/, "Mint"]]) },
-    { re: /^MYDŁO W PŁYNIE .*RAKUN/, key: "MYDŁO W PŁYNIE RAKUN", title: "Mydło w płynie RAKUN 5 l", label: "Zapach",
+    { re: /^MYDŁO W PŁYNIE .*RAKUN/, key: "MYDŁO W PŁYNIE RAKUN", title: "RAKUN liquid soap 5 l", label: "Scent",
       opt: pick([[/FLOWER/, "Flower Bloom"], [/FOREST/, "Forest Walk"], [/MILK/, "Milk & Honey Care"], [/OCEAN/, "Ocean Dive"], [/TROPIC/, "Tropic Holiday"]]) },
-    { re: /^SZNUREK/, label: "Długość", clearLength: true,
+    { re: /^SZNUREK/, label: "Length", clearLength: true,
       opt: function (up, len) { return [len + " m", len]; } },
-    { re: /^TAŚMA MASKUJĄCA/, key: "TAŚMA MASKUJĄCA", title: "Taśma maskująca 50 m", label: "Szerokość",
+    { re: /^TAŚMA MASKUJĄCA/, key: "TAŚMA MASKUJĄCA", title: "Masking tape 50 m", label: "Width",
       opt: function (up) { var w = +(up.match(/(\d+)MM/) || [])[1]; return [w + " mm", w]; } },
-    { re: /TORBA FILCOWA|TORBA KANGOO/, key: "TORBY FILCOWE", title: "Torba filcowa", label: "Model",
-      opt: pick([[/XXL/, "XXL na zakupy"], [/1102/, "1102"], [/KANGOO/, "Kangoo z przegródkami"]]) },
-    { re: /AKTYWNA PIANA/, key: "AKTYWNA PIANA DO NAGROBKÓW", title: "Aktywna piana do mycia nagrobków 400 ml", label: "Wariant",
+    { re: /TORBA FILCOWA|TORBA KANGOO/, key: "TORBY FILCOWE", title: "Felt bag", label: "Model",
+      opt: pick([[/XXL/, "XXL shopper"], [/1102/, "1102"], [/KANGOO/, "Kangoo with compartments"]]) },
+    { re: /AKTYWNA PIANA/, key: "AKTYWNA PIANA DO NAGROBKÓW", title: "Active headstone cleaning foam 400 ml", label: "Variant",
       opt: function () { return [null, 0]; } },
-    { re: /^KARMNIK DLA PTAKÓW/, key: "KARMNIK DLA PTAKÓW", title: "Karmnik dla ptaków", label: "Model",
+    { re: /^KARMNIK DLA PTAKÓW/, key: "KARMNIK DLA PTAKÓW", title: "Bird feeder", label: "Model",
       opt: pick([[/MAXI/, "Maxi"], [/MIDI/, "Midi DIY"], [/MINI(?! DIY)/, "Mini"], [/MINI DIY/, "Mini DIY"]]) },
-    { re: /^BUDKA DLA PTAKÓW/, key: "BUDKA DLA PTAKÓW", title: "Budka dla ptaków", label: "Model",
+    { re: /^BUDKA DLA PTAKÓW/, key: "BUDKA DLA PTAKÓW", title: "Birdhouse", label: "Model",
       opt: pick([[/APUS/, "Apus"], [/PARIDAE/, "Paridae"]]) }
   ];
 
@@ -321,22 +322,22 @@
     key = key.replace(/\d+\s*SZT\.?/g, " ").replace(/\d+PACK/g, " ").replace(/\bA'\d+/g, " ");
     if (length) key = key.replace(/\d+M\b/g, " ").replace(/[\d.]+KG\b/g, " ");
     if (/RENOWACJI/.test(up)) key = "ZESTAW DO RENOWACJI NAPISÓW NA POMNIKACH";
-    var bagType = /EKSTRA MOCNY/.test(up) ? " ekstra mocne" : /MOCNY/.test(up) ? " mocne" : /TAŚM/.test(up) ? " z taśmą" : /SEGREGACJI/.test(up) ? " do segregacji" : "";
+    var bagType = /EKSTRA MOCNY/.test(up) ? " extra strong" : /MOCNY/.test(up) ? " mocne" : /TAŚM/.test(up) ? " drawstring" : /SEGREGACJI/.test(up) ? " for recycling" : "";
     var bagMat = /HDPE/.test(up) ? "HDPE" : "LDPE";
     // worki: jedna rodzina na rodzaj worka, pojemność i kolor to warianty
     if (cat === "worki") key = ("WORKI " + bagMat + bagType).toUpperCase();
     // Flexistore / Techbox: jedna karta na pojemniki i jedna na inserty, rozmiar jako opcja do wyboru
-    var opt = null, optSort = null, optLabel = "Pojemność";
+    var opt = null, optSort = null, optLabel = "Capacity";
     if (cat === "flexistore" || cat === "techbox") {
       var isInsert = /INSERT/.test(up) && !/SET/.test(up);
       var sizes = (up.match(/(\d+)\/(\d+)\s*L/) || []);
       if (cat === "flexistore") key = isInsert ? "INSERTY FLEXISTORE" : "POJEMNIKI FLEXISTORE";
       else key = "TECHBOX HD";
-      if (/MIX ROZMIAR/.test(up)) { opt = "Mix 4 rozmiary"; optSort = 0; }
-      else if (/SET 2X(\d+)L/.test(up)) { var n = up.match(/SET 2X(\d+)L/)[1]; opt = "Zestaw 2 × " + n + " l + insert"; optSort = 1; }
+      if (/MIX ROZMIAR/.test(up)) { opt = "Mix of 4 sizes"; optSort = 0; }
+      else if (/SET 2X(\d+)L/.test(up)) { var n = up.match(/SET 2X(\d+)L/)[1]; opt = "Set of 2 × " + n + " l + insert"; optSort = 1; }
       else if (sizes[1]) { opt = (isInsert && cat === "techbox" ? "Insert " : "") + sizes[1] + "/" + sizes[2] + " l"; optSort = +sizes[1] + (cat === "techbox" ? 1000 : 0); }
       else if (cap) { opt = cap + " l"; optSort = +cap; }
-      optLabel = cat === "techbox" ? "Wariant" : "Rozmiar";
+      optLabel = cat === "techbox" ? "Variant" : "Size";
     }
     // pozostałe podobne produkty: jedna karta, różnica jako opcja do wyboru
     var rr = null;
@@ -346,15 +347,15 @@
 
     var title;
     if (cat === "worki") {
-      title = "Worki na odpady " + bagMat + bagType;
+      title = "Bin bags " + bagMat + bagType;
     } else if (key === "POJEMNIKI FLEXISTORE") {
-      title = "Pojemniki Flexistore z pokrywą";
+      title = "Flexistore boxes with lid";
     } else if (key === "INSERTY FLEXISTORE") {
-      title = "Insert z przegródkami do pojemnika Flexistore";
+      title = "Compartment insert for Flexistore box";
     } else if (key === "TECHBOX HD") {
-      title = "Pojemniki Techbox HD i inserty";
+      title = "Techbox HD boxes and inserts";
     } else if (/RENOWACJI/.test(up)) {
-      title = "Zestaw do renowacji napisów na pomnikach";
+      title = "Headstone inscription renovation kit";
     } else {
       title = prettify(key.replace(/\s*\.$/, ""));
     }
@@ -392,7 +393,7 @@
     var parts = [];
     if (v.color && COLORS[v.color]) parts.push(COLORS[v.color].name);
     if (v.length) parts.push(v.length + " m");
-    if (v.pack) parts.push(v.pack + " szt.");
+    if (v.pack) parts.push(v.pack + " pcs");
     return parts.join(" · ");
   }
   function buildCatalog() {
@@ -485,7 +486,7 @@
     // ceny ze sklepu polskiego pokazujemy tylko w wersji PL
     if (v.price == null || LANG !== "pl") return '<p class="price" hidden></p>';
     var p = v.price.toFixed(2).replace(".", ",") + " zł";
-    return '<p class="price">' + p + (v.avail === false ? ' <span class="soldout">chwilowo niedostępny</span>' : "") + "</p>";
+    return '<p class="price">' + p + (v.avail === false ? ' <span class="soldout">temporarily unavailable</span>' : "") + "</p>";
   }
   function buyUrl(g, v) {
     if (LANG === "pl") return v.url || shopSearch(g.query);
@@ -493,13 +494,13 @@
     if (/PIANA|PIANKA/i.test(v.raw)) return MARKET.search(LANG === "cs" ? "pěna" : "Aktivschaum");
     return MARKET.search(terms[g.cat] || "IDEA HOME");
   }
-  // na przycisku tylko to, czym warianty się różnią (np. "5 szt." zamiast "naturalny · 5 szt.")
+  // na przycisku tylko to, czym warianty się różnią (np. "5 pcs" zamiast "natural · 5 pcs")
   function chipLabel(g, v) {
     var differs = function (k) { return g.variants.some(function (x) { return x[k] !== g.variants[0][k]; }); };
     var parts = [];
     if (differs("color") && v.color && COLORS[v.color]) parts.push(COLORS[v.color].name);
     if (differs("length") && v.length) parts.push(v.length + " m");
-    if (differs("pack") && v.pack) parts.push(v.pack + " szt.");
+    if (differs("pack") && v.pack) parts.push(v.pack + " pcs");
     return parts.join(" · ");
   }
   // wybór wariantu w maks. trzech rzędach: opcja (litraż/rozmiar/model…), kolor, opakowanie
@@ -511,17 +512,17 @@
     var packPool = sameOpt.filter(function (x) { return x.color === v.color; });
     if (uniq(packPool.map(function (x) { return x.pack; })).length < 2) packPool = sameOpt;
     var packs = uniq(packPool.map(function (x) { return x.pack; })).sort(function (a, b) { return a - b; });
-    var lab = g.optLabel || "Pojemność";
+    var lab = g.optLabel || "Capacity";
     var html = '<div class="vpick">';
     if (g.opts.length > 1) html += '<div class="vrow" role="group" aria-label="' + lab + '"><span class="vlab">' + lab + "</span>" + g.opts.map(function (o) {
       return '<button class="vchip" type="button" data-opt="' + esc(o) + '" aria-pressed="' + (o === v.opt) + '">' + esc(o) + "</button>";
     }).join("") + "</div>";
-    if (colors.length > 1) html += '<div class="vrow swatches" role="group" aria-label="Kolor"><span class="vlab">Kolor</span>' + colors.map(function (c) {
+    if (colors.length > 1) html += '<div class="vrow swatches" role="group" aria-label="Colour"><span class="vlab">Colour</span>' + colors.map(function (c) {
       var ok = sameOpt.some(function (x) { return x.color === c; }), name = COLORS[c] ? COLORS[c].name : c;
-      return '<button class="sw' + (ok ? "" : " na") + '" type="button" data-color="' + c + '" aria-pressed="' + (c === v.color) + '" title="' + esc(name + (ok ? "" : " – w innym wariancie")) + '" aria-label="' + esc(name) + '" style="background:' + (COLORS[c] ? COLORS[c].hex : "#ccc") + '"></button>';
+      return '<button class="sw' + (ok ? "" : " na") + '" type="button" data-color="' + c + '" aria-pressed="' + (c === v.color) + '" title="' + esc(name + (ok ? "" : " – in another variant")) + '" aria-label="' + esc(name) + '" style="background:' + (COLORS[c] ? COLORS[c].hex : "#ccc") + '"></button>';
     }).join("") + "</div>";
-    if (packs.length > 1) html += '<div class="vrow" role="group" aria-label="Opakowanie"><span class="vlab">Opakowanie</span>' + packs.map(function (p) {
-      return '<button class="vchip" type="button" data-pack="' + p + '" aria-pressed="' + (p === v.pack) + '">' + p + " szt.</button>";
+    if (packs.length > 1) html += '<div class="vrow" role="group" aria-label="Pack"><span class="vlab">Pack</span>' + packs.map(function (p) {
+      return '<button class="vchip" type="button" data-pack="' + p + '" aria-pressed="' + (p === v.pack) + '">' + p + " pcs</button>";
     }).join("") + "</div>";
     return html + "</div>";
   }
@@ -556,14 +557,14 @@
       '<button class="fav" type="button" aria-pressed="' + fav + '" aria-label="Dodaj do ulubionych">' + ICON.heart + "</button>" +
       '<button class="thumb" type="button" aria-label="Szczegóły: ' + esc(g.title) + '"><img class="main" loading="lazy" src="' + v.img + '" alt="' + esc(g.title) + '">' +
       '<img class="alt" loading="lazy" src="' + (v.imgs[1] || v.img) + '" alt=""' + (v.imgs[1] ? "" : " hidden") + '>' +
-      (v.imgs.length > 1 ? '<span class="photos">' + v.imgs.length + " " + pl(v.imgs.length, "zdjęcie", "zdjęcia", "zdjęć") + "</span>" : "") + "</button>" +
+      (v.imgs.length > 1 ? '<span class="photos">' + v.imgs.length + " " + pl(v.imgs.length, "photo", "photos", "photos") + "</span>" : "") + "</button>" +
       '<div class="body">' +
       (opts.hideCat ? "" : '<span class="pcat">' + cat.name + "</span>") +
       (LANG === "pl" ? '<h3><a class="plink" href="p/' + g.id + '.html">' + esc(g.title) + "</a></h3>" : "<h3>" + esc(g.title) + "</h3>") +
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<div class="vwrap">' + variantPicker(g, si) + "</div>" +
-      '<div class="foot"><a class="btn btn-primary btn-sm buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup online</a>' +
+      '<div class="foot"><a class="btn btn-primary btn-sm buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Buy online</a>' +
       (v.amazon ? '<a class="link-arrow amz" href="' + v.amazon + '" target="_blank" rel="noopener">Amazon.de</a>' : "") + "</div>" +
       "</div></article>";
   }
@@ -573,7 +574,7 @@
     var main = root.querySelector(".thumb img.main, .mimg img"); if (main) main.src = v.img;
     var alt = root.querySelector(".thumb img.alt");
     if (alt) { alt.src = v.imgs[1] || v.img; alt.hidden = !v.imgs[1]; }
-    var photos = root.querySelector(".thumb .photos"); if (photos) photos.textContent = v.imgs.length + " " + pl(v.imgs.length, "zdjęcie", "zdjęcia", "zdjęć");
+    var photos = root.querySelector(".thumb .photos"); if (photos) photos.textContent = v.imgs.length + " " + pl(v.imgs.length, "photo", "photos", "photos");
     var desc = root.querySelector(".pdesc, .mdesc"); if (desc) desc.textContent = v.desc || "";
     var strip = root.querySelector(".mthumbs"); if (strip) strip.outerHTML = thumbStrip(v);
     root.querySelector(".spec").textContent = variantSpec(g, v);
@@ -590,7 +591,7 @@
       if (vb) return selectVariant(c, g, pickIndex(g, +c.dataset.vi || 0, vb));
       if (e.target.closest(".fav")) {
         var favs = getFavs(), i = favs.indexOf(g.id), btn = e.target.closest(".fav");
-        if (i > -1) { favs.splice(i, 1); toast("Usunięto z ulubionych"); } else { favs.push(g.id); toast("Dodano do ulubionych"); }
+        if (i > -1) { favs.splice(i, 1); toast("Removed from favourites"); } else { favs.push(g.id); toast("Added to favourites"); }
         btn.setAttribute("aria-pressed", i === -1); setFavs(favs);
         return;
       }
@@ -603,7 +604,7 @@
   /* ---------- Podgląd produktu ---------- */
   function thumbStrip(v) {
     if (v.imgs.length < 2) return '<div class="mthumbs" hidden></div>';
-    return '<div class="mthumbs" role="group" aria-label="Zdjęcia produktu">' + v.imgs.map(function (src, i) {
+    return '<div class="mthumbs" role="group" aria-label="Product photos">' + v.imgs.map(function (src, i) {
       return '<button type="button" data-img="' + i + '" aria-pressed="' + (i === 0) + '" aria-label="Zdjęcie ' + (i + 1) + '"><img loading="lazy" src="' + src + '" alt=""></button>';
     }).join("") + "</div>";
   }
@@ -616,23 +617,23 @@
     var colors = uniq(g.variants.map(function (x) { return x.color && COLORS[x.color] ? COLORS[x.color].name : null; }));
     var packs = uniq(g.variants.map(function (x) { return x.pack; }));
     var rooms = g.rooms.map(roomById).filter(Boolean).map(function (r) { return r.name; });
-    var specs = [["Kategoria", cat.name]];
-    if (g.badge) specs.push(["Seria", g.badge]);
-    if (g.caps.length && (g.cat === "worki" || !g.multi)) specs.push([g.caps.length > 1 ? "Pojemności" : "Pojemność", g.caps.join(" / ") + " l"]);
-    if (g.multi && g.cat !== "worki") specs.push([g.optLabel === "Wariant" ? "Warianty" : "Rozmiary", g.opts.join(", ")]);
-    if (g.cat === "worki") specs.push(["Materiał", /HDPE/.test(g.title) ? "folia HDPE" : "folia LDPE"]);
-    if (packs.length) specs.push(["Opakowanie", packs.join(" / ") + " szt."]);
-    if (colors.length) specs.push([colors.length > 1 ? "Kolory" : "Kolor", colors.join(", ")]);
-    if (rooms.length) specs.push(["Gdzie się sprawdzi", rooms.join(", ")]);
-    specs.push(["Warianty", String(g.variants.length)]);
+    var specs = [["Category", cat.name]];
+    if (g.badge) specs.push(["Range", g.badge]);
+    if (g.caps.length && (g.cat === "worki" || !g.multi)) specs.push([g.caps.length > 1 ? "Capacities" : "Capacity", g.caps.join(" / ") + " l"]);
+    if (g.multi && g.cat !== "worki") specs.push([g.optLabel === "Variant" ? "Variants" : "Sizes", g.opts.join(", ")]);
+    if (g.cat === "worki") specs.push(["Material", /HDPE/.test(g.title) ? "HDPE film" : "LDPE film"]);
+    if (packs.length) specs.push(["Pack", packs.join(" / ") + " pcs"]);
+    if (colors.length) specs.push([colors.length > 1 ? "Colours" : "Colour", colors.join(", ")]);
+    if (rooms.length) specs.push(["Where it works best", rooms.join(", ")]);
+    specs.push(["Variants", String(g.variants.length)]);
     m.innerHTML = '<div class="modal-box">' +
-      '<button class="icon-btn modal-close" type="button" aria-label="Zamknij">' + ICON.close + "</button>" +
+      '<button class="icon-btn modal-close" type="button" aria-label="Close">' + ICON.close + "</button>" +
       '<div class="mgallery"><div class="mimg"><img src="' + v.img + '" alt="' + esc(g.title) + '"></div>' + thumbStrip(v) + "</div>" +
       '<div class="mbody"><span class="label">' + cat.name + "</span><h2>" + esc(g.title) + '</h2><p class="mdesc">' + esc(v.desc || "") + "</p>" +
       '<div class="vwrap">' + variantPicker(g, vi) + "</div>" +
       '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
-      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + (LANG === "pl" ? '<a class="btn btn-outline" href="p/' + g.id + '.html">Strona produktu</a>' : "") + '</div>' +
+      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Buy in shop ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Buy on Amazon.de</a>' : "") + (LANG === "pl" ? '<a class="btn btn-outline" href="p/' + g.id + '.html">Product page</a>' : "") + '</div>' +
       "</div></div>";
     function close() { m.remove(); document.removeEventListener("keydown", onKey); if (last) last.focus(); }
     function onKey(e) { if (e.key === "Escape") close(); }
@@ -717,35 +718,35 @@
     var el = document.getElementById("site-header"); if (!el) return;
     var megaCats = CATS.map(function (c) {
       var n = countIn(c.id);
-      return '<a href="produkty.html#' + c.id + '">' + c.icon + "<span>" + c.name + "<small>" + (n ? n + " " + pl(n, "produkt", "produkty", "produktów") : "wkrótce") + "</small></span></a>";
+      return '<a href="produkty.html#' + c.id + '">' + c.icon + "<span>" + c.name + "<small>" + (n ? n + " " + pl(n, "product", "produkty", "products") : "coming soon") + "</small></span></a>";
     }).join("");
     el.outerHTML =
-      '<div class="topbar"><div class="wrap"><span>Produkty IDEA HOME kupisz w sklepie <a href="' + MARKET.home + '" target="_blank" rel="noopener">' + MARKET.name + '</a></span><span class="tb-extra"><a href="dla-firm.html">Oferta dla firm</a><a href="kontakt.html">Kontakt</a></span></div></div>' +
+      '<div class="topbar"><div class="wrap"><span>IDEA HOME products are available on <a href="' + MARKET.home + '" target="_blank" rel="noopener">' + MARKET.name + '</a></span><span class="tb-extra"><a href="dla-firm.html">Business offer</a><a href="kontakt.html">Contact</a></span></div></div>' +
       '<header class="site-header"><div class="wrap headbar">' +
-      '<a class="brand" href="index.html" aria-label="IDEA HOME – strona główna">' + LOGO + '<span class="brand-tag">Funkcjonalność<br>na co dzień</span></a>' +
-      '<nav class="mainnav" id="mainnav" aria-label="Menu główne">' +
-      '<div class="dd' + (page === "produkty" ? " current" : "") + '"><button type="button" aria-expanded="false">Produkty ' + ICON.chev + '</button><div class="mega">' + megaCats + '<a class="mega-all" href="produkty.html">Zobacz wszystkie produkty <span>→</span></a></div></div>' +
-      '<div class="dd' + (page === "serie" ? " current" : "") + '"><button type="button" aria-expanded="false">Serie ' + ICON.chev + '</button><div class="mega narrow">' +
-      '<a href="serie.html#idea-home"><span>IDEA HOME<small>Funkcjonalność na co dzień</small></span></a>' +
-      '<a href="rakun/index.html"><span>RAKUN<small>Skuteczność w każdej sytuacji</small></span></a>' +
-      '<a href="ms-everyday.html"><span>MS. EVERYDAY<small>Czystość na co dzień</small></span></a>' +
-      '<a class="mega-all" href="serie.html">Zobacz wszystkie serie <span>→</span></a></div></div>' +
-      navLink("kolekcje.html", "Kolekcje", "kolekcje") +
-      navLink("o-marce.html", "O marce", "o-marce") +
-      navLink("inspiracje.html", "Inspiracje", "inspiracje") +
-      navLink("dla-firm.html", "Dla firm", "dla-firm") +
-      navLink("kontakt.html", "Kontakt", "kontakt") +
-      '<a class="btn btn-primary mobile-cta" href="' + MARKET.home + '" target="_blank" rel="noopener">Kup online</a>' +
+      '<a class="brand" href="index.html" aria-label="IDEA HOME – home page">' + LOGO + '<span class="brand-tag">Functionality<br>for every day</span></a>' +
+      '<nav class="mainnav" id="mainnav" aria-label="Main menu">' +
+      '<div class="dd' + (page === "produkty" ? " current" : "") + '"><button type="button" aria-expanded="false">Products ' + ICON.chev + '</button><div class="mega">' + megaCats + '<a class="mega-all" href="produkty.html">See all products <span>→</span></a></div></div>' +
+      '<div class="dd' + (page === "serie" ? " current" : "") + '"><button type="button" aria-expanded="false">Ranges ' + ICON.chev + '</button><div class="mega narrow">' +
+      '<a href="serie.html#idea-home"><span>IDEA HOME<small>Everyday functionality</small></span></a>' +
+      '<a href="rakun/index.html"><span>RAKUN<small>Effective in every situation</small></span></a>' +
+      '<a href="ms-everyday.html"><span>MS. EVERYDAY<small>Everyday cleanliness</small></span></a>' +
+      '<a class="mega-all" href="serie.html">See all ranges <span>→</span></a></div></div>' +
+      navLink("kolekcje.html", "Collections", "kolekcje") +
+      navLink("o-marce.html", "About us", "o-marce") +
+      navLink("inspiracje.html", "Inspiration", "inspiracje") +
+      navLink("dla-firm.html", "For business", "dla-firm") +
+      navLink("kontakt.html", "Contact", "kontakt") +
+      '<a class="btn btn-primary mobile-cta" href="' + MARKET.home + '" target="_blank" rel="noopener">Buy online</a>' +
       "</nav>" +
       '<div class="head-actions">' + langSwitch() +
-      '<button class="icon-btn" type="button" id="searchbtn" aria-label="Szukaj" aria-expanded="false">' + ICON.search + "</button>" +
-      '<a class="icon-btn" href="produkty.html#ulubione" aria-label="Ulubione">' + ICON.heart + '<span class="count" id="favcount"></span></a>' +
-      '<a class="btn btn-primary" href="' + MARKET.home + '" target="_blank" rel="noopener">Kup online ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + "</a>" +
-      '<button class="icon-btn navtoggle" type="button" id="navtoggle" aria-label="Otwórz menu" aria-expanded="false">' + ICON.menu + "</button>" +
+      '<button class="icon-btn" type="button" id="searchbtn" aria-label="Search" aria-expanded="false">' + ICON.search + "</button>" +
+      '<a class="icon-btn" href="produkty.html#ulubione" aria-label="Favourites">' + ICON.heart + '<span class="count" id="favcount"></span></a>' +
+      '<a class="btn btn-primary" href="' + MARKET.home + '" target="_blank" rel="noopener">Buy online ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + "</a>" +
+      '<button class="icon-btn navtoggle" type="button" id="navtoggle" aria-label="Open menu" aria-expanded="false">' + ICON.menu + "</button>" +
       "</div></div>" +
-      '<div class="search-panel" id="searchpanel" hidden><div class="wrap"><form action="produkty.html" id="searchform" role="search"><label class="visually-hidden" for="q-global">Szukaj produktów</label><input id="q-global" name="q" type="search" placeholder="Czego szukasz? np. worki 60 l, pojemnik, torba"><button class="btn btn-dark" type="submit">Szukaj</button></form>' +
+      '<div class="search-panel" id="searchpanel" hidden><div class="wrap"><form action="produkty.html" id="searchform" role="search"><label class="visually-hidden" for="q-global">Search products</label><input id="q-global" name="q" type="search" placeholder="What are you looking for? e.g. bags 60 l, box, tote"><button class="btn btn-dark" type="submit">Search</button></form>' +
       '<div class="suggest" id="suggest" hidden></div>' +
-      '<div class="hints">Popularne: <a class="chip" href="produkty.html#worki">Worki na odpady</a><a class="chip" href="produkty.html#flexistore">Flexistore</a><a class="chip" href="produkty.html#torby">Torby bawełniane</a></div></div></div>' +
+      '<div class="hints">Popular: <a class="chip" href="produkty.html#worki">Bin bags</a><a class="chip" href="produkty.html#flexistore">Flexistore</a><a class="chip" href="produkty.html#torby">Cotton bags</a></div></div></div>' +
       "</header>";
 
     var nav = document.getElementById("mainnav"), tog = document.getElementById("navtoggle");
@@ -776,8 +777,8 @@
       sug.innerHTML = res.length ? res.map(function (r, i) {
         var v = r.g.variants[r.k];
         return '<button type="button" class="sg-item" data-i="' + i + '"><img src="' + esc(v.img) + '" alt="" loading="lazy"><span><b>' + esc(r.g.title) + "</b><small>" + esc(catById(r.g.cat).name + (variantLabel(v) ? " · " + variantLabel(v) : "")) + "</small></span></button>";
-      }).join("") + '<button type="submit" form="searchform" class="sg-all">Zobacz wszystkie wyniki →</button>'
-        : '<p class="sg-none">Nie znaleźliśmy produktów dla „' + esc(q) + '”. Spróbuj innego słowa, np. worki, torba, pojemnik.</p>';
+      }).join("") + '<button type="submit" form="searchform" class="sg-all">See all results →</button>'
+        : '<p class="sg-none">We found no products for “' + esc(q) + '”. Try another word, e.g. bags, tote, box.</p>';
       sug.querySelectorAll(".sg-item").forEach(function (b) {
         b.addEventListener("click", function () { var r = res[+b.dataset.i]; openModal(r.g, r.k); });
       });
@@ -795,16 +796,16 @@
   function renderFooter() {
     var el = document.getElementById("site-footer"); if (!el) return;
     el.outerHTML = '<footer class="site-footer"><div class="wrap"><div class="foot-grid">' +
-      '<div class="fbrand">' + LOGO_WHITE + "<p>Funkcjonalność, jakość i nowoczesne rozwiązania dla Twojego domu. Marka firmy Leviatan z Bielska-Białej.</p>" +
+      '<div class="fbrand">' + LOGO_WHITE + "<p>Functionality, quality and modern solutions for your home. A brand of Leviatan from Bielsko-Biała, Poland.</p>" +
       '<div class="socials"><a href="https://www.facebook.com/LeviatanPoligrafia" target="_blank" rel="noopener" aria-label="Facebook">' + ICON.fb + '</a><a href="https://www.instagram.com/leviatan_poligrafia/" target="_blank" rel="noopener" aria-label="Instagram">' + ICON.ig + '</a><a href="https://www.youtube.com/@LeviatanPoligrafia" target="_blank" rel="noopener" aria-label="YouTube">' + ICON.yt + '</a><a href="https://pl.pinterest.com/leviatanpoligrafia/" target="_blank" rel="noopener" aria-label="Pinterest">' + ICON.pin2 + '</a><a href="https://www.tiktok.com/@leviatanpoligrafia" target="_blank" rel="noopener" aria-label="TikTok">' + ICON.tt + "</a></div></div>" +
-      "<div><h4>Produkty</h4><ul>" + CATS.slice(0, 8).map(function (c) { return '<li><a href="produkty.html#' + c.id + '">' + c.name + "</a></li>"; }).join("") + '<li><a href="produkty.html">Wszystkie →</a></li></ul></div>' +
-      '<div><h4>Serie</h4><ul><li><a href="serie.html#idea-home">IDEA HOME</a></li><li><a href="rakun/index.html">RAKUN</a></li><li><a href="ms-everyday.html">MS. EVERYDAY</a></li></ul><h4 style="margin-top:28px">Kolekcje</h4><ul><li><a href="kolekcje.html#flexistore">Flexistore</a></li><li><a href="kolekcje.html#torby">Torby Valencia i Kopenhaga</a></li></ul></div>' +
-      '<div><h4>Informacje</h4><ul><li><a href="o-marce.html">O marce</a></li><li><a href="inspiracje.html">Inspiracje i porady</a></li><li><a href="dla-firm.html">Dla firm i hurtowni</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#faq">Najczęstsze pytania</a></li><li><a href="o-marce.html#marki-leviatan">Marki Leviatan</a></li></ul></div>' +
-      '<div class="shopbox"><h4>Kup online</h4><p>Wszystkie produkty IDEA HOME znajdziesz w sklepie naszego partnera.</p><b>' + MARKET.name + '</b><a class="btn btn-outline btn-sm" href="' + MARKET.home + '" target="_blank" rel="noopener">Przejdź do sklepu</a></div>' +
-      '</div><div class="foot-brands"><span class="fb-label">Inne marki Leviatan</span>' +
-      '<a href="https://strona-marki-school.vercel.app" target="_blank" rel="noopener" title="S&#39;COOL – artykuły plastyczne i szkolne"><img src="img/marki/scool.png" alt="S&#39;COOL" width="448" height="228"><small>artykuły plastyczne</small></a>' +
-      '<a href="https://lifeup.cafe/" target="_blank" rel="noopener" title="LIFE UP – autorska kawa"><img src="img/marki/lifeup.png" alt="LIFE UP" width="336" height="440"><small>autorska kawa</small></a></div>' +
-      '<div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Wszelkie prawa zastrzeżone.</span><span><a href="polityka-prywatnosci.html">Polityka prywatności i cookies</a> · <a href="regulamin.html">Regulamin</a> · Rudawka 88, 43-300 Bielsko-Biała</span></div></div></footer>';
+      "<div><h4>Products</h4><ul>" + CATS.slice(0, 8).map(function (c) { return '<li><a href="produkty.html#' + c.id + '">' + c.name + "</a></li>"; }).join("") + '<li><a href="produkty.html">All →</a></li></ul></div>' +
+      '<div><h4>Ranges</h4><ul><li><a href="serie.html#idea-home">IDEA HOME</a></li><li><a href="rakun/index.html">RAKUN</a></li><li><a href="ms-everyday.html">MS. EVERYDAY</a></li></ul><h4 style="margin-top:28px">Collections</h4><ul><li><a href="kolekcje.html#flexistore">Flexistore</a></li><li><a href="kolekcje.html#torby">Valencia and Kopenhaga bags</a></li></ul></div>' +
+      '<div><h4>Information</h4><ul><li><a href="o-marce.html">About us</a></li><li><a href="inspiracje.html">Inspiration and tips</a></li><li><a href="dla-firm.html">For businesses and wholesalers</a></li><li><a href="kontakt.html">Contact</a></li><li><a href="kontakt.html#faq">Frequently asked questions</a></li><li><a href="o-marce.html#marki-leviatan">Leviatan brands</a></li></ul></div>' +
+      '<div class="shopbox"><h4>Buy online</h4><p>You\'ll find IDEA HOME products in our partner\'s store.</p><b>' + MARKET.name + '</b><a class="btn btn-outline btn-sm" href="' + MARKET.home + '" target="_blank" rel="noopener">Go to shop</a></div>' +
+      '</div><div class="foot-brands"><span class="fb-label">Other Leviatan brands</span>' +
+      '<a href="https://strona-marki-school.vercel.app" target="_blank" rel="noopener" title="S&#39;COOL – artykuły plastyczne i szkolne"><img src="img/marki/scool.png" alt="S&#39;COOL" width="448" height="228"><small>art supplies</small></a>' +
+      '<a href="https://lifeup.cafe/" target="_blank" rel="noopener" title="LIFE UP – signature coffee"><img src="img/marki/lifeup.png" alt="LIFE UP" width="336" height="440"><small>signature coffee</small></a></div>' +
+      '<div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. All rights reserved.</span><span><a href="polityka-prywatnosci.html">Privacy and cookie policy</a> · <a href="regulamin.html">Terms of use</a> · Rudawka 88, 43-300 Bielsko-Biała, Poland</span></div></div></footer>';
   }
 
   /* ---------- Karuzele ---------- */
@@ -818,8 +819,8 @@
   // informacja o cookies (strona nie śledzi – wystarczy informacja, bez zgody)
   function cookieNote() {
     try { if (localStorage.getItem("ih-cookies")) return; } catch (e) {}
-    var n = document.createElement("div"); n.className = "cookie-note"; n.setAttribute("role", "region"); n.setAttribute("aria-label", "Informacja o cookies");
-    n.innerHTML = "<p>Strona nie używa cookies analitycznych ani reklamowych. Pamięć przeglądarki służy tylko do zapisania Twoich ulubionych produktów. <a href=\"polityka-prywatnosci.html\">Polityka prywatności</a></p><button class=\"btn btn-dark btn-sm\" type=\"button\">OK</button>";
+    var n = document.createElement("div"); n.className = "cookie-note"; n.setAttribute("role", "region"); n.setAttribute("aria-label", "Cookie notice");
+    n.innerHTML = "<p>This website uses no analytics or advertising cookies. Browser storage is only used to save your favourite products. <a href=\"polityka-prywatnosci.html\">Privacy policy</a></p><button class=\"btn btn-dark btn-sm\" type=\"button\">OK</button>";
     n.querySelector("button").addEventListener("click", function () { try { localStorage.setItem("ih-cookies", "1"); } catch (e) {} n.remove(); });
     document.body.appendChild(n);
   }

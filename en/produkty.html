@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<base href="../"><script>window.IH_LANG="en";window.IH_ROOT_REL="../";</script><script src="js/i18n-links.js"></script><script src="js/i18n.en.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Produkty — IDEA HOME</title>
-<meta name="description" content="Katalog produktów IDEA HOME: worki na odpady, pojemniki Flexistore, torby, akcesoria do kuchni i warsztatu.">
+<title>Products — IDEA HOME</title>
+<meta name="description" content="IDEA HOME product catalogue: bin bags, Flexistore boxes, bags, kitchen and workshop accessories.">
 <link rel="alternate" hreflang="pl" href="https://strona-ideahome-chi.vercel.app/produkty.html"><link rel="alternate" hreflang="en" href="https://strona-ideahome-chi.vercel.app/en/produkty.html"><link rel="alternate" hreflang="de" href="https://strona-ideahome-chi.vercel.app/de/produkty.html"><link rel="alternate" hreflang="cs" href="https://strona-ideahome-chi.vercel.app/cs/produkty.html"><link rel="alternate" hreflang="x-default" href="https://strona-ideahome-chi.vercel.app/produkty.html">
 <link rel="stylesheet" href="fonts/manrope.css">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="pl_PL">
+<meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="IDEA HOME">
-<meta property="og:title" content="Produkty — IDEA HOME">
-<meta property="og:description" content="Katalog produktów IDEA HOME: worki na odpady, pojemniki Flexistore, torby, akcesoria do kuchni i warsztatu.">
-<meta property="og:url" content="https://strona-ideahome-chi.vercel.app/produkty.html">
+<meta property="og:title" content="Products — IDEA HOME">
+<meta property="og:description" content="IDEA HOME product catalogue: bin bags, Flexistore boxes, bags, kitchen and workshop accessories.">
+<meta property="og:url" content="https://strona-ideahome-chi.vercel.app/en/produkty.html">
 <meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
@@ -24,37 +25,37 @@
 <main>
   <div class="page-hero">
     <div class="wrap">
-      <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Strona główna</a> / <span id="crumb">Produkty</span></nav>
-      <h1 id="ptitle">Wszystkie produkty</h1>
-      <p class="lead" id="plead">Wybierz kategorię, pomieszczenie albo kolor. Każdy produkt kupisz online w sklepie dladomu.sklep.pl.</p>
+      <nav class="crumbs" aria-label="Breadcrumbs"><a href="en/index.html">Home</a> / <span id="crumb">Products</span></nav>
+      <h1 id="ptitle">All products</h1>
+      <p class="lead" id="plead">Choose a category, room or colour. All products are available online on Amazon.de.</p>
     </div>
   </div>
 
   <section style="padding-top:36px">
     <div class="wrap catalog">
-      <aside class="filters" id="filters" aria-label="Filtry">
-        <div class="fgroup"><h3>Kategorie</h3><ul id="f-cat"></ul></div>
-        <div class="fgroup"><h3>Pomieszczenie</h3><ul id="f-room"></ul></div>
-        <div class="fgroup"><h3>Kolor</h3><div class="swatches" id="f-color"></div></div>
-        <div class="fgroup"><ul><li><button class="fbtn" type="button" id="f-fav" aria-pressed="false"><span>Moje ulubione</span><span class="n" id="f-fav-n"></span></button></li></ul></div>
+      <aside class="filters" id="filters" aria-label="Filters">
+        <div class="fgroup"><h3>Categories</h3><ul id="f-cat"></ul></div>
+        <div class="fgroup"><h3>Room</h3><ul id="f-room"></ul></div>
+        <div class="fgroup"><h3>Colour</h3><div class="swatches" id="f-color"></div></div>
+        <div class="fgroup"><ul><li><button class="fbtn" type="button" id="f-fav" aria-pressed="false"><span>My favourites</span><span class="n" id="f-fav-n"></span></button></li></ul></div>
       </aside>
 
       <div style="min-width:0">
         <div class="toolbar">
           <div class="search">
             <span id="s-ico"></span>
-            <label class="visually-hidden" for="q">Szukaj w katalogu</label>
-            <input id="q" type="search" placeholder="Szukaj, np. 120 l, żółty, bawełna">
+            <label class="visually-hidden" for="q">Search the catalogue</label>
+            <input id="q" type="search" placeholder="Search, e.g. 120 l, yellow, cotton">
           </div>
-          <button class="btn btn-outline btn-sm filters-toggle" type="button" id="ftoggle" aria-expanded="false">Filtry</button>
-          <label class="visually-hidden" for="sort">Sortowanie</label>
+          <button class="btn btn-outline btn-sm filters-toggle" type="button" id="ftoggle" aria-expanded="false">Filters</button>
+          <label class="visually-hidden" for="sort">Sorting</label>
           <select id="sort">
-            <option value="cat">Sortuj: kategoriami</option>
-            <option value="az">Nazwa A–Z</option>
-            <option value="cap">Pojemność rosnąco</option>
-            <option value="price">Cena rosnąco</option>
-            <option value="price-desc">Cena malejąco</option>
-            <option value="var">Najwięcej wariantów</option>
+            <option value="cat">Sort: by category</option>
+            <option value="az">Name A–Z</option>
+            <option value="cap">Capacity ascending</option>
+            <option value="price">Price ascending</option>
+            <option value="price-desc">Price descending</option>
+            <option value="var">Most variants</option>
           </select>
         </div>
         <div class="chips" id="chips"></div>
@@ -68,8 +69,8 @@
   <section style="padding-top:0">
     <div class="wrap">
       <div class="cta-band" style="background:var(--dark)">
-        <div><h2>Kupujesz dla firmy lub sklepu?</h2><p>Hurtowe ilości i stałe dostawy. Przygotujemy ofertę dopasowaną do Twojej skali.</p></div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap"><a class="btn" href="dla-firm.html">Oferta dla firm</a><a class="btn btn-outline" style="color:#fff" href="kontakt.html">Napisz do nas</a></div>
+        <div><h2>Buying for a business or shop?</h2><p>Wholesale quantities and regular deliveries. We will prepare an offer tailored to your scale.</p></div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap"><a class="btn" href="en/dla-firm.html">Business offer</a><a class="btn btn-outline" style="color:#fff" href="en/kontakt.html">Write to us</a></div>
       </div>
     </div>
   </section>
@@ -79,7 +80,7 @@
 
 <script src="js/miniatury-data.js?v=202610071219"></script>
 <script src="js/produkty-data.js?v=202610071219"></script>
-<script src="js/site.js?v=202610071219"></script>
+<script src="js/site.en.js?v=202610071219"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -126,8 +127,8 @@
   function countVariants(fn) { return IH.CATALOG.reduce(function (s, g) { return s + g.variants.filter(function (v) { return fn(g, v); }).length; }, 0); }
 
   function renderFilters() {
-    document.getElementById("f-cat").innerHTML = '<li><button class="fbtn" type="button" data-cat="" aria-pressed="' + (!state.cat) + '"><span>Wszystkie</span><span class="n">' + countVariants(function () { return true; }) + "</span></button></li>" +
-      IH.CATS.map(function (c) { var n = IH.countIn(c.id); return '<li><button class="fbtn' + (n ? "" : " empty") + '" type="button" data-cat="' + c.id + '" aria-pressed="' + (state.cat === c.id) + '"><span>' + c.name + '</span><span class="n">' + (n || "wkrótce") + "</span></button></li>"; }).join("");
+    document.getElementById("f-cat").innerHTML = '<li><button class="fbtn" type="button" data-cat="" aria-pressed="' + (!state.cat) + '"><span>All</span><span class="n">' + countVariants(function () { return true; }) + "</span></button></li>" +
+      IH.CATS.map(function (c) { var n = IH.countIn(c.id); return '<li><button class="fbtn' + (n ? "" : " empty") + '" type="button" data-cat="' + c.id + '" aria-pressed="' + (state.cat === c.id) + '"><span>' + c.name + '</span><span class="n">' + (n || "coming soon") + "</span></button></li>"; }).join("");
     document.getElementById("f-room").innerHTML = IH.ROOMS.map(function (r) { var n = countVariants(function (g, v) { return (v.rooms || g.rooms).indexOf(r.id) > -1; }); return '<li><button class="fbtn" type="button" data-room="' + r.id + '" aria-pressed="' + (state.room === r.id) + '"><span>' + r.name + '</span><span class="n">' + n + "</span></button></li>"; }).join("");
     var used = {}; IH.CATALOG.forEach(function (g) { g.variants.forEach(function (v) { if (v.color) used[v.color] = 1; }); });
     document.getElementById("f-color").innerHTML = Object.keys(used).map(function (k) { var c = IH.COLORS[k]; return '<button class="sw" type="button" data-color="' + k + '" aria-pressed="' + (state.color === k) + '" title="' + c.name + '" aria-label="Kolor ' + c.name + '" style="background:' + c.hex + '"></button>'; }).join("");
@@ -145,31 +146,31 @@
     grid.innerHTML = list.map(function (it) { return IH.card(it.g, { hideCat: !!state.cat, vi: it.k }); }).join("");
 
     var cat = state.cat && IH.catById(state.cat), room = state.room && IH.roomById(state.room);
-    var t = cat ? cat.name : room ? "Produkty: " + room.name.toLowerCase() : state.fav ? "Moje ulubione" : "Wszystkie produkty";
+    var t = cat ? cat.name : room ? "Products: " + room.name.toLowerCase() : state.fav ? "My favourites" : "All products";
     document.getElementById("ptitle").textContent = t;
     document.getElementById("crumb").textContent = t;
-    document.getElementById("plead").textContent = cat ? cat.desc + ". " + (IH.countIn(cat.id) ? "Na karcie produktu przełączysz się między powiązanymi wariantami." : "")
-      : room ? "Produkty, które sprawdzają się w tym miejscu domu." : state.fav ? "Produkty zapisane w tej przeglądarce." : "Wybierz kategorię, pomieszczenie albo kolor. Każdy produkt kupisz online w sklepie dladomu.sklep.pl.";
+    document.getElementById("plead").textContent = cat ? cat.desc + ". " + (IH.countIn(cat.id) ? "On each product card you can switch between related variants." : "")
+      : room ? "Products that work well in this part of the home." : state.fav ? "Products saved in this browser." : "Choose a category, room or colour. All products are available online on Amazon.de.";
 
-    document.getElementById("result").textContent = list.length ? list.length + " " + IH.pl(list.length, "produkt", "produkty", "produktów") : "";
+    document.getElementById("result").textContent = list.length ? list.length + " " + IH.pl(list.length, "product", "produkty", "products") : "";
 
     var chips = [];
     if (cat) chips.push(["cat", cat.name]);
     if (room) chips.push(["room", room.name]);
-    if (state.color) chips.push(["color", "Kolor: " + IH.COLORS[state.color].name]);
-    if (state.fav) chips.push(["fav", "Ulubione"]);
+    if (state.color) chips.push(["color", "Colour: " + IH.COLORS[state.color].name]);
+    if (state.fav) chips.push(["fav", "Favourites"]);
     if (state.q) chips.push(["q", "„" + state.q + "”"]);
     document.getElementById("chips").innerHTML = chips.map(function (c) { return '<span class="chip">' + IH.esc(c[1]) + '<button type="button" data-clear="' + c[0] + '" aria-label="Usuń filtr ' + IH.esc(c[1]) + '">×</button></span>'; }).join("") +
-      (chips.length > 1 ? '<button class="chip" type="button" data-clear="all">Wyczyść wszystko</button>' : "");
+      (chips.length > 1 ? '<button class="chip" type="button" data-clear="all">Clear all</button>' : "");
 
     var empty = document.getElementById("empty");
     empty.hidden = !!list.length;
     if (!list.length) {
       var soon = cat && !IH.countIn(cat.id);
       empty.innerHTML = '<div class="empty-state">' + (cat ? cat.icon : IH.ICON.search) +
-        (soon ? "<h3>" + cat.name + " – już wkrótce</h3><p>Pracujemy nad tą kategorią. Do tego czasu zajrzyj do sklepu albo zapytaj nas o dostępność.</p><div style=\"display:flex;gap:10px;flex-wrap:wrap;justify-content:center\"><a class=\"btn btn-primary\" href=\"" + IH.shopSearch(cat.name + " idea home") + "\" target=\"_blank\" rel=\"noopener\">Szukaj w sklepie</a><a class=\"btn btn-outline\" href=\"kontakt.html\">Zapytaj o dostępność</a></div>"
-          : state.fav ? "<h3>Nie masz jeszcze ulubionych</h3><p>Kliknij serce na karcie produktu, żeby zapisać go tutaj.</p><button class=\"btn btn-dark\" type=\"button\" data-clear=\"all\">Pokaż wszystkie produkty</button>"
-          : "<h3>Brak produktów dla tych filtrów</h3><p>Usuń jeden z filtrów albo wpisz inną frazę.</p><button class=\"btn btn-dark\" type=\"button\" data-clear=\"all\">Wyczyść filtry</button>") + "</div>";
+        (soon ? "<h3>" + cat.name + " – coming soon</h3><p>We are working on this category. Until then, visit the shop or ask us about availability.</p><div style=\"display:flex;gap:10px;flex-wrap:wrap;justify-content:center\"><a class=\"btn btn-primary\" href=\"" + IH.shopSearch(cat.name + " idea home") + "\" target=\"_blank\" rel=\"noopener\">Search the shop</a><a class=\"btn btn-outline\" href=\"kontakt.html\">Ask about availability</a></div>"
+          : state.fav ? "<h3>No favourites yet</h3><p>Click the heart on a product card to save it here.</p><button class=\"btn btn-dark\" type=\"button\" data-clear=\"all\">Show all products</button>"
+          : "<h3>No products match these filters</h3><p>Remove one of the filters or try a different phrase.</p><button class=\"btn btn-dark\" type=\"button\" data-clear=\"all\">Clear filters</button>") + "</div>";
     }
   }
 

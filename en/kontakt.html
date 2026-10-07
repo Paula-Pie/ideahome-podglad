@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<base href="../"><script>window.IH_LANG="en";window.IH_ROOT_REL="../";</script><script src="js/i18n-links.js"></script><script src="js/i18n.en.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Contact — IDEA HOME</title>
+<meta name="description" content="Contact IDEA HOME by Leviatan: email, phone, address and FAQ.">
+<link rel="alternate" hreflang="pl" href="https://strona-ideahome-chi.vercel.app/kontakt.html"><link rel="alternate" hreflang="en" href="https://strona-ideahome-chi.vercel.app/en/kontakt.html"><link rel="alternate" hreflang="de" href="https://strona-ideahome-chi.vercel.app/de/kontakt.html"><link rel="alternate" hreflang="cs" href="https://strona-ideahome-chi.vercel.app/cs/kontakt.html"><link rel="alternate" hreflang="x-default" href="https://strona-ideahome-chi.vercel.app/kontakt.html">
+<link rel="stylesheet" href="fonts/manrope.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="IDEA HOME">
+<meta property="og:title" content="Contact — IDEA HOME">
+<meta property="og:description" content="Contact IDEA HOME by Leviatan: email, phone, address and FAQ.">
+<meta property="og:url" content="https://strona-ideahome-chi.vercel.app/en/kontakt.html">
+<meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/logo-ideahome.png" type="image/png">
+<link rel="stylesheet" href="styles.css?v=202610071219">
+</head>
+<body data-page="kontakt">
+<div id="site-header"></div>
+<main>
+  <div class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumbs"><a href="en/index.html">Home</a> / Kontakt</nav>
+      <h1>Let's talk</h1>
+      <p class="lead">Questions about products, complaints or business cooperation. We usually reply within 48 hours.</p>
+    </div>
+  </div>
+
+  <section id="formularz">
+    <div class="wrap contact-grid">
+      <form class="form" id="cform" novalidate>
+        <div class="row">
+          <div class="field"><label for="c-name">Full name</label><input id="c-name" required autocomplete="name"></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" required autocomplete="email"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="c-topic">Subject</label>
+            <select id="c-topic"><option>Product question</option><option>Business cooperation / wholesale</option><option>Complaint</option><option>Other</option></select></div>
+          <div class="field"><label for="c-company">Company (optional)</label><input id="c-company" autocomplete="organization"></div>
+        </div>
+        <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
+        <label class="consent"><input type="checkbox" id="c-consent" required> I agree to the processing of my data in order to reply to my message. Details in the <a href="en/polityka-prywatnosci.html" style="text-decoration:underline">privacy policy</a>.</label>
+        <div><button class="btn btn-primary" type="submit">Send message</button></div>
+        <p class="form-msg" id="c-out" hidden></p>
+      </form>
+
+      <div class="cards-stack">
+        <div class="info-card"><span id="i1"></span><div><small>Email</small><b>leviatan@leviatan.pl</b></div><button class="copy-btn" type="button" data-copy="leviatan@leviatan.pl">Copy</button></div>
+        <div class="info-card"><span id="i2"></span><div><small>Phone</small><b>+48 33 443 21 00</b></div><button class="copy-btn" type="button" data-copy="+48 33 443 21 00">Copy</button></div>
+        <div class="info-card"><span id="i3"></span><div><small>Address</small><b>Rudawka 88, 43-300 Bielsko-Biała, Poland</b></div><a class="copy-btn" href="https://www.google.com/maps/search/?api=1&query=Rudawka+88+Bielsko-Bia%C5%82a" target="_blank" rel="noopener">Map</a></div>
+        <div class="info-card"><span id="i4"></span><div><small>Online shop</small><b>dladomu.sklep.pl</b></div><a class="copy-btn" href="https://www.dladomu.sklep.pl" target="_blank" rel="noopener">Open</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap" style="max-width:900px">
+      <div class="sec-head"><div><span class="label">FAQ</span><h2>Frequently asked questions</h2></div></div>
+      <div class="faq">
+        <details><summary>Where can I buy IDEA HOME products?</summary><p>Our products are available online on Amazon.de. In Poland you'll also find them at dladomu.sklep.pl and at our trade partners.</p></details>
+        <details><summary>What's the difference between strong and extra-strong bags?</summary><p>Extra-strong bags have thicker film. They are ideal for garden debris, branches and heavy waste. Strong bags are enough for everyday household waste.</p></details>
+        <details><summary>Which bag colours match which waste fractions?</summary><p>Yellow – metals and plastics, blue – paper, green – glass, brown – organic, black – mixed waste (Polish system).</p></details>
+        <details><summary>Can Flexistore boxes be bought individually?</summary><p>We currently offer them in sets of 4 sizes, in Denim and Neutral. Ask us if you need more of one size.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="js/miniatury-data.js?v=202610071219"></script>
+<script src="js/produkty-data.js?v=202610071219"></script>
+<script src="js/site.en.js?v=202610071219"></script>
+<script src="js/formularze.en.js?v=202610071219"></script>
+<script>
+(function () {
+  var IH = window.IH;
+  document.getElementById("i1").innerHTML = IH.ICON.mail; document.getElementById("i2").innerHTML = IH.ICON.phone;
+  document.getElementById("i3").innerHTML = IH.ICON.pin; document.getElementById("i4").innerHTML = IH.ICON.bag;
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = b.dataset.copy;
+      var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function () { selectText(b); });
+      else selectText(b);
+    });
+  });
+  function selectText(b) { var r = document.createRange(); r.selectNodeContents(b.parentElement.querySelector("b")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  document.getElementById("cform").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var out = document.getElementById("c-out"), f = this;
+    var missing = ["c-name", "c-email", "c-msg"].filter(function (id) { return !document.getElementById(id).value.trim(); });
+    out.hidden = false;
+    if (missing.length) { out.textContent = "Please fill in your name, email and message."; document.getElementById(missing[0]).focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(document.getElementById("c-email").value)) { out.textContent = "The email address looks incomplete, e.g. anna@company.com."; document.getElementById("c-email").focus(); return; }
+    if (!document.getElementById("c-consent").checked) { out.textContent = "Please tick the data processing consent so we can reply."; return; }
+    var btn = f.querySelector("button[type=submit]"); btn.disabled = true; out.textContent = "Sending message…";
+    IH_FORM.send("IDEA HOME website (EN): " + document.getElementById("c-topic").value, {
+      "Full name": document.getElementById("c-name").value.trim(),
+      "Email": document.getElementById("c-email").value.trim(),
+      "Company": document.getElementById("c-company").value.trim(),
+      "Subject": document.getElementById("c-topic").value,
+      "Message": document.getElementById("c-msg").value.trim(),
+      _replyto: document.getElementById("c-email").value.trim()
+    }, function (ok) {
+      btn.disabled = false;
+      if (ok) { out.textContent = "Thank you! Your message has been sent. We usually reply within 48 hours."; f.reset(); }
+      else out.textContent = "The message could not be sent. Please try again in a moment or email us directly at leviatan@leviatan.pl.";
+    });
+  });
+})();
+</script>
+</body>
+</html>

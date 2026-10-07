@@ -1,0 +1,25 @@
+/* Plik generowany przez tools/i18n-generuj.pl – nie edytuj recznie. */
+window.IH_TITLES = {
+  "budka-dla-jezy-erina": "Budka pro ježky Erina",
+  "budka-dla-nietoperzy-chiroptera": "Budka pro netopýry Chiroptera",
+  "plyn-do-spryskiwaczy-letni-rakun-5l": "Letní kapalina do ostřikovačů RAKUN 5 l",
+  "plyn-do-szyb-rakun-5l": "Čistič skel RAKUN 5 l",
+  "pudlo-do-przeprowadzek-wzmocnione": "Zesílená stěhovací krabice",
+  "pumeks-kosmetyczny": "Kosmetická pemza",
+  "rolka-do-ubran-12-wkladow-zestaw": "Váleček na oblečení + 12 náplní, sada",
+  "sciereczki-do-kuchni-roll-18x35cm": "Kuchyňské utěrky Roll 18 × 35 cm",
+  "sciereczki-z-mikrofibry": "Utěrky z mikrovlákna",
+  "sciereczki-z-mikrofibry-rakun-30x30cm-pizza-box-all": "Utěrky z mikrovlákna RAKUN 30 × 30 cm, pizza box",
+  "sznurek-sizalowy-2mm": "Sisalový provázek 2 mm",
+  "sznurek-wedliniarski-1-8mm-na-szpuli": "Uzenářský provázek 1,8 mm na cívce",
+  "tasma-izolacyjna-18mm-x-20m": "Izolační páska 18 mm × 20 m",
+  "tasma-ostrzegawcza-50mm-x-5m-klejaca-odblaskowa-strzalka": "Reflexní lepicí výstražná páska 50 mm × 5 m, šipky",
+  "torba-bawelniana-kopenhaga-380x420-z-uszami-bez-nadruku": "Bavlněná taška Kopenhaga 380 × 420 s uchy, bez potisku",
+  "torba-manhattan-sztruksowa": "Manšestrová taška Manhattan",
+  "worki-hdpe": "Pytle na odpadky HDPE",
+  "worki-ldpe": "Pytle na odpadky LDPE",
+  "worki-ldpe-do-segregacji": "Pytle na odpadky LDPE na třídění",
+  "worki-ldpe-ekstra-mocne": "Extra pevné pytle na odpadky LDPE",
+  "worki-ldpe-mocne": "Pevné pytle na odpadky LDPE",
+  "worki-ldpe-z-tasma": "Pytle na odpadky LDPE se zatahovací páskou"
+};

@@ -88,3 +88,9 @@ footer .ih-btn { margin: 0 10px 10px 0; padding: .7em 1.1em !important; font-siz
 /* grafiki w stopce nie mogą zasłaniać przycisków (Allegro, dladomu.sklep.pl) */
 .footer-graphic, .raccoon-tea-wrap { pointer-events: none; }
 footer .ih-btn, footer a { position: relative; z-index: 3; }
+/* przełącznik języka */
+.ih-langs { display: flex; gap: 2px; }
+.ih-langs a { font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 6px 5px; border-radius: 3px; color: inherit; opacity: .7; text-decoration: none; }
+.ih-langs a:hover, .ih-langs a[aria-current] { opacity: 1; }
+.ih-langs a[aria-current] { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 420px) { .ih-langs a { padding: 6px 3px; font-size: 10px; } }

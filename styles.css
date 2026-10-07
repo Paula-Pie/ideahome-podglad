@@ -630,3 +630,10 @@ a.lev-card:hover { border-color: var(--ink); box-shadow: var(--shadow); }
 
 /* elementy ukryte atrybutem hidden zawsze niewidoczne (np. wpisy w Inspiracjach po wyborze zakładki) */
 [hidden] { display: none !important; }
+
+/* przełącznik języków */
+.langs { display: flex; gap: 2px; margin-right: 6px; }
+.langs a { font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 6px 6px; border-radius: 3px; color: var(--muted); }
+.langs a:hover { color: var(--ink); background: var(--sand); }
+.langs a[aria-current] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 620px) { .langs a { padding: 6px 4px; font-size: 10px; } .head-actions .icon-btn { width: 38px; } }
