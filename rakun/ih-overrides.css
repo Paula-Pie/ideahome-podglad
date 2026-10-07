@@ -74,3 +74,11 @@ footer .ih-btn { margin: 0 10px 10px 0; padding: .7em 1.1em !important; font-siz
 .ih-buyrow .ih-btn { white-space: nowrap; }
 @media (max-width: 760px) { .ih-buyrow .ih-btn { padding: .65em .8em !important; font-size: 10px !important; letter-spacing: .06em !important; } }
 .ih-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* mydła: miniatury tej samej wielkości co w Chemii (2 kolumny), Rakun bez zmian */
+@media (min-width: 761px) {
+  #mydla .editorial-grid.cols-3 { grid-template-columns: repeat(2, 1fr); max-width: 520px; gap: 24px 21px; }
+  #mydla .editorial-grid.cols-3 .editorial-item { max-width: 230px; }
+  #mydla .prod-character, #chemia .prod-character { flex-shrink: 0; }
+  #mydla .prod-character { align-self: center; }
+}
