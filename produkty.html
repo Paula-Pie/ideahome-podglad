@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610071147">
+<link rel="stylesheet" href="styles.css?v=202610071152">
 </head>
 <body data-page="produkty">
 <div id="site-header"></div>
@@ -76,9 +76,9 @@
 
 <div id="site-footer"></div>
 
-<script src="js/miniatury-data.js?v=202610071147"></script>
-<script src="js/produkty-data.js?v=202610071147"></script>
-<script src="js/site.js?v=202610071147"></script>
+<script src="js/miniatury-data.js?v=202610071152"></script>
+<script src="js/produkty-data.js?v=202610071152"></script>
+<script src="js/site.js?v=202610071152"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -106,6 +106,8 @@
     if (state.color && v.color !== state.color) return false;
     if (state.q) {
       var hay = (g.title + " " + IH.catById(g.cat).name + " " + v.raw + " " + (v.opt || "") + " " + (IH.COLORS[v.color] ? IH.COLORS[v.color].name + " " + (IH.COLORS[v.color].seg || "") : "")).toLowerCase();
+      // synonimy: pianka/piana (i odmiany) znajdują ten sam produkt
+      if (/\bpian/.test(hay)) hay += " pianka pianki piankę pianke piana piany pianę piane";
       var ok = state.q.toLowerCase().split(/\s+/).every(function (w) { return hay.indexOf(w.replace(/\s*l$/, "")) > -1 || hay.indexOf(w) > -1; });
       if (!ok) return false;
     }
