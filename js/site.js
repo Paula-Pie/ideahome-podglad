@@ -675,7 +675,22 @@
     [/sciereczk|scierk/, "scierka scierki sciereczka sciereczki"],
     [/pojemnik|flexistore|techbox/, "pojemnik pojemniki skrzynka pudelko organizer"],
     [/mydlo/, "mydlo mydla"],
-    [/nagrob|pomnik|renowacj/, "nagrobek nagrobki pomnik pomniki cmentarz znicz"]
+    [/nagrob|pomnik|renowacj/, "nagrobek nagrobki pomnik pomniki cmentarz znicz"],
+    // wersje językowe: słowa, które wpisze klient z Niemiec, Czech albo Wielkiej Brytanii
+    [/worki|worek/, "bag bags bin binbag binbags trash rubbish garbage waste muell muellbeutel muellsack muellsaecke abfall abfallbeutel beutel pytel pytle odpadky odpad kos"],
+    [/torb|plecak/, "bag tote shopper backpack tasche taschen einkaufstasche beutel rucksack taska tasky batoh"],
+    [/sciereczk|scierk|mikrofibr/, "cloth cloths microfibre microfiber tuch tuecher mikrofaser mikrofasertuch utarka uterka uterky mikrovlakno hadr"],
+    [/pojemnik|flexistore|techbox|insert/, "box boxes storage container organiser organizer kiste box boxen aufbewahrung behaelter ulozny krabice"],
+    [/pudl|karton/, "box boxes carton cardboard moving archive karton kartons umzugskarton archiv krabice stehovaci archiv"],
+    [/mydlo/, "soap liquid seife fluessigseife mydlo tekute"],
+    [/\bpian|nagrob|pomnik|renowacj/, "headstone gravestone grave tombstone foam cleaner grabstein grab friedhof schaum aktivschaum reiniger nahrobek nahrobky pomnik hrbitov pena"],
+    [/naczyn/, "dish dishes washing up liquid spuelmittel geschirr nadobi saponat jar"],
+    [/szyb|spryskiwacz/, "glass window cleaner screenwash washer windscreen glasreiniger fenster scheibenwaschanlage scheibe cistic skel okna ostrikovac"],
+    [/tasm/, "tape masking insulating warning klebeband abdeckband isolierband warnband paska lepici"],
+    [/sznur/, "twine string cord schnur kordel provazek"],
+    [/budk|karmnik/, "birdhouse bird feeder nest box hedgehog bat vogelhaus nistkasten futterhaus igel fledermaus budka krmitko ptaci jezek netopyr"],
+    [/druciak|zmywak|gabk/, "sponge scourer scrubber schwamm topfreiniger houbicka dratenka"],
+    [/wino|prezent|wave/, "gift present wine geschenk geschenktuete wein darek darkova vino"]
   ];
   function searchText(g, v) {
     var t = fold([g.title, catById(g.cat).name, v.raw, v.opt || "",
