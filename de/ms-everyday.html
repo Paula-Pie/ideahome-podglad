@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-ms-everyday-new.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610080944">
+<link rel="stylesheet" href="styles.css?v=202610081018">
 <style>
   .mse-hero { position: relative; background: var(--sand); overflow: hidden; }
   .mse-hero { padding: 0; }
@@ -26,11 +26,14 @@
   .mse-hero h1 .light { display: block; font-size: .6em; margin-top: .2em; }
   .mse-hero .lead { margin-top: 18px; color: var(--ink-2); font-size: var(--fs-lg); max-width: 46ch; }
   .mse-hero img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); }
-  .mse-products { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .mse-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: grid; grid-template-columns: 220px 1fr; overflow: hidden; }
+  .mse-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .mse-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: grid; grid-template-columns: 200px minmax(0, 1fr); overflow: hidden; min-width: 0; }
   .mse-card img { width: 100%; height: 100%; object-fit: cover; background: var(--sand); }
+  .mse-card .pic { display: block; background: #fff; border-right: 1px solid var(--line); }
+  .mse-card .pic img { object-fit: contain; background: #fff; padding: 18px; aspect-ratio: 3/4; height: 100%; }
   .mse-card .body { padding: 26px; display: grid; gap: 12px; align-content: start; }
-  .mse-card h3 { font-size: var(--fs-xl); }
+  .mse-card h3 { font-size: var(--fs-xl); hyphens: auto; overflow-wrap: break-word; }
+  .mse-card .body { min-width: 0; grid-template-columns: minmax(0, 1fr); }
   .mse-card p { color: var(--ink-2); font-size: var(--fs-sm); }
   .mse-card .facts { display: flex; flex-wrap: wrap; gap: 8px; }
   .mse-card .facts span { font-size: var(--fs-xs); padding: 5px 10px; border-radius: 20px; background: var(--sand); }
@@ -66,8 +69,8 @@
 
   <section>
     <div class="wrap">
-      <div class="sec-head"><div><span class="label">Produkte</span><h2>Zwei Flüssigkeiten, ein Ziel: eine saubere Scheibe</h2></div></div>
-      <div class="mse-products">
+      <div class="sec-head"><div><span class="label">Produkte</span><h2 id="mse-h">Zwei Flüssigkeiten, ein Ziel: eine saubere Scheibe</h2></div></div>
+      <div class="mse-products" id="mse-list">
         <article class="mse-card">
           <img src="img/foto/ms-everyday-szyby.jpg" alt="MS. EVERYDAY Glasreiniger 5 l">
           <div class="body">
@@ -102,13 +105,41 @@
   </section>
 </main>
 <div id="site-footer"></div>
-<script src="js/miniatury-data.js?v=202610080944"></script>
-<script src="js/produkty-data.js?v=202610080944"></script>
-<script src="js/site.de.js?v=202610080944"></script>
+<script src="js/miniatury-data.js?v=202610081018"></script>
+<script src="js/produkty-data.js?v=202610081018"></script>
+<script src="js/site.de.js?v=202610081018"></script>
+<script src="js/ms-everyday-data.js?v=202610081018"></script>
 <script>
 (function () {
   var AMZ = "https://www.amazon.de/stores/page/916542A8-6F93-43D6-B5FC-639158F0193C/search?terms=MS.EVERYDAY";
   document.querySelectorAll("#mse-amazon, #mse-amazon2, .amz").forEach(function (a) { a.href = AMZ; });
+
+  // produkty z Amazon.de (tools/sync-amazon.pl, codziennie): każdy nowy produkt MS. EVERYDAY pojawia się tu sam
+  var list = window.IH_MSE || [];
+  if (!list.length) return;
+  // znane produkty: nasz opis zamiast tytułu z Amazona (rozpoznanie po tytule)
+  var KNOWN = [
+    { re: /sommer|scheibenwasch|washer|spryskiwacz/i, label: "Windshield Washer Fluid · Sommer", h: "Sommer-Scheibenwaschflüssigkeit",
+      p: "Gebrauchsfertig – einfach in den Behälter füllen. Entfernt Insekten, Staub und Schlieren von der Windschutzscheibe, damit beim Fahren nichts die Sicht behindert.",
+      facts: ["5 l", "gebrauchsfertig", "für den Sommer"], order: 2 },
+    { re: /glas|fenster|szyb/i, label: "Glass Cleaner", h: "Glasreiniger",
+      p: "Für Fenster, Spiegel, Glastische und Duschkabinen. Hinterlässt eine saubere, streifenfreie Oberfläche. Der große Kanister reicht lange und eignet sich zum Nachfüllen der Sprühflasche.",
+      facts: ["5 l", "Glas und Spiegel", "streifenfrei"], order: 1 }
+  ];
+  var esc = IH.esc;
+  var cards = list.map(function (a) {
+    var k = KNOWN.find(function (x) { return x.re.test(a.title); });
+    var name = a.title.replace(/^IDEA HOME\s*/i, "").replace(/^MS\.?\s*EVERYDAY\s*/i, "");
+    var size = (a.title.match(/(\d+(?:[.,]\d+)?)\s*(l|ml)\b/i) || [])[0];
+    return { order: k ? k.order : 9, html:
+      '<article class="mse-card"><a class="pic" href="' + esc(a.url) + '" target="_blank" rel="noopener"><img src="' + esc(a.img) + '" alt="' + esc(k ? k.h + " MS. EVERYDAY" : a.title) + '" loading="lazy"></a>' +
+      '<div class="body"><span class="label">' + esc(k ? k.label : "MS. EVERYDAY") + "</span><h3>" + esc(k ? k.h : name) + "</h3>" +
+      (k ? "<p>" + esc(k.p) + "</p>" : "") +
+      '<div class="facts">' + (k ? k.facts : size ? [size.replace(/\s*l$/i, " l")] : []).map(function (f) { return "<span>" + esc(f) + "</span>"; }).join("") + "</div>" +
+      '<a class="btn btn-dark" href="' + esc(a.url) + '" target="_blank" rel="noopener">Auf Amazon.de kaufen</a></div></article>' };
+  }).sort(function (x, y) { return x.order - y.order; });
+  document.getElementById("mse-list").innerHTML = cards.map(function (c) { return c.html; }).join("");
+  if (cards.length !== 2) document.getElementById("mse-h").textContent = "Produkte der Serie MS. EVERYDAY";
 })();
 </script>
 </body>
