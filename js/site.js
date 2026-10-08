@@ -23,7 +23,7 @@
   };
   MARKET_TERMS.en = MARKET_TERMS.de;
   // korzeń strony względem bieżącej podstrony (ustawiany na stronach obcojęzycznych przez generator)
-  function siteRoot() { return new URL(window.IH_ROOT_REL || (/\/rakun\//.test(location.pathname) ? "../" : "./"), location.href).href; }
+  function siteRoot() { return new URL(window.IH_ROOT_REL || (/\/(rakun|p)\//.test(location.pathname) ? "../" : "./"), location.href).href; }
   // link do podstrony w bieżącym języku, np. page("produkty.html#worki")
   function page(p) { return LANG === "pl" ? p : siteRoot() + LANG + "/" + p; }
   // adres tej samej podstrony w innym języku
@@ -484,6 +484,10 @@
   function priceHtml(v) { return '<p class="price" hidden></p>'; }
   function buyUrl(g, v) {
     if (LANG === "pl") return v.url || shopSearch(g.query);
+    // EN/DE: konkretny produkt na Amazon.de, jeśli jest dopasowany (js/amazon-data.js), inaczej wyszukiwanie w sklepie marki
+    var amz = (LANG === "en" || LANG === "de") && window.IH_AMAZON;
+    var asin = amz && (amz[v.id] || amz["rodzina:" + g.id]);
+    if (asin) return "https://www.amazon.de/dp/" + asin;
     var terms = MARKET_TERMS[LANG] || {};
     if (/PIANA|PIANKA/i.test(v.raw)) return MARKET.search(LANG === "cs" ? "pěna" : "Aktivschaum");
     return MARKET.search(terms[g.cat] || "IDEA HOME");
@@ -554,7 +558,7 @@
       (v.imgs.length > 1 ? '<span class="photos">' + v.imgs.length + " " + pl(v.imgs.length, "zdjęcie", "zdjęcia", "zdjęć") + "</span>" : "") + "</button>" +
       '<div class="body">' +
       (opts.hideCat ? "" : '<span class="pcat">' + cat.name + "</span>") +
-      (LANG === "pl" ? '<h3><a class="plink" href="p/' + g.id + '.html">' + esc(g.title) + "</a></h3>" : "<h3>" + esc(g.title) + "</h3>") +
+      '<h3><a class="plink" href="p/' + g.id + '.html">' + esc(g.title) + "</a></h3>" +
       '<p class="pdesc">' + esc(v.desc || "") + "</p>" +
       '<p class="spec">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<div class="vwrap">' + variantPicker(g, si) + "</div>" +
@@ -627,7 +631,7 @@
       '<div class="vwrap">' + variantPicker(g, vi) + "</div>" +
       '<p class="spec muted">' + esc(variantSpec(g, v)) + "</p>" + priceHtml(v) +
       '<dl class="specs">' + specs.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + esc(s[1]) + "</dd>"; }).join("") + "</dl>" +
-      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + (LANG === "pl" ? '<a class="btn btn-outline" href="p/' + g.id + '.html">Strona produktu</a>' : "") + '</div>' +
+      '<div class="modal-actions"><a class="btn btn-primary buy" href="' + buyUrl(g, v) + '" target="_blank" rel="noopener">Kup w sklepie ' + ICON.bag.replace("<svg", '<svg width="16" height="16"') + '</a>' + (v.amazon ? '<a class="btn btn-outline" href="' + v.amazon + '" target="_blank" rel="noopener">Kup na Amazon.de</a>' : "") + '<a class="btn btn-outline" href="p/' + g.id + '.html">Strona produktu</a>' + '</div>' +
       "</div></div>";
     function close() { m.remove(); document.removeEventListener("keydown", onKey); if (last) last.focus(); }
     function onKey(e) { if (e.key === "Escape") close(); }

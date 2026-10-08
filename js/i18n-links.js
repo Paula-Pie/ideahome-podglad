@@ -11,7 +11,7 @@
     var u; try { u = new URL(raw, document.baseURI); } catch (e) { return; }
     if (u.href.indexOf(root) !== 0) return;
     var rel = u.href.slice(root.length);
-    if (/^(en|de|cs|p)\//.test(rel) || a.hasAttribute("hreflang")) return;     // inne języki, strony produktów (tylko PL)
+    if (/^(en|de|cs)\//.test(rel) || a.hasAttribute("hreflang")) return;     // linki do innych wersji językowych
     if (!/^([\w-]+\/)*[\w-]*\.html(#.*)?$/.test(rel) && rel !== "" && !/^[\w-]+\/$/.test(rel)) return; // pliki (zdjęcia, PDF)
     a.href = root + LANG + "/" + rel; a.dataset.ihLang = "1";
   }
