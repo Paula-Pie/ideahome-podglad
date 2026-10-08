@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-ms-everyday-new.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610081018">
+<link rel="stylesheet" href="styles.css?v=202610081109">
 <style>
   .mse-hero { position: relative; background: var(--sand); overflow: hidden; }
   .mse-hero { padding: 0; }
@@ -27,10 +27,10 @@
   .mse-hero .lead { margin-top: 18px; color: var(--ink-2); font-size: var(--fs-lg); max-width: 46ch; }
   .mse-hero img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); }
   .mse-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-  .mse-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: grid; grid-template-columns: 200px minmax(0, 1fr); overflow: hidden; min-width: 0; }
+  .mse-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: grid; grid-template-columns: 220px minmax(0, 1fr); overflow: hidden; min-width: 0; }
   .mse-card img { width: 100%; height: 100%; object-fit: cover; background: var(--sand); }
-  .mse-card .pic { display: block; background: #fff; border-right: 1px solid var(--line); }
-  .mse-card .pic img { object-fit: contain; background: #fff; padding: 18px; aspect-ratio: 3/4; height: 100%; }
+  .mse-card .pic { display: flex; align-items: center; justify-content: center; padding: 22px 16px; background: #fff; border-right: 1px solid var(--line); }
+  .mse-card .pic img { width: 100%; height: 234px; object-fit: contain; background: #fff; padding: 0; aspect-ratio: auto; }
   .mse-card .body { padding: 26px; display: grid; gap: 12px; align-content: start; }
   .mse-card h3 { font-size: var(--fs-xl); hyphens: auto; overflow-wrap: break-word; }
   .mse-card .body { min-width: 0; grid-template-columns: minmax(0, 1fr); }
@@ -45,7 +45,7 @@
   .mse-where .btn-outline { color: var(--on-dark); }
   .mse-where .btn-outline:hover { background: var(--on-dark); color: var(--ink); border-color: var(--on-dark); }
   @media (max-width: 900px) { .mse-hero .wrap, .mse-products, .mse-where { grid-template-columns: 1fr; } .mse-where .btns { justify-content: flex-start; } }
-  @media (max-width: 520px) { .mse-card { grid-template-columns: 1fr; } .mse-card img { aspect-ratio: 4/3; height: auto; } }
+  @media (max-width: 520px) { .mse-card { grid-template-columns: 1fr; } .mse-card .pic { border-right: 0; border-bottom: 1px solid var(--line); } }
 </style>
 </head>
 <body data-page="serie">
@@ -105,10 +105,10 @@
   </section>
 </main>
 <div id="site-footer"></div>
-<script src="js/miniatury-data.js?v=202610081018"></script>
-<script src="js/produkty-data.js?v=202610081018"></script>
-<script src="js/site.en.js?v=202610081018"></script>
-<script src="js/ms-everyday-data.js?v=202610081018"></script>
+<script src="js/miniatury-data.js?v=202610081109"></script>
+<script src="js/produkty-data.js?v=202610081109"></script>
+<script src="js/site.en.js?v=202610081109"></script>
+<script src="js/ms-everyday-data.js?v=202610081109"></script>
 <script>
 (function () {
   var AMZ = "https://www.amazon.de/stores/page/916542A8-6F93-43D6-B5FC-639158F0193C/search?terms=MS.EVERYDAY";
