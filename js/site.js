@@ -324,7 +324,9 @@
     var bagType = /EKSTRA MOCNY/.test(up) ? " ekstra mocne" : /MOCNY/.test(up) ? " mocne" : /TAŚM/.test(up) ? " z taśmą" : /SEGREGACJI/.test(up) ? " do segregacji" : "";
     var bagMat = /HDPE/.test(up) ? "HDPE" : "LDPE";
     // worki: jedna rodzina na rodzaj worka, pojemność i kolor to warianty
-    if (cat === "worki") key = ("WORKI " + bagMat + bagType).toUpperCase();
+    // klucz (i adres strony produktu) niezależny od języka – bagType bywa przetłumaczony
+    var bagCode = /EKSTRA MOCNY/.test(up) ? "-EKSTRA-MOCNE" : /MOCNY/.test(up) ? "-MOCNE" : /TAŚM/.test(up) ? "-Z-TASMA" : /SEGREGACJI/.test(up) ? "-DO-SEGREGACJI" : "";
+    if (cat === "worki") key = "WORKI " + bagMat + bagCode;
     // Flexistore / Techbox: jedna karta na pojemniki i jedna na inserty, rozmiar jako opcja do wyboru
     var opt = null, optSort = null, optLabel = "Pojemność";
     if (cat === "flexistore" || cat === "techbox") {
