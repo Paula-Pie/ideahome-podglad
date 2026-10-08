@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610081127">
+<link rel="stylesheet" href="styles.css?v=202610081216">
 <style>
   .post { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(24px, 4vw, 56px); padding-block: 48px; border-bottom: 1px solid var(--line); scroll-margin-top: 110px; }
   .post:last-child { border-bottom: 0; }
@@ -35,7 +35,7 @@
 <main>
   <div class="page-hero">
     <div class="wrap">
-      <nav class="crumbs" aria-label="Drobečková navigace"><a href="cs/index.html">Úvod</a> / Inspiracje</nav>
+      <nav class="crumbs" aria-label="Drobečková navigace"><a href="cs/index.html">Úvod</a> / Inspirace</nav>
       <h1>Inspirace a rady</h1>
       <p class="lead">Osvědčené způsoby, jak udržet pořádek. Stručně, konkrétně a se seznamem věcí, které se hodí.</p>
       <div class="tabs" style="margin:24px 0 0" id="tabs">
@@ -170,10 +170,28 @@
   </div>
 </main>
 <div id="site-footer"></div>
-<script src="js/miniatury-data.js?v=202610081127"></script>
-<script src="js/produkty-data.js?v=202610081127"></script>
-<script src="js/site.cs.js?v=202610081127"></script>
+<script src="js/miniatury-data.js?v=202610081216"></script>
+<script src="js/produkty-data.js?v=202610081216"></script>
+<script src="js/site.cs.js?v=202610081216"></script>
+<script src="js/blog-data.js?v=202610081216"></script>
 <script>
+// wpisy z kolejki (js/blog-data.js) – widoczne od dnia publikacji, najnowsze na górze
+(function () {
+  var L = window.IH_LANG || "pl", tags = window.IH_BLOG_TAGS || {}, d = new Date();
+  var today = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+  var e = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var t = function (o) { return o ? (o[L] || o.pl) : ""; };
+  var posts = (window.IH_BLOG || []).filter(function (p) { return p.date <= today; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+  var box = document.getElementById("posts");
+  var html = posts.map(function (p) {
+    return '<article class="post" id="' + e(p.id) + '" data-t="' + e(p.tag) + '"><img src="' + e(p.img) + '" alt="' + e(t(p.alt)) + '" loading="lazy">' +
+      '<div class="copy"><span class="label">' + e(t(tags[p.tag])) + " · " + p.min + ' min</span><h2>' + e(t(p.title)) + "</h2><p>" + e(t(p.lead)) + "</p>" +
+      "<ol>" + (t(p.steps) || []).map(function (s) { return "<li>" + e(s) + "</li>"; }).join("") + "</ol>" +
+      '<div class="related">' + (p.links || []).map(function (l) { return '<a class="btn ' + (l.dark ? "btn-dark" : "btn-outline") + ' btn-sm" href="' + e(l.href) + '">' + e(t(l.label)) + "</a>"; }).join("") + "</div></div></article>";
+  }).join("");
+  box.insertAdjacentHTML("afterbegin", html);
+  if (location.hash) { var el = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) setTimeout(function () { el.scrollIntoView(); }, 50); }
+})();
 document.getElementById("tabs").addEventListener("click", function (e) {
   var b = e.target.closest(".tab"); if (!b) return;
   this.querySelectorAll(".tab").forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
