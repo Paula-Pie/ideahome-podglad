@@ -3,7 +3,7 @@
    wspólny nagłówek z powrotem do IDEA HOME, ceny i przyciski "Buy online" przy produktach, poprawione linki w stopce. */
 (function () {
   var SHOP = "https://www.dladomu.sklep.pl";
-  // wersje językowe: EN/DE kupują na Amazon.de, CS na Allegro.cz; ceny tylko po polsku (złotówki)
+  // wersje językowe: EN/DE kupują na Amazon.de, CS na Allegro.cz; cen nie pokazujemy
   var LANG = window.IH_LANG || "pl";
   var AMAZON = "https://www.amazon.de/stores/page/916542A8-6F93-43D6-B5FC-639158F0193C";
   var MARKET = LANG === "cs" ? { name: "allegro.cz", url: "https://allegro.cz/uzivatel/Leviatan_SHOPCZ?string=rakun" }
@@ -87,9 +87,7 @@
     if (LANG !== "pl") {
       buy.innerHTML = '<a class="ih-btn" href="' + MARKET.url + '" target="_blank" rel="noopener">Buy online</a>';
     } else if (p) {
-      var price = p.price != null ? p.price.toFixed(2).replace(".", ",") + " zł" : "";
-      buy.innerHTML = (price ? '<span class="ih-price">' + price + (p.avail === false ? ' <small>temporarily unavailable</small>' : "") + "</span>" : "") +
-        '<a class="ih-btn" href="' + p.url + '" target="_blank" rel="noopener">Buy online</a>';
+      buy.innerHTML = '<a class="ih-btn" href="' + p.url + '" target="_blank" rel="noopener">Buy online</a>';
     } else {
       buy.innerHTML = '<a class="ih-btn ih-btn-outline" href="' + SHOP + '/search?q=' + encodeURIComponent("rakun roll") + '" target="_blank" rel="noopener">Check in shop</a>';
     }

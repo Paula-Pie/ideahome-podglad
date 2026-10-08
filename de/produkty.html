@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://strona-ideahome-chi.vercel.app/img/foto/baner-111062-7.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo-ideahome.png" type="image/png">
-<link rel="stylesheet" href="styles.css?v=202610080938">
+<link rel="stylesheet" href="styles.css?v=202610080944">
 </head>
 <body data-page="produkty">
 <div id="site-header"></div>
@@ -53,8 +53,6 @@
             <option value="cat">Sortieren: nach Kategorie</option>
             <option value="az">Name A–Z</option>
             <option value="cap">Volumen aufsteigend</option>
-            <option value="price">Preis aufsteigend</option>
-            <option value="price-desc">Preis absteigend</option>
             <option value="var">Meiste Varianten</option>
           </select>
         </div>
@@ -78,9 +76,9 @@
 
 <div id="site-footer"></div>
 
-<script src="js/miniatury-data.js?v=202610080938"></script>
-<script src="js/produkty-data.js?v=202610080938"></script>
-<script src="js/site.de.js?v=202610080938"></script>
+<script src="js/miniatury-data.js?v=202610080944"></script>
+<script src="js/produkty-data.js?v=202610080944"></script>
+<script src="js/site.de.js?v=202610080944"></script>
 <script>
 (function () {
   var IH = window.IH;
@@ -141,8 +139,6 @@
     if (state.sort === "az") list.sort(function (a, b) { return a.g.title.localeCompare(b.g.title, "pl") || a.k - b.k; });
     if (state.sort === "cap") list.sort(function (a, b) { return (a.v.cap || 9999) - (b.v.cap || 9999); });
     if (state.sort === "var") list.sort(function (a, b) { return b.g.variants.length - a.g.variants.length || a.k - b.k; });
-    if (state.sort === "price") list.sort(function (a, b) { return (a.v.price == null ? 1e9 : a.v.price) - (b.v.price == null ? 1e9 : b.v.price); });
-    if (state.sort === "price-desc") list.sort(function (a, b) { return (b.v.price || 0) - (a.v.price || 0); });
     grid.innerHTML = list.map(function (it) { return IH.card(it.g, { hideCat: !!state.cat, vi: it.k }); }).join("");
 
     var cat = state.cat && IH.catById(state.cat), room = state.room && IH.roomById(state.room);

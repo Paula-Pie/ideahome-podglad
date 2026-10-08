@@ -481,13 +481,8 @@
     if (g.cat === "worki" && v.color && COLORS[v.color].seg) s += (s ? " · " : "") + COLORS[v.color].seg;
     return s;
   }
-  // cena brutto ze sklepu dladomu.sklep.pl
-  function priceHtml(v) {
-    // ceny ze sklepu polskiego pokazujemy tylko w wersji PL
-    if (v.price == null || LANG !== "pl") return '<p class="price" hidden></p>';
-    var p = v.price.toFixed(2).replace(".", ",") + " zł";
-    return '<p class="price">' + p + (v.avail === false ? ' <span class="soldout">dočasně nedostupné</span>' : "") + "</p>";
-  }
+  // ceny nie są pokazywane na stronie (decyzja: tylko przyciski do sklepu)
+  function priceHtml(v) { return '<p class="price" hidden></p>'; }
   function buyUrl(g, v) {
     if (LANG === "pl") return v.url || shopSearch(g.query);
     var terms = MARKET_TERMS[LANG] || {};
