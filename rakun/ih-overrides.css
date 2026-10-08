@@ -94,3 +94,15 @@ footer .ih-btn, footer a { position: relative; z-index: 3; }
 .ih-langs a:hover, .ih-langs a[aria-current] { opacity: 1; }
 .ih-langs a[aria-current] { text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 420px) { .ih-langs a { padding: 6px 3px; font-size: 10px; } }
+/* wszystkie miniatury produktów tej samej szerokości (RAKUN Summer i ściereczki jak mydła i chemia) */
+@media (min-width: 761px) {
+  #spryskiwacz .editorial-item, #akcesoria .editorial-item { width: 210px; max-width: 210px; }
+  #akcesoria .editorial-grid.cols-2 { max-width: 210px; }
+}
+/* telefon: wszystkie produkty w dwóch równych kolumnach */
+@media (max-width: 760px) {
+  #mydla .editorial-grid, #chemia .editorial-grid, #spryskiwacz .editorial-grid, #akcesoria .editorial-grid {
+    display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 22px 14px !important; max-width: 100% !important; width: 100%; flex-direction: initial;
+  }
+  #mydla .editorial-item, #chemia .editorial-item, #spryskiwacz .editorial-item, #akcesoria .editorial-item { width: auto !important; max-width: none !important; margin: 0 !important; }
+}
