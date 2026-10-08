@@ -827,7 +827,7 @@
       '<div class="shopbox"><h4>Online kaufen</h4><p>IDEA HOME Produkte finden Sie im Shop unseres Partners.</p><b>' + MARKET.name + '</b><a class="btn btn-outline btn-sm" href="' + MARKET.home + '" target="_blank" rel="noopener">Zum Shop</a></div>' +
       '</div><div class="foot-brands"><span class="fb-label">Leviatan und unsere Marken</span>' +
       '<a href="https://www.leviatan.pl/pl" target="_blank" rel="noopener" title="Leviatan – Hersteller"><img src="img/marki/leviatan.svg" alt="Leviatan" width="108" height="88"><small>Hersteller</small></a>' +
-      '<a href="https://strona-marki-school.vercel.app" target="_blank" rel="noopener" title="S&#39;COOL – artykuły plastyczne i szkolne"><img src="img/marki/scool.png" alt="S&#39;COOL" width="448" height="228"><small>Bastelbedarf</small></a>' +
+      '<a href="https://www.scoolbyleviatan.com/" target="_blank" rel="noopener" title="S&#39;COOL – artykuły plastyczne i szkolne"><img src="img/marki/scool.png" alt="S&#39;COOL" width="448" height="228"><small>Bastelbedarf</small></a>' +
       '<a href="https://lifeup.cafe/" target="_blank" rel="noopener" title="LIFE UP – eigener Kaffee"><img src="img/marki/lifeup.png" alt="LIFE UP" width="336" height="440"><small>eigener Kaffee</small></a></div>' +
       '<div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Alle Rechte vorbehalten.</span><span><a href="polityka-prywatnosci.html">Datenschutz und Cookies</a> · <a href="regulamin.html">Nutzungsbedingungen</a> · Rudawka 88, 43-300 Bielsko-Biała, Polen</span></div></div></footer>';
   }
