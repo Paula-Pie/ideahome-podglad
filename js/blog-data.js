@@ -11,8 +11,8 @@ window.IH_BLOG_TAGS = {
 window.IH_BLOG = [
   {
     id: "jaki-worek-do-kosza", date: "2026-10-09", tag: "porzadek", min: 4,
-    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/66bcb2fae524fb70b6cf4a9f_worki-ldpe-120l-czarny-25szt-mocny.jpg?v=1776083454&width=1200",
-    alt: { pl: "Rolka czarnych worków IDEA HOME w dłoni", en: "A roll of black IDEA HOME bin bags in a hand", de: "Eine Rolle schwarzer IDEA HOME Müllbeutel in der Hand", cs: "Role černých pytlů IDEA HOME v ruce" },
+    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/661e3e195e43bd2d3d87927d_worki-ldpe-60l-czarny-50szt.jpg?v=1776083371&width=1200",
+    alt: { pl: "Kobieta w rękawicach wymienia worek w koszu na śmieci w kuchni", en: "A woman in gloves changing the bag in a kitchen bin", de: "Eine Frau mit Handschuhen wechselt den Beutel im Küchenmülleimer", cs: "Žena v rukavicích vyměňuje pytel v kuchyňském koši" },
     title: { pl: "Jaki worek do kosza? Pojemność i grubość bez zgadywania", en: "Which bin bag? Capacity and thickness without guesswork", de: "Welcher Müllbeutel? Volumen und Stärke ohne Rätselraten", cs: "Jaký pytel do koše? Objem a tloušťka bez hádání" },
     lead: { pl: "Za mały worek pęka przy wiązaniu, za duży zsuwa się do środka kosza. Trzy proste zasady pomogą dobrać właściwy.", en: "A bag that's too small splits when you tie it; one that's too big slides into the bin. Three simple rules help you pick the right one.", de: "Ein zu kleiner Beutel reißt beim Zubinden, ein zu großer rutscht in den Eimer. Drei einfache Regeln helfen bei der Wahl.", cs: "Příliš malý pytel praskne při zavazování, příliš velký sklouzne do koše. Tři jednoduchá pravidla pomohou vybrat ten správný." },
     steps: {
@@ -25,8 +25,8 @@ window.IH_BLOG = [
   },
   {
     id: "jesienne-porzadki-w-ogrodzie", date: "2026-10-13", tag: "porzadek", min: 4,
-    img: "img/foto/baner-ogrod-i-taras.jpg",
-    alt: { pl: "Ogród i taras jesienią", en: "Garden and patio in autumn", de: "Garten und Terrasse im Herbst", cs: "Zahrada a terasa na podzim" },
+    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/661e3dea5e43bd2d3d83b20d_worki-ldpe-120l-czarny-25szt.jpg?v=1776083369&width=1200",
+    alt: { pl: "Pełny czarny worek niesiony przez ogród w jesiennym słońcu", en: "A full black bag carried through the garden in autumn sun", de: "Ein voller schwarzer Beutel wird in der Herbstsonne durch den Garten getragen", cs: "Plný černý pytel nesený zahradou v podzimním slunci" },
     title: { pl: "Jesienne porządki w ogrodzie: plan na jedno popołudnie", en: "Autumn garden clean-up: a plan for one afternoon", de: "Herbstputz im Garten: ein Plan für einen Nachmittag", cs: "Podzimní úklid zahrady: plán na jedno odpoledne" },
     lead: { pl: "Zanim przyjdą przymrozki, warto uprzątnąć ogród i taras. Z dobrym planem zajmie to kilka godzin.", en: "Before the frost arrives, it's worth tidying the garden and patio. With a good plan it takes just a few hours.", de: "Bevor der Frost kommt, lohnt es sich, Garten und Terrasse aufzuräumen. Mit einem guten Plan dauert das nur wenige Stunden.", cs: "Než přijdou mrazíky, vyplatí se uklidit zahradu a terasu. S dobrým plánem to zabere jen pár hodin." },
     steps: {
@@ -53,8 +53,8 @@ window.IH_BLOG = [
   },
   {
     id: "garaz-z-techbox", date: "2026-10-20", tag: "garaz", min: 3,
-    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/6903468a2445c550739b2b99_pojemnik-ih-techbox-hd-set-2x55l-insert.jpg?v=1776083563&width=1200",
-    alt: { pl: "Pojemnik Techbox HD z wkładem pełnym narzędzi", en: "Techbox HD box with an insert full of tools", de: "Techbox HD mit Einsatz voller Werkzeuge", cs: "Box Techbox HD s vložkou plnou nářadí" },
+    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/675809cee524fb70b6f0528a_insert-do-pojemnika-techbox-hd-ih-4055l-czarny.jpg?v=1776083516&width=1200",
+    alt: { pl: "Otwarte pojemniki Techbox pełne narzędzi, taśm i drobiazgów", en: "Open Techbox boxes full of tools, tapes and small parts", de: "Offene Techbox-Boxen voller Werkzeuge, Klebebänder und Kleinteile", cs: "Otevřené boxy Techbox plné nářadí, pásek a drobností" },
     title: { pl: "Garaż przed zimą: wszystko w pojemnikach, nic na podłodze", en: "Garage before winter: everything in boxes, nothing on the floor", de: "Garage vor dem Winter: alles in Boxen, nichts auf dem Boden", cs: "Garáž před zimou: vše v boxech, nic na podlaze" },
     lead: { pl: "Zimą w garażu stoi auto, sanki i opony. Żeby wszystko się zmieściło, drobiazgi muszą trafić do pojemników.", en: "In winter the garage holds the car, sledges and tyres. To fit everything in, the small stuff has to go into boxes.", de: "Im Winter stehen in der Garage Auto, Schlitten und Reifen. Damit alles passt, müssen Kleinteile in Boxen.", cs: "V zimě je v garáži auto, sáňky a pneumatiky. Aby se vše vešlo, drobnosti musí do boxů." },
     steps: {
@@ -95,8 +95,8 @@ window.IH_BLOG = [
   },
   {
     id: "mydlo-w-kanistrze", date: "2026-10-30", tag: "porzadek", min: 3,
-    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/cd05d9d32f673e687946fc4685f58ac0.jpg?v=1776083578&width=1200",
-    alt: { pl: "Mydło w płynie RAKUN 5 l w łazience", en: "RAKUN liquid soap 5 l in a bathroom", de: "RAKUN Flüssigseife 5 l im Badezimmer", cs: "Tekuté mýdlo RAKUN 5 l v koupelně" },
+    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/4c7e7ae53b32b56db85b5c49c49f7011.jpg?v=1776342322&width=1200",
+    alt: { pl: "Uzupełnianie butelki z dozownikiem mydłem RAKUN z kanistra 5 l", en: "Refilling a dispenser bottle with RAKUN soap from a 5 l canister", de: "Nachfüllen einer Spenderflasche mit RAKUN Seife aus dem 5-l-Kanister", cs: "Doplňování lahve s dávkovačem mýdlem RAKUN z 5l kanystru" },
     title: { pl: "Mydło w kanistrze: jak wygodnie uzupełniać dozowniki", en: "Soap in a canister: how to refill dispensers easily", de: "Seife im Kanister: Spender bequem nachfüllen", cs: "Mýdlo v kanystru: jak pohodlně doplňovat dávkovače" },
     lead: { pl: "Kanister 5 l wystarcza na długo i sprawdza się w domu, biurze i małej firmie. Kilka trików ułatwi uzupełnianie.", en: "A 5 l canister lasts a long time and works well at home, in the office and in small businesses. A few tricks make refilling easier.", de: "Ein 5-l-Kanister reicht lange und bewährt sich zu Hause, im Büro und im kleinen Betrieb. Ein paar Tricks erleichtern das Nachfüllen.", cs: "Kanystr 5 l vydrží dlouho a hodí se domů, do kanceláře i malé firmy. Pár triků usnadní doplňování." },
     steps: {
@@ -109,8 +109,8 @@ window.IH_BLOG = [
   },
   {
     id: "prezenty-w-papierowych-torbach", date: "2026-11-03", tag: "porzadek", min: 3,
-    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/659bc2cc5e43bd2d3d8723e4_torba-prezentowa-ih-wave-kraft-l-6szt.jpg?v=1776083419&width=1200",
-    alt: { pl: "Papierowa torba prezentowa Wave Kraft w dłoni", en: "Wave Kraft paper gift bag in a hand", de: "Wave Kraft Geschenktüte aus Papier in der Hand", cs: "Papírová dárková taška Wave Kraft v ruce" },
+    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/66bb2192e524fb70b6277c3b_pudeko-na-wino-ih-wave-kraft-clickgo-6szt.jpg?v=1776687722&width=1200",
+    alt: { pl: "Papierowe pudełko na wino Wave Kraft w świątecznej aranżacji", en: "Wave Kraft paper wine box in a festive arrangement", de: "Wave Kraft Weinbox aus Papier in festlicher Dekoration", cs: "Papírová krabička na víno Wave Kraft ve sváteční aranžmá" },
     title: { pl: "Prezenty bez stresu: pakowanie w papierowe torby", en: "Stress-free gifts: wrapping in paper bags", de: "Geschenke ohne Stress: Verpacken in Papiertüten", cs: "Dárky bez stresu: balení do papírových tašek" },
     lead: { pl: "Do świąt zostało kilka tygodni. Papierowa torba to najszybszy sposób na elegancko zapakowany prezent – bez taśmy i nożyczek.", en: "The holidays are a few weeks away. A paper bag is the quickest way to an elegantly wrapped gift – no tape or scissors.", de: "Bis zu den Feiertagen sind es nur noch wenige Wochen. Eine Papiertüte ist der schnellste Weg zum elegant verpackten Geschenk – ohne Klebeband und Schere.", cs: "Do svátků zbývá pár týdnů. Papírová taška je nejrychlejší cesta k elegantně zabalenému dárku – bez pásky a nůžek." },
     steps: {
