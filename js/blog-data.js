@@ -11,8 +11,8 @@ window.IH_BLOG_TAGS = {
 window.IH_BLOG = [
   {
     id: "jaki-worek-do-kosza", date: "2026-10-09", tag: "porzadek", min: 4,
-    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/661e3e195e43bd2d3d87927d_worki-ldpe-60l-czarny-50szt.jpg?v=1776083371&width=1200",
-    alt: { pl: "Kobieta w rękawicach wymienia worek w koszu na śmieci w kuchni", en: "A woman in gloves changing the bag in a kitchen bin", de: "Eine Frau mit Handschuhen wechselt den Beutel im Küchenmülleimer", cs: "Žena v rukavicích vyměňuje pytel v kuchyňském koši" },
+    img: "https://cdn.shopify.com/s/files/1/1032/1985/5705/files/661e3dfe5e43bd2d3d83c42e_worki-ldpe-35l-czarny-50szt.jpg?v=1776342245&width=1200",
+    alt: { pl: "Pełny worek na śmieci niesiony w dłoni, w tle zieleń", en: "A full bin bag carried in a hand, greenery in the background", de: "Ein voller Müllbeutel in der Hand, im Hintergrund Grün", cs: "Plný pytel na odpadky v ruce, v pozadí zeleň" },
     title: { pl: "Jaki worek do kosza? Pojemność i grubość bez zgadywania", en: "Which bin bag? Capacity and thickness without guesswork", de: "Welcher Müllbeutel? Volumen und Stärke ohne Rätselraten", cs: "Jaký pytel do koše? Objem a tloušťka bez hádání" },
     lead: { pl: "Za mały worek pęka przy wiązaniu, za duży zsuwa się do środka kosza. Trzy proste zasady pomogą dobrać właściwy.", en: "A bag that's too small splits when you tie it; one that's too big slides into the bin. Three simple rules help you pick the right one.", de: "Ein zu kleiner Beutel reißt beim Zubinden, ein zu großer rutscht in den Eimer. Drei einfache Regeln helfen bei der Wahl.", cs: "Příliš malý pytel praskne při zavazování, příliš velký sklouzne do koše. Tři jednoduchá pravidla pomohou vybrat ten správný." },
     steps: {
