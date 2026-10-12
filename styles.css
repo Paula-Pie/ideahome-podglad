@@ -79,7 +79,7 @@ p { margin: 0; }
 .mainnav .dd { position: relative; }
 .mainnav .dd > button svg { width: 10px; transition: transform .2s; }
 .mainnav .dd:hover > button svg, .mainnav .dd.open > button svg { transform: rotate(180deg); }
-.mega { position: absolute; top: calc(100% + 14px); left: 50%; translate: -50% 0; width: min(760px, 92vw); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: var(--radius); padding: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; opacity: 0; visibility: hidden; transition: opacity .18s, visibility .18s; }
+.mega { position: absolute; top: calc(100% + 14px); left: 0; translate: none; width: min(760px, calc(100vw - 32px)); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: var(--radius); padding: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; opacity: 0; visibility: hidden; transition: opacity .18s, visibility .18s; }
 .mega::before { content: ""; position: absolute; inset: -16px 0 auto; height: 16px; }
 .mega.narrow { width: 300px; grid-template-columns: 1fr; }
 .mainnav .dd:hover .mega, .mainnav .dd.open .mega, .mainnav .dd:focus-within .mega { opacity: 1; visibility: visible; }
@@ -472,7 +472,7 @@ section { padding-block: clamp(56px, 7vw, 96px); }
 
 /* menu w jednej linii na średnich ekranach */
 .mainnav > a, .mainnav .dd > button { white-space: nowrap; }
-@media (min-width: 1081px) and (max-width: 1320px) {
+@media (min-width: 1081px) and (max-width: 1680px) {
   .brand .brand-tag { display: none; }
   .headbar { gap: 16px; }
   .mainnav > a, .mainnav .dd > button { padding: 10px 9px; letter-spacing: .07em; }
@@ -637,3 +637,13 @@ a.lev-card:hover { border-color: var(--ink); box-shadow: var(--shadow); }
 .langs a:hover { color: var(--ink); background: var(--sand); }
 .langs a[aria-current] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 620px) { .langs a { padding: 6px 4px; font-size: 10px; } .head-actions .icon-btn { width: 38px; } }
+
+/* strona nigdy nie przewija się w bok (np. przy powiększeniu w przeglądarce); clip nie psuje przyklejonego nagłówka */
+html, body { overflow-x: clip; }
+/* przy węższych ekranach komputera mniejsze odstępy w prawej części nagłówka */
+@media (min-width: 1081px) and (max-width: 1680px) {
+  .head-actions { gap: 4px; }
+  .langs { margin-right: 2px; }
+  .head-actions .btn { padding-inline: 16px; }
+}
+@media (min-width: 1081px) and (max-width: 1300px) { .head-actions .btn { display: none; } }

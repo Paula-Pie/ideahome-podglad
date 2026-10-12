@@ -106,3 +106,5 @@ footer .ih-btn, footer a { position: relative; z-index: 3; }
   }
   #mydla .editorial-item, #chemia .editorial-item, #spryskiwacz .editorial-item, #akcesoria .editorial-item { width: auto !important; max-width: none !important; margin: 0 !important; }
 }
+/* bez przewijania w bok (ozdobne grafiki w stopce i powiększone miniatury) */
+html, body { overflow-x: clip; }
