@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://strona-ideahome-chi.vercel.app/sitemap.xml
+Sitemap: https://www.idea-home.eu/sitemap.xml
