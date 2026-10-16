@@ -141,16 +141,18 @@
     item.classList.add("ih-slider");
     th.dataset.first = imgs[0];
     var cur = 0;
-    var nav = '<button type="button" class="ih-sl-nav prev" aria-label="Předchozí fotka">‹</button><button type="button" class="ih-sl-nav next" aria-label="Další fotka">›</button>';
-    th.insertAdjacentHTML("beforeend", nav + '<div class="ih-sl-dots">' + imgs.map(function () { return "<i></i>"; }).join("") + "</div>");
+    // jedna, dyskretna strzałka po prawej; po zjechaniu z kafelka (albo dotknięciu innego miejsca) wraca pierwsze zdjęcie
+    th.insertAdjacentHTML("beforeend", '<button type="button" class="ih-sl-nav next" aria-label="Další fotka">›</button><div class="ih-sl-dots">' + imgs.map(function () { return "<i></i>"; }).join("") + "</div>");
     var dots = th.querySelectorAll(".ih-sl-dots i");
     function go(i) {
       cur = (i + imgs.length) % imgs.length;
       i1.src = imgs[cur]; i1.classList.toggle("ih-photo", cur > 0);   // ilustracja i zdjęcia ze sklepu bez powiększenia, żeby nie nachodziły na sąsiednie kafelki
       dots.forEach(function (d, j) { d.classList.toggle("on", j === cur); });
+      item.classList.toggle("ih-sl-moved", cur > 0);
     }
-    th.querySelector(".prev").addEventListener("click", function (e) { e.stopPropagation(); go(cur - 1); });
     th.querySelector(".next").addEventListener("click", function (e) { e.stopPropagation(); go(cur + 1); });
+    item.addEventListener("mouseleave", function () { if (cur) go(0); });
+    document.addEventListener("pointerdown", function (e) { if (cur && !item.contains(e.target)) go(0); });
     go(0);
     return swipe(th, function (d) { go(cur + d); });
   }
