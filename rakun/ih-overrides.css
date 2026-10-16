@@ -166,3 +166,6 @@ html, body { overflow-x: clip; }
 @media (hover: none) { .ih-slider .ih-sl-nav { opacity: .9; width: 28px; height: 28px; } }
 /* galeria w karcie: strzałki w obie strony */
 .ih-card-stage .ih-sl-nav { opacity: 1; width: 42px; height: 42px; font-size: 26px; }
+/* telefon: kadr z filmu (poziomy 16:9) – niższa sekcja i kadr na Rakuna z kanistrem zamiast powiększonej maski auta */
+.ih-lite .hero-video { height: 68vh; min-height: 380px; max-height: 620px; }
+.ih-lite .hero-video video { object-position: 82% 45%; }
