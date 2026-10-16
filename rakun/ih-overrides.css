@@ -108,3 +108,36 @@ footer .ih-btn, footer a { position: relative; z-index: 3; }
 }
 /* bez przewijania w bok (ozdobne grafiki w stopce i powiększone miniatury) */
 html, body { overflow-x: clip; }
+
+/* karta produktu: galeria zdjęć i pełny opis */
+.ih-buyrow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ih-card { position: fixed; inset: 0; z-index: 1000; background: rgba(40,32,24,.55); display: grid; place-items: center; padding: 20px; }
+.ih-card[hidden] { display: none; }
+.ih-card-box { position: relative; background: var(--white, #fffdf8); color: var(--ink, #3d332a); border-radius: 22px; width: min(1040px, 100%); max-height: calc(100vh - 40px); overflow: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 32px; padding: 32px; box-shadow: 0 30px 80px rgba(0,0,0,.25); }
+.ih-card-x { position: absolute; top: 12px; right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line, #e2d5bd); background: var(--white, #fffdf8); font-size: 24px; line-height: 1; cursor: pointer; color: inherit; z-index: 2; }
+.ih-card-x:hover { background: var(--cream, #f6efe2); }
+.ih-card-gal { position: sticky; top: 0; align-self: start; }
+.ih-card-main { width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border: 1px solid var(--line, #e2d5bd); border-radius: 16px; }
+.ih-card-thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.ih-card-thumbs button { width: 62px; height: 62px; padding: 3px; border: 1px solid var(--line, #e2d5bd); border-radius: 10px; background: #fff; cursor: pointer; }
+.ih-card-thumbs button[aria-current="true"] { border-color: var(--accent, #c17f4f); box-shadow: 0 0 0 2px var(--accent, #c17f4f) inset; }
+.ih-card-thumbs img { width: 100%; height: 100%; object-fit: contain; }
+.ih-card-cat { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-dark, #a86438); font-weight: 700; }
+.ih-card-body h3 { font-size: clamp(24px, 2.4vw, 32px); margin: 8px 0 16px; line-height: 1.15; padding-right: 40px; }
+.ih-card-desc { font-size: 15px; line-height: 1.65; color: var(--ink-soft, #6b5d4f); }
+.ih-card-desc h4, .ih-card-desc h5 { color: var(--ink, #3d332a); font-size: 17px; margin: 18px 0 8px; line-height: 1.3; }
+.ih-card-desc p { margin: 0 0 10px; }
+.ih-card-desc ul, .ih-card-desc ol { margin: 0 0 12px; padding-left: 20px; }
+.ih-card-desc li { margin-bottom: 6px; }
+.ih-card-desc strong, .ih-card-desc b { color: var(--ink, #3d332a); }
+.ih-card-desc table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 14px; }
+.ih-card-desc th, .ih-card-desc td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line, #e2d5bd); vertical-align: top; }
+.ih-card-desc th { color: var(--ink, #3d332a); background: var(--cream, #f6efe2); }
+.ih-card-buy { margin-top: 18px; position: sticky; bottom: -32px; background: linear-gradient(transparent, var(--white, #fffdf8) 30%); padding: 14px 0 6px; }
+@media (max-width: 760px) {
+  .ih-card { padding: 0; align-items: end; }
+  .ih-card-box { grid-template-columns: 1fr; gap: 18px; padding: 20px 18px 24px; border-radius: 20px 20px 0 0; max-height: 92vh; }
+  .ih-card-gal { position: static; }
+  .ih-card-main { aspect-ratio: 4/3; }
+  .ih-card-thumbs button { width: 52px; height: 52px; }
+}

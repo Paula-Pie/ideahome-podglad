@@ -90,8 +90,55 @@
     } else {
       buy.innerHTML = '<a class="ih-btn ih-btn-outline" href="' + SHOP + '/search?q=' + encodeURIComponent("rakun roll") + '" target="_blank" rel="noopener">Sprawdź w sklepie</a>';
     }
+    // karta produktu: galeria zdjęć ze sklepu + pełny opis
+    if (p) {
+      var more = document.createElement("button");
+      more.type = "button"; more.className = "ih-btn ih-btn-outline ih-more"; more.textContent = "Szczegóły";
+      buy.appendChild(more);
+      var open = function () { openCard(item, hit[1], p, buy.querySelector("a").href); };
+      more.addEventListener("click", open);
+      var th = item.querySelector(".thumb");
+      if (th) { th.style.cursor = "pointer"; th.setAttribute("role", "button"); th.setAttribute("tabindex", "0"); th.setAttribute("aria-label", "Szczegóły"); th.addEventListener("click", open); th.addEventListener("keydown", function (e) { if (e.key === "Enter") open(); }); }
+    }
     item.appendChild(buy);
   });
+
+  /* 2b. Karta produktu (okno): zdjęcia ze sklepu dladomu.sklep.pl i pełny opis (ih/rakun-opisy.js, tylko po polsku) */
+  if (LANG === "pl") { var ds = document.createElement("script"); ds.src = "ih/rakun-opisy.js?v=202610160941"; document.head.appendChild(ds); }
+  // produkty bez opisu w sklepie
+  var OWN = {
+    "plyn-do-mycia-naczyn-lemon-ih-rakun-5l": "<p>Płyn do mycia naczyń RAKUN Lemon w ekonomicznym kanistrze 5 l. Skutecznie usuwa tłuszcz z naczyń, garnków i patelni, zostawiając cytrusową świeżość.</p><p>Duża pojemność wystarcza na długo i pozwala wygodnie uzupełniać dozownik w domu, biurze czy kuchni firmowej.</p>",
+    "plyn-do-mycia-naczyn-mint-ih-rakun-5l": "<p>Płyn do mycia naczyń RAKUN Mint w ekonomicznym kanistrze 5 l. Chłodząca mięta i skuteczne działanie na tłuste garnki i patelnie.</p><p>Duża pojemność wystarcza na długo i pozwala wygodnie uzupełniać dozownik w domu, biurze czy kuchni firmowej.</p>"
+  };
+  var card = null;
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function openCard(item, id, p, buyHref) {
+    if (!card) {
+      card = document.createElement("div"); card.className = "ih-card"; card.hidden = true;
+      card.innerHTML = '<div class="ih-card-box" role="dialog" aria-modal="true" aria-labelledby="ih-card-title"><button type="button" class="ih-card-x" aria-label="Zamknij">×</button><div class="ih-card-gal"><img class="ih-card-main" alt=""><div class="ih-card-thumbs"></div></div><div class="ih-card-body"><span class="ih-card-cat"></span><h3 id="ih-card-title"></h3><div class="ih-card-desc"></div><div class="ih-card-buy"></div></div></div>';
+      document.body.appendChild(card);
+      var close = function () { card.hidden = true; document.body.style.overflow = ""; };
+      card.addEventListener("click", function (e) { if (e.target === card || e.target.closest(".ih-card-x")) close(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !card.hidden) close(); });
+    }
+    var own = item.querySelector(".thumb .img-1");
+    var imgs = [];
+    if (own) imgs.push(own.getAttribute("src"));
+    (p.imgs || [p.img]).forEach(function (u) { if (u && imgs.indexOf(u) < 0) imgs.push(u); });
+    var main = card.querySelector(".ih-card-main"), thumbs = card.querySelector(".ih-card-thumbs");
+    var show = function (i) { main.src = imgs[i]; thumbs.querySelectorAll("button").forEach(function (b, j) { b.setAttribute("aria-current", j === i); }); };
+    thumbs.innerHTML = imgs.map(function (u, i) { return '<button type="button" aria-label="Zdjęcie ' + (i + 1) + '"><img src="' + esc(u) + '" alt="" loading="lazy"></button>'; }).join("");
+    thumbs.querySelectorAll("button").forEach(function (b, i) { b.addEventListener("click", function () { show(i); }); });
+    show(0);
+    var h4 = item.querySelector("h4"), cat = item.querySelector(".cat"), lead = item.querySelector("p");
+    card.querySelector(".ih-card-cat").textContent = "RAKUN" + (cat ? " · " + cat.textContent : "");
+    card.querySelector("#ih-card-title").textContent = h4 ? h4.textContent : "";
+    var full = LANG === "pl" ? ((window.IH_RAKUN_DESC || {})[id] || OWN[id] || "") : "";
+    card.querySelector(".ih-card-desc").innerHTML = full || (lead ? "<p>" + esc(lead.textContent) + "</p>" : "");
+    card.querySelector(".ih-card-buy").innerHTML = '<a class="ih-btn" href="' + esc(buyHref) + '" target="_blank" rel="noopener">Kup online</a>';
+    card.hidden = false; document.body.style.overflow = "hidden";
+    card.querySelector(".ih-card-x").focus();
+  }
 
   /* 3. Sekcja "Dziennik Rakuna" → stała treść o Rakunie (bez bloga do prowadzenia) */
   var blog = document.getElementById("blog");
