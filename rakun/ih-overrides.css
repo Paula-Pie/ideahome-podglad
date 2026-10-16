@@ -167,5 +167,7 @@ html, body { overflow-x: clip; }
 /* galeria w karcie: strzałki w obie strony */
 .ih-card-stage .ih-sl-nav { opacity: 1; width: 42px; height: 42px; font-size: 26px; }
 /* telefon: kadr z filmu (poziomy 16:9) – niższa sekcja i kadr na Rakuna z kanistrem zamiast powiększonej maski auta */
-.ih-lite .hero-video { height: 68vh; min-height: 380px; max-height: 620px; }
-.ih-lite .hero-video video { object-position: 82% 45%; }
+.ih-lite .hero-video { height: min(125vw, 78vh); min-height: 380px; }
+.ih-lite .hero-video video { object-position: 45% 60%; }
+/* telefon: delikatne przyciemnienie nieba pod białym logo i menu */
+.ih-lite .hero-video::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 130px; background: linear-gradient(rgba(45,36,28,.5), rgba(45,36,28,0)); z-index: 1; pointer-events: none; }

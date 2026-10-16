@@ -502,9 +502,9 @@
     .scroll-btn{width:60px; height:60px; font-size:.7rem;}
   }
 </style>
-<link rel="stylesheet" href="ih-overrides.css?v=202610161010">
+<link rel="stylesheet" href="ih-overrides.css?v=202610161042">
 <script defer src="../js/produkty-data.js"></script>
-<script defer src="ih-rakun.js?v=202610161010"></script>
+<script defer src="ih-rakun.js?v=202610161042"></script>
 </head>
 <body>
 
@@ -524,6 +524,7 @@
 <!-- ============ HERO VIDEO (full first viewport, no extra graphics) ============ -->
 <section class="hero-video" id="top">
   <video autoplay muted loop playsinline poster="rakun-film-poster.jpg" id="hero-video-el"></video>
+  <script>/* telefon: osobna grafika (Rakun w kabriolecie) zamiast kadru z poziomego filmu */ if (window.matchMedia("(max-width: 760px)").matches) document.getElementById("hero-video-el").poster = "rakun-hero-mobile.jpg";</script>
   <a href="#intro" class="scroll-btn">Scroll</a>
   <button type="button" id="sound-toggle" class="sound-btn" aria-label="Włącz dźwięk">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
