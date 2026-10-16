@@ -9,7 +9,7 @@ window.IH_MSE = [
    {
       "asin" : "B0HD127ZFH",
       "img" : "img/amazon/B0HD127ZFH.jpg",
-      "title" : "IDEA HOME MS. EVERYDAY Glasreiniger 5L Fensterreiniger für streifenfreie Sauberkeit",
+      "title" : "IDEA HOME MS. EVERYDAY Glasreiniger 5L - Streifenfrei für Glas und Spiegel | Fensterreiniger, Spiegelreiniger, flüssige Rezeptur, Kunststoffkanister mit Tragegriff, für Haushalt und Gewerbe",
       "url" : "https://www.amazon.de/dp/B0HD127ZFH"
    }
 ]
