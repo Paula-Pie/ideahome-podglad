@@ -98,7 +98,12 @@
       var open = function () { openCard(item, hit[1], p, buy.querySelector("a").href); };
       more.addEventListener("click", open);
       var th = item.querySelector(".thumb");
-      if (th) { th.style.cursor = "pointer"; th.setAttribute("role", "button"); th.setAttribute("tabindex", "0"); th.setAttribute("aria-label", "Szczegóły"); th.addEventListener("click", open); th.addEventListener("keydown", function (e) { if (e.key === "Enter") open(); }); }
+      if (th) {
+        th.style.cursor = "pointer"; th.setAttribute("tabindex", "0"); th.setAttribute("aria-label", "Szczegóły");
+        var swiped = makeSlider(th, item, p);
+        th.addEventListener("click", function (e) { if (swiped() || e.target.closest(".ih-sl-nav, .ih-sl-dots")) return; open(); });
+        th.addEventListener("keydown", function (e) { if (e.key === "Enter") open(); });
+      }
     }
     item.appendChild(buy);
   });
@@ -111,22 +116,71 @@
     "plyn-do-mycia-naczyn-mint-ih-rakun-5l": "<p>Płyn do mycia naczyń RAKUN Mint w ekonomicznym kanistrze 5 l. Chłodząca mięta i skuteczne działanie na tłuste garnki i patelnie.</p><p>Duża pojemność wystarcza na długo i pozwala wygodnie uzupełniać dozownik w domu, biurze czy kuchni firmowej.</p>"
   };
   var card = null;
+
+  // przesuwanie zdjęć: strzałki, kropki i gest (palcem albo przeciągnięcie myszą); zwraca funkcję „czy przed chwilą przesunięto”
+  function swipe(el, step) {
+    var x0 = null, moved = false, t = 0;
+    el.addEventListener("pointerdown", function (e) { x0 = e.clientX; moved = false; });
+    el.addEventListener("pointerup", function (e) {
+      if (x0 === null) return; var dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 35) { moved = true; t = Date.now(); step(dx < 0 ? 1 : -1); }
+    });
+    el.addEventListener("pointercancel", function () { x0 = null; });
+    el.addEventListener("dragstart", function (e) { e.preventDefault(); });
+    return function () { return moved && Date.now() - t < 400; };
+  }
+  // zdjęcia ze sklepu; pierwsze (zdjęcie produktu na białym tle) pomijamy, gdy mamy własną miniaturę – wyglądałoby jak duplikat
+  function shopImgs(p, haveOwn) { var a = (p.imgs || [p.img]).filter(Boolean); return haveOwn ? a.slice(1) : a; }
+  function makeSlider(th, item, p) {
+    var i1 = th.querySelector(".img-1"), i2 = th.querySelector(".img-2");
+    var imgs = [];
+    [i1, i2].forEach(function (im) { if (im && im.getAttribute("src")) imgs.push(im.getAttribute("src")); });
+    shopImgs(p, imgs.length > 0).forEach(function (u) { if (u && imgs.indexOf(u) < 0) imgs.push(u); });
+    if (imgs.length < 2) return function () { return false; };
+    item.classList.add("ih-slider");
+    th.dataset.first = imgs[0];
+    var cur = 0;
+    var nav = '<button type="button" class="ih-sl-nav prev" aria-label="Poprzednie zdjęcie">‹</button><button type="button" class="ih-sl-nav next" aria-label="Następne zdjęcie">›</button>';
+    th.insertAdjacentHTML("beforeend", nav + '<div class="ih-sl-dots">' + imgs.map(function () { return "<i></i>"; }).join("") + "</div>");
+    var dots = th.querySelectorAll(".ih-sl-dots i");
+    function go(i) {
+      cur = (i + imgs.length) % imgs.length;
+      i1.src = imgs[cur]; i1.classList.toggle("ih-photo", cur > 0);   // ilustracja i zdjęcia ze sklepu bez powiększenia, żeby nie nachodziły na sąsiednie kafelki
+      dots.forEach(function (d, j) { d.classList.toggle("on", j === cur); });
+    }
+    th.querySelector(".prev").addEventListener("click", function (e) { e.stopPropagation(); go(cur - 1); });
+    th.querySelector(".next").addEventListener("click", function (e) { e.stopPropagation(); go(cur + 1); });
+    go(0);
+    return swipe(th, function (d) { go(cur + d); });
+  }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function openCard(item, id, p, buyHref) {
     if (!card) {
       card = document.createElement("div"); card.className = "ih-card"; card.hidden = true;
-      card.innerHTML = '<div class="ih-card-box" role="dialog" aria-modal="true" aria-labelledby="ih-card-title"><button type="button" class="ih-card-x" aria-label="Zamknij">×</button><div class="ih-card-gal"><img class="ih-card-main" alt=""><div class="ih-card-thumbs"></div></div><div class="ih-card-body"><span class="ih-card-cat"></span><h3 id="ih-card-title"></h3><div class="ih-card-desc"></div><div class="ih-card-buy"></div></div></div>';
+      card.innerHTML = '<div class="ih-card-box" role="dialog" aria-modal="true" aria-labelledby="ih-card-title"><button type="button" class="ih-card-x" aria-label="Zamknij">×</button><div class="ih-card-gal"><div class="ih-card-stage"><img class="ih-card-main" alt="" draggable="false"><button type="button" class="ih-sl-nav prev" aria-label="Poprzednie zdjęcie">‹</button><button type="button" class="ih-sl-nav next" aria-label="Następne zdjęcie">›</button></div><div class="ih-card-thumbs"></div></div><div class="ih-card-body"><span class="ih-card-cat"></span><h3 id="ih-card-title"></h3><div class="ih-card-desc"></div><div class="ih-card-buy"></div></div></div>';
       document.body.appendChild(card);
       var close = function () { card.hidden = true; document.body.style.overflow = ""; };
       card.addEventListener("click", function (e) { if (e.target === card || e.target.closest(".ih-card-x")) close(); });
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !card.hidden) close(); });
+      document.addEventListener("keydown", function (e) {
+        if (card.hidden) return;
+        if (e.key === "Escape") close();
+        if (e.key === "ArrowLeft" || e.key === "ArrowRight") card._step(e.key === "ArrowRight" ? 1 : -1);
+      });
+      card.querySelector(".ih-card-stage .prev").addEventListener("click", function () { card._step(-1); });
+      card.querySelector(".ih-card-stage .next").addEventListener("click", function () { card._step(1); });
+      swipe(card.querySelector(".ih-card-stage"), function (d) { card._step(d); });
     }
-    var own = item.querySelector(".thumb .img-1");
+    var th0 = item.querySelector(".thumb");
     var imgs = [];
-    if (own) imgs.push(own.getAttribute("src"));
-    (p.imgs || [p.img]).forEach(function (u) { if (u && imgs.indexOf(u) < 0) imgs.push(u); });
-    var main = card.querySelector(".ih-card-main"), thumbs = card.querySelector(".ih-card-thumbs");
-    var show = function (i) { main.src = imgs[i]; thumbs.querySelectorAll("button").forEach(function (b, j) { b.setAttribute("aria-current", j === i); }); };
+    if (th0 && th0.dataset.first) imgs.push(th0.dataset.first);
+    else { var own = item.querySelector(".thumb .img-1"); if (own) imgs.push(own.getAttribute("src")); }
+    shopImgs(p, imgs.length > 0).forEach(function (u) { if (u && imgs.indexOf(u) < 0) imgs.push(u); });
+    var main = card.querySelector(".ih-card-main"), thumbs = card.querySelector(".ih-card-thumbs"), at = 0;
+    var show = function (i) {
+      at = (i + imgs.length) % imgs.length; main.src = imgs[at];
+      thumbs.querySelectorAll("button").forEach(function (b, j) { b.setAttribute("aria-current", j === at); if (j === at && b.scrollIntoView) b.scrollIntoView({ block: "nearest", inline: "nearest" }); });
+    };
+    card._step = function (d) { show(at + d); };
     thumbs.innerHTML = imgs.map(function (u, i) { return '<button type="button" aria-label="Zdjęcie ' + (i + 1) + '"><img src="' + esc(u) + '" alt="" loading="lazy"></button>'; }).join("");
     thumbs.querySelectorAll("button").forEach(function (b, i) { b.addEventListener("click", function () { show(i); }); });
     show(0);
