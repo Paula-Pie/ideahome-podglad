@@ -828,7 +828,8 @@
       '</div><div class="foot-brands"><span class="fb-label">Leviatan a naše značky</span>' +
       '<a href="https://www.leviatan.pl/pl" target="_blank" rel="noopener" title="Leviatan – výrobce"><img src="img/marki/leviatan.svg" alt="Leviatan" width="108" height="88"><small>výrobce</small></a>' +
       '<a href="https://www.scoolbyleviatan.com/" target="_blank" rel="noopener" title="S&#39;COOL – artykuły plastyczne i szkolne"><img src="img/marki/scool.png" alt="S&#39;COOL" width="448" height="228"><small>výtvarné potřeby</small></a>' +
-      '<a href="https://lifeup.cafe/" target="_blank" rel="noopener" title="LIFE UP – autorská káva"><img src="img/marki/lifeup.png" alt="LIFE UP" width="336" height="440"><small>autorská káva</small></a></div>' +
+      '<a href="https://lifeup.cafe/" target="_blank" rel="noopener" title="LIFE UP – autorská káva"><img src="img/marki/lifeup.png" alt="LIFE UP" width="336" height="440"><small>autorská káva</small></a>' +
+      '<a href="https://strona-smart.vercel.app/" target="_blank" rel="noopener" title="SMART – kancelářské potřeby"><img src="img/marki/smart.svg" alt="SMART" width="229" height="96"><small>kancelářské potřeby</small></a></div>' +
       '<div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. Všechna práva vyhrazena.</span><span><a href="polityka-prywatnosci.html">Ochrana osobních údajů a cookies</a> · <a href="regulamin.html">Podmínky užívání</a> · Rudawka 88, 43-300 Bielsko-Biała, Polsko</span></div></div></footer>';
   }
 

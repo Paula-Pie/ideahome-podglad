@@ -828,7 +828,8 @@
       '</div><div class="foot-brands"><span class="fb-label">Leviatan and our brands</span>' +
       '<a href="https://www.leviatan.pl/pl" target="_blank" rel="noopener" title="Leviatan – manufacturer"><img src="img/marki/leviatan.svg" alt="Leviatan" width="108" height="88"><small>manufacturer</small></a>' +
       '<a href="https://www.scoolbyleviatan.com/" target="_blank" rel="noopener" title="S&#39;COOL – artykuły plastyczne i szkolne"><img src="img/marki/scool.png" alt="S&#39;COOL" width="448" height="228"><small>art supplies</small></a>' +
-      '<a href="https://lifeup.cafe/" target="_blank" rel="noopener" title="LIFE UP – signature coffee"><img src="img/marki/lifeup.png" alt="LIFE UP" width="336" height="440"><small>signature coffee</small></a></div>' +
+      '<a href="https://lifeup.cafe/" target="_blank" rel="noopener" title="LIFE UP – signature coffee"><img src="img/marki/lifeup.png" alt="LIFE UP" width="336" height="440"><small>signature coffee</small></a>' +
+      '<a href="https://strona-smart.vercel.app/" target="_blank" rel="noopener" title="SMART – office supplies"><img src="img/marki/smart.svg" alt="SMART" width="229" height="96"><small>office supplies</small></a></div>' +
       '<div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' IDEA HOME by Leviatan. All rights reserved.</span><span><a href="polityka-prywatnosci.html">Privacy and cookie policy</a> · <a href="regulamin.html">Terms of use</a> · Rudawka 88, 43-300 Bielsko-Biała, Poland</span></div></div></footer>';
   }
 
