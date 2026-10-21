@@ -647,3 +647,9 @@ html, body { overflow-x: clip; }
   .head-actions .btn { padding-inline: 16px; }
 }
 @media (min-width: 1081px) and (max-width: 1300px) { .head-actions .btn { display: none; } }
+
+/* stopka: kafelki marek – kwadratowe, wszystkie tej samej wielkości (logo na środku, podpis pod spodem) */
+.foot-brands a { flex-direction: column; justify-content: center; width: 128px; height: 128px; padding: 14px 10px; gap: 10px; text-align: center; }
+.foot-brands img { height: 52px; width: auto; max-width: 100px; object-fit: contain; }
+.foot-brands small { line-height: 1.25; }
+@media (max-width: 620px) { .foot-brands a { width: 104px; height: 104px; } .foot-brands img { height: 42px; max-width: 80px; } }
