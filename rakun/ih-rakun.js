@@ -68,12 +68,17 @@
     lustra: "https://allegro.pl/produkt/piana-aktywna-do-szyb-i-luster-ih-rakun-600ml-30ea4d0f-9606-45cf-bde0-4bc20cbddf9d?offerId=19069345341"
   };
   // zdjęcia z ofert Allegro do galerii w kafelku i karcie produktu (pliki w rakun/ih/galeria/)
-  var GALLERY = { kokpit: [], lustra: [], buty: [] };
+  var GALLERY = {
+    kokpit: ["kokpit-1.jpg", "kokpit-2.jpg", "kokpit-3.jpg", "kokpit-4.jpg"],
+    lustra: ["lustra-1.jpg", "lustra-2.jpg", "lustra-3.jpg", "lustra-4.jpg"],
+    buty: ["buty-1.jpg", "buty-2.jpg", "buty-3.jpg", "buty-4.jpg"]
+  };
   function addFoam(section, key, img, alt, cat, name, lead) {
     var grid = section && section.querySelector(".editorial-grid");
     if (!grid || grid.querySelector('[data-allegro="' + key + '"]')) return;
     var it = document.createElement("div"); it.className = "editorial-item ih-nowa"; it.setAttribute("data-allegro", key);
-    it.innerHTML = '<div class="thumb"><img class="img-1" src="ih/' + img + '" alt="' + alt + '"><img class="img-2" src="ih/' + img + '" alt="' + alt + '"></div>' +
+    var img2 = (GALLERY[key] || [])[0] ? "ih/galeria/" + GALLERY[key][0] : "ih/" + img;   // drugie zdjęcie = pierwsze z galerii, jak ilustracja przy innych produktach
+    it.innerHTML = '<div class="thumb"><img class="img-1" src="ih/' + img + '" alt="' + alt + '"><img class="img-2" src="' + img2 + '" alt="' + alt + '"></div>' +
       '<div class="cat">' + cat + "</div><h4>" + name + "</h4><p>" + lead + "</p>";
     grid.appendChild(it);
   }
