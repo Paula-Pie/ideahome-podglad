@@ -81,6 +81,9 @@
     if (cp2) cp2.textContent = "Prostředky na nádobí a skla, aktivní pěny na okna, zrcadla a náhrobky a pěna na čištění bot – účinné čištění bez drhnutí.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "Aktivní pěna na okna a zrcadla RAKUN 600 ml", "Aktivní pěna", "Na okna a zrcadla", "Aktivní pěna na mytí oken a zrcadel – čisté sklo bez šmouh.");
     addFoam(chem, "buty", "pianka-do-butow.png", "Pěna na čištění bot RAKUN 400 ml", "Pěna na boty", "Na čištění bot", "Pěna na čištění a osvěžení bot.");
+    // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi
+    var cg = chem.querySelector(".editorial-grid");
+    if (cg) Array.prototype.slice.call(cg.querySelectorAll(".ih-nowa")).reverse().forEach(function (f) { cg.insertBefore(f, cg.children[1]); });
   }
   var auto = document.getElementById("spryskiwacz");
   if (auto) {

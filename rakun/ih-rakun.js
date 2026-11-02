@@ -80,6 +80,9 @@
     if (cp2) cp2.textContent = "Płyny do naczyń i szyb, aktywne piany do szyb, luster i nagrobków oraz pianka do butów – skuteczne czyszczenie bez szorowania.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "Aktywna piana do szyb i luster RAKUN 600 ml", "Aktywna piana", "Do szyb i luster", "Aktywna piana do mycia szyb i luster – czyste szkło bez smug.");
     addFoam(chem, "buty", "pianka-do-butow.png", "Pianka do czyszczenia butów RAKUN 400 ml", "Pianka do butów", "Do czyszczenia butów", "Pianka do czyszczenia i odświeżania butów.");
+    // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi
+    var cg = chem.querySelector(".editorial-grid");
+    if (cg) Array.prototype.slice.call(cg.querySelectorAll(".ih-nowa")).reverse().forEach(function (f) { cg.insertBefore(f, cg.children[1]); });
   }
   var auto = document.getElementById("spryskiwacz");
   if (auto) {

@@ -81,6 +81,9 @@
     if (cp2) cp2.textContent = "Spülmittel, Glasreiniger, Aktivschaum für Fenster, Spiegel und Grabsteine sowie Schuhreinigungsschaum – wirksame Reinigung ohne Schrubben.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "RAKUN Aktivschaum für Fenster und Spiegel 600 ml", "Aktivschaum", "Für Fenster und Spiegel", "Aktivschaum zur Reinigung von Fenstern und Spiegeln – sauberes Glas ohne Schlieren.");
     addFoam(chem, "buty", "pianka-do-butow.png", "RAKUN Schuhreinigungsschaum 400 ml", "Schuhschaum", "Zur Schuhreinigung", "Schaum zum Reinigen und Auffrischen von Schuhen.");
+    // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi
+    var cg = chem.querySelector(".editorial-grid");
+    if (cg) Array.prototype.slice.call(cg.querySelectorAll(".ih-nowa")).reverse().forEach(function (f) { cg.insertBefore(f, cg.children[1]); });
   }
   var auto = document.getElementById("spryskiwacz");
   if (auto) {
