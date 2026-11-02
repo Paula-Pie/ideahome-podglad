@@ -62,6 +62,34 @@
     }
   }
 
+  // nowe pianki, których nie ma w dladomu.sklep.pl – w wersji PL "Online kaufen" prowadzi do oferty na Allegro
+  var ALLEGRO = {
+    kokpit: "https://allegro.pl/produkt/piana-aktywna-kokpit-i-szyby-ih-rakun-400ml-ad232c44-94bb-4124-8e63-bfc447b37a0e?offerId=19069339248",
+    buty: "https://allegro.pl/produkt/idea-home-pianka-do-czyszczenia-butow-400-ml-5f4b22ce-ca72-4c1c-9578-38dffe1ab553?offerId=19069339002",
+    lustra: "https://allegro.pl/produkt/piana-aktywna-do-szyb-i-luster-ih-rakun-600ml-30ea4d0f-9606-45cf-bde0-4bc20cbddf9d?offerId=19069345341"
+  };
+  function addFoam(section, key, img, alt, cat, name, lead) {
+    var grid = section && section.querySelector(".editorial-grid");
+    if (!grid || grid.querySelector('[data-allegro="' + key + '"]')) return;
+    var it = document.createElement("div"); it.className = "editorial-item ih-nowa"; it.setAttribute("data-allegro", key);
+    it.innerHTML = '<div class="thumb"><img class="img-1" src="ih/' + img + '" alt="' + alt + '"><img class="img-2" src="ih/' + img + '" alt="' + alt + '"></div>' +
+      '<div class="cat">' + cat + "</div><h4>" + name + "</h4><p>" + lead + "</p>";
+    grid.appendChild(it);
+  }
+  if (chem) {
+    var cp2 = chem.querySelector(".prod-heading p");
+    if (cp2) cp2.textContent = "Spülmittel, Glasreiniger, Aktivschaum für Fenster, Spiegel und Grabsteine sowie Schuhreinigungsschaum – wirksame Reinigung ohne Schrubben.";
+    addFoam(chem, "lustra", "piana-szyby-lustra.png", "RAKUN Aktivschaum für Fenster und Spiegel 600 ml", "Aktivschaum", "Für Fenster und Spiegel", "Aktivschaum zur Reinigung von Fenstern und Spiegeln – sauberes Glas ohne Schlieren.");
+    addFoam(chem, "buty", "pianka-do-butow.png", "RAKUN Schuhreinigungsschaum 400 ml", "Schuhschaum", "Zur Schuhreinigung", "Schaum zum Reinigen und Auffrischen von Schuhen.");
+  }
+  var auto = document.getElementById("spryskiwacz");
+  if (auto) {
+    var ah2 = auto.querySelector(".prod-heading h2"), ap = auto.querySelector(".prod-heading p");
+    if (ah2) ah2.textContent = "RAKUN fürs Auto";
+    if (ap) ap.textContent = "Sommer-Scheibenwaschflüssigkeit und Aktivschaum für Cockpit und Scheiben – ein sauberes Auto für jede Fahrt.";
+    addFoam(auto, "kokpit", "piana-kokpit.png", "RAKUN Aktivschaum für Cockpit und Scheiben 400 ml", "Aktivschaum", "Cockpit und Scheiben", "Aktivschaum zur Reinigung von Cockpit und Scheiben im Auto.");
+  }
+
   /* 2. Ceny i przyciski przy produktach (dopasowanie po nazwie z karty) */
   var MAP = [
     [/aktywna piana|nagrobk/i, "spray-do-nagrobkow-aktywna-piana-plyn-do-mycia-nagrobkow-pomnikow-400ml"],
@@ -78,6 +106,13 @@
     [/roll/i, null]
   ];
   document.querySelectorAll(".editorial-item").forEach(function (item) {
+    var key = item.getAttribute("data-allegro");
+    if (key) {
+      var ab = document.createElement("div"); ab.className = "ih-buyrow";
+      ab.innerHTML = '<a class="ih-btn" href="' + (LANG === "pl" ? ALLEGRO[key] : MARKET.url) + '" target="_blank" rel="noopener">Online kaufen</a>';
+      item.appendChild(ab);
+      return;
+    }
     var name = ((item.querySelector("h4") || {}).textContent || "") + " " + ((item.querySelector(".cat") || {}).textContent || "");
     var hit = MAP.find(function (m) { return m[0].test(name); });
     if (!hit) return;

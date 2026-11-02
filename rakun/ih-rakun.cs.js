@@ -62,6 +62,34 @@
     }
   }
 
+  // nowe pianki, których nie ma w dladomu.sklep.pl – w wersji PL "Koupit online" prowadzi do oferty na Allegro
+  var ALLEGRO = {
+    kokpit: "https://allegro.pl/produkt/piana-aktywna-kokpit-i-szyby-ih-rakun-400ml-ad232c44-94bb-4124-8e63-bfc447b37a0e?offerId=19069339248",
+    buty: "https://allegro.pl/produkt/idea-home-pianka-do-czyszczenia-butow-400-ml-5f4b22ce-ca72-4c1c-9578-38dffe1ab553?offerId=19069339002",
+    lustra: "https://allegro.pl/produkt/piana-aktywna-do-szyb-i-luster-ih-rakun-600ml-30ea4d0f-9606-45cf-bde0-4bc20cbddf9d?offerId=19069345341"
+  };
+  function addFoam(section, key, img, alt, cat, name, lead) {
+    var grid = section && section.querySelector(".editorial-grid");
+    if (!grid || grid.querySelector('[data-allegro="' + key + '"]')) return;
+    var it = document.createElement("div"); it.className = "editorial-item ih-nowa"; it.setAttribute("data-allegro", key);
+    it.innerHTML = '<div class="thumb"><img class="img-1" src="ih/' + img + '" alt="' + alt + '"><img class="img-2" src="ih/' + img + '" alt="' + alt + '"></div>' +
+      '<div class="cat">' + cat + "</div><h4>" + name + "</h4><p>" + lead + "</p>";
+    grid.appendChild(it);
+  }
+  if (chem) {
+    var cp2 = chem.querySelector(".prod-heading p");
+    if (cp2) cp2.textContent = "Prostředky na nádobí a skla, aktivní pěny na okna, zrcadla a náhrobky a pěna na čištění bot – účinné čištění bez drhnutí.";
+    addFoam(chem, "lustra", "piana-szyby-lustra.png", "Aktivní pěna na okna a zrcadla RAKUN 600 ml", "Aktivní pěna", "Na okna a zrcadla", "Aktivní pěna na mytí oken a zrcadel – čisté sklo bez šmouh.");
+    addFoam(chem, "buty", "pianka-do-butow.png", "Pěna na čištění bot RAKUN 400 ml", "Pěna na boty", "Na čištění bot", "Pěna na čištění a osvěžení bot.");
+  }
+  var auto = document.getElementById("spryskiwacz");
+  if (auto) {
+    var ah2 = auto.querySelector(".prod-heading h2"), ap = auto.querySelector(".prod-heading p");
+    if (ah2) ah2.textContent = "RAKUN do auta";
+    if (ap) ap.textContent = "Letní kapalina do ostřikovačů a aktivní pěna na palubní desku a skla – čisté auto na každou cestu.";
+    addFoam(auto, "kokpit", "piana-kokpit.png", "Aktivní pěna na palubní desku a skla RAKUN 400 ml", "Aktivní pěna", "Palubní deska a skla", "Aktivní pěna na čištění palubní desky a skel v autě.");
+  }
+
   /* 2. Ceny i przyciski przy produktach (dopasowanie po nazwie z karty) */
   var MAP = [
     [/aktywna piana|nagrobk/i, "spray-do-nagrobkow-aktywna-piana-plyn-do-mycia-nagrobkow-pomnikow-400ml"],
@@ -78,6 +106,13 @@
     [/roll/i, null]
   ];
   document.querySelectorAll(".editorial-item").forEach(function (item) {
+    var key = item.getAttribute("data-allegro");
+    if (key) {
+      var ab = document.createElement("div"); ab.className = "ih-buyrow";
+      ab.innerHTML = '<a class="ih-btn" href="' + (LANG === "pl" ? ALLEGRO[key] : MARKET.url) + '" target="_blank" rel="noopener">Koupit online</a>';
+      item.appendChild(ab);
+      return;
+    }
     var name = ((item.querySelector("h4") || {}).textContent || "") + " " + ((item.querySelector(".cat") || {}).textContent || "");
     var hit = MAP.find(function (m) { return m[0].test(name); });
     if (!hit) return;
