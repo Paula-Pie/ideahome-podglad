@@ -68,6 +68,8 @@
     buty: "https://allegro.pl/produkt/idea-home-pianka-do-czyszczenia-butow-400-ml-5f4b22ce-ca72-4c1c-9578-38dffe1ab553?offerId=19069339002",
     lustra: "https://allegro.pl/produkt/piana-aktywna-do-szyb-i-luster-ih-rakun-600ml-30ea4d0f-9606-45cf-bde0-4bc20cbddf9d?offerId=19069345341"
   };
+  // zdjęcia z ofert Allegro do galerii w kafelku i karcie produktu (pliki w rakun/ih/galeria/)
+  var GALLERY = { kokpit: [], lustra: [], buty: [] };
   function addFoam(section, key, img, alt, cat, name, lead) {
     var grid = section && section.querySelector(".editorial-grid");
     if (!grid || grid.querySelector('[data-allegro="' + key + '"]')) return;
@@ -78,9 +80,9 @@
   }
   if (chem) {
     var cp2 = chem.querySelector(".prod-heading p");
-    if (cp2) cp2.textContent = "Neu in der RAKUN-Serie: Aktivschaum für Fenster und Spiegel sowie Schuhreinigungsschaum. Sie ergänzen den Aktivschaum für Grabsteine, die Spülmittel und den Glasreiniger – wirksame Reinigung im ganzen Haus.";
+    if (cp2) cp2.textContent = "Neu in der RAKUN-Serie: Aktivschaum für Fenster und Spiegel sowie für Schuhe. Sie ergänzen den Aktivschaum für Grabsteine, die Spülmittel und den Glasreiniger – wirksame Reinigung im ganzen Haus.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "RAKUN Aktivschaum für Fenster und Spiegel 600 ml", "Aktivschaum", "Für Fenster und Spiegel", "Aktivschaum zur Reinigung von Fenstern und Spiegeln – sauberes Glas ohne Schlieren.");
-    addFoam(chem, "buty", "pianka-do-butow.png", "RAKUN Schuhreinigungsschaum 400 ml", "Schuhschaum", "Zur Schuhreinigung", "Schaum zum Reinigen und Auffrischen von Schuhen.");
+    addFoam(chem, "buty", "pianka-do-butow.png", "RAKUN XXL Aktivschaum für Schuhe 400 ml", "Aktivschaum", "Für Schuhe", "Reinigt Glattleder, Wildleder, Nubuk und Textilien ohne Wasser – die Schuhe sind sofort wieder tragbar.");
     // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi
     var cg = chem.querySelector(".editorial-grid");
     if (cg) Array.prototype.slice.call(cg.querySelectorAll(".ih-nowa")).reverse().forEach(function (f) { cg.insertBefore(f, cg.children[1]); });
@@ -90,7 +92,7 @@
     var ah2 = auto.querySelector(".prod-heading h2"), ap = auto.querySelector(".prod-heading p");
     if (ah2) ah2.textContent = "RAKUN fürs Auto";
     if (ap) ap.textContent = "Sommer-Scheibenwaschflüssigkeit und Aktivschaum für Cockpit und Scheiben – ein sauberes Auto für jede Fahrt.";
-    addFoam(auto, "kokpit", "piana-kokpit.png", "RAKUN Aktivschaum für Cockpit und Scheiben 400 ml", "Aktivschaum", "Cockpit und Scheiben", "Aktivschaum zur Reinigung von Cockpit und Scheiben im Auto.");
+    addFoam(auto, "kokpit", "piana-kokpit.png", "RAKUN Aktivschaum für Cockpit und Scheiben 400 ml", "Aktivschaum", "Cockpit und Scheiben", "Reinigt Kunststoffe, Scheiben und Spiegel im Auto ohne Wasser – ohne Schlieren und ohne Fettfilm.");
   }
 
   /* 2. Ceny i przyciski przy produktach (dopasowanie po nazwie z karty) */
@@ -110,16 +112,11 @@
   ];
   document.querySelectorAll(".editorial-item").forEach(function (item) {
     var key = item.getAttribute("data-allegro");
-    if (key) {
-      var ab = document.createElement("div"); ab.className = "ih-buyrow";
-      ab.innerHTML = '<a class="ih-btn" href="' + (LANG === "pl" ? ALLEGRO[key] : MARKET.url) + '" target="_blank" rel="noopener">Online kaufen</a>';
-      item.appendChild(ab);
-      return;
-    }
     var name = ((item.querySelector("h4") || {}).textContent || "") + " " + ((item.querySelector(".cat") || {}).textContent || "");
-    var hit = MAP.find(function (m) { return m[0].test(name); });
+    // pianki z Allegro: zdjęcia z własnej galerii (pierwsze = miniatura, pomijane jak zdjęcie ze sklepu), link do oferty
+    var hit = key ? [null, "allegro-" + key] : MAP.find(function (m) { return m[0].test(name); });
     if (!hit) return;
-    var p = hit[1] && data[hit[1]];
+    var p = key ? { url: ALLEGRO[key], imgs: [""].concat((GALLERY[key] || []).map(function (f) { return "ih/galeria/" + f; })) } : hit[1] && data[hit[1]];
     var buy = document.createElement("div");
     buy.className = "ih-buyrow";
     if (LANG !== "pl") {
@@ -152,7 +149,49 @@
   // produkty bez opisu w sklepie
   var OWN = {
     "plyn-do-mycia-naczyn-lemon-ih-rakun-5l": "<p>Płyn do mycia naczyń RAKUN Lemon w ekonomicznym kanistrze 5 l. Skutecznie usuwa tłuszcz z naczyń, garnków i patelni, zostawiając cytrusową świeżość.</p><p>Duża pojemność wystarcza na długo i pozwala wygodnie uzupełniać dozownik w domu, biurze czy kuchni firmowej.</p>",
-    "plyn-do-mycia-naczyn-mint-ih-rakun-5l": "<p>Płyn do mycia naczyń RAKUN Mint w ekonomicznym kanistrze 5 l. Chłodząca mięta i skuteczne działanie na tłuste garnki i patelnie.</p><p>Duża pojemność wystarcza na długo i pozwala wygodnie uzupełniać dozownik w domu, biurze czy kuchni firmowej.</p>"
+    "plyn-do-mycia-naczyn-mint-ih-rakun-5l": "<p>Płyn do mycia naczyń RAKUN Mint w ekonomicznym kanistrze 5 l. Chłodząca mięta i skuteczne działanie na tłuste garnki i patelnie.</p><p>Duża pojemność wystarcza na długo i pozwala wygodnie uzupełniać dozownik w domu, biurze czy kuchni firmowej.</p>",
+    // pianki z Allegro (opisy na podstawie ofert Leviatan_SHOP)
+    "allegro-kokpit": "<h4>Aktywna piana RAKUN do kokpitu i szyb – czyste wnętrze auta w kilka minut</h4>" +
+      "<p>Uniwersalna piana do pielęgnacji całego wnętrza samochodu. Usuwa kurz, brud i lekkie plamy z deski rozdzielczej, plastików, winylu, szyb i lusterek – na sucho, bez użycia wody i bez smug. Jeden podręczny spray zastępuje osobne środki do plastików i do szyb.</p>" +
+      "<h5>Dlaczego warto wybrać ten produkt?</h5><ul>" +
+      "<li><strong>2 w 1 – plastiki i szkło:</strong> czyści deskę rozdzielczą, elementy z tworzywa i winylu oraz szyby i lusterka.</li>" +
+      "<li><strong>Bez smug i tłustej warstwy:</strong> zostawia matowe wykończenie, więc deska rozdzielcza nie odbija światła i nie lepi się.</li>" +
+      "<li><strong>Czyste szyby:</strong> formuła do szyb samochodowych i lusterek zapewnia dobrą widoczność podczas jazdy.</li>" +
+      "<li><strong>Działanie ochronne:</strong> zostawia niewidoczną warstwę antystatyczną, dzięki której kurz wolniej osiada, a plastiki dłużej wyglądają jak nowe.</li>" +
+      "<li><strong>Gęsta piana:</strong> nie kapie i nie rozpryskuje się na sąsiednie powierzchnie, dzięki czemu jest wydajna, a sprzątanie szybkie i czyste.</li>" +
+      "<li><strong>Świeży zapach:</strong> neutralny, z delikatną nutą cytryny, bez drażniących aromatów.</li>" +
+      "<li><strong>Podręczny pojemnik 400 ml:</strong> zmieści się w schowku albo w bagażniku.</li></ul>" +
+      "<h5>Jak stosować?</h5><ol>" +
+      "<li><strong>Spryskaj</strong> – nanieś równomierną warstwę piany bezpośrednio na zabrudzoną powierzchnię.</li>" +
+      "<li><strong>Odczekaj</strong> chwilę, aż aktywna piana rozpuści brud.</li>" +
+      "<li><strong>Przetrzyj</strong> do sucha czystą ściereczką, np. z mikrofibry RAKUN – bez szorowania.</li></ol>" +
+      "<h5>Specyfikacja techniczna</h5><table><thead><tr><th>Cecha</th><th>Wartość</th></tr></thead><tbody>" +
+      "<tr><td>Rodzaj produktu</td><td>Aktywna piana czyszcząca (APC) do wnętrza auta</td></tr>" +
+      "<tr><td>Zastosowanie</td><td>Kokpit, plastiki, winyl, szyby i lusterka</td></tr>" +
+      "<tr><td>Duft</td><td>Neutralny z nutą cytryny</td></tr>" +
+      "<tr><td>Volumen</td><td>400 ml</td></tr>" +
+      "<tr><td>Producent</td><td>IDEA HOME</td></tr>" +
+      "<tr><td>Numer katalogowy</td><td>700009</td></tr>" +
+      "<tr><td>EAN</td><td>5902308746350</td></tr></tbody></table>",
+    "allegro-buty": "<h4>Aktywna piana RAKUN do butów XXL – czyste buty bez wody i bez czekania</h4>" +
+      "<p>Wydajna aktywna piana do czyszczenia obuwia na sucho. Wnika w zabrudzenia i rozpuszcza je bez użycia wody, więc buty są gotowe do noszenia od razu po czyszczeniu. Sprawdza się przy skórze licowej, zamszu, nubuku, tkaninach i syntetycznych siateczkach (mesh) – jeden środek zamiast kilku specjalistycznych.</p>" +
+      "<h5>Dlaczego warto wybrać ten produkt?</h5><ul>" +
+      "<li><strong>Duży format XXL – 400 ml:</strong> starcza na długo i obniża koszt jednego czyszczenia.</li>" +
+      "<li><strong>Czyszczenie na sucho:</strong> aktywna piana rozpuszcza brud bez wody, co znacznie skraca czas czyszczenia.</li>" +
+      "<li><strong>Do różnych materiałów:</strong> skóra licowa, zamsz, nubuk, tekstylia i materiały syntetyczne – sneakersy, buty sportowe, codzienne i robocze.</li>" +
+      "<li><strong>Buty od razu gotowe:</strong> bez suszenia – obuwie można założyć zaraz po zabiegu.</li></ul>" +
+      "<h5>Jak stosować?</h5><ol>" +
+      "<li><strong>Spryskaj</strong> – nanieś równomierną warstwę piany na zabrudzoną powierzchnię buta.</li>" +
+      "<li><strong>Odczekaj</strong> chwilę, aż piana rozpuści brud.</li>" +
+      "<li><strong>Przetrzyj</strong> do sucha czystą ściereczką, np. z mikrofibry RAKUN.</li></ol>" +
+      "<h5>Także dla firm</h5>" +
+      "<p>Duża pojemność sprawdza się tam, gdzie butów czyści się dużo: w zakładach pracy (obuwie robocze i ochronne), w hotelach i gastronomii, w firmach sprzątających oraz w sklepach obuwniczych i sportowych.</p>" +
+      "<h5>Specyfikacja techniczna</h5><table><thead><tr><th>Cecha</th><th>Wartość</th></tr></thead><tbody>" +
+      "<tr><td>Rodzaj produktu</td><td>Aktywna piana do czyszczenia obuwia</td></tr>" +
+      "<tr><td>Materiały</td><td>Skóra licowa, zamsz, nubuk, tekstylia, siateczki syntetyczne</td></tr>" +
+      "<tr><td>Volumen</td><td>400 ml (XXL)</td></tr>" +
+      "<tr><td>Marka</td><td>IDEA HOME</td></tr>" +
+      "<tr><td>Kod producenta</td><td>700021</td></tr></tbody></table>"
   };
   var card = null;
 
@@ -222,6 +261,7 @@
       thumbs.querySelectorAll("button").forEach(function (b, j) { b.setAttribute("aria-current", j === at); if (j === at && b.scrollIntoView) b.scrollIntoView({ block: "nearest", inline: "nearest" }); });
     };
     card._step = function (d) { show(at + d); };
+    card.classList.toggle("ih-card-one", imgs.length < 2);   // jedno zdjęcie: bez strzałek i miniatur
     thumbs.innerHTML = imgs.map(function (u, i) { return '<button type="button" aria-label="Zdjęcie ' + (i + 1) + '"><img src="' + esc(u) + '" alt="" loading="lazy"></button>'; }).join("");
     thumbs.querySelectorAll("button").forEach(function (b, i) { b.addEventListener("click", function () { show(i); }); });
     show(0);

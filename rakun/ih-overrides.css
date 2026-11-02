@@ -189,3 +189,4 @@ html, body { overflow-x: clip; }
 @media (max-width: 760px) {
   #chemia .editorial-grid { grid-auto-flow: column !important; }
 }
+.ih-card-one .ih-card-stage .ih-sl-nav, .ih-card-one .ih-card-thumbs { display: none; }
