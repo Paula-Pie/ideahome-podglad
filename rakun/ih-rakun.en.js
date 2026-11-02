@@ -78,7 +78,7 @@
   }
   if (chem) {
     var cp2 = chem.querySelector(".prod-heading p");
-    if (cp2) cp2.textContent = "Washing-up liquids, glass cleaner, active foams for windows, mirrors and headstones, and shoe cleaning foam – effective cleaning without scrubbing.";
+    if (cp2) cp2.textContent = "New in the RAKUN range: active foam for windows and mirrors and shoe cleaning foam. They join the active headstone foam and our washing-up liquids and glass cleaner – effective cleaning all around the home.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "RAKUN active foam for windows and mirrors 600 ml", "Active foam", "For windows and mirrors", "Active foam for cleaning windows and mirrors – clean, streak-free glass.");
     addFoam(chem, "buty", "pianka-do-butow.png", "RAKUN shoe cleaning foam 400 ml", "Shoe foam", "For cleaning shoes", "Foam for cleaning and refreshing shoes.");
     // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi

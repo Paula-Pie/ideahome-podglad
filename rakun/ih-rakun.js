@@ -77,7 +77,7 @@
   }
   if (chem) {
     var cp2 = chem.querySelector(".prod-heading p");
-    if (cp2) cp2.textContent = "Płyny do naczyń i szyb, aktywne piany do szyb, luster i nagrobków oraz pianka do butów – skuteczne czyszczenie bez szorowania.";
+    if (cp2) cp2.textContent = "Nowość w serii RAKUN: aktywna piana do szyb i luster oraz pianka do czyszczenia butów. Dołączają do aktywnej piany do nagrobków i płynów do naczyń i szyb – skuteczne czyszczenie w całym domu.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "Aktywna piana do szyb i luster RAKUN 600 ml", "Aktywna piana", "Do szyb i luster", "Aktywna piana do mycia szyb i luster – czyste szkło bez smug.");
     addFoam(chem, "buty", "pianka-do-butow.png", "Pianka do czyszczenia butów RAKUN 400 ml", "Pianka do butów", "Do czyszczenia butów", "Pianka do czyszczenia i odświeżania butów.");
     // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi

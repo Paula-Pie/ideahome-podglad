@@ -78,7 +78,7 @@
   }
   if (chem) {
     var cp2 = chem.querySelector(".prod-heading p");
-    if (cp2) cp2.textContent = "Prostředky na nádobí a skla, aktivní pěny na okna, zrcadla a náhrobky a pěna na čištění bot – účinné čištění bez drhnutí.";
+    if (cp2) cp2.textContent = "Novinka v řadě RAKUN: aktivní pěna na okna a zrcadla a pěna na čištění bot. Doplňují aktivní pěnu na náhrobky a prostředky na nádobí a skla – účinné čištění v celé domácnosti.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "Aktivní pěna na okna a zrcadla RAKUN 600 ml", "Aktivní pěna", "Na okna a zrcadla", "Aktivní pěna na mytí oken a zrcadel – čisté sklo bez šmouh.");
     addFoam(chem, "buty", "pianka-do-butow.png", "Pěna na čištění bot RAKUN 400 ml", "Pěna na boty", "Na čištění bot", "Pěna na čištění a osvěžení bot.");
     // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi

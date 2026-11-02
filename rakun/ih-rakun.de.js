@@ -78,7 +78,7 @@
   }
   if (chem) {
     var cp2 = chem.querySelector(".prod-heading p");
-    if (cp2) cp2.textContent = "Spülmittel, Glasreiniger, Aktivschaum für Fenster, Spiegel und Grabsteine sowie Schuhreinigungsschaum – wirksame Reinigung ohne Schrubben.";
+    if (cp2) cp2.textContent = "Neu in der RAKUN-Serie: Aktivschaum für Fenster und Spiegel sowie Schuhreinigungsschaum. Sie ergänzen den Aktivschaum für Grabsteine, die Spülmittel und den Glasreiniger – wirksame Reinigung im ganzen Haus.";
     addFoam(chem, "lustra", "piana-szyby-lustra.png", "RAKUN Aktivschaum für Fenster und Spiegel 600 ml", "Aktivschaum", "Für Fenster und Spiegel", "Aktivschaum zur Reinigung von Fenstern und Spiegeln – sauberes Glas ohne Schlieren.");
     addFoam(chem, "buty", "pianka-do-butow.png", "RAKUN Schuhreinigungsschaum 400 ml", "Schuhschaum", "Zur Schuhreinigung", "Schaum zum Reinigen und Auffrischen von Schuhen.");
     // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi
