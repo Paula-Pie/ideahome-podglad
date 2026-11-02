@@ -175,15 +175,17 @@ html, body { overflow-x: clip; }
 @media (min-width: 761px) {
   #spryskiwacz .editorial-grid { flex-direction: column; max-width: 210px; gap: 23px; }
 }
-/* chemia: 3 kolumny – pianki w pierwszym rzędzie, płyny w kanistrach w drugim; Rakun mniejszy, żeby siatka zmieściła się obok */
+/* dział auto: kolumna z produktami nie może się zwężać (ucinała produkty przy ok. 1100 px) */
 @media (min-width: 1001px) {
-  #chemia .prod-character { flex: 0 1 440px; align-self: center; }
-  #chemia .prod-character img { max-width: 440px; }
-  #chemia .prod-grid-wrap { flex: 1 1 672px; }
-  /* dział auto: kolumna z produktami nie może się zwężać (ucinała produkty przy ok. 1100 px) */
   #spryskiwacz .prod-grid-wrap { flex: 0 0 auto; }
 }
+/* chemia jak mydła: Rakun w pełnej wielkości, 2 kolumny wyśrodkowane obok niego;
+   pianki razem w lewej kolumnie, płyny w kanistrach w prawej */
+#chemia .editorial-grid { grid-template-rows: repeat(3, auto); grid-auto-flow: column; }
 @media (min-width: 761px) {
-  #chemia .editorial-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 672px; gap: 24px 21px; }
-  #chemia .editorial-item { max-width: 210px; width: 100%; }
+  #chemia .editorial-grid { gap: 24px 21px; }
+  #chemia .prod-character { align-self: center; }
+}
+@media (max-width: 760px) {
+  #chemia .editorial-grid { grid-auto-flow: column !important; }
 }
