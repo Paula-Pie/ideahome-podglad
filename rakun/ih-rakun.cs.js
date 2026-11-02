@@ -81,7 +81,7 @@
   if (chem) {
     var cp2 = chem.querySelector(".prod-heading p");
     if (cp2) cp2.textContent = "Novinka v řadě RAKUN: aktivní pěny na okna a zrcadla a na boty. Doplňují aktivní pěnu na náhrobky a prostředky na nádobí a skla – účinné čištění v celé domácnosti.";
-    addFoam(chem, "lustra", "piana-szyby-lustra.png", "Aktivní pěna na okna a zrcadla RAKUN 600 ml", "Aktivní pěna", "Na okna a zrcadla", "Aktivní pěna na mytí oken a zrcadel – čisté sklo bez šmouh.");
+    addFoam(chem, "lustra", "piana-szyby-lustra.png", "Aktivní pěna na okna a zrcadla RAKUN 600 ml", "Aktivní pěna", "Na okna a zrcadla", "Odstraňuje otisky prstů a mastnotu z oken, zrcadel a skleněných dveří – na sucho a bez šmouh.");
     addFoam(chem, "buty", "pianka-do-butow.png", "Aktivní pěna na boty XXL RAKUN 400 ml", "Aktivní pěna", "Na boty", "Čistí na sucho kůži, semiš, nubuk i textil – boty jsou ihned připravené k nošení.");
     // pianki obok siebie w pierwszym rzędzie, płyny w kanistrach pod nimi
     var cg = chem.querySelector(".editorial-grid");
@@ -191,7 +191,26 @@
       "<tr><td>Materiały</td><td>Skóra licowa, zamsz, nubuk, tekstylia, siateczki syntetyczne</td></tr>" +
       "<tr><td>Objem</td><td>400 ml (XXL)</td></tr>" +
       "<tr><td>Marka</td><td>IDEA HOME</td></tr>" +
-      "<tr><td>Kod producenta</td><td>700021</td></tr></tbody></table>"
+      "<tr><td>Kod producenta</td><td>700021</td></tr></tbody></table>",
+    "allegro-lustra": "<h4>Aktywna piana RAKUN do szyb i luster – lśniące szkło bez smug</h4>" +
+      "<p>Praktyczny pomocnik do szybkiego czyszczenia okien, luster i wszystkich błyszczących powierzchni w domu. Wydajna formuła usuwa brud, odciski palców i osady tłuszczu, a stabilna piana zostaje tam, gdzie ją nałożysz – także na pionowych szybach. Do mycia na sucho, bez wiadra z wodą.</p>" +
+      "<h5>Dlaczego warto wybrać ten produkt?</h5><ul>" +
+      "<li><strong>Silna formuła czyszcząca:</strong> skoncentrowana aktywna piana radzi sobie z odciskami palców, tłuszczem i uporczywym brudem.</li>" +
+      "<li><strong>Bez smug:</strong> skład ogranicza smugi i pozostałości – okna są przejrzyste, a lustra lśnią.</li>" +
+      "<li><strong>Nie spływa:</strong> gęsta piana trzyma się powierzchni pionowych, więc nie kapie na parapety i podłogę.</li>" +
+      "<li><strong>Wszechstronne zastosowanie:</strong> okna, witryny, lustra, szklane drzwi i stoły oraz inne powierzchnie o wysokim połysku.</li>" +
+      "<li><strong>Duża pojemność 600 ml:</strong> wystarcza na długo, bez ciągłego dokupowania.</li>" +
+      "<li><strong>Podręczny pojemnik:</strong> wystarczy ściereczka i piana RAKUN – bez wody i dodatkowych akcesoriów.</li></ul>" +
+      "<h5>Jak stosować?</h5><ol>" +
+      "<li><strong>Spryskaj</strong> – nanieś równomierną warstwę piany bezpośrednio na zabrudzoną powierzchnię.</li>" +
+      "<li><strong>Odczekaj</strong> chwilę, aż aktywna piana rozpuści brud.</li>" +
+      "<li><strong>Przetrzyj</strong> do sucha czystą ściereczką, np. z mikrofibry RAKUN – bez szorowania.</li></ol>" +
+      "<h5>Specyfikacja techniczna</h5><table><thead><tr><th>Cecha</th><th>Wartość</th></tr></thead><tbody>" +
+      "<tr><td>Rodzaj produktu</td><td>Aktywna piana do mycia szyb i luster</td></tr>" +
+      "<tr><td>Zastosowanie</td><td>Okna, witryny, lustra, szklane drzwi i stoły, powierzchnie o wysokim połysku</td></tr>" +
+      "<tr><td>Objem</td><td>600 ml</td></tr>" +
+      "<tr><td>Marka</td><td>IDEA HOME</td></tr>" +
+      "<tr><td>EAN</td><td>5902308746343</td></tr></tbody></table>"
   };
   var card = null;
 
