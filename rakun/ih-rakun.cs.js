@@ -124,7 +124,7 @@
     var p = key ? { url: ALLEGRO[key], imgs: [""].concat((GALLERY[key] || []).map(function (f) { return "ih/galeria/" + f; })) } : hit[1] && data[hit[1]];
     var buy = document.createElement("div");
     buy.className = "ih-buyrow";
-    if (LANG !== "pl") {
+    if (LANG !== "pl" && !(key && LANG === "cs")) {   // CS: pianki prowadzą prosto do swojej oferty na Allegro
       buy.innerHTML = '<a class="ih-btn" href="' + MARKET.url + '" target="_blank" rel="noopener">Koupit online</a>';
     } else if (p) {
       buy.innerHTML = '<a class="ih-btn" href="' + p.url + '" target="_blank" rel="noopener">Koupit online</a>';
@@ -217,6 +217,69 @@
       "<tr><td>Marka</td><td>IDEA HOME</td></tr>" +
       "<tr><td>EAN</td><td>5902308746343</td></tr></tbody></table>"
   };
+  // te same opisy pianek po czesku (strona CS; generator i18n zostawia je bez zmian)
+  var OWN_CS = {
+    "allegro-kokpit": "<h4>Aktivní pěna RAKUN na palubní desku a skla – čistý interiér auta za pár minut</h4>" +
+      "<p>Univerzální pěna pro péči o celý interiér vozu. Odstraňuje prach, nečistoty a lehké skvrny z palubní desky, plastů, vinylu, skel a zrcátek – nasucho, bez použití vody a bez šmouh. Jeden praktický sprej nahradí samostatné přípravky na plasty a na skla.</p>" +
+      "<h5>Proč si vybrat tento produkt?</h5><ul>" +
+      "<li><strong>2 v 1 – plasty i sklo:</strong> čistí palubní desku, plastové a vinylové díly i skla a zrcátka.</li>" +
+      "<li><strong>Bez šmouh a mastného filmu:</strong> zanechává matný povrch, takže palubní deska neodráží světlo a nelepí.</li>" +
+      "<li><strong>Čistá skla:</strong> složení určené pro autoskla a zrcátka zajišťuje dobrý výhled během jízdy.</li>" +
+      "<li><strong>Ochranný účinek:</strong> zanechává neviditelnou antistatickou vrstvu, díky které se prach usazuje pomaleji a plasty déle vypadají jako nové.</li>" +
+      "<li><strong>Hustá pěna:</strong> nekape a nestříká na okolní povrchy, takže je vydatná a úklid rychlý a čistý.</li>" +
+      "<li><strong>Svěží vůně:</strong> neutrální s jemným tónem citronu, bez dráždivých aromat.</li>" +
+      "<li><strong>Praktické balení 400 ml:</strong> vejde se do přihrádky i do kufru.</li></ul>" +
+      "<h5>Jak používat?</h5><ol>" +
+      "<li><strong>Nastříkejte</strong> – naneste rovnoměrnou vrstvu pěny přímo na znečištěný povrch.</li>" +
+      "<li><strong>Počkejte</strong> chvíli, než aktivní pěna rozpustí nečistoty.</li>" +
+      "<li><strong>Otřete</strong> dosucha čistým hadříkem, např. z mikrovlákna RAKUN – bez drhnutí.</li></ol>" +
+      "<h5>Technické parametry</h5><table><thead><tr><th>Vlastnost</th><th>Hodnota</th></tr></thead><tbody>" +
+      "<tr><td>Druh produktu</td><td>Aktivní čisticí pěna (APC) na interiér auta</td></tr>" +
+      "<tr><td>Použití</td><td>Palubní deska, plasty, vinyl, skla a zrcátka</td></tr>" +
+      "<tr><td>Vůně</td><td>Neutrální s tónem citronu</td></tr>" +
+      "<tr><td>Objem</td><td>400 ml</td></tr>" +
+      "<tr><td>Výrobce</td><td>IDEA HOME</td></tr>" +
+      "<tr><td>Katalogové číslo</td><td>700009</td></tr>" +
+      "<tr><td>EAN</td><td>5902308746350</td></tr></tbody></table>",
+    "allegro-buty": "<h4>Aktivní pěna RAKUN na boty XXL – čisté boty bez vody a bez čekání</h4>" +
+      "<p>Vydatná aktivní pěna na čištění obuvi nasucho. Proniká do nečistot a rozpouští je bez použití vody, takže boty jsou připravené k nošení hned po vyčištění. Hodí se na hladkou kůži, semiš, nubuk, textil i syntetické síťoviny (mesh) – jeden přípravek místo několika speciálních.</p>" +
+      "<h5>Proč si vybrat tento produkt?</h5><ul>" +
+      "<li><strong>Velký formát XXL – 400 ml:</strong> vydrží dlouho a snižuje náklady na jedno čištění.</li>" +
+      "<li><strong>Čištění nasucho:</strong> aktivní pěna rozpouští nečistoty bez vody, což výrazně zkracuje dobu čištění.</li>" +
+      "<li><strong>Na různé materiály:</strong> hladká kůže, semiš, nubuk, textil a syntetické materiály – tenisky, sportovní, běžná i pracovní obuv.</li>" +
+      "<li><strong>Boty hned připravené:</strong> bez sušení – obuv si můžete obout ihned po ošetření.</li></ul>" +
+      "<h5>Jak používat?</h5><ol>" +
+      "<li><strong>Nastříkejte</strong> – naneste rovnoměrnou vrstvu pěny na znečištěný povrch boty.</li>" +
+      "<li><strong>Počkejte</strong> chvíli, než pěna rozpustí nečistoty.</li>" +
+      "<li><strong>Otřete</strong> dosucha čistým hadříkem, např. z mikrovlákna RAKUN.</li></ol>" +
+      "<h5>I pro firmy</h5>" +
+      "<p>Velké balení se osvědčí všude tam, kde se čistí hodně bot: ve výrobních podnicích (pracovní a ochranná obuv), v hotelích a gastronomii, v úklidových firmách i v obchodech s obuví a sportovním vybavením.</p>" +
+      "<h5>Technické parametry</h5><table><thead><tr><th>Vlastnost</th><th>Hodnota</th></tr></thead><tbody>" +
+      "<tr><td>Druh produktu</td><td>Aktivní pěna na čištění obuvi</td></tr>" +
+      "<tr><td>Materiály</td><td>Hladká kůže, semiš, nubuk, textil, syntetické síťoviny</td></tr>" +
+      "<tr><td>Objem</td><td>400 ml (XXL)</td></tr>" +
+      "<tr><td>Značka</td><td>IDEA HOME</td></tr>" +
+      "<tr><td>Kód výrobce</td><td>700021</td></tr></tbody></table>",
+    "allegro-lustra": "<h4>Aktivní pěna RAKUN na okna a zrcadla – zářivé sklo bez šmouh</h4>" +
+      "<p>Praktický pomocník na rychlé čištění oken, zrcadel a všech lesklých povrchů v domácnosti. Vydatné složení odstraňuje nečistoty, otisky prstů i mastné usazeniny a stabilní pěna zůstane tam, kam ji nanesete – i na svislých skleněných plochách. Na mytí nasucho, bez kbelíku s vodou.</p>" +
+      "<h5>Proč si vybrat tento produkt?</h5><ul>" +
+      "<li><strong>Silné čisticí složení:</strong> koncentrovaná aktivní pěna si poradí s otisky prstů, mastnotou i odolnými nečistotami.</li>" +
+      "<li><strong>Bez šmouh:</strong> složení omezuje šmouhy a zbytky – okna jsou průzračná a zrcadla se lesknou.</li>" +
+      "<li><strong>Nestéká:</strong> hustá pěna drží na svislých plochách, takže nekape na parapety ani na podlahu.</li>" +
+      "<li><strong>Všestranné použití:</strong> okna, výlohy, zrcadla, skleněné dveře a stoly i další vysoce lesklé povrchy.</li>" +
+      "<li><strong>Velký objem 600 ml:</strong> vydrží dlouho, bez neustálého dokupování.</li>" +
+      "<li><strong>Praktické balení:</strong> stačí hadřík a pěna RAKUN – bez vody a dalších pomůcek.</li></ul>" +
+      "<h5>Jak používat?</h5><ol>" +
+      "<li><strong>Nastříkejte</strong> – naneste rovnoměrnou vrstvu pěny přímo na znečištěný povrch.</li>" +
+      "<li><strong>Počkejte</strong> chvíli, než aktivní pěna rozpustí nečistoty.</li>" +
+      "<li><strong>Otřete</strong> dosucha čistým hadříkem, např. z mikrovlákna RAKUN – bez drhnutí.</li></ol>" +
+      "<h5>Technické parametry</h5><table><thead><tr><th>Vlastnost</th><th>Hodnota</th></tr></thead><tbody>" +
+      "<tr><td>Druh produktu</td><td>Aktivní pěna na mytí oken a zrcadel</td></tr>" +
+      "<tr><td>Použití</td><td>Okna, výlohy, zrcadla, skleněné dveře a stoly, vysoce lesklé povrchy</td></tr>" +
+      "<tr><td>Objem</td><td>600 ml</td></tr>" +
+      "<tr><td>Značka</td><td>IDEA HOME</td></tr>" +
+      "<tr><td>EAN</td><td>5902308746343</td></tr></tbody></table>"
+  };
   var card = null;
 
   // przesuwanie zdjęć: strzałki, kropki i gest (palcem albo przeciągnięcie myszą); zwraca funkcję „czy przed chwilą przesunięto”
@@ -292,7 +355,7 @@
     var h4 = item.querySelector("h4"), cat = item.querySelector(".cat"), lead = item.querySelector("p");
     card.querySelector(".ih-card-cat").textContent = "RAKUN" + (cat ? " · " + cat.textContent : "");
     card.querySelector("#ih-card-title").textContent = h4 ? h4.textContent : "";
-    var full = LANG === "pl" ? ((window.IH_RAKUN_DESC || {})[id] || OWN[id] || "") : "";
+    var full = LANG === "pl" ? ((window.IH_RAKUN_DESC || {})[id] || OWN[id] || "") : LANG === "cs" ? (OWN_CS[id] || "") : "";
     card.querySelector(".ih-card-desc").innerHTML = full || (lead ? "<p>" + esc(lead.textContent) + "</p>" : "");
     card.querySelector(".ih-card-buy").innerHTML = '<a class="ih-btn" href="' + esc(buyHref) + '" target="_blank" rel="noopener">Koupit online</a>';
     card.hidden = false; document.body.style.overflow = "hidden";
