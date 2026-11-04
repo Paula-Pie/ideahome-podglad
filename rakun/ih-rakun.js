@@ -101,7 +101,7 @@
 
   /* 2. Ceny i przyciski przy produktach (dopasowanie po nazwie z karty) */
   var MAP = [
-    [/aktywna piana|nagrobk/i, "spray-do-nagrobkow-aktywna-piana-plyn-do-mycia-nagrobkow-pomnikow-400ml"],
+    [/aktywna[ -]piana|nagrobk/i, "spray-do-nagrobkow-aktywna-piana-plyn-do-mycia-nagrobkow-pomnikow-400ml"],
     [/flower bloom/i, "mydlo-w-plynie-ih-rakun-flower-bloom-5l"],
     [/forest walk/i, "mydlo-w-plynie-ih-rakun-forest-walk-5l"],
     [/milk/i, "mydlo-w-plynie-ih-rakun-milk-honey-care-5l"],
@@ -114,16 +114,40 @@
     [/mikrofibr/i, "sciereczki-z-mikrofibry-ih-rakun-30x30cm-24szt-mix-kolor-pizza-box-all"],
     [/roll/i, null]
   ];
+  // CS: wyszukiwanie danego produktu w sklepie Leviatan_SHOPCZ na Allegro.cz (pianki – ich oferta na Allegro.cz)
+  var CZ = {
+    "spray-do-nagrobkow-aktywna-piana-plyn-do-mycia-nagrobkow-pomnikow-400ml": "rakun náhrobky",
+    "mydlo-w-plynie-ih-rakun-flower-bloom-5l": "rakun flower bloom",
+    "mydlo-w-plynie-ih-rakun-forest-walk-5l": "rakun forest walk",
+    "mydlo-w-plynie-ih-rakun-milk-honey-care-5l": "rakun milk honey",
+    "mydlo-w-plynie-ih-rakun-ocean-dive-5l": "rakun ocean dive",
+    "mydlo-w-plynie-ih-rakun-tropic-holiday-5l": "rakun tropic holiday",
+    "plyn-do-mycia-naczyn-lemon-ih-rakun-5l": "rakun lemon",
+    "plyn-do-mycia-naczyn-mint-ih-rakun-5l": "rakun mint",
+    "plyn-do-szyb-ih-rakun-5l": "rakun skla",
+    "plyn-do-spryskiwaczy-letni-ih-rakun-5l": "rakun summer",
+    "sciereczki-z-mikrofibry-ih-rakun-30x30cm-24szt-mix-kolor-pizza-box-all": "rakun mikrovlákno"
+  };
+  function czUrl(id, key) {
+    if (key) return ALLEGRO[key].replace("//allegro.pl/", "//allegro.cz/");
+    return MARKET.url.replace(/string=.*$/, "string=" + encodeURIComponent(CZ[id] || (id ? "rakun" : "rakun roll")));
+  }
   document.querySelectorAll(".editorial-item").forEach(function (item) {
     var key = item.getAttribute("data-allegro");
     var name = ((item.querySelector("h4") || {}).textContent || "") + " " + ((item.querySelector(".cat") || {}).textContent || "");
+    // nazwy są tłumaczone (EN/DE/CS) – nazwa pliku miniatury jest zawsze po polsku
+    var src = (item.querySelector(".thumb .img-1") || { getAttribute: function () { return ""; } }).getAttribute("src") || "";
+    try { src = decodeURIComponent(src); } catch (e) {}
+    name += " " + src;
     // pianki z Allegro: zdjęcia z własnej galerii (pierwsze = miniatura, pomijane jak zdjęcie ze sklepu), link do oferty
     var hit = key ? [null, "allegro-" + key] : MAP.find(function (m) { return m[0].test(name); });
     if (!hit) return;
     var p = key ? { url: ALLEGRO[key], imgs: [""].concat((GALLERY[key] || []).map(function (f) { return "ih/galeria/" + f; })) } : hit[1] && data[hit[1]];
     var buy = document.createElement("div");
     buy.className = "ih-buyrow";
-    if (LANG !== "pl" && !(key && LANG === "cs")) {   // CS: pianki prowadzą prosto do swojej oferty na Allegro
+    if (LANG === "cs") {
+      buy.innerHTML = '<a class="ih-btn" href="' + czUrl(hit[1], key) + '" target="_blank" rel="noopener">Kup online</a>';
+    } else if (LANG !== "pl") {
       buy.innerHTML = '<a class="ih-btn" href="' + MARKET.url + '" target="_blank" rel="noopener">Kup online</a>';
     } else if (p) {
       buy.innerHTML = '<a class="ih-btn" href="' + p.url + '" target="_blank" rel="noopener">Kup online</a>';
